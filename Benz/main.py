@@ -10,6 +10,7 @@ from modules.colors import *
 from modules.detect import *
 from modules.places import *
 from modules.claw import *
+import time
 
 #Declaração de variáveis globais e objetos
 
@@ -17,26 +18,16 @@ from modules.claw import *
 
 #Programa principal (minúsuclo pq é o programa principal lmfao)
 #close_claw()
-motors.settings(150, 300, 100, 1000)
-go_to_passengers()
-while total_of_passengers < 4 :
-    pick_passenger()
-    drop_passenger()
-    # time_open_claw += 500
-# print(sensor_color_right.rgb())
-# close_claw()
-# open_claw()
-# while True :
-#    print(sensor_color_right.rgb())
-
-#while True:
- #   print(distance_front())
-  #  if (distance_front() > 200) : 
-   #     passenger_size = 15
-    #    print("É O JÚLIO!")
-    #else :
-     #   passenger_size = 10
-      #  print("É A JESS!")
-    #wait(5000)
-
-# finish()
+#motors.turn(180)
+#print("rodei")
+recognize_fisrt()
+#move_forward_cm(30)
+#i = 0
+# while True:
+#  #   calibrate()
+#   #  i+=1
+#    # calibration(sensor_color_left)
+#     #calibration(sensor_color_right)
+#    # teste_cor()
+ #  print(saw_red())
+    #time.sleep(1)

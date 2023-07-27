@@ -8,7 +8,9 @@ motor_left = Motor(Port.A)
 motor_right = Motor(Port.B)
 
 
-motors = DriveBase(motor_left, motor_right, wheel_diameter = 42.1, axle_track = 115.3)
+motors = DriveBase(motor_left, motor_right, wheel_diameter = 42.1, axle_track = 94.3)
+
+motors.settings(150, 300, 100, 3000)
 
 def move_forward(velocity):
     motors.drive(velocity, 0)
@@ -52,7 +54,9 @@ def turn_90_right_and_move_distance(distance):
     stop()
 
 def turn_180():
+    print("turn")
     motors.turn(180)
+    print("já tornou")
     
 def stop():
     motors.stop()
