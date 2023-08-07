@@ -20,14 +20,28 @@ import time
 #close_claw()
 #motors.turn(180)
 #print("rodei")
-recognize_fisrt()
-#move_forward_cm(30)
-#i = 0
 # while True:
-#  #   calibrate()
-#   #  i+=1
-#    # calibration(sensor_color_left)
-#     #calibration(sensor_color_right)
+
+#    circle_right()
+#recognize_fisrt()
+reposition("Blue")
+#turn_90_left()
+#move_forward_cm(60)
+#i = 0
+#while i < 10:
+#print(motors.distance_control.pid())
+#while True:
+ #  print(saw_blue())
+   #calibrate()
+   #i+=1
+     #calibration(sensor_color_left)
+     #calibration(sensor_color_right)
 #    # teste_cor()
- #  print(saw_red())
+ #  print(saw_brown())
     #time.sleep(1)
+
+
+#while True:
+ # print("diretinha", seeRight())
+  #print("lula",  seeLeft())
+  #time.sleep(1)

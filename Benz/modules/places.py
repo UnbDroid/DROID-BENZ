@@ -35,25 +35,61 @@ def follow_line() :
 def recognize_fisrt():
     print("oii")
     print(saw_red())
-    while not saw_red():
+    while not saw_red() and not saw_blue():
         print("andando")
         move_forward(150)
         if(saw_black() or saw_yellow()):
            stop()
            move_backward_cm(3) #calcular
            turn_90_left()
-    stop() 
-    turn_left(180)
     
-    move_forward_cm(30)
-    
-   
-    turn_90_left()
-    while not saw_blue():
-        move_foward(150)
-        if(saw_black()):
-            turn_180()
+            
+
     stop()
+    move_backward_cm(6)
+    check_point()
+    if saw_red(): 
+        turn_left(180)
+        move_forward_cm(30)
+        turn_90_left()
+        while not saw_blue():
+            move_foward(150)
+            if(saw_black()):
+                turn_180()
+        stop()
+    
+    
+
+def reposition(color):
+    print("Entriu")
+    if seeRight() != color and seeLeft() == color:
+        print("Diferenciou")
+        while seeRight() != color:
+            circle_left()
+        stop()
+    elif seeRight() == color and seeLeft() != color:
+        print("1")
+        while seeLeft() != color:
+            circle_right()
+        stop()
+    elif seeRight() == seeLeft():
+        print("2")
+        pass
+    elif seeRight() != color and seeLeft() != color:
+        print("3")
+        pass
+    print("rodou tuto")
+
+def posicionate_in_blue():
+
+    turn_90_left()
+    while tempo <= 2:
+        move_backward(80) #implementar questão do tempo sem ver nada
+        if side_detection(): #ainda sendo implementado
+            tempo = 2
+    stop()
+    print("Ready to start taking passangers")
+
 
 
 
@@ -93,6 +129,14 @@ def recognize():
         turn_90_leftt()
 
     print("start")
+
+def check_point():
+    turn_90_left()
+    while not saw_red():
+        print("andando")
+        move_forward(150)
+    stop()
+    turn_180()
 
 #Funções referentes ao trajeto do robô
 

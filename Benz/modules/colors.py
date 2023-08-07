@@ -25,8 +25,8 @@ green_right = [[54,5,0],[77,25,20]]
 black_left = [[2,5,0],[15,15,10]]
 black_right = [[5,5,0],[16,22,10]] #check
 
-brown_left = [[30,5,0],[49,25,20]]
-brown_right = [[54,5,0],[77,25,20]]
+brown_left = [[20,10,0],[35,30,18]]
+brown_right = [[24,9,0],[45,32,15]] #check
 
 
 #left 
@@ -47,6 +47,10 @@ def yellowLeft() :
     rgb = sensor_color_left.rgb()
     return ( (yellow_left[0][0] <= rgb[0] and rgb[0] <=yellow_left[1][0]) and (yellow_left[0][1] <= rgb[1] and rgb[1] <=yellow_left[1][1]) and (yellow_left[0][2] <= rgb[2] and rgb[2] <=yellow_left[1][2]) )
 
+def brownLeft() :
+    rgb = sensor_color_right.rgb()
+    return ( (brown_left[0][0] <= rgb[0] and rgb[0] <=brown_left[1][0]) and (brown_left[0][1] <= rgb[1] and rgb[1] <=brown_left[1][1]) and (brown_left[0][2] <= rgb[2] and rgb[2] <=brown_left[1][2]) )
+
 #right
         
 def redRight() :
@@ -65,11 +69,15 @@ def yellowRight() :
     rgb = sensor_color_right.rgb()
     return ( (yellow_right[0][0] <= rgb[0] and rgb[0] <=yellow_right[1][0]) and (yellow_right[0][1] <= rgb[1] and rgb[1] <=yellow_right[1][1]) and (yellow_right[0][2] <= rgb[2] and rgb[2] <=yellow_right[1][2]) )
 
+def brownRight() :
+    rgb = sensor_color_right.rgb()
+    return ( (brown_right[0][0] <= rgb[0] and rgb[0] <=brown_right[1][0]) and (brown_right[0][1] <= rgb[1] and rgb[1] <=brown_right[1][1]) and (brown_right[0][2] <= rgb[2] and rgb[2] <=brown_right[1][2]) )
+
 
 #Declaration of detected colors
 
 def saw_red():
-    return redRight() or redLeft()
+    return redRight() and redLeft()
 
 def saw_black():
     return blackRight() or blackLeft()
@@ -79,3 +87,38 @@ def saw_yellow():
     
 def saw_blue():
     return blueRight() or blueLeft()
+
+def saw_brown():
+    return brownRight() or brownLeft()
+
+def seeRight():
+    if redRight():
+        return "Red"
+    elif blueRight():
+        return "Blue"
+    elif blackRight():
+        return "Black"
+    # elif greenRight():
+    #     return "Green"
+    elif brownRight():
+        return "Brown"
+    elif yellowRight():
+        return "Yellow"
+    else:
+        return "White"
+
+def seeLeft():
+    if redLeft():
+        return "Red"
+    elif blueLeft():
+        return "Blue"
+    elif blackLeft():
+        return "Black"
+    # elif greenLeft():
+    #     return "Green"
+    elif brownLeft():
+        return "Brown"
+    elif yellowLeft():
+        return "Yellow"
+    else:
+        return "White"
