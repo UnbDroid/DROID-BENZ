@@ -2,6 +2,8 @@ from pybricks.ev3devices import UltrasonicSensor
 from pybricks.parameters import Port
 from pybricks.tools import StopWatch
 from pybricks.hubs import EV3Brick
+import time
+
 
 from modules.motors import *
 from modules.colors import *
@@ -9,6 +11,7 @@ from modules.detect import *
 from modules.claw import *
 
 ev3 = EV3Brick()
+
 
 count = 0 
 count_turns_left = 0
@@ -37,17 +40,14 @@ def recognize_fisrt():
     print(saw_red())
     while not saw_red() and not saw_blue():
         print("andando")
-        move_forward(150)
+        move_forward(140)
         if(saw_black() or saw_yellow()):
            stop()
            move_backward_cm(3) #calcular
-           turn_90_left()
-    
-            
+           turn_90_left()         
 
     stop()
-    move_backward_cm(6)
-    check_point()
+   # check_point()
     if saw_red(): 
         turn_left(180)
         move_forward_cm(30)
@@ -57,6 +57,11 @@ def recognize_fisrt():
             if(saw_black()):
                 turn_180()
         stop()
+    if(saw_blue()):
+        move_backward_cm(5)
+        turn_90_right()
+        find_passenger()
+    #colocar para ir para trás
     
     
 
@@ -74,10 +79,10 @@ def reposition(color):
         stop()
     elif seeRight() == seeLeft():
         print("2")
-        pass
+        #pass
     elif seeRight() != color and seeLeft() != color:
         print("3")
-        pass
+        #pass
     print("rodou tuto")
 
 def posicionate_in_blue():
@@ -129,6 +134,23 @@ def recognize():
         turn_90_leftt()
 
     print("start")
+
+def find_passenger():
+    print("procurando")
+    while not side_detection():
+        move_backward(80)
+    move_backward_cm(10)   
+    turn_90_left()
+    while not blueRight() and not blueLeft():
+        move_forward(50) 
+    reposition("Blue")
+    print("vou te pegar")
+    close_claw_s(200)
+    move_forward_cm(6)
+    #verificar se tem algo na frente por preucação
+    close_claw()
+    move_backward_cm(6)
+
 
 def check_point():
     turn_90_left()

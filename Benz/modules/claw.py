@@ -10,11 +10,21 @@ stopwatch = StopWatch()
 
 def open_claw():
     global time_open_claw
-    motor_claw.run_time(600, time_open_claw, Stop.HOLD, True)
+    motor_claw.run_time(400, time_open_claw, Stop.HOLD, True)
     motor_claw.hold()
 
 def close_claw() : 
     global time_open_claw
-    motor_claw.run_time(-600, time_open_claw, Stop.HOLD, True)
+    motor_claw.run_time(-400, time_open_claw, Stop.HOLD, True)
+    motor_claw.hold()
+    
+def close_claw_s(seconds) : 
+    global time_open_claw
+    motor_claw.run_time(-seconds, time_open_claw, Stop.HOLD, True)
+    motor_claw.hold()
+
+def open_claw_s(seconds) : 
+    global time_open_claw
+    motor_claw.run_time(seconds, time_open_claw, Stop.HOLD, True)
     motor_claw.hold()
     
