@@ -35,7 +35,7 @@ def follow_line() :
         turn_right(15)
         count_turns_right += 1
 
-def recognize_fisrt():
+def recognize_first():
     print("oii")
     print(saw_red())
     while not saw_red() and not saw_blue():
@@ -58,6 +58,8 @@ def recognize_fisrt():
                 turn_180()
         stop()
     if(saw_blue()):
+        stop()
+        reposition("Blue")
         move_backward_cm(5)
         turn_90_right()
         find_passenger()
@@ -66,7 +68,7 @@ def recognize_fisrt():
     
 
 def reposition(color):
-    print("Entriu")
+    print("Entrou")
     if seeRight() != color and seeLeft() == color:
         print("Diferenciou")
         while seeRight() != color:
@@ -85,18 +87,16 @@ def reposition(color):
         #pass
     print("rodou tuto")
 
-def posicionate_in_blue():
-
-    turn_90_left()
-    while tempo <= 2:
+def final_tube():
+    tempo = StopWatch()
+    tempo.reset()
+    while tempo.time() <= 1000:
         move_backward(80) #implementar questão do tempo sem ver nada
         if side_detection(): #ainda sendo implementado
-            tempo = 2
+            print("oi")
+            tempo.reset()
     stop()
     print("Ready to start taking passangers")
-
-
-
 
 
 def recognize():
@@ -137,15 +137,19 @@ def recognize():
 
 def find_passenger():
     print("procurando")
+    final_tube()
+    
     while not side_detection():
-        move_backward(80)
-    move_backward_cm(10)   
+        move_forward(50)
+    stop()   
+    move_backward_cm(3)   
     turn_90_left()
     while not blueRight() and not blueLeft():
         move_forward(50) 
+    stop()
     reposition("Blue")
     print("vou te pegar")
-    close_claw_s(200)
+    close_claw(200)
     move_forward_cm(6)
     #verificar se tem algo na frente por preucação
     close_claw()

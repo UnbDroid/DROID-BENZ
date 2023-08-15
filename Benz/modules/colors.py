@@ -2,6 +2,7 @@ from pybricks.parameters import  Color
 from pybricks.parameters import Port
 from pybricks.ev3devices import ColorSensor
 
+
 sensor_color_left = ColorSensor(Port.S1) 
 sensor_color_right = ColorSensor(Port.S2) 
 
@@ -10,6 +11,8 @@ def calibration(sensor):
 
 #Declaration of RGB values of color sensors
 #min and max
+
+#arrumar o marrom e verde
 red_left = [[30,5,0],[49,25,20]]
 red_right = [[54,5,0],[77,25,20]]#check
 
@@ -97,28 +100,37 @@ def seeRight():
     elif blueRight():
         return "Blue"
     elif blackRight():
+        print("vi preto")
         return "Black"
     # elif greenRight():
     #     return "Green"
     elif brownRight():
         return "Brown"
     elif yellowRight():
+        print("vi amarelo")
         return "Yellow"
     else:
+        print("vi branco")
         return "White"
 
 def seeLeft():
     if redLeft():
+        print("vi vermelho")
         return "Red"
     elif blueLeft():
+        print("vi azul")
         return "Blue"
     elif blackLeft():
+        print("vi preto")
         return "Black"
     # elif greenLeft():
     #     return "Green"
     elif brownLeft():
+        print("vi marrom")
         return "Brown"
     elif yellowLeft():
+        print("vi amarelo")
         return "Yellow"
     else:
+        print("vi branco")
         return "White"

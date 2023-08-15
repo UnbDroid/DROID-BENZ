@@ -3,7 +3,6 @@ from pybricks.hubs import EV3Brick
 from pybricks.ev3devices import (InfraredSensor, UltrasonicSensor)
 from pybricks.parameters import Stop, Direction, Button
 from pybricks.tools import wait, StopWatch, DataLog
-from pybricks.messaging import BluetoothMailboxServer, TextMailbox
 
 #from pybricks.media.ev3dev import SoundFile, ImageFile
 
@@ -13,23 +12,22 @@ from modules.detect import *
 from modules.places import *
 from modules.claw import *
 
+wait(4000)
 
-'''server = BluetoothMailboxServer()
-eve3box = TextMailbox('greeting', server)
+message()
 
-print('waiting for connection...')
-server.wait_for_connection()
-print('connected!')
-
-eve3box.wait()
-print(ev3mbox.read())
-eve3box.send('hello to you!')
-'''
-
-open_claw()
-#open_claw_s(200)
-#recognize_fisrt()
-
+#while True:
+ # seeRight()
+#  seeLeft()
+ # wait(2000)
+ 
+#reposition("Blue")
+#final_tube()
+#open_claw_s(400)
+#recognize_first()
+#turn_left(360)
+#turn_left(360)
+# turn_left(360)
 '''
 while not saw_blue():
   move_forward(160)
@@ -79,3 +77,10 @@ stop()
  # print("diretinha", seeRight())
   #print("lula",  seeLeft())
   #time.sleep(1)
+'''
+
+tempo = StopWatch()
+print(tempo.time())
+print(tempo.reset())
+time.sleep(2)
+print(tempo.time())'''
