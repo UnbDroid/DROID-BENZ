@@ -1,124 +1,90 @@
-from pybricks.parameters import  Color
+from pybricks.parameters import Color
 from pybricks.parameters import Port
 from pybricks.ev3devices import ColorSensor
 
-sensor_color_left = ColorSensor(Port.S1) 
-sensor_color_right = ColorSensor(Port.S2) 
+sensor_color = ColorSensor(Port.S1)
+sensor_sup = ColorSensor(Port.S2)
+
 
 def calibration(sensor):
     print(sensor.rgb())
 
-#Declaration of RGB values of color sensors
-#min and max
-red_left = [[30,5,0],[49,25,20]]
-red_right = [[54,5,0],[77,25,20]]#check
-
-blue_left = [[0,15,43],[17,34,65]]
-blue_right = [[6,18,32],[23,35,53]]#check
-
-yellow_left = [[35,64, 11],[55,82,30]]
-yellow_right = [[58,78,13],[78,92,30]] #check
-
-green_left = [[30,5,0],[49,25,20]]
-green_right = [[54,5,0],[77,25,20]]
-
-black_left = [[2,5,0],[15,15,10]]
-black_right = [[5,5,0],[16,22,10]] #check
-
-brown_left = [[20,10,0],[35,30,18]]
-brown_right = [[24,9,0],[45,32,15]] #check
+# Declaration of RGB values of color sensors
+# min and max
 
 
-#left 
+# arrumar o marrom e verde
+red = [[30, 5, 0], [49, 25, 20]]  # check
 
-def redLeft() :
-    rgb = sensor_color_left.rgb()
-    return ( (red_left[0][0] <= rgb[0] and rgb[0] <=red_left[1][0]) and (red_left[0][1] <= rgb[1] and rgb[1] <=red_left[1][1]) and (red_left[0][2] <= rgb[2] and rgb[2] <=red_left[1][2]) )
+blue = [[0, 15, 43], [17, 34, 65]]  # check
 
-def blackLeft() :
-    rgb = sensor_color_left.rgb()
-    return ( (black_left[0][0] <= rgb[0] and rgb[0] <=black_left[1][0]) and (black_left[0][1] <= rgb[1] and rgb[1] <=black_left[1][1]) and (black_left[0][2] <= rgb[2] and rgb[2] <=black_left[1][2]) )
+yellow = [[35, 64, 11], [55, 82, 30]]  # check
 
-def blueLeft() :
-    rgb = sensor_color_left.rgb()
-    return ( (blue_left[0][0] <= rgb[0] and rgb[0] <=blue_left[1][0]) and (blue_left[0][1] <= rgb[1] and rgb[1] <=blue_left[1][1]) and (blue_left[0][2] <= rgb[2] and rgb[2] <=blue_left[1][2]) )
+green = [[30, 5, 0], [49, 25, 20]]
 
-def yellowLeft() :
-    rgb = sensor_color_left.rgb()
-    return ( (yellow_left[0][0] <= rgb[0] and rgb[0] <=yellow_left[1][0]) and (yellow_left[0][1] <= rgb[1] and rgb[1] <=yellow_left[1][1]) and (yellow_left[0][2] <= rgb[2] and rgb[2] <=yellow_left[1][2]) )
+black = [[2, 5, 0], [15, 15, 10]]  # check
 
-def brownLeft() :
+brown = [[20, 10, 0], [35, 30, 18]]  # check
+
+
+# 
+
+def red():
+    rgb = sensor_color.rgb()
+    return ((red[0][0] <= rgb[0] and rgb[0] <= red[1][0]) and (red[0][1] <= rgb[1] and rgb[1] <= red[1][1]) and (red[0][2] <= rgb[2] and rgb[2] <= red[1][2]))
+
+
+def black():
+    rgb = sensor_color.rgb()
+    return ((black[0][0] <= rgb[0] and rgb[0] <= black[1][0]) and (black[0][1] <= rgb[1] and rgb[1] <= black[1][1]) and (black[0][2] <= rgb[2] and rgb[2] <= black[1][2]))
+
+
+def blue():
+    rgb = sensor_color.rgb()
+    return ((blue[0][0] <= rgb[0] and rgb[0] <= blue[1][0]) and (blue[0][1] <= rgb[1] and rgb[1] <= blue[1][1]) and (blue[0][2] <= rgb[2] and rgb[2] <= blue[1][2]))
+
+
+def yellow():
+    rgb = sensor_color.rgb()
+    return ((yellow[0][0] <= rgb[0] and rgb[0] <= yellow[1][0]) and (yellow[0][1] <= rgb[1] and rgb[1] <= yellow[1][1]) and (yellow[0][2] <= rgb[2] and rgb[2] <= yellow[1][2]))
+
+
+def brown():
     rgb = sensor_color_right.rgb()
-    return ( (brown_left[0][0] <= rgb[0] and rgb[0] <=brown_left[1][0]) and (brown_left[0][1] <= rgb[1] and rgb[1] <=brown_left[1][1]) and (brown_left[0][2] <= rgb[2] and rgb[2] <=brown_left[1][2]) )
-
-#right
-        
-def redRight() :
-    rgb = sensor_color_right.rgb()
-    return ( (red_right[0][0] <= rgb[0] and rgb[0] <=red_right[1][0]) and (red_right[0][1] <= rgb[1] and rgb[1] <=red_right[1][1]) and (red_right[0][2] <= rgb[2] and rgb[2] <=red_right[1][2]) )
-
-def blackRight() :
-    rgb = sensor_color_right.rgb()
-    return ( (black_right[0][0] <= rgb[0] and rgb[0] <=black_right[1][0]) and (black_right[0][1] <= rgb[1] and rgb[1] <=black_right[1][1]) and (black_right[0][2] <= rgb[2] and rgb[2] <=black_right[1][2]) )
-
-def blueRight() :
-    rgb = sensor_color_right.rgb()
-    return ( (blue_right[0][0] <= rgb[0] and rgb[0] <=blue_right[1][0]) and (blue_right[0][1] <= rgb[1] and rgb[1] <=blue_right[1][1]) and (blue_right[0][2] <= rgb[2] and rgb[2] <=blue_right[1][2]) )
-
-def yellowRight() :
-    rgb = sensor_color_right.rgb()
-    return ( (yellow_right[0][0] <= rgb[0] and rgb[0] <=yellow_right[1][0]) and (yellow_right[0][1] <= rgb[1] and rgb[1] <=yellow_right[1][1]) and (yellow_right[0][2] <= rgb[2] and rgb[2] <=yellow_right[1][2]) )
-
-def brownRight() :
-    rgb = sensor_color_right.rgb()
-    return ( (brown_right[0][0] <= rgb[0] and rgb[0] <=brown_right[1][0]) and (brown_right[0][1] <= rgb[1] and rgb[1] <=brown_right[1][1]) and (brown_right[0][2] <= rgb[2] and rgb[2] <=brown_right[1][2]) )
+    return ((brown[0][0] <= rgb[0] and rgb[0] <= brown[1][0]) and (brown[0][1] <= rgb[1] and rgb[1] <= brown[1][1]) and (brown[0][2] <= rgb[2] and rgb[2] <= brown[1][2]))
 
 
-#Declaration of detected colors
-
-def saw_red():
-    return redRight() and redLeft()
-
-def saw_black():
-    return blackRight() or blackLeft()
-
-def saw_yellow():
-    return yellowRight() or yellowLeft()
-    
-def saw_blue():
-    return blueRight() or blueLeft()
-
-def saw_brown():
-    return brownRight() or brownLeft()
-
-def seeRight():
-    if redRight():
+def see():
+    if red():
+        print("vi vermelho")
         return "Red"
-    elif blueRight():
+    elif blue():
+        print("vi azul")
         return "Blue"
-    elif blackRight():
+    elif black():
+        print("vi preto")
         return "Black"
-    # elif greenRight():
+    # elif green():
     #     return "Green"
-    elif brownRight():
+    elif brown():
+        print("vi marrom")
         return "Brown"
-    elif yellowRight():
+    elif yellow():
+        print("vi amarelo")
         return "Yellow"
     else:
+        print("vi branco")
         return "White"
 
-def seeLeft():
-    if redLeft():
-        return "Red"
-    elif blueLeft():
-        return "Blue"
-    elif blackLeft():
-        return "Black"
-    # elif greenLeft():
-    #     return "Green"
-    elif brownLeft():
-        return "Brown"
-    elif yellowLeft():
-        return "Yellow"
+
+def size():
+    if sensor_sup().reflection() <= 50:
+        return "10"
     else:
-        return "White"
+        return "15"
+
+
+
+def check():
+    color = see()
+    return color + " " + size()
