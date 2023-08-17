@@ -33,6 +33,8 @@ brown_right = [[24,9,0],[45,32,15]] #check
 
 
 #left 
+def whiteLeft():
+    return seeLeft() == "White"
 
 def redLeft() :
     rgb = sensor_color_left.rgb()
@@ -55,7 +57,9 @@ def brownLeft() :
     return ( (brown_left[0][0] <= rgb[0] and rgb[0] <=brown_left[1][0]) and (brown_left[0][1] <= rgb[1] and rgb[1] <=brown_left[1][1]) and (brown_left[0][2] <= rgb[2] and rgb[2] <=brown_left[1][2]) )
 
 #right
-        
+def whiteRight():
+    return seeRight() == "White"
+
 def redRight() :
     rgb = sensor_color_right.rgb()
     return ( (red_right[0][0] <= rgb[0] and rgb[0] <=red_right[1][0]) and (red_right[0][1] <= rgb[1] and rgb[1] <=red_right[1][1]) and (red_right[0][2] <= rgb[2] and rgb[2] <=red_right[1][2]) )
@@ -93,6 +97,9 @@ def saw_blue():
 
 def saw_brown():
     return brownRight() or brownLeft()
+    
+def saw_white():
+    return whiteRight() or whiteLeft()
 
 def seeRight():
     if redRight():

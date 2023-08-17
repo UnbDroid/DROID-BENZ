@@ -1,6 +1,5 @@
 from pybricks.ev3devices import UltrasonicSensor
 from pybricks.parameters import Port
-from pybricks.tools import StopWatch
 from pybricks.hubs import EV3Brick
 import time
 
@@ -9,6 +8,7 @@ from modules.motors import *
 from modules.colors import *
 from modules.detect import *
 from modules.claw import *
+from modules.varaiables import *
 
 ev3 = EV3Brick()
 
@@ -22,18 +22,6 @@ total_of_passengers_of_10cm = 1
 total_of_passengers_of_15cm = 1
 time_forward = 0
 
-def follow_line() :
-    global count_turns_left
-    global count_turns_right
-    move_forward(150)
-    if (saw_black_left() and saw_black_right()) :
-        pass
-    elif saw_black_left() :
-        turn_left(15)
-        count_turns_left += 1
-    elif saw_black_right() :
-        turn_right(15)
-        count_turns_right += 1
 
 def recognize_first():
     print("oii")
@@ -58,45 +46,15 @@ def recognize_first():
                 turn_180()
         stop()
     if(saw_blue()):
-        stop()
+        #stop()
         reposition("Blue")
-        move_backward_cm(5)
+        move_backward_cm(7)
         turn_90_right()
         find_passenger()
     #colocar para ir para trás
     
     
 
-def reposition(color):
-    print("Entrou")
-    if seeRight() != color and seeLeft() == color:
-        print("Diferenciou")
-        while seeRight() != color:
-            circle_left()
-        stop()
-    elif seeRight() == color and seeLeft() != color:
-        print("1")
-        while seeLeft() != color:
-            circle_right()
-        stop()
-    elif seeRight() == seeLeft():
-        print("2")
-        #pass
-    elif seeRight() != color and seeLeft() != color:
-        print("3")
-        #pass
-    print("rodou tuto")
-
-def final_tube():
-    tempo = StopWatch()
-    tempo.reset()
-    while tempo.time() <= 1000:
-        move_backward(80) #implementar questão do tempo sem ver nada
-        if side_detection(): #ainda sendo implementado
-            print("oi")
-            tempo.reset()
-    stop()
-    print("Ready to start taking passangers")
 
 
 def recognize():
@@ -135,6 +93,31 @@ def recognize():
 
     print("start")
 
+#def enter():
+    
+
+def enter():
+    entered = False
+    while not entered:
+        print(yellowRight()," ", yellowLeft())
+        if(yellowRight() and yellowLeft()):
+            move_forward_cm(10)
+            return None
+        elif yellowLeft() and blackRight():
+            turn_right(89)
+            move_forward_cm(2)
+            turn_left(90) 
+            #move_forward_cm(10)
+        elif yellowRight() and blackLeft():
+            turn_left(90)
+            move_forward_cm(2)
+            turn_right(90) 
+        #else:
+         #   stop()
+          #  reposition("Black")        
+
+            #move_forward_cm(10)
+
 def find_passenger():
     print("procurando")
     final_tube()
@@ -142,31 +125,56 @@ def find_passenger():
     while not side_detection():
         move_forward(50)
     stop()   
-    move_backward_cm(3)   
+    move_backward_cm(2)   
     turn_90_left()
     while not blueRight() and not blueLeft():
         move_forward(50) 
     stop()
     reposition("Blue")
     print("vou te pegar")
-    close_claw(200)
+    close_claw(250)
     move_forward_cm(6)
     #verificar se tem algo na frente por preucação
     close_claw()
-    move_backward_cm(6)
+    move_backward_cm(9)
+    check_point()
+    #ver como vai ser tratado o return
+    
 
 
 def check_point():
     turn_90_left()
     while not saw_red():
         print("andando")
-        move_forward(150)
+        move_forward(140)
     stop()
+    reposition("Red")
     turn_180()
+    tube = message()
+    decision(tube)
 
+def decision(tube):
+    color = tube[0]
+    size = tube[1]
+    if size == "15":
+        place = dic_15[color]
+    else:
+        place = dic_10[color]  
+    if place == "ESCOLA":
+        school()
+        #get back from school depois      
 #Funções referentes ao trajeto do robô
 
+def school():
+    move_forward_cm(30)
+    turn_right(90)
+    move_forward_cm(30)
+    turn_90_right()
+    while not saw_yellow():
+        move_forward(50)
+    stop()
+    enter()
 
-#def go_to_passengers() :
-   
+
+    open_claw(850) #fazer leave depois 
 

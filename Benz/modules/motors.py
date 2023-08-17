@@ -3,6 +3,7 @@ from pybricks.parameters import Port
 from pybricks.robotics import DriveBase
 from pybricks.tools import wait
 
+from modules.colors import *
 
 motor_left = Motor(Port.A) 
 motor_right = Motor(Port.B)
@@ -15,7 +16,7 @@ def circle_left():
     motor_left.run(80)
     motor_right.run(-10)
 
-motors = DriveBase(motor_left, motor_right, wheel_diameter = 42.1, axle_track = 102.7)
+motors = DriveBase(motor_left, motor_right, wheel_diameter = 42.1, axle_track = 105.7)
 #motors.distance_control.pid(200 , 600, 2,  8, 2, 0)
 motors.distance_control.pid(200 , 600, 2,  8, 2, 0)
 motors.settings(150, 300, 100, 250)
@@ -46,10 +47,10 @@ def turn_left(angle):
     motors.turn(-angle)
     
 def turn_90_left():
-    motors.turn(-90)
+    motors.turn(-92)
 
 def turn_90_right():
-    motors.turn(90)
+    motors.turn(92)
     
 def turn_90_left_and_move_distance(distance):
     motors.straight(distance)
@@ -74,3 +75,23 @@ def calibrate():
     turn_right(360)
     stop()
     wait(1000)
+
+def reposition(color):
+    print("Entrou")
+    if seeRight() != color and seeLeft() == color:
+        print("Diferenciou")
+        while seeRight() != color:
+            circle_left()
+        stop()
+    elif seeRight() == color and seeLeft() != color:
+        print("1")
+        while seeLeft() != color:
+            circle_right()
+        stop()
+    elif seeRight() == seeLeft():
+        print("2")
+        #pass
+    elif seeRight() != color and seeLeft() != color:
+        print("3")
+        #pass
+    print("rodou tuto")

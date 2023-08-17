@@ -12,22 +12,36 @@ from modules.detect import *
 from modules.places import *
 from modules.claw import *
 
-wait(4000)
+#wait(4000)
 
-message()
+#message()
 
 #while True:
+ # message()
+  #wait(4000)
+
  # seeRight()
 #  seeLeft()
- # wait(2000)
- 
+# wait(4000)
+#open_claw(200)
+#open_claw()
+#message()
+
 #reposition("Blue")
 #final_tube()
-#open_claw_s(400)
+#close_claw()
+#close_claw(200)
 #recognize_first()
+#school()
+enter()
+#open_claw()
+#open_claw(200)
+#turn_90_left() 
+#check_point()
+#turn_180()
+
 #turn_left(360)
 #turn_left(360)
-# turn_left(360)
 '''
 while not saw_blue():
   move_forward(160)
@@ -41,7 +55,7 @@ stop()
     
 
 #move_backward_cm(5)
-#open_claw()
+#open_claw(850)
 #close_claw()
 
 #Declaração de variáveis globais e objetos
