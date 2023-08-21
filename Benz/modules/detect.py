@@ -5,7 +5,6 @@ from pybricks.tools import StopWatch
 from modules.motors import *
 from pybricks.messaging import BluetoothMailboxServer, TextMailbox
 import time
-
 '''
 server = BluetoothMailboxServer()
 eve3box = TextMailbox('greeting', server)

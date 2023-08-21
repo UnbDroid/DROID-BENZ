@@ -3,8 +3,8 @@ from pybricks.parameters import Port
 from pybricks.ev3devices import ColorSensor
 
 
-sensor_color_left = ColorSensor(Port.S1) 
-sensor_color_right = ColorSensor(Port.S2) 
+sensor_color_left = ColorSensor(Port.S2) 
+sensor_color_right = ColorSensor(Port.S1) 
 
 def calibration(sensor):
     print(sensor.rgb())
@@ -13,23 +13,26 @@ def calibration(sensor):
 #min and max
 
 #arrumar o marrom e verde
-red_left = [[30,5,0],[49,25,20]]
-red_right = [[54,5,0],[77,25,20]]#check
+red_left = [[57,7,0],[78,27,25]]
+red_right = [[40,8,7],[62,30,26]]#check
 
-blue_left = [[0,15,43],[17,34,65]]
-blue_right = [[6,18,32],[23,35,53]]#check
+blue_left = [[0,18,34],[23,38,54]]
+blue_right = [[0,18,52],[18,38,74]]#check
 
-yellow_left = [[35,64, 11],[55,82,30]]
-yellow_right = [[58,78,13],[78,92,30]] #check
+yellow_left = [[60,80, 12],[81,100,32]]
+yellow_right = [[33,54,8],[54,76,28]] #check
 
 green_left = [[30,5,0],[49,25,20]]
 green_right = [[54,5,0],[77,25,20]]
 
-black_left = [[2,5,0],[15,15,10]]
-black_right = [[5,5,0],[16,22,10]] #check
+black_left = [[0,0, 0],[20,18,18]]
+black_right = [[0,2,0],[16,24,20]] 
 
 brown_left = [[20,10,0],[35,30,18]]
-brown_right = [[24,9,0],[45,32,15]] #check
+brown_right = [[24,9,0],[45,32,15]] 
+
+white_left = [[37,61, 10],[67,85,30]]
+white_right = [[65,70,15],[83,97,33]] 
 
 
 #left 

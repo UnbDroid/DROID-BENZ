@@ -81,17 +81,44 @@ def reposition(color):
     if seeRight() != color and seeLeft() == color:
         print("Diferenciou")
         while seeRight() != color:
-            circle_left()
+            circle_right()
         stop()
     elif seeRight() == color and seeLeft() != color:
         print("1")
         while seeLeft() != color:
-            circle_right()
+            circle_left()
         stop()
     elif seeRight() == seeLeft():
         print("2")
         #pass
     elif seeRight() != color and seeLeft() != color:
-        print("3")
+        while seeRight() != color:
+            circle_right()
+        stop()
+    print("rodou tudo")
+
+'''
+def reposition2(color, color2 = True):
+    if color2 == True:
+        color2 = color
+    
+    if seeRight() != color and seeLeft() == color2:
+        print("Diferenciou")
+        while seeRight() != color:
+            circle_right()
+        stop()
+    elif seeRight() == color2 and seeLeft() != color:
+        print("1")
+        while seeLeft() != color:
+            circle_left()
+        stop()
+    elif seeRight() == seeLeft():
+        print("2")
         #pass
-    print("rodou tuto")
+    elif seeRight() != color2 and seeLeft() != color:
+        while seeRight() != color2:
+            circle_right()
+        stop()
+    print("rodou tudo")
+
+'''

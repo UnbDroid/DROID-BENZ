@@ -23,17 +23,25 @@ from modules.claw import *
  # seeRight()
 #  seeLeft()
 # wait(4000)
-#open_claw(200)
-#open_claw()
+#close_claw(200)
+#close_claw()
 #message()
 
 #reposition("Blue")
+drugstore()
 #final_tube()
 #close_claw()
-#close_claw(200)
+#check_point()
+# close_claw(200)
 #recognize_first()
 #school()
-enter()
+#while True:
+ # calibration(sensor_color_right)
+  #calibration(sensor_color_left)
+  #wait(3000)
+#calibration(sensor_color_right)
+#reposition_two("Yellow", "Black")
+#enter()
 #open_claw()
 #open_claw(200)
 #turn_90_left() 
@@ -42,11 +50,13 @@ enter()
 
 #turn_left(360)
 #turn_left(360)
-'''
-while not saw_blue():
-  move_forward(160)
-stop()
-'''
+#turn_left(360)
+#turn_left(360)
+
+#while not saw_blue():
+ # move_forward(160)
+#stop()
+
 
 
 # turn_left(360)
@@ -97,4 +107,6 @@ tempo = StopWatch()
 print(tempo.time())
 print(tempo.reset())
 time.sleep(2)
-print(tempo.time())'''
+print(tempo.time())
+
+'''

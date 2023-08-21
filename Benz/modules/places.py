@@ -46,7 +46,7 @@ def recognize_first():
                 turn_180()
         stop()
     if(saw_blue()):
-        #stop()
+        stop()
         reposition("Blue")
         move_backward_cm(7)
         turn_90_right()
@@ -93,30 +93,6 @@ def recognize():
 
     print("start")
 
-#def enter():
-    
-
-def enter():
-    entered = False
-    while not entered:
-        print(yellowRight()," ", yellowLeft())
-        if(yellowRight() and yellowLeft()):
-            move_forward_cm(10)
-            return None
-        elif yellowLeft() and blackRight():
-            turn_right(89)
-            move_forward_cm(2)
-            turn_left(90) 
-            #move_forward_cm(10)
-        elif yellowRight() and blackLeft():
-            turn_left(90)
-            move_forward_cm(2)
-            turn_right(90) 
-        #else:
-         #   stop()
-          #  reposition("Black")        
-
-            #move_forward_cm(10)
 
 def find_passenger():
     print("procurando")
@@ -143,13 +119,13 @@ def find_passenger():
 
 
 def check_point():
-    turn_90_left()
+    turn_left(90)
     while not saw_red():
         print("andando")
-        move_forward(140)
+        move_forward(120)
     stop()
     reposition("Red")
-    turn_180()
+    stop()
     tube = message()
     decision(tube)
 
@@ -162,19 +138,110 @@ def decision(tube):
         place = dic_10[color]  
     if place == "ESCOLA":
         school()
+    elif place == "PREFEITURA":
+        city_hall()
+    elif place == "BIBLIOTECA":
+        library()
         #get back from school depois      
 #Funções referentes ao trajeto do robô
 
 def school():
+    move_backward_cm(35)
+    #depois verificar tubo
+    turn_left(90)
     move_forward_cm(30)
     turn_right(90)
-    move_forward_cm(30)
-    turn_90_right()
     while not saw_yellow():
         move_forward(50)
     stop()
     enter()
-
-
     open_claw(850) #fazer leave depois 
 
+
+def city_hall():
+    move_backward_cm(35)
+    #depois verificar tubo
+    turn_left(90)
+    move_forward_cm(30)
+    turn_left(90)
+    while not saw_yellow():
+        move_forward(50)
+    stop()
+    enter()
+    open_claw(850) #fazer leave depois 
+
+def library():
+    move_backward_cm(95)#verificar se é isto mesmo que a distancia da biblioteca
+    turn_left(90)
+    move_forward_cm(30)
+    turn_left(90)
+    while not saw_yellow():
+        move_forward(50)
+    stop()
+    enter()
+    open_claw(850)
+
+def museum():
+    move_backward_cm(95)
+    turn_left(90)
+    move_forward_cm(95)
+    turn_left(90)
+    while not saw_yellow():
+        move_forward(50)
+    stop()
+    enter()
+    open_claw(850)
+
+def drugstore():
+    move_backward_cm(100)
+    turn_left(90)
+    move_forward_cm(65)
+    turn_right(90)
+    move_forward_cm(20)
+    turn_left(90)
+    while not saw_yellow():
+        move_forward(50)
+    stop()
+    enter()
+    open_claw(850)
+
+def bakery():
+    move_backward_cm(35)
+    #depois verificar tubo
+    turn_left(90)
+    move_forward_cm(95)
+    turn_right(90)
+    while not saw_yellow():
+        move_forward(50)
+    stop()
+    enter()
+    open_claw(850) #fazer leave depois 
+
+def enter():
+    entered = False
+    while not entered:
+        print(yellowRight()," ", yellowLeft())
+        if(yellowRight() and yellowLeft()):
+            reposition("Yellow")
+            move_forward_cm(10)
+            return None
+        elif yellowLeft() and blackRight():
+            stop()
+            move_backward_cm(3)
+            turn_90_right()
+            move_backward_cm(3)
+            stop()
+            turn_90_left() 
+            stop()
+            reposition("Black")
+        elif yellowRight() and blackLeft():
+            stop()
+            move_backward_cm(3)
+            turn_90_left()
+            move_backward_cm(3)
+            stop()
+            turn_90_right() 
+            stop()
+            reposition("Yellow")
+        else:
+            move_forward_cm(1)
