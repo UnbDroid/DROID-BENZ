@@ -100,7 +100,7 @@ def find_passenger():
     while not side_detection():
         move_forward(50)
     stop()   
-    move_backward_cm(1)   
+    move_backward_cm(1.8)   
     turn_90_left()
     while not blueRight() and not blueLeft():
         move_forward(50) 
@@ -118,7 +118,7 @@ def find_passenger():
 
 
 def check_point():
-    turn_left(90)
+    turn_left(93)
     while not saw_red():
         print("andando")
         move_forward(120)
@@ -170,9 +170,9 @@ def school():
 def city_hall():
     move_backward_cm(35)
     #depois verificar tubo
-    turn_left(90)
+    turn_left(92)
     move_forward_cm(30)
-    turn_left(90)
+    turn_left(92)
     leave_passenger()
 
 def library():
@@ -233,6 +233,7 @@ def enter():
             turn_left(90) 
             stop()
             reposition_wall()
+            move_backward_cm(2)
         elif yellowRight() and blackLeft():
             stop()
             reposition_wall()
@@ -243,5 +244,6 @@ def enter():
             turn_right(90) 
             stop()
             reposition_wall()
+            move_backward_cm(2)
         else:
             move_forward_cm(1)
