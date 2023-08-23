@@ -45,8 +45,9 @@ while True:
     mbox.send(txt)
 
 
-# brown = calibration_auto(sensor_color, brown)
-# print(see())
+# green = calibration_auto(sensor_color, green)
+# for i in range(100):
+#   print(see())
 #print(see())
 # while True:
 #   calibration(sensor_color)
