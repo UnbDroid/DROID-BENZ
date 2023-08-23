@@ -97,11 +97,10 @@ def recognize():
 def find_passenger():
     print("procurando")
     final_tube()
-    
     while not side_detection():
         move_forward(50)
     stop()   
-    move_backward_cm(2)   
+    move_backward_cm(1)   
     turn_90_left()
     while not blueRight() and not blueLeft():
         move_forward(50) 
