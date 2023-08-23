@@ -5,14 +5,14 @@ from pybricks.tools import StopWatch
 from modules.motors import *
 from pybricks.messaging import BluetoothMailboxServer, TextMailbox
 import time
-'''
+
 server = BluetoothMailboxServer()
 eve3box = TextMailbox('greeting', server)
 
 print('waiting for connection...')
 server.wait_for_connection()
 print('connected!')
-'''
+
 def message():
     eve3box.send("True")
     eve3box.wait()

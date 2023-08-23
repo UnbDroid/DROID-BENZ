@@ -238,10 +238,10 @@ def enter():
             stop()
             reposition_wall()
             move_backward_cm(3)
-            turn_left()
+            turn_left(90)
             move_backward_cm(3)
             stop()
-            turn_right() 
+            turn_right(90) 
             stop()
             reposition_wall()
         else:
