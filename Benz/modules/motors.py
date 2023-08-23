@@ -16,7 +16,7 @@ def circle_left():
     motor_left.run(80)
     motor_right.run(-10)
 
-motors = DriveBase(motor_left, motor_right, wheel_diameter = 42.1, axle_track = 105.7)
+motors = DriveBase(motor_left, motor_right, wheel_diameter = 42.1, axle_track = 105.5)
 #motors.distance_control.pid(200 , 600, 2,  8, 2, 0)
 motors.distance_control.pid(200 , 600, 2,  8, 2, 0)
 motors.settings(150, 300, 100, 250)
@@ -80,6 +80,9 @@ def reposition(color):
     print("Entrou")
     if seeRight() != color and seeLeft() == color:
         print("Diferenciou")
+        #if color == "White":
+         #   while seeRight() != color:
+          #      circle_right()
         while seeRight() != color:
             circle_right()
         stop()
@@ -97,28 +100,22 @@ def reposition(color):
         stop()
     print("rodou tudo")
 
-'''
-def reposition2(color, color2 = True):
-    if color2 == True:
-        color2 = color
-    
-    if seeRight() != color and seeLeft() == color2:
-        print("Diferenciou")
-        while seeRight() != color:
-            circle_right()
-        stop()
-    elif seeRight() == color2 and seeLeft() != color:
+
+def reposition_wall():
+    colors =  ["Yellow","Black"]
+    print(seeRight(), " ", seeLeft())
+    if (seeRight() in colors and seeLeft() in colors):
+        print("Perfecto")
+    elif seeRight() in colors and seeLeft() not in  colors:
         print("1")
-        while seeLeft() != color:
+        while seeLeft() not in colors:
             circle_left()
         stop()
-    elif seeRight() == seeLeft():
+    elif seeRight() not in colors and seeLeft() in  colors:
         print("2")
-        #pass
-    elif seeRight() != color2 and seeLeft() != color:
-        while seeRight() != color2:
+        while seeRight() not in colors:
             circle_right()
         stop()
+    else:
+        print("Todo fudido")
     print("rodou tudo")
-
-'''

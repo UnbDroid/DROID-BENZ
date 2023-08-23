@@ -137,11 +137,26 @@ def decision(tube):
     else:
         place = dic_10[color]  
     if place == "ESCOLA":
+        print("Indo para a escola")
         school()
     elif place == "PREFEITURA":
+        print("Indo para a prefeitura")
         city_hall()
     elif place == "BIBLIOTECA":
+        print("Indo para a biblioteca")
         library()
+    elif place == "FARMACIA":
+        print("Indo para a farmácia")
+        drugstore()
+    elif place == "MUSEU":
+        print("Indo para o museu")
+        museum()
+    elif place == "PARQUE":
+        print("Indo para o parque")
+        park()
+    elif place == "PADARIA":
+        print("Indo para a padaria")
+        bakery()
         #get back from school depois      
 #Funções referentes ao trajeto do robô
 
@@ -151,12 +166,7 @@ def school():
     turn_left(90)
     move_forward_cm(30)
     turn_right(90)
-    while not saw_yellow():
-        move_forward(50)
-    stop()
-    enter()
-    open_claw(850) #fazer leave depois 
-
+    leave_passenger()
 
 def city_hall():
     move_backward_cm(35)
@@ -164,46 +174,31 @@ def city_hall():
     turn_left(90)
     move_forward_cm(30)
     turn_left(90)
-    while not saw_yellow():
-        move_forward(50)
-    stop()
-    enter()
-    open_claw(850) #fazer leave depois 
+    leave_passenger()
 
 def library():
     move_backward_cm(95)#verificar se é isto mesmo que a distancia da biblioteca
     turn_left(90)
     move_forward_cm(30)
     turn_left(90)
-    while not saw_yellow():
-        move_forward(50)
-    stop()
-    enter()
-    open_claw(850)
+    leave_passenger()
 
 def museum():
     move_backward_cm(95)
     turn_left(90)
     move_forward_cm(95)
     turn_left(90)
-    while not saw_yellow():
-        move_forward(50)
-    stop()
-    enter()
-    open_claw(850)
+    leave_passenger()
 
 def drugstore():
-    move_backward_cm(100)
-    turn_left(90)
-    move_forward_cm(65)
-    turn_right(90)
-    move_forward_cm(20)
-    turn_left(90)
-    while not saw_yellow():
-        move_forward(50)
-    stop()
-    enter()
-    open_claw(850)
+    move_backward_cm(40)
+    #depois verificar tubo
+    turn_left(93)
+    move_forward_cm(60)
+    turn_left(93)
+    move_forward_cm(25)
+    turn_right(92)
+    leave_passenger()
 
 def bakery():
     move_backward_cm(35)
@@ -211,9 +206,13 @@ def bakery():
     turn_left(90)
     move_forward_cm(95)
     turn_right(90)
-    while not saw_yellow():
+    leave_passenger()
+
+def leave_passenger():
+    while not saw_yellow() and not saw_black():
         move_forward(50)
     stop()
+    reposition_wall()
     enter()
     open_claw(850) #fazer leave depois 
 
@@ -227,21 +226,23 @@ def enter():
             return None
         elif yellowLeft() and blackRight():
             stop()
+            reposition_wall()
             move_backward_cm(3)
-            turn_90_right()
+            turn_right(90)
             move_backward_cm(3)
             stop()
-            turn_90_left() 
+            turn_left(90) 
             stop()
-            reposition("Black")
+            reposition_wall()
         elif yellowRight() and blackLeft():
             stop()
+            reposition_wall()
             move_backward_cm(3)
-            turn_90_left()
+            turn_left()
             move_backward_cm(3)
             stop()
-            turn_90_right() 
+            turn_right() 
             stop()
-            reposition("Yellow")
+            reposition_wall()
         else:
             move_forward_cm(1)

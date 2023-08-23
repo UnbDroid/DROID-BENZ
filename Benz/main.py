@@ -15,7 +15,7 @@ from modules.claw import *
 #wait(4000)
 
 #message()
-
+#calibration_auto(sensor, array)
 #while True:
  # message()
   #wait(4000)
@@ -23,12 +23,19 @@ from modules.claw import *
  # seeRight()
 #  seeLeft()
 # wait(4000)
-#close_claw(200)
-#close_claw()
-#message()
 
-#reposition("Blue")
+#calibration_auto(sensor_color_left, teste)
+#calibration_auto(sensor_color_right, teste)
+#reposition_wall()
 drugstore()
+#stop()
+#reposition("Black")
+
+#while not saw_yellow():
+   # move_forward(50)
+#stop()
+#enter()
+
 #final_tube()
 #close_claw()
 #check_point()
@@ -52,16 +59,18 @@ drugstore()
 #turn_left(360)
 #turn_left(360)
 #turn_left(360)
-
+#close_claw(200)
+#close_claw()
+#drugstore()
 #while not saw_blue():
  # move_forward(160)
 #stop()
 
 
 
-# turn_left(360)
-# turn_left(360)
-# turn_left(360)
+#turn_left(360)
+#turn_left(360)
+#turn_left(360)
     
 
 #move_backward_cm(5)

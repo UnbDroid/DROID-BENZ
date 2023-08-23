@@ -2,16 +2,50 @@ from pybricks.parameters import  Color
 from pybricks.parameters import Port
 from pybricks.ev3devices import ColorSensor
 
-
 sensor_color_left = ColorSensor(Port.S2) 
 sensor_color_right = ColorSensor(Port.S1) 
+
+global array
+global teste
 
 def calibration(sensor):
     print(sensor.rgb())
 
+def calibration_auto2(sensor, array):
+  #  global array
+   # global teste
+    colors = sensor.rgb()
+    #min
+    print("Calibrando as cores")
+    array[0][0] = colors[0]-8
+    array[0][1] = colors[1]-8
+    array[0][2] = colors[2]-8
+    #max
+    array[1][0] = colors[0]+8
+    array[1][1] = colors[1]+8
+    array[1][2] = colors[2]+8
+    print("Devolvendo os valores")
+    print(array)
+
+def calibration_auto(sensor, array):
+
+    colors = sensor.rgb()
+    #min
+    print("Calibrando as cores")
+    
+    array[0][0] = colors[0]-8
+    array[0][1] = colors[1]-8
+    array[0][2] = colors[2]-8
+    #max
+    array[1][0] = colors[0]+8
+    array[1][1] = colors[1]+8
+    array[1][2] = colors[2]+8
+    print("Devolvendo os valores")
+    print(array)
+
 #Declaration of RGB values of color sensors
 #min and max
-
+teste = [[0,0,0],[0,0,0]]
 #arrumar o marrom e verde
 red_left = [[57,7,0],[78,27,25]]
 red_right = [[40,8,7],[62,30,26]]#check
@@ -19,25 +53,27 @@ red_right = [[40,8,7],[62,30,26]]#check
 blue_left = [[0,18,34],[23,38,54]]
 blue_right = [[0,18,52],[18,38,74]]#check
 
-yellow_left = [[60,80, 12],[81,100,32]]
-yellow_right = [[33,54,8],[54,76,28]] #check
+yellow_left = [[62, 76, 13], [78, 92, 29]]
+yellow_right = [[43, 68, 13], [59, 84, 29]]#check
 
 green_left = [[30,5,0],[49,25,20]]
 green_right = [[54,5,0],[77,25,20]]
 
-black_left = [[0,0, 0],[20,18,18]]
-black_right = [[0,2,0],[16,24,20]] 
+black_left = [[0,0, 0],[15, 16, 14]]
+black_right = [[0,2,0],[13, 17, 13]]
 
 brown_left = [[20,10,0],[35,30,18]]
 brown_right = [[24,9,0],[45,32,15]] 
 
-white_left = [[37,61, 10],[67,85,30]]
-white_right = [[65,70,15],[83,97,33]] 
+white_left = [[68, 92, 84], [84, 108, 100]]
+white_right = [[44, 81, 92], [60, 97, 108]]
 
 
 #left 
 def whiteLeft():
-    return seeLeft() == "White"
+    rgb = sensor_color_left.rgb()
+    return ( (white_left[0][0] <= rgb[0] and rgb[0] <=white_left[1][0]) and (white_left[0][1] <= rgb[1] and rgb[1] <=white_left[1][1]) and (white_left[0][2] <= rgb[2] and rgb[2] <=white_left[1][2]) )
+
 
 def redLeft() :
     rgb = sensor_color_left.rgb()
@@ -61,7 +97,8 @@ def brownLeft() :
 
 #right
 def whiteRight():
-    return seeRight() == "White"
+    rgb = sensor_color_left.rgb()
+    return ( (white_left[0][0] <= rgb[0] and rgb[0] <=white_left[1][0]) and (white_left[0][1] <= rgb[1] and rgb[1] <=white_left[1][1]) and (white_left[0][2] <= rgb[2] and rgb[2] <=white_left[1][2]) )
 
 def redRight() :
     rgb = sensor_color_right.rgb()
