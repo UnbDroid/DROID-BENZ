@@ -23,30 +23,30 @@ from modules.colors import *
 from pybricks.messaging import BluetoothMailboxClient, TextMailbox
 time.sleep(2)
 # This is the name of the remote EV3 or PC we are connecting to.
-# SERVER = 'ev3dev'
-# print("tentando ;)")
-# client = BluetoothMailboxClient()
-# mbox = TextMailbox('greeting', client)
+SERVER = 'ev3dev'
+print("tentando ;)")
+client = BluetoothMailboxClient()
+mbox = TextMailbox('greeting', client)
 
-# print('establishing connection...')
-# client.connect(SERVER)
-# print('connected!')
-# mbox.send("Hello")
-
-
-# # In this program, the client sends the first message and then waits for the
-# # server to reply.
-
-# while True:
-#   print(mbox.read())
-#   if mbox.read() == "True":
-#     print("checkando")
-#     txt = check()
-#     mbox.send(txt)
+print('establishing connection...')
+client.connect(SERVER)
+print('connected!')
+mbox.send("Hello")
 
 
-brown = calibration_auto(sensor_color, brown)
-print(see())
+# In this program, the client sends the first message and then waits for the
+# server to reply.
+
+while True:
+  print(mbox.read())
+  if mbox.read() == "True":
+    print("checkando")
+    txt = check()
+    mbox.send(txt)
+
+
+# brown = calibration_auto(sensor_color, brown)
+# print(see())
 #print(see())
 # while True:
 #   calibration(sensor_color)
