@@ -14,17 +14,34 @@ def calibration(sensor):
 # min and max
 
 
-# arrumar o marrom e verde
-red = [[50, 3, 0], [72, 25, 10]]  # check
+def calibration_auto(sensor, array):
+    global teste
+    colors = sensor.rgb()
+    # min
+    print("Calibrando as cores")
 
-blue = [[0, 7, 10], [12, 19, 21]]  # check
+    array[0][0] = colors[0]-8
+    array[0][1] = colors[1]-8
+    array[0][2] = colors[2]-8
+    # max
+    array[1][0] = colors[0]+8
+    array[1][1] = colors[1]+8
+    array[1][2] = colors[2]+8
+    print("Devolvendo os valores")
+    print(array)
+    return array
+
+
+# arrumar o marrom e verde
+red = [[29, 0, 0], [45, 13, 10]]  # check
+
+blue = [[0, 0, 5], [11, 15, 21]]  # check
 
 yellow = [[35, 64, 11], [55, 82, 30]]  
 
-green = [[0, 18, 0], [12, 32, 12]]#check
+green = [[0, 13, 0], [11, 29, 14]]  # check
 
-
-brown = [[62, 62, 57], [78, 80, 70]]  
+brown = [[29, 42, 44], [45, 58, 60]] #check
 
 
 def calibration(sensor):

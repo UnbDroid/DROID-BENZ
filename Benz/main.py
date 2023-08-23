@@ -7,6 +7,7 @@ from pybricks.ev3devices import (InfraredSensor, UltrasonicSensor)
 from pybricks.parameters import Stop, Direction, Button
 from pybricks.tools import wait, StopWatch, DataLog
 import time
+from modules.colors import *
 #from pybricks.media.ev3dev import SoundFile, ImageFile
 
 
@@ -22,28 +23,31 @@ import time
 from pybricks.messaging import BluetoothMailboxClient, TextMailbox
 time.sleep(2)
 # This is the name of the remote EV3 or PC we are connecting to.
-SERVER = 'ev3dev'
-print("tentando ;)")
-client = BluetoothMailboxClient()
-mbox = TextMailbox('greeting', client)
+# SERVER = 'ev3dev'
+# print("tentando ;)")
+# client = BluetoothMailboxClient()
+# mbox = TextMailbox('greeting', client)
 
-print('establishing connection...')
-client.connect(SERVER)
-print('connected!')
-mbox.send("Hello")
+# print('establishing connection...')
+# client.connect(SERVER)
+# print('connected!')
+# mbox.send("Hello")
 
 
-# In this program, the client sends the first message and then waits for the
-# server to reply.
-from modules.colors import *
-while True:
-  print(mbox.read())
-  if mbox.read() == "True":
-    print("checkando")
-    txt = check()
-    mbox.send(txt)
+# # In this program, the client sends the first message and then waits for the
+# # server to reply.
 
+# while True:
+#   print(mbox.read())
+#   if mbox.read() == "True":
+#     print("checkando")
+#     txt = check()
+#     mbox.send(txt)
+
+
+brown = calibration_auto(sensor_color, brown)
+print(see())
 #print(see())
 # while True:
-#   print(check())
+#   calibration(sensor_color)
 #   wait(1000)
