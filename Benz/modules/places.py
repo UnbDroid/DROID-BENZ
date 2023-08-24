@@ -1,6 +1,5 @@
 from pybricks.ev3devices import UltrasonicSensor
 from pybricks.parameters import Port
-from pybricks.hubs import EV3Brick
 import time
 
 
@@ -10,7 +9,6 @@ from modules.detect import *
 from modules.claw import *
 from modules.varaiables import *
 
-ev3 = EV3Brick()
 
 
 count = 0 

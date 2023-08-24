@@ -12,27 +12,16 @@ from modules.detect import *
 from modules.places import *
 from modules.claw import *
 
-#wait(4000)
 
-#message()
 #calibration_auto(sensor, array)
-#while True:
- # message()
-  #wait(4000)
 
- # seeRight()
-#  seeLeft()
-# wait(4000)
-
-
-
-
-#final_tube()
-#close_claw()
-#check_point()
 #open_claw(850)
-
-recognize_first()
+for i in range(100):
+  obstacle(False)
+  wait(1000)
+  #obstacle()
+  #wait(1000)
+#recognize_first()
 
 #school()
 #while True:
