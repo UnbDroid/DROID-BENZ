@@ -16,7 +16,7 @@ def circle_left():
     motor_left.run(80)
     motor_right.run(-10)
 
-motors = DriveBase(motor_left, motor_right, wheel_diameter = 42.1, axle_track = 105.5)
+motors = DriveBase(motor_left, motor_right, wheel_diameter = 42.1, axle_track = 103)
 #motors.distance_control.pid(200 , 600, 2,  8, 2, 0)
 motors.distance_control.pid(200 , 600, 2,  8, 2, 0)
 motors.settings(150, 300, 100, 250)

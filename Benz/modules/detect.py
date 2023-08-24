@@ -6,12 +6,30 @@ from modules.motors import *
 from pybricks.messaging import BluetoothMailboxServer, TextMailbox
 import time
 
+ultra_sensor = UltrasonicSensor(Port.S3)
+infra_sensor = InfraredSensor(Port.S4)
+
+
 server = BluetoothMailboxServer()
 eve3box = TextMailbox('greeting', server)
 
 print('waiting for connection...')
 server.wait_for_connection()
 print('connected!')
+
+
+def obstacle(default = True):
+    if default:
+        if ultra_sensor.distance() <= 400:
+            return True
+        else:
+            return False
+    else:
+        if infra_sensor.distance() <= 18:
+            return True
+        else:
+            return False
+
 
 def message():
     eve3box.send("True")
@@ -20,7 +38,8 @@ def message():
     eve3box.send("False")
     return eve3box.read().split()
 
-infra_sensor = InfraredSensor(Port.S4)
+
+
 
 def collision():
      if (ultra_front_sensor.distance() > 0) :
