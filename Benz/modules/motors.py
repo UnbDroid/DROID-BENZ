@@ -119,3 +119,4 @@ def reposition_wall():
     else:
         print("Todo fudido")
     print("rodou tudo")
+
