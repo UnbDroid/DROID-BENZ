@@ -1,6 +1,5 @@
 from pybricks.ev3devices import UltrasonicSensor
 from pybricks.parameters import Port
-from pybricks.hubs import EV3Brick
 import time
 
 
@@ -10,7 +9,6 @@ from modules.detect import *
 from modules.claw import *
 from modules.varaiables import *
 
-ev3 = EV3Brick()
 
 
 count = 0 
@@ -24,24 +22,24 @@ time_forward = 0
 
 
 def recognize_first():
-    print("oii")
-    print(saw_red())
+    print("starting")
+    #print(saw_red())
     while not saw_red() and not saw_blue():
         print("andando")
         move_forward(140)
         if(saw_black() or saw_yellow()):
            stop()
            move_backward_cm(3) #calcular
-           turn_90_left()         
+           turn_left(90)         
 
     stop()
    # check_point()
     if saw_red(): 
-        turn_left(180)
+        #turn_left(180)
         move_forward_cm(30)
-        turn_90_left()
+        turn_right(90)
         while not saw_blue():
-            move_foward(150)
+            move_forward(150)
             if(saw_black()):
                 turn_180()
         stop()
@@ -49,7 +47,7 @@ def recognize_first():
         stop()
         reposition("Blue")
         move_backward_cm(7)
-        turn_90_right()
+        turn_right(90)
         find_passenger()
     #colocar para ir para trás
     
@@ -118,10 +116,12 @@ def find_passenger():
 
 
 def check_point():
-    turn_left(93)
+    turn_left(95)
     while not saw_red():
         print("andando")
         move_forward(120)
+    stop()
+    move_backward_cm(1)
     stop()
     reposition("Red")
     stop()
@@ -167,12 +167,54 @@ def school():
     turn_right(90)
     leave_passenger()
 
+def school2():
+    move_backward_cm(35)
+    if obstacle(False):
+        move_backward_cm(60)
+        turn_right(90)
+        move_backward_cm(60)
+        if obstacle(False):
+            move_backward_cm(60)
+            turn_left(90)
+            move_forward_cm(45)
+            turn_right(90)
+            move_forward_cm(60)
+            turn_left(90)
+            move_forward_cm(25)
+            turn_right(90)
+            #leave_passenger()
+        else:
+            turn_left(90)
+            move_forward_cm(90)
+            move_right(90)
+           # leave_passenger()
+    #depois verificar tubo
+    else:
+        turn_left(90)
+        move_forward_cm(30)
+        turn_right(90)
+    leave_passenger()
+
 def city_hall():
     move_backward_cm(35)
     #depois verificar tubo
     turn_left(92)
     move_forward_cm(30)
     turn_left(92)
+    leave_passenger()
+
+def city_hall2():
+    move_backward_cm(35)
+    if obstacle(False):
+        move_backward_cm(35)
+        turn_left(90)
+        move_forward_cm(30)
+        turn_right(90)
+    #depois verificar tubo
+    else:
+        turn_left(92)
+        move_forward_cm(30)
+        turn_left(92)
     leave_passenger()
 
 def library():
@@ -188,6 +230,23 @@ def museum():
     move_forward_cm(95)
     turn_left(90)
     leave_passenger()
+
+def museum2():
+    move_backward_cm(95)
+    if obstacle(False):
+        pass #mexer caso eleveja o primeiro obstaculo
+    else:
+        turn_left(90)
+        move_forward_cm(65)
+        if obstacle():
+            turn_left(90)
+            move_foward_cm(15)
+            turn_right(90)
+        else:
+            move_foward_cm(30)
+            turn_left(90)
+    leave_passenger()
+
 
 def drugstore():
     move_backward_cm(40)

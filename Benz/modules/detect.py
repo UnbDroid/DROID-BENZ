@@ -2,16 +2,42 @@ from pybricks.ev3devices import (ColorSensor, UltrasonicSensor,InfraredSensor )
 from pybricks.nxtdevices import ColorSensor as ColorNxt
 from pybricks.parameters import Port
 from pybricks.tools import StopWatch
+from pybricks.hubs import EV3Brick
 from modules.motors import *
 from pybricks.messaging import BluetoothMailboxServer, TextMailbox
 import time
 
-server = BluetoothMailboxServer()
+ultra_sensor = UltrasonicSensor(Port.S3)
+infra_sensor = InfraredSensor(Port.S4)
+
+ev3 = EV3Brick()
+
+'''server = BluetoothMailboxServer()
 eve3box = TextMailbox('greeting', server)
 
 print('waiting for connection...')
 server.wait_for_connection()
 print('connected!')
+'''
+
+def obstacle(default = True):
+    if default:
+        if ultra_sensor.distance() <= 200:
+            ev3.speaker.beep(200)
+            return True
+        else:
+            ev3.speaker.beep(200)
+            ev3.speaker.beep(300)
+            return False
+    else:
+        if infra_sensor.distance() <= 23:
+            ev3.speaker.beep(200)
+            return True
+        else:
+            ev3.speaker.beep(200)
+            ev3.speaker.beep(300)
+            return False
+
 
 def message():
     eve3box.send("True")
@@ -20,7 +46,8 @@ def message():
     eve3box.send("False")
     return eve3box.read().split()
 
-infra_sensor = InfraredSensor(Port.S4)
+
+
 
 def collision():
      if (ultra_front_sensor.distance() > 0) :
