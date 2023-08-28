@@ -33,15 +33,15 @@ def calibration_auto(sensor, array):
 
 
 # arrumar o marrom e verde
-red = [[29, 0, 0], [45, 13, 10]]  #check
+red = [[31, 0, 0], [47, 16, 10]]  # check
 
-blue = [[0, 0, 5], [11, 14, 21]]  #check
+blue = [[0, 1, 5], [12, 14, 21]]  # check
 
-yellow = [[35, 64, 11], [55, 82, 30]]  
+#yellow = [[35, 64, 11], [55, 82, 30]]  
 
-green = [[0, 13, 0], [12, 28, 17]]  #check
+green = [[0, 13, 0], [11, 28, 13]]  # check
 
-brown = [[29, 42, 44], [45, 58, 60]] #check
+brown = [[36, 56, 54], [52, 72, 70]]  # check
 
 
 def calibration(sensor):
@@ -87,8 +87,8 @@ def see():
         return "Green"
     elif Brown():
         return "Brown"
-    elif Yellow():
-        return "Yellow"
+    # elif Yellow():
+    #     return "Yellow"
     else:
         return "White"
 
@@ -102,4 +102,7 @@ def size():
 
 def check():
     color = see()
-    return color + " " + size()
+    if color == "White":
+        time.sleep(1)
+        color = see()
+    return choice = color + " " + size()

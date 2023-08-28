@@ -47,8 +47,11 @@ while True:
 
 # green = calibration_auto(sensor_color, green)
 # for i in range(100):
-#   print(see())
+#   print(check())
+#   time.sleep(1)
 # #print(see())
 # # while True:
 # #   calibration(sensor_color)
 # #   wait(1000)
+
+# calibration_auto(sensor_color, brown)
