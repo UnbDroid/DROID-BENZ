@@ -105,4 +105,4 @@ def check():
     if color == "White":
         time.sleep(1)
         color = see()
-    return choice = color + " " + size()
+    return color + " " + size()
