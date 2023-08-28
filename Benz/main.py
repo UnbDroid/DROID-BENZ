@@ -16,9 +16,9 @@ from modules.claw import *
 #calibration_auto(sensor, array)
 
 #open_claw(850)
-for i in range(100):
-  obstacle(False)
-  wait(1000)
+# for i in range(100):
+#   obstacle(False)
+#   wait(1000)
   #obstacle()
   #wait(1000)
 #recognize_first()
@@ -87,4 +87,4 @@ print(tempo.time())
 '''
 
 #recognize_first()
-# city_hall()
+museum2()

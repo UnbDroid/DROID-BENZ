@@ -171,29 +171,29 @@ def school2():
     move_backward_cm(35)
     if obstacle(False):
         move_backward_cm(60)
-        turn_right(90)
+        turn_right(92)
         move_backward_cm(60)
         if obstacle(False):
             move_backward_cm(60)
-            turn_left(90)
-            move_forward_cm(45)
-            turn_right(90)
+            turn_left(92)
             move_forward_cm(60)
-            turn_left(90)
-            move_forward_cm(25)
-            turn_right(90)
+            turn_right(92)
+            move_forward_cm(55)
+            turn_left(92)
+            move_forward_cm(35)
+            turn_right(92)
             #leave_passenger()
         else:
-            turn_left(90)
+            turn_left(92)
             move_forward_cm(90)
-            move_right(90)
+            turn_right(92)
            # leave_passenger()
     #depois verificar tubo
     else:
-        turn_left(90)
+        turn_left(92)
         move_forward_cm(30)
-        turn_right(90)
-    leave_passenger()
+        turn_right(92)
+    #leave_passenger()
 
 def city_hall():
     move_backward_cm(35)
@@ -203,10 +203,10 @@ def city_hall():
     turn_left(92)
     leave_passenger()
 
-def city_hall2():
+def city_hall2(): #check
     move_backward_cm(35)
     if obstacle(False):
-        move_backward_cm(35)
+        move_backward_cm(60)
         turn_left(90)
         move_forward_cm(30)
         turn_right(90)
@@ -215,7 +215,7 @@ def city_hall2():
         turn_left(92)
         move_forward_cm(30)
         turn_left(92)
-    leave_passenger()
+    # leave_passenger()
 
 def library():
     move_backward_cm(95)#verificar se é isto mesmo que a distancia da biblioteca
@@ -232,20 +232,35 @@ def museum():
     leave_passenger()
 
 def museum2():
-    move_backward_cm(95)
+    move_backward_cm(32)
     if obstacle(False):
-        pass #mexer caso eleveja o primeiro obstaculo
-    else:
-        turn_left(90)
-        move_forward_cm(65)
-        if obstacle():
+        move_backward_cm(60)
+        turn_left(92) #mexer caso eleveja o primeiro obstaculo
+        move_forward_cm(30)
+        if obstacle(False):
+            move_forward_cm(60)
             turn_left(90)
-            move_foward_cm(15)
+            move_forward_cm(35)
+            turn_left(92)
+            move_forward_cm(20)
             turn_right(90)
-        else:
-            move_foward_cm(30)
-            turn_left(90)
-    leave_passenger()
+            if obstacle():
+                turn_left(92)
+                move_foward_cm(15)
+                turn_right(92)
+            else:
+                move_foward_cm(30)
+                turn_left(92)
+    else:
+        turn_left(96)
+        move_forward_cm(120)
+        turn_left(94)
+        move_forward_cm(75)
+        turn_left(94)
+        move_forward_cm(25)
+        turn_right(94)
+        
+    #leave_passenger()
 
 
 def drugstore():
