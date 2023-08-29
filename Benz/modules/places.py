@@ -33,7 +33,6 @@ def recognize_first():
            turn_left(90)         
 
     stop()
-   # check_point()
     if saw_red(): 
         #turn_left(180)
         move_forward_cm(30)
@@ -49,6 +48,8 @@ def recognize_first():
         move_backward_cm(7)
         turn_right(90)
         find_passenger()
+    recognize_first()
+    
     #colocar para ir para trás
     
     
@@ -99,7 +100,7 @@ def find_passenger():
         move_forward(50)
     stop()   
     move_backward_cm(1.8)   
-    turn_90_left()
+    turn_left(90)
     while not blueRight() and not blueLeft():
         move_forward(50) 
     stop()
@@ -116,7 +117,7 @@ def find_passenger():
 
 
 def check_point():
-    turn_left(95)
+    turn_left(90)
     while not saw_red():
         print("andando")
         move_forward(120)
@@ -160,12 +161,20 @@ def decision(tube):
 #Funções referentes ao trajeto do robô
 
 def school():
+    command_stack()
     move_backward_cm(35)
+    stack.append(["straight_cm", 35])
+    
     #depois verificar tubo
     turn_left(90)
-    move_forward_cm(30)
+    stack.append(["turn_right", 90])
+    move_forward_cm(32)
+    stack.append(["back_cm", 30])
     turn_right(90)
+    stack.append(["turn_leftt", 90])
     leave_passenger()
+    stack.append(["back_cm", 15])
+    stack.reverse()
 
 def school2():
     move_backward_cm(35)
@@ -294,6 +303,7 @@ def enter():
     while not entered:
         print(yellowRight()," ", yellowLeft())
         if(yellowRight() and yellowLeft()):
+            stop()
             reposition("Yellow")
             move_forward_cm(10)
             return None

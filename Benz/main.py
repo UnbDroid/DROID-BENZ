@@ -12,7 +12,7 @@ from modules.detect import *
 from modules.places import *
 from modules.claw import *
 
-
+#school()
 #calibration_auto(sensor, array)
 
 #open_claw(850)
@@ -23,6 +23,7 @@ from modules.claw import *
   #wait(1000)
 #recognize_first()
 
+#open_claw(700)
 #school()
 #while True:
  # calibration(sensor_color_right)
@@ -48,9 +49,15 @@ from modules.claw import *
 #turn_left(360)
 #turn_left(360)
     
-
-#move_backward_cm(5)
 #open_claw(850)
+#close_claw(250)
+#move_forward_cm(6)
+#verificar se tem algo na frente por preucação
+#close_claw()
+#move_backward_cm(9)
+#check_point()
+#move_backward_cm(5)
+#close_claw(850)
 #close_claw()
 
 #Declaração de variáveis globais e objetos
@@ -59,18 +66,24 @@ from modules.claw import *
 
 #Programa principal (minúsuclo pq é o programa principal lmfao)
 
-
+#school()
 #
 # 
-# recognize_first()
+#recognize_first()
+#recognize_first()
 # reposition("Blue")
 #turn_90_left()
-#move_forward_cm(60)
-'''i = 0
-while i < 10:
-  turn_left(360)
-  i+=1
-'''
+#command_stack()
+#move_forward_cm(30)
+#turn_left(90)
+#move_forward_cm(30)
+#turn_left(90)
+#stack.reverse()
+#i = 0
+#while i < 10:
+ # turn_left(360)
+  #i+=1
+
 
 #while True:
  # print("diretinha", seeRight())
@@ -87,4 +100,4 @@ print(tempo.time())
 '''
 
 #recognize_first()
-museum2()
+#museum2()

@@ -20,38 +20,36 @@ class command_stack():
     def size(self):
         return len(self.lista)
 
+    def isEmpty(self):
+        return self.lista == []
+
     def unpille(self):
         command = self.lista.pop(-1)
+        print(command[0])
         if command[0] == "straight_cm":
-            move_forward_cm(command[1])
+            move_forward_cm(command[1],False)
         elif command[0] == "back_cm":
-            move_backward_cm(command[1])
+            move_backward_cm(command[1],False)
         elif command[0] == "turn_left":
-            turn_left(command[1])
+            turn_left(command[1],False)
         elif command[0] == "back":
-            move_backward(command[1])
+            move_backward(command[1],False)
         elif command[0] == "forward":
-            move_forward(command[1])
+            move_forward(command[1],False)
         elif command[0] == "turn_right":
-            turn_right(command[1])
+            turn_right(command[1],False)
         elif command[0] == "stop":
-            stop()
+            stop(False)
+        self.lista.pop()
         return command
 
-    def reverse(self):
-        while self.size() != 0:
+    
+    def reverse(self):    
+        while not self.isEmpty():
+            print(self.size())
             self.unpille()
 
 stack = command_stack()
-
-class command_stack():
-    def __init__(self):
-        lista = []
-    def append(self, command):
-        lista.append(command)
-        return True
-    def unpille():
-        return lista.pop(-1)
 
 def circle_right():
     motor_right.run(80)
@@ -61,7 +59,7 @@ def circle_left():
     motor_left.run(80)
     motor_right.run(-10)
 
-motors = DriveBase(motor_left, motor_right, wheel_diameter = 42.1, axle_track = 103)
+motors = DriveBase(motor_left, motor_right, wheel_diameter = 42.1, axle_track = 116)
 #motors.distance_control.pid(200 , 600, 2,  8, 2, 0)
 motors.distance_control.pid(200 , 600, 2,  8, 2, 0)
 motors.settings(150, 300, 100, 250)
@@ -70,30 +68,36 @@ def move_forward(velocity):
     motors.drive(velocity, 0)
 
 
-def move_forward_cm(mm) :
+def move_forward_cm(mm, save = True) :
     motors.straight(mm*10)
-    stack.forward(["backward_cm", mm])
+    if save:
+        stack.append(["back_cm", mm])
         
 def move_backward(velocity):
     motors.drive(-velocity, 0)
     
-def move_backward_cm(mm) :
+def move_backward_cm(mm, save = True) :
     motors.straight(-mm*10)
-    stack.append(["straight_cm", mm])
+    if save:
+        stack.append(["backward_cm", mm])
     
 def move_right(velocity):
     motors.drive(0, velocity)
 
-def turn_right(angle):
+def turn_right(angle, save = True):
     motors.turn(angle)
-    stack.append(["turn_left", angle])
+    if save:
+        stack.append(["turn_right", angle])
+   # stack.append(["turn_left", angle])
     
 def move_left(velocity):
     motors.drive(0, -velocity)
     
-def turn_left(angle):
+def turn_left(angle, save = True):
     motors.turn(-angle)
-    stack.append(["turn_right", angle])
+    if save:
+        stack.append(["turn_left", angle])
+  #  stack.append(["turn_right", angle])
     
 def turn_90_left():
     motors.turn(-92)
@@ -117,9 +121,11 @@ def turn_180():
     motors.turn(180)
     print("já tornou")
     
-def stop():
+def stop(save = True):
     motors.stop()
-    stack.append(["stop"])
+    if save:
+        stack.append(['stop'])
+    #stack.append(["stop"])
 
 def calibrate():
     turn_right(360)
