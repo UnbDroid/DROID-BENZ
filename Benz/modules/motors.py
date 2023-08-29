@@ -8,6 +8,51 @@ from modules.colors import *
 motor_left = Motor(Port.A) 
 motor_right = Motor(Port.B)
 
+
+class command_stack():
+    def __init__(self):
+        self.lista = []
+
+    def append(self, command):
+        self.lista.append(command)
+        return True
+
+    def size(self):
+        return len(self.lista)
+
+    def unpille(self):
+        command = self.lista.pop(-1)
+        if command[0] == "straight_cm":
+            move_forward_cm(command[1])
+        elif command[0] == "back_cm":
+            move_backward_cm(command[1])
+        elif command[0] == "turn_left":
+            turn_left(command[1])
+        elif command[0] == "back":
+            move_backward(command[1])
+        elif command[0] == "forward":
+            move_forward(command[1])
+        elif command[0] == "turn_right":
+            turn_right(command[1])
+        elif command[0] == "stop":
+            stop()
+        return command
+
+    def reverse(self):
+        while self.size() != 0:
+            self.unpille()
+
+stack = command_stack()
+
+class command_stack():
+    def __init__(self):
+        lista = []
+    def append(self, command):
+        lista.append(command)
+        return True
+    def unpille():
+        return lista.pop(-1)
+
 def circle_right():
     motor_right.run(80)
     motor_left.run(-10)
@@ -27,24 +72,28 @@ def move_forward(velocity):
 
 def move_forward_cm(mm) :
     motors.straight(mm*10)
+    stack.forward(["backward_cm", mm])
         
 def move_backward(velocity):
     motors.drive(-velocity, 0)
     
 def move_backward_cm(mm) :
     motors.straight(-mm*10)
+    stack.append(["straight_cm", mm])
     
 def move_right(velocity):
     motors.drive(0, velocity)
 
 def turn_right(angle):
     motors.turn(angle)
+    stack.append(["turn_left", angle])
     
 def move_left(velocity):
     motors.drive(0, -velocity)
     
 def turn_left(angle):
     motors.turn(-angle)
+    stack.append(["turn_right", angle])
     
 def turn_90_left():
     motors.turn(-92)
@@ -70,6 +119,7 @@ def turn_180():
     
 def stop():
     motors.stop()
+    stack.append(["stop"])
 
 def calibrate():
     turn_right(360)
