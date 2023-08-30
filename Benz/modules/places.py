@@ -52,7 +52,36 @@ def recognize_first():
     
     #colocar para ir para trás
     
-    
+
+def recognize_first2():
+    print("starting")
+    # print(saw_red())
+    while not saw_red() and not saw_blue():
+        print("andando")
+        move_forward(140)
+        if (saw_black() or saw_yellow() or obstacle):
+           stop()
+           move_backward_cm(3)  # calcular
+           turn_left(90)
+
+    stop()
+    if saw_red():
+        # turn_left(180)
+        move_forward_cm(30)
+        turn_right(90)
+        while not saw_blue():
+            move_forward(150)
+            if (saw_black()):
+                turn_180()
+        stop()
+    if (saw_blue()):
+        stop()
+        reposition("Blue")
+        move_backward_cm(7)
+        turn_right(90)
+        find_passenger()
+    recognize_first()
+
 
 
 

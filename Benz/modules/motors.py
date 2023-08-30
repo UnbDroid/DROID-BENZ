@@ -19,7 +19,9 @@ class command_stack():
 
     def size(self):
         return len(self.lista)
-
+    def reset(self):
+        while not self.isEmpty():
+            self.lista.pop()
     def isEmpty(self):
         return self.lista == []
 
@@ -42,7 +44,8 @@ class command_stack():
             stop(False)
         self.lista.pop()
         return command
-
+    def onTop(self):
+        return self.lista[-1]
     
     def reverse(self):    
         while not self.isEmpty():
