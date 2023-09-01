@@ -1,5 +1,6 @@
 from pybricks.ev3devices import UltrasonicSensor
 from pybricks.parameters import Port
+from pybricks.tools import wait,
 import time
 
 
@@ -29,23 +30,26 @@ def recognize_first():
         move_forward(140)
         if(saw_black() or saw_yellow()):
            stop()
+           reposition_wall()
            move_backward_cm(3) #calcular
-           turn_left(90)         
+           turn_left(90)  
+           wait(500)       
 
     stop()
     if saw_red(): 
         #turn_left(180)
         move_forward_cm(30)
         turn_right(90)
+        wait(500)
         while not saw_blue():
             move_forward(150)
             if(saw_black()):
-                turn_180()
+                turn_left(180)
         stop()
     if(saw_blue()):
         stop()
         reposition("Blue")
-        move_backward_cm(7)
+        move_backward_cm(9)
         turn_right(90)
         find_passenger()
     recognize_first()
@@ -101,6 +105,7 @@ def find_passenger():
     stop()   
     move_backward_cm(1.8)   
     turn_left(90)
+    stop()
     while not blueRight() and not blueLeft():
         move_forward(50) 
     stop()
@@ -110,7 +115,10 @@ def find_passenger():
     move_forward_cm(6)
     #verificar se tem algo na frente por preucação
     close_claw()
-    move_backward_cm(9)
+    move_backward_cm(6)
+    stop()
+    reposition("Blue")
+    move_backward_cm(6)
     check_point()
     #ver como vai ser tratado o return
     
@@ -205,12 +213,19 @@ def school2():
     #leave_passenger()
 
 def city_hall():
+    command_stack()
     move_backward_cm(35)
+    stack.append(["straight_cm", 35])
     #depois verificar tubo
     turn_left(92)
+    stack.append(["turn_right", 90])
     move_forward_cm(30)
+    stack.append(["back_cm", 15])
     turn_left(92)
+    stack.append(["turn_right", 90])
     leave_passenger()
+    stack.append(["back_cm", 15])
+    stack.reverse()
 
 def city_hall2(): #check
     move_backward_cm(35)

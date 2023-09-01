@@ -11,7 +11,22 @@ from modules.colors import *
 from modules.detect import *
 from modules.places import *
 from modules.claw import *
+'''
+turn_right(90)
+wait(500)
+turn_left(90)
 
+
+motors.turn(90)
+wait(500)
+print(motor_left.angle())
+print(motor_right.angle())
+
+'''
+#close_claw(800)
+#leave_passenger()
+#motor_left.run_angle(150, 247, then=Stop.HOLD, wait=False)
+#motor_right.run_angle(150, -247, then=Stop.HOLD, wait=True)
 #school()
 #calibration_auto(sensor, array)
 
@@ -22,8 +37,8 @@ from modules.claw import *
   #obstacle()
   #wait(1000)
 #recognize_first()
-
-#open_claw(700)
+#open_claw(800)
+#open_claw()
 #school()
 #while True:
  # calibration(sensor_color_right)
@@ -79,12 +94,14 @@ from modules.claw import *
 #move_forward_cm(30)
 #turn_left(90)
 #stack.reverse()
-#i = 0
-#while i < 10:
- # turn_left(360)
-  #i+=1
 
+'''i = 0
+while i < 10:
+  motors.turn(360)
+  wait(500)
+  i+=1
 
+'''
 #while True:
  # print("diretinha", seeRight())
   #print("lula",  seeLeft())

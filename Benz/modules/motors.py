@@ -1,5 +1,5 @@
 from pybricks.ev3devices import Motor
-from pybricks.parameters import Port
+from pybricks.parameters import Port, Stop
 from pybricks.robotics import DriveBase
 from pybricks.tools import wait
 
@@ -59,7 +59,7 @@ def circle_left():
     motor_left.run(80)
     motor_right.run(-10)
 
-motors = DriveBase(motor_left, motor_right, wheel_diameter = 42.1, axle_track = 116)
+motors = DriveBase(motor_left, motor_right, wheel_diameter = 42.1, axle_track = 107)
 #motors.distance_control.pid(200 , 600, 2,  8, 2, 0)
 motors.distance_control.pid(200 , 600, 2,  8, 2, 0)
 motors.settings(150, 300, 100, 250)
@@ -69,7 +69,7 @@ def move_forward(velocity):
 
 
 
-def move_forward_cm(mm, save = True) :
+def move_forward_cm(mm, save = False) :
     motors.straight(mm*10)
     if save:
         stack.append(["back_cm", mm])
@@ -77,7 +77,7 @@ def move_forward_cm(mm, save = True) :
 def move_backward(velocity):
     motors.drive(-velocity, 0)
     
-def move_backward_cm(mm, save = True) :
+def move_backward_cm(mm, save = False) :
     motors.straight(-mm*10)
     if save:
         stack.append(["backward_cm", mm])
@@ -85,8 +85,10 @@ def move_backward_cm(mm, save = True) :
 def move_right(velocity):
     motors.drive(0, velocity)
 
-def turn_right(angle, save = True):
-    motors.turn(angle)
+def turn_right(angle, save = False):
+    stop()
+    motor_left.run_angle(150, (228 * (angle / 90)), then=Stop.HOLD, wait=False)
+    motor_right.run_angle(150, (-228 * (angle / 90)), then=Stop.HOLD, wait=True)
     if save:
         stack.append(["turn_right", angle])
    # stack.append(["turn_left", angle])
@@ -94,8 +96,11 @@ def turn_right(angle, save = True):
 def move_left(velocity):
     motors.drive(0, -velocity)
     
-def turn_left(angle, save = True):
-    motors.turn(-angle)
+def turn_left(angle, save = False):
+    stop()
+    motor_left.run_angle(150, (-228 * (angle / 90)), then=Stop.HOLD, wait=False)
+    motor_right.run_angle(150, (228 * (angle / 90)), then=Stop.HOLD, wait=True)
+ 
     if save:
         stack.append(["turn_left", angle])
   #  stack.append(["turn_right", angle])
