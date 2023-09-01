@@ -57,6 +57,17 @@ def recognize_first():
     #colocar para ir para trás
     
 
+def final_tube():
+    tempo = StopWatch()
+    tempo.reset()
+    while tempo.time() <= 3000:
+        move_backward(80)  # implementar questão do tempo sem ver nada
+        if side_detection():  # ainda sendo implementado
+            print("oi")
+            tempo.reset()
+    stop()
+    print("Ready to start taking passangers")
+
 def recognize_first2():
     print("starting")
     # print(saw_red())

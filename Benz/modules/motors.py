@@ -1,17 +1,44 @@
 from pybricks.ev3devices import Motor
 from pybricks.parameters import Port, Stop
 from pybricks.robotics import DriveBase
-from pybricks.tools import wait
+from pybricks.tools import wait, StopWatch
 
 from modules.colors import *
+from modules.detect import *
 
 motor_left = Motor(Port.A) 
 motor_right = Motor(Port.B)
 
 
 class command_stack():
+    tempo = StopWatch()
+    velocity = 200
     def __init__(self):
         self.lista = []
+    
+    def forward_cm(self,cm):
+        tempo.pause()
+        tempo.reset()
+        duration = (cm*10)/velocity
+        while tempo.time() != duration:
+            motors.drive(velocity, 0)
+            if obstacle():
+                stop()
+                self.reset()
+                break
+        stop(False)
+    def backward_cm(self, cm):
+        tempo.pause()
+        tempo.reset()
+        turn_right(180)
+        duration = (cm*10)/velocity
+        while tempo.time() != duration:
+            motors.drive(velocity, 0)
+            if obstacle():
+                stop()
+                self.reset()
+                break
+        stop(False)
 
     def append(self, command):
         self.lista.append(command)
@@ -29,9 +56,9 @@ class command_stack():
         command = self.lista.pop(-1)
         print(command[0])
         if command[0] == "straight_cm":
-            move_forward_cm(command[1],False)
+            self.forward_cm(command[1])
         elif command[0] == "back_cm":
-            move_backward_cm(command[1],False)
+            self.backward_cm(command[1])
         elif command[0] == "turn_left":
             turn_left(command[1],False)
         elif command[0] == "back":
@@ -83,7 +110,7 @@ def move_backward(velocity):
 def move_backward_cm(mm, save = False) :
     motors.straight(-mm*10)
     if save:
-        stack.append(["backward_cm", mm])
+        stack.append(["straight_cm", mm])
     
 def move_right(velocity):
     motors.drive(0, velocity)
@@ -93,7 +120,7 @@ def turn_right(angle, save = False):
     motor_left.run_angle(150, (228 * (angle / 90)), then=Stop.HOLD, wait=False)
     motor_right.run_angle(150, (-228 * (angle / 90)), then=Stop.HOLD, wait=True)
     if save:
-        stack.append(["turn_right", angle])
+        stack.append(["turn_left", angle])
    # stack.append(["turn_left", angle])
     
 def move_left(velocity):
@@ -105,7 +132,7 @@ def turn_left(angle, save = False):
     motor_right.run_angle(150, (228 * (angle / 90)), then=Stop.HOLD, wait=True)
  
     if save:
-        stack.append(["turn_left", angle])
+        stack.append(["turn_right", angle])
   #  stack.append(["turn_right", angle])
     
 def turn_90_left():
