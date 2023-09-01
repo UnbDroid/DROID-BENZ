@@ -369,12 +369,80 @@ def drugstore2():
             turn_right(92)
     leave_passenger()
 
+
 def bakery():
     move_backward_cm(35)
-    #depois verificar tubo
+    # depois verificar tubo
     turn_left(90)
     move_forward_cm(95)
     turn_right(90)
+    leave_passenger()
+
+
+def bakery2():
+    move_backward_cm(35)
+    #depois verificar tubo
+    if obstacle(False):
+        move_backward_cm(78.1)
+        turn_right(90)
+        move_backward_cm(40)
+        if obstacle(False):
+            move_backward_cm(65)
+            turn_left(90)
+            move_forward_cm(65)
+            turn_right(90)
+        else:
+            turn_left(90)
+            move_foward_cm(55)
+            if obstacle(False):
+                move_backward_cm(55)
+                turn_left(90)
+                move_forward_cm(65)
+                turn_right(90)
+                move_forward_cm(85)
+                turn_right(90)
+            else:
+                turn_left(90)
+                move_forward_cm(25)
+                turn_right(90)
+    else:
+        turn_left(90)
+        move_forward_cm(60)
+        if obstacle():
+            turn_left(90)
+            if obstacle():
+                turn_left(90)
+                move_forward_cm(60)
+                turn_left(90)
+                move_backward_cm(78.1)
+                turn_right(90)
+                move_backward_cm(40)
+                if obstacle(False):
+                    pass
+                else:
+                    turn_left(90)
+                    move_foward_cm(55)
+                    if obstacle(False):
+                        move_backward_cm(55)
+                        turn_left(90)
+                        move_forward_cm(65)
+                        turn_right(90)
+                        move_forward_cm(85)
+                        turn_right(90)
+                    else:
+                        turn_left(90)
+                        move_forward_cm(25)
+                        turn_right(90)
+            else:#####
+                move_forward_cm(65)
+                turn_right(90)
+                move_forward_cm(65)
+                turn_right(90)
+                move_forward_cm(65)
+                turn_right(90)
+        else:
+            move_forward(30)
+            turn_right(90)
     leave_passenger()
 
 def leave_passenger():
