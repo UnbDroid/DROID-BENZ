@@ -250,7 +250,7 @@ def school2():
         turn_left(92)
         move_forward_cm(30)
         turn_right(92)
-    #leave_passenger()
+    leave_passenger()
 
 def city_hall():
     command_stack()
@@ -279,7 +279,7 @@ def city_hall2(): #check
         turn_left(92)
         move_forward_cm(30)
         turn_left(92)
-    # leave_passenger()
+    leave_passenger()
 
 def library():
     move_backward_cm(95)#verificar se é isto mesmo que a distancia da biblioteca
@@ -324,7 +324,7 @@ def museum2():
         move_forward_cm(25)
         turn_right(94)
         
-    #leave_passenger()
+    leave_passenger()
 
 
 def drugstore():
@@ -335,6 +335,38 @@ def drugstore():
     turn_left(93)
     move_forward_cm(25)
     turn_right(92)
+    leave_passenger()
+
+
+def drugstore2():
+    move_backward_cm(40)
+    # depois verificar tubo
+    if obstacle(False):
+        move_backward_cm(60)
+        turn_right(90)
+        move_backward_cm(45)
+        if obstacle(False):
+            move_backward_cm(55)
+            turn_left(90)
+            move_forward_cm(25)
+            turn_right(90)
+        else:
+            turn_left(90)
+            move_forward_cm(25)
+            turn_left(90)
+    else:
+        turn_left(93)
+        move_forward_cm(60)
+        turn_left(93)
+        if obstacle():
+            turn_right(90)
+            move_forward_cm(60)
+            turn_left(90)
+            move_forward_cm(25)
+            turn_left(90)
+        else:
+            move_forward_cm(25)
+            turn_right(92)
     leave_passenger()
 
 def bakery():
