@@ -11,8 +11,8 @@ ultra_sensor = UltrasonicSensor(Port.S3)
 infra_sensor = InfraredSensor(Port.S4)
 
 ev3 = EV3Brick()
-'''
-server = BluetoothMailboxServer()
+
+'''server = BluetoothMailboxServer()
 eve3box = TextMailbox('greeting', server)
 
 print('waiting for connection...')
@@ -53,7 +53,7 @@ def collision():
         print("cuidado motorista")
 
 def side_detection():
-    if infra_sensor.distance() <= 15: ############### lembrar de adicionar sensor
+    if infra_sensor.distance() <= 20: ############### lembrar de adicionar sensor
         return True
     else:
         return False
@@ -64,7 +64,7 @@ def side_detection():
 def final_tube():
     tempo = StopWatch()
     tempo.reset()
-    while tempo.time() <= 2000:
+    while tempo.time() <= 3000:
         move_backward(80) #implementar questão do tempo sem ver nada
         if side_detection(): #ainda sendo implementado
             print("oi")
