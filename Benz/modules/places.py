@@ -369,10 +369,9 @@ def drugstore2():
             turn_right(92)
     leave_passenger()
 
-
 def bakery():
     move_backward_cm(35)
-    # depois verificar tubo
+    #depois verificar tubo
     turn_left(90)
     move_forward_cm(95)
     turn_right(90)
