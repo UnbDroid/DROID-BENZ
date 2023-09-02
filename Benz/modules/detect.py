@@ -24,16 +24,16 @@ def obstacle(default = True):
             ev3.speaker.beep(200)
             return True
         else:
-            ev3.speaker.beep(200)
-            ev3.speaker.beep(300)
+           # ev3.speaker.beep(200)
+            #ev3.speaker.beep(300)
             return False
     else:
         if infra_sensor.distance() <= 23:
             ev3.speaker.beep(200)
             return True
         else:
-            ev3.speaker.beep(200)
-            ev3.speaker.beep(300)
+           # ev3.speaker.beep(200)
+            #ev3.speaker.beep(300)
             return False
 
 

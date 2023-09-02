@@ -1,6 +1,6 @@
 from pybricks.ev3devices import UltrasonicSensor
 from pybricks.parameters import Port
-from pybricks.tools import wait,
+from pybricks.tools import wait, StopWatch
 import time
 
 
@@ -33,6 +33,7 @@ def recognize_first():
            reposition_wall()
            move_backward_cm(3) #calcular
            turn_left(90)  
+           stop()
            wait(500)       
 
     stop()
@@ -40,6 +41,7 @@ def recognize_first():
         #turn_left(180)
         move_forward_cm(30)
         turn_right(90)
+        stop()
         wait(500)
         while not saw_blue():
             move_forward(150)
@@ -55,7 +57,8 @@ def recognize_first():
     recognize_first()
     
     #colocar para ir para trás
-    
+
+#1: 872 2: 874
 
 def final_tube():
     tempo = StopWatch()
@@ -73,29 +76,39 @@ def recognize_first2():
     # print(saw_red())
     while not saw_red() and not saw_blue():
         print("andando")
-        move_forward(140)
-        if (saw_black() or saw_yellow() or obstacle):
-           stop()
-           move_backward_cm(3)  # calcular
-           turn_left(90)
+        move_forward(360*10)
+        if (saw_black() or saw_yellow() or obstacle()):
+            stop()
+            if saw_black() or saw_yellow():
+                reposition_wall()
+            move_backward_cm(3)  # calcular
+            turn_left(90)
+            stop()
+            wait(500)
 
     stop()
     if saw_red():
-        # turn_left(180)
-        move_forward_cm(30)
+        move_backward_cm(2)
+        stop()
+        reposition("Red")
+        move_backward_cm(35)
         turn_right(90)
+        wait(500)
         while not saw_blue():
-            move_forward(150)
+            move_forward(360*10)
             if (saw_black()):
-                turn_180()
+                turn_right(180)
+                wait(500)
         stop()
     if (saw_blue()):
         stop()
         reposition("Blue")
         move_backward_cm(7)
         turn_right(90)
+        wait(500)
         find_passenger()
-    recognize_first()
+    print("Bora para o próximo")
+    recognize_first2()
 
 
 
@@ -105,7 +118,7 @@ def recognize():
     up = 0
     center = 0
     turn_90_right()
-    move_forward(150)
+    move_forward(360*10)
     if(saw_black_left() and saw_black_right()):
         stop()
         down += 1
@@ -113,7 +126,7 @@ def recognize():
         up += 1
 
     turn_180()
-    move_forward(150)
+    move_forward(360*10)
 
     if(saw_yellow_left() and saw_yellow_right()):
         stop()
@@ -146,6 +159,7 @@ def find_passenger():
     move_backward_cm(1.8)   
     turn_left(90)
     stop()
+    wait(500)
     while not blueRight() and not blueLeft():
         move_forward(50) 
     stop()
@@ -166,6 +180,8 @@ def find_passenger():
 
 def check_point():
     turn_left(90)
+    stop()
+    wait(500)
     while not saw_red():
         print("andando")
         move_forward(120)

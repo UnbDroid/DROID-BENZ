@@ -11,69 +11,18 @@ from modules.colors import *
 from modules.detect import *
 from modules.places import *
 from modules.claw import *
-'''
-turn_right(90)
-wait(500)
-turn_left(90)
 
-
-motors.turn(90)
-wait(500)
-print(motor_left.angle())
-print(motor_right.angle())
-
-'''
-#close_claw(800)
-#leave_passenger()
-#motor_left.run_angle(150, 247, then=Stop.HOLD, wait=False)
-#motor_right.run_angle(150, -247, then=Stop.HOLD, wait=True)
-#school()
-#calibration_auto(sensor, array)
-
-#open_claw(850)
-# for i in range(100):
-#   obstacle(False)
-#   wait(1000)
-  #obstacle()
-  #wait(1000)
-#recognize_first()
-#open_claw(800)
-#open_claw()
-#school()
+#turn_right(90)
+#recognize_first2()
+#move_forward(200)
 #while True:
- # calibration(sensor_color_right)
-  #calibration(sensor_color_left)
-  #wait(3000)
-#calibration(sensor_color_right)
-#reposition_two("Yellow", "Black")
-#enter()
-#open_claw()
-#open_claw(200)
-#turn_90_left() 
-#check_point()
-#turn_180()
+ # move_forward_pid(360*10)
+#Abrir e fechar a garra
 
-#drugstore()
-#while not saw_blue():
- # move_forward(160)
-#stop()
+open_claw(700)
+#close_claw(700)
 
 
-
-#turn_left(360)
-#turn_left(360)
-#turn_left(360)
-    
-#open_claw(850)
-#close_claw(250)
-#move_forward_cm(6)
-#verificar se tem algo na frente por preucação
-#close_claw()
-#move_backward_cm(9)
-#check_point()
-#move_backward_cm(5)
-#close_claw(850)
-#close_claw()
 
 #Declaração de variáveis globais e objetos
 
@@ -95,17 +44,50 @@ print(motor_right.angle())
 #turn_left(90)
 #stack.reverse()
 
-'''i = 0
-while i < 10:
-  motors.turn(360)
-  wait(500)
-  i+=1
+#----------------------------------------------------------------------#
+#regular o giro
+
+# motors.turn(330)
+# while not blackRight() or not blackLeft():
+#   motors.turn(1)
+# motors.stop()
+# print(motor_left.angle(), motor_right.angle())
+
+#turn_left(90)
 
 '''
+
+motors.turn(90)
+
+wait(500)
+print(motor_left.angle())
+print(motor_right.angle())
+print("a")
+turn_left(90)
+
+
+i = 0
+while i < 3:
+  motors.turn(360)
+  stop()
+  wait(500)
+  i+=1
+stop()
+reposition_wall()
+'''
+#---------------------------------------------------------------------#
+
+
+#-------------------------------------------------------------------------------------------------------
+#calibrando cores 
 #while True:
- # print("diretinha", seeRight())
-  #print("lula",  seeLeft())
-  #time.sleep(1)
+ # calibration(sensor_color_right)
+  #calibration(sensor_color_left)
+  #wait(3000)
+#------------------------------------------------------------------------------------------------------
+
+#------------------------------------------------------------------#
+#teste do time
 '''
 
 tempo = StopWatch()
@@ -115,6 +97,4 @@ time.sleep(2)
 print(tempo.time())
 
 '''
-
-#recognize_first()
-#museum2()
+#---------------------------------------------------------------------#
