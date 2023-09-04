@@ -9,33 +9,38 @@ from modules.detect import *
 motor_left = Motor(Port.A) 
 motor_right = Motor(Port.B)
 
-
+velocity = 2
 class command_stack():
-    tempo = StopWatch()
-    velocity = 200
     def __init__(self):
-        self.lista = []
+        self.lista = [['straight_cm', 12]]
     
     def forward_cm(self,cm):
+        tempo = StopWatch()
         tempo.pause()
         tempo.reset()
-        duration = (cm*10)/velocity
-        while tempo.time() != duration:
-            motors.drive(velocity, 0)
-            if obstacle(stop()):
-                stop()
+        print(tempo.time())
+        duration = ((cm*10)/velocity)*10
+        while tempo.time() <= duration:
+            tempo.resume()
+            print(tempo.time())
+            motors.drive(velocity*100, 0)
+            if obstacle():
+                stop(False)
                 self.reset()
                 break
         stop(False)
     def backward_cm(self, cm):
+        tempo = StopWatch()
         tempo.pause()
         tempo.reset()
         turn_right(180)
-        duration = (cm*10)/velocity
-        while tempo.time() != duration:
-            motors.drive(velocity, 0)
+        duration = ((cm*10)/velocity)*10
+        print(duration)
+        tempo.resume()
+        while tempo.time() <= duration:
+            motors.drive(velocity*100, 0)
             if obstacle():
-                stop()
+                stop(False)
                 self.reset()
                 break
         stop(False)
@@ -50,10 +55,11 @@ class command_stack():
         while not self.isEmpty():
             self.lista.pop()
     def isEmpty(self):
-        return self.lista == []
+        return len(self.lista) == 0
 
     def unpille(self):
-        command = self.lista.pop(-1)
+        command = self.lista.pop()
+        print(command)
         print(command[0])
         if command[0] == "straight_cm":
             self.forward_cm(command[1])
@@ -69,7 +75,6 @@ class command_stack():
             turn_right(command[1],False)
         elif command[0] == "stop":
             stop(False)
-        self.lista.pop()
         return command
     def onTop(self):
         return self.lista[-1]
@@ -121,7 +126,7 @@ def move_forward(velocity):
     
 
 
-def move_forward_cm(mm, save = False) :
+def move_forward_cm(mm, save = True) :
     motors.straight(mm*10)
     if save:
         stack.append(["back_cm", mm])
@@ -129,7 +134,7 @@ def move_forward_cm(mm, save = False) :
 def move_backward(velocity):
     motors.drive(-velocity, 0)
     
-def move_backward_cm(mm, save = False) :
+def move_backward_cm(mm, save = True) :
     motors.straight(-mm*10)
     if save:
         stack.append(["straight_cm", mm])
@@ -137,7 +142,7 @@ def move_backward_cm(mm, save = False) :
 def move_right(velocity):
     motors.drive(0, velocity)
 
-def turn_left(angle):
+def turn_left(angle, save = True):
     kp = 0.1
     ki = 0
     set_point = 873*(angle/360)
@@ -148,12 +153,14 @@ def turn_left(angle):
         control_signal = calculate_pid(kp, ki, set_point, current_angle)
         motor_left.run_angle(200, -control_signal -(set_point - motor_right.angle())*0.1, wait=False)
         motor_right.run_angle(200, control_signal +(set_point - motor_right.angle())*0.1, wait=True)
-        print(" motor right and left :",motor_right.angle(), motor_left.angle())
-        print("difference", set_point - motor_right.angle())
+        # print(" motor right and left :",motor_right.angle(), motor_left.angle())
+        # print("difference", set_point - motor_right.angle())
     stop_motors()
+    if save:
+        stack.append(["turn_right", angle])
 
 
-def turn_right(angle):
+def turn_right(angle, save = True):
     kp = 0.1
     ki = 0
     set_point = 873*(angle/360)
@@ -164,10 +171,12 @@ def turn_right(angle):
         control_signal = calculate_pid(kp, ki, set_point, current_angle)
         motor_left.run_angle(200, control_signal + (set_point - motor_right.angle())*0.1, wait=False)
         motor_right.run_angle(200, -control_signal -(set_point - motor_right.angle())*0.1, wait=True)
-        print(" motor right and left :",motor_right.angle(), motor_left.angle())
-        print("difference", set_point - motor_left.angle())
+        # print(" motor right and left :",motor_right.angle(), motor_left.angle())
+        # print("difference", set_point - motor_left.angle())
     stop_motors()
-    print("Saí")
+    # print("Saí")
+    if save:
+        stack.append(["turn_left", angle])
 
 
 
@@ -218,7 +227,6 @@ def turn_left2(angle, save = False):
     motor_right.run_angle(150, (226 * (angle / 90)), wait=True)
     print(motor_left.angle())
     print(motor_right.angle())
- 
     if save:
         stack.append(["turn_right", angle])
   #  stack.append(["turn_right", angle])
@@ -286,12 +294,12 @@ def reposition_wall():
         print("1")
         while seeLeft() not in colors:
             circle_left()
-        stop()
+        stop(False)
     elif seeRight() not in colors and seeLeft() in  colors:
         print("2")
         while seeRight() not in colors:
             circle_right()
-        stop()
+        stop(False)
     else:
         print("Todo fudido")
     print("rodou tudo")

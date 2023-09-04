@@ -19,7 +19,7 @@ from modules.claw import *
  # move_forward_pid(360*10)
 #Abrir e fechar a garra
 
-open_claw(700)
+# open_claw(700)
 #close_claw(700)
 
 
@@ -98,3 +98,12 @@ print(tempo.time())
 
 '''
 #---------------------------------------------------------------------#
+
+
+# museum2()
+# move_forward_cm(12)
+# turn_left(90)
+# move_forward_cm(150)
+print(stack.lista)
+stack.reverse()
+print(stack.lista)

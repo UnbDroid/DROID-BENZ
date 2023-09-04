@@ -340,7 +340,7 @@ def museum2():
         move_forward_cm(25)
         turn_right(94)
         
-    leave_passenger()
+    #leave_passenger()
 
 
 def drugstore():
@@ -463,7 +463,7 @@ def bakery2():
 def leave_passenger():
     while not saw_yellow() and not saw_black():
         move_forward(50)
-    stop()
+    stop(False)
     reposition_wall()
     enter()
     open_claw(850) #fazer leave depois 
@@ -473,31 +473,31 @@ def enter():
     while not entered:
         print(yellowRight()," ", yellowLeft())
         if(yellowRight() and yellowLeft()):
-            stop()
+            stop(False)
             reposition("Yellow")
-            move_forward_cm(10)
+            move_forward_cm(10, False)
             return None
         elif yellowLeft() and blackRight():
-            stop()
+            stop(False)
             reposition_wall()
-            move_backward_cm(3)
-            turn_right(90)
-            move_backward_cm(3)
-            stop()
-            turn_left(90) 
-            stop()
+            move_backward_cm(3, False)
+            turn_right(90, False)
+            move_backward_cm(3, False)
+            stop(False)
+            turn_left(90, False)
+            stop(False)
             reposition_wall()
-            move_backward_cm(2)
+            move_backward_cm(2, False)
         elif yellowRight() and blackLeft():
-            stop()
+            stop(False)
             reposition_wall()
-            move_backward_cm(3)
-            turn_left(90)
-            move_backward_cm(3)
-            stop()
-            turn_right(90) 
-            stop()
+            move_backward_cm(3, False)
+            turn_left(90, False)
+            move_backward_cm(3, False)
+            stop(False)
+            turn_right(90, False)
+            stop(False)
             reposition_wall()
-            move_backward_cm(2)
+            move_backward_cm(2, False)
         else:
-            move_forward_cm(1)
+            move_forward_cm(1, False)
