@@ -12,7 +12,7 @@ motor_right = Motor(Port.B)
 velocity = 2
 class command_stack():
     def __init__(self):
-        self.lista = [['straight_cm', 12]]
+        self.lista = []
     
     def forward_cm(self,cm):
         tempo = StopWatch()
