@@ -63,7 +63,7 @@ def recognize_first():
 def final_tube():
     tempo = StopWatch()
     tempo.reset()
-    while tempo.time() <= 3000:
+    while tempo.time() <= 1500:
         move_backward(80)  # implementar questão do tempo sem ver nada
         if side_detection():  # ainda sendo implementado
             print("oi")
@@ -76,7 +76,7 @@ def recognize_first2():
     # print(saw_red())
     while not saw_red() and not saw_blue():
         print("andando")
-        move_forward(360*10)
+        move_forward(360*15)
         if (saw_black() or saw_yellow() or obstacle()):
             stop()
             if saw_black() or saw_yellow():
@@ -91,13 +91,21 @@ def recognize_first2():
         move_backward_cm(2)
         stop()
         reposition("Red")
-        move_backward_cm(35)
+        
+        stop()
+        wait(500)
+        move_backward_cm(37)
         turn_right(90)
         wait(500)
         while not saw_blue():
             move_forward(360*10)
             if (saw_black()):
-                turn_right(180)
+                move_backward_cm(2)
+                stop()
+                reposition_wall()
+                stop()
+                turn_right_180(180)
+                stop()
                 wait(500)
         stop()
     if (saw_blue()):
@@ -154,14 +162,14 @@ def find_passenger():
     print("procurando")
     final_tube()
     while not side_detection():
-        move_forward(50)
+        move_forward(8*360)
     stop()   
     move_backward_cm(1.8)   
     turn_left(90)
     stop()
     wait(500)
     while not blueRight() and not blueLeft():
-        move_forward(50) 
+        move_forward(10*360) 
     stop()
     reposition("Blue")
     print("vou te pegar")
@@ -180,11 +188,11 @@ def find_passenger():
 
 def check_point():
     turn_left(90)
-    stop()
+    #stop()
     wait(500)
     while not saw_red():
         print("andando")
-        move_forward(120)
+        move_forward(50*360)
     stop()
     move_backward_cm(1)
     stop()
@@ -196,6 +204,7 @@ def check_point():
 def decision(tube):
     color = tube[0]
     size = tube[1]
+    stack.reset()
     if size == "15":
         place = dic_15[color]
     else:
@@ -224,7 +233,7 @@ def decision(tube):
         #get back from school depois      
 #Funções referentes ao trajeto do robô
 
-def school():
+def school2():
     command_stack()
     move_backward_cm(35)
     stack.append(["straight_cm", 35])
@@ -240,7 +249,7 @@ def school():
     stack.append(["back_cm", 15])
     stack.reverse()
 
-def school2():
+def school():
     move_backward_cm(35)
     if obstacle(False):
         move_backward_cm(60)
@@ -268,7 +277,7 @@ def school2():
         turn_right(92)
     leave_passenger()
 
-def city_hall():
+def city_hall2():
     command_stack()
     move_backward_cm(35)
     stack.append(["straight_cm", 35])
@@ -283,7 +292,7 @@ def city_hall():
     stack.append(["back_cm", 15])
     stack.reverse()
 
-def city_hall2(): #check
+def city_hall(): #check
     move_backward_cm(35)
     if obstacle(False):
         move_backward_cm(60)
@@ -304,14 +313,14 @@ def library():
     turn_left(90)
     leave_passenger()
 
-def museum():
+def museum2():
     move_backward_cm(95)
     turn_left(90)
     move_forward_cm(95)
     turn_left(90)
     leave_passenger()
 
-def museum2():
+def museum():
     move_backward_cm(32)
     if obstacle(False):
         move_backward_cm(60)
@@ -343,7 +352,7 @@ def museum2():
     #leave_passenger()
 
 
-def drugstore():
+def drugstore2():
     move_backward_cm(40)
     #depois verificar tubo
     turn_left(93)
@@ -354,7 +363,7 @@ def drugstore():
     leave_passenger()
 
 
-def drugstore2():
+def drugstore():
     move_backward_cm(40)
     # depois verificar tubo
     if obstacle(False):
@@ -385,7 +394,7 @@ def drugstore2():
             turn_right(92)
     leave_passenger()
 
-def bakery():
+def bakery2():
     move_backward_cm(35)
     #depois verificar tubo
     turn_left(90)
@@ -394,7 +403,7 @@ def bakery():
     leave_passenger()
 
 
-def bakery2():
+def bakery():
     move_backward_cm(35)
     #depois verificar tubo
     if obstacle(False):
@@ -460,13 +469,40 @@ def bakery2():
             turn_right(90)
     leave_passenger()
 
+def park():
+    move_backward_cm(55)
+    if obstacle(False):
+        move_backward_cm(55)
+        turn_left(90)
+        move_forward_cm(55)
+        if obstacle():
+            turn_left(90)
+            move_forward_cm(35)
+            turn_right(90)
+            move_forward_cm(65)
+        else:
+            move_forward_cm(60)
+            if obstacle(False):
+                turn_right(90)
+                
+    else:
+        turn_left(90)
+        move_forward_cm(65)
+        if obstacle():
+            pass
+        else:
+            move_forward_cm(45)
+    leave_passenger()
+
 def leave_passenger():
     while not saw_yellow() and not saw_black():
-        move_forward(50)
+        move_forward(8*360)
     stop(False)
     reposition_wall()
     enter()
-    open_claw(850) #fazer leave depois 
+    open_claw(850)
+    move_backward_cm(15) #fazer leave depois
+    stack.reverse() 
 
 def enter():
     entered = False

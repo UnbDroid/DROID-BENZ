@@ -13,7 +13,7 @@ def open_claw(seconds = 750):
     motor_claw.run_time(seconds, time_open_claw, Stop.HOLD, True)
     motor_claw.hold()
 
-def close_claw(seconds = 450) : 
+def close_claw(seconds =  500) : 
     global time_open_claw
     motor_claw.run_time(-seconds, time_open_claw, Stop.HOLD, True)
     motor_claw.hold()

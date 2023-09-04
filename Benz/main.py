@@ -15,13 +15,15 @@ from modules.claw import *
 #turn_right(90)
 #recognize_first2()
 #move_forward(200)
+
 #while True:
  # move_forward_pid(360*10)
 #Abrir e fechar a garra
 
-# open_claw(700)
-#close_claw(700)
-
+#close_claw(100)
+#open_claw(750)
+#turn_right(90)
+#recognize_first2()
 
 
 #Declaração de variáveis globais e objetos
@@ -33,8 +35,9 @@ from modules.claw import *
 #school()
 #
 # 
-#recognize_first()
-#recognize_first()
+#turn_left(90)
+#move_forward_cm(90)
+
 # reposition("Blue")
 #turn_90_left()
 #command_stack()
@@ -47,13 +50,13 @@ from modules.claw import *
 #----------------------------------------------------------------------#
 #regular o giro
 
-# motors.turn(330)
-# while not blackRight() or not blackLeft():
-#   motors.turn(1)
-# motors.stop()
-# print(motor_left.angle(), motor_right.angle())
+motors.turn(330)
+while not blackRight() or not blackLeft():
+   motors.turn(1)
+motors.stop()
+print(motor_left.angle(), motor_right.angle())
 
-#turn_left(90)
+#----------------------------------------------------------------------#
 
 '''
 
@@ -66,14 +69,20 @@ print("a")
 turn_left(90)
 
 
+'''
+#turn_right(90)
+#wait(2000)
+'''
 i = 0
-while i < 3:
-  motors.turn(360)
+while i < 2:
+  turn_right(90)
+#  motors.turn(360)
   stop()
   wait(500)
   i+=1
 stop()
-reposition_wall()
+#reposition_wall()
+'''
 '''
 #---------------------------------------------------------------------#
 
@@ -88,7 +97,7 @@ reposition_wall()
 
 #------------------------------------------------------------------#
 #teste do time
-'''
+
 
 tempo = StopWatch()
 print(tempo.time())
@@ -104,6 +113,6 @@ print(tempo.time())
 # move_forward_cm(12)
 # turn_left(90)
 # move_forward_cm(150)
-print(stack.lista)
-stack.reverse()
-print(stack.lista)
+#print(stack.lista)
+#stack.reverse()
+#print(stack.lista)

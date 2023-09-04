@@ -145,7 +145,7 @@ def move_right(velocity):
 def turn_left(angle, save = True):
     kp = 0.1
     ki = 0
-    set_point = 873*(angle/360)
+    set_point = 850*(angle/360)
     set_point = round(set_point)
     stop_motors()
     while not (abs(set_point - motor_right.angle()) <= 11):
@@ -160,10 +160,11 @@ def turn_left(angle, save = True):
         stack.append(["turn_right", angle])
 
 
+
 def turn_right(angle, save = True):
-    kp = 0.1
+    kp = 0.356
     ki = 0
-    set_point = 873*(angle/360)
+    set_point = 850*(angle/360)
     set_point = round(set_point)
     stop_motors()
     while not (abs(set_point-motor_left.angle()) <= 11):
@@ -171,6 +172,26 @@ def turn_right(angle, save = True):
         control_signal = calculate_pid(kp, ki, set_point, current_angle)
         motor_left.run_angle(200, control_signal + (set_point - motor_right.angle())*0.1, wait=False)
         motor_right.run_angle(200, -control_signal -(set_point - motor_right.angle())*0.1, wait=True)
+        # print(" motor right and left :",motor_right.angle(), motor_left.angle())
+        # print("difference", set_point - motor_left.angle())
+    stop_motors()
+    # print("Saí")
+    if save:
+        stack.append(["turn_left", angle])
+
+
+def turn_right_180(angle, save = True):
+    #kp = 0.1
+    kp = 1.05
+    ki = 0.001
+    set_point = 850*(angle/360)
+    set_point = round(set_point)
+    stop_motors()
+    while not (abs(set_point-motor_left.angle()) <= 11):
+        current_angle = motor_left.angle()
+        control_signal = calculate_pid(kp, ki, set_point, current_angle)
+        motor_left.run_angle(200, control_signal, wait=False)
+        motor_right.run_angle(200, -control_signal, wait=True)
         # print(" motor right and left :",motor_right.angle(), motor_left.angle())
         # print("difference", set_point - motor_left.angle())
     stop_motors()
@@ -196,15 +217,6 @@ def stop_motors():
     motor_left.reset_angle(0)
     motor_right.reset_angle(0)
 
-def turn_right2(angle, save = False):
-    stop()
-    motor_left.reset_angle(0)
-    motor_right.reset_angle(0)
-    valor_a_girar = (228 * (angle / 90))
-    motor_left.run_angle(120, valor_a_girar, wait=False)
-    motor_right.run_angle(120, -valor_a_girar, wait=True)
-    print(motor_left.angle())
-    print(motor_right.angle())
 
    # if motor_left.angle() != valor_a_girar:
     #    motor_left.run_angle(50, (motor_left.angle() - valor_a_girar), wait=True)
@@ -212,8 +224,8 @@ def turn_right2(angle, save = False):
     #if motor_right.angle() != valor_a_girar:
      #   motor_right.run_angle(50, (motor_right.angle() + valor_a_girar), wait=True)
    
-    if save:
-        stack.append(["turn_left", angle])
+  #  if save:
+   #     stack.append(["turn_left", angle])
    # stack.append(["turn_left", angle])
     
 def move_left(velocity):
@@ -229,7 +241,6 @@ def turn_left2(angle, save = False):
     print(motor_right.angle())
     if save:
         stack.append(["turn_right", angle])
-  #  stack.append(["turn_right", angle])
     
 
     
