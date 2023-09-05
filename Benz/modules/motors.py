@@ -66,13 +66,13 @@ class command_stack():
         elif command[0] == "back_cm":
             self.backward_cm(command[1])
         elif command[0] == "turn_left":
-            turn_left(command[1],False)
+            turn_left(command[1])
         elif command[0] == "back":
             move_backward(command[1],False)
         elif command[0] == "forward":
             move_forward(command[1],False)
         elif command[0] == "turn_right":
-            turn_right(command[1],False)
+            turn_right(command[1])
         elif command[0] == "stop":
             stop(False)
         return command
@@ -125,7 +125,6 @@ def move_forward(velocity):
         
     
 
-
 def move_forward_cm(mm, save = True) :
     motors.straight(mm*10)
     if save:
@@ -143,7 +142,7 @@ def move_right(velocity):
     motors.drive(0, velocity)
 
 def turn_left(angle, save = True):
-    kp = 1.2
+    kp = 0.3
     ki = 0
     set_point = 871*(angle/360)
     set_point = round(set_point)
@@ -162,7 +161,7 @@ def turn_left(angle, save = True):
 
 
 def turn_right(angle, save = True):
-    kp = 0.356
+    kp = 0.5
     ki = 0
     set_point = 871*(angle/360)
     set_point = round(set_point)
@@ -179,10 +178,9 @@ def turn_right(angle, save = True):
     if save:
         stack.append(["turn_left", angle])
 
-
 def turn_right_180(angle, save = True):
     #kp = 0.1
-    kp = 1.05
+    kp = 0.25
     ki = 0.001
     set_point = 871*(angle/360)
     set_point = round(set_point)
@@ -198,7 +196,6 @@ def turn_right_180(angle, save = True):
     # print("Saí")
     if save:
         stack.append(["turn_left", angle])
-
 
 
 
@@ -260,7 +257,7 @@ def turn_180():
     motors.turn(180)
     print("já tornou")
     
-def stop(save = True):
+def stop(save = False):
     motors.stop()
     if save:
         stack.append(['stop'])

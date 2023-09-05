@@ -19,32 +19,39 @@ from modules.claw import *
 #while True:
  # move_forward_pid(360*10)
 #Abrir e fechar a garra
-
-#close_claw(100)
-#open_claw(750)
+#find_passenger()
+#close_claw(30)
+#open_claw()
+#final_tube()
 #turn_right(90)
 #recognize_first2()
 
-
+# oi entrei
+#oii
+#vei, n sei o que ta acontecendo
+#to testando, não está funcinando a hora da pilha
+#vou testar aqui mais uma vez, vei simplesmente n funda
+#ele printa mas na faz
+# okok vou olhar a pilha okay/
 #Declaração de variáveis globais e objetos
 
 #----------------------------------------------------------------------------------------------------------------------------------
 
 #Programa principal (minúsuclo pq é o programa principal lmfao)
-
-#school()
+close_claw(760)
+school()
 #
 # 
-#turn_left(90)
+#turn_right(90)
 #move_forward_cm(90)
-
+#check_point()
 # reposition("Blue")
 #turn_90_left()
 #command_stack()
 #move_forward_cm(30)
 #turn_left(90)
 #move_forward_cm(30)
-turn_left(90)
+#turn_left(90)
 #stack.reverse()
 
 #----------------------------------------------------------------------#
@@ -70,15 +77,15 @@ turn_left(90)
 
 
 '''
-#turn_right(90)
-#wait(2000)
+#turn_right_180(180)
 '''
 i = 0
 while i < 2:
-  turn_right(90)
+  turn_left(90)
 #  motors.turn(360)
+  print("Virei")
   stop()
-  wait(500)
+  wait(1000)
   i+=1
 stop()
 #reposition_wall()
