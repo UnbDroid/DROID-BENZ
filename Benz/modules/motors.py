@@ -143,9 +143,9 @@ def move_right(velocity):
     motors.drive(0, velocity)
 
 def turn_left(angle, save = True):
-    kp = 0.1
+    kp = 1.2
     ki = 0
-    set_point = 850*(angle/360)
+    set_point = 871*(angle/360)
     set_point = round(set_point)
     stop_motors()
     while not (abs(set_point - motor_right.angle()) <= 11):
@@ -164,7 +164,7 @@ def turn_left(angle, save = True):
 def turn_right(angle, save = True):
     kp = 0.356
     ki = 0
-    set_point = 850*(angle/360)
+    set_point = 871*(angle/360)
     set_point = round(set_point)
     stop_motors()
     while not (abs(set_point-motor_left.angle()) <= 11):
@@ -184,7 +184,7 @@ def turn_right_180(angle, save = True):
     #kp = 0.1
     kp = 1.05
     ki = 0.001
-    set_point = 850*(angle/360)
+    set_point = 871*(angle/360)
     set_point = round(set_point)
     stop_motors()
     while not (abs(set_point-motor_left.angle()) <= 11):

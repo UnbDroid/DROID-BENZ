@@ -44,17 +44,17 @@ from modules.claw import *
 #move_forward_cm(30)
 #turn_left(90)
 #move_forward_cm(30)
-#turn_left(90)
+turn_left(90)
 #stack.reverse()
 
 #----------------------------------------------------------------------#
 #regular o giro
-
-motors.turn(330)
-while not blackRight() or not blackLeft():
-   motors.turn(1)
-motors.stop()
-print(motor_left.angle(), motor_right.angle())
+#865
+# motors.turn(330)
+# while not blackRight() or not blackLeft():
+#    motors.turn(1)
+# motors.stop()
+# print(motor_left.angle(), motor_right.angle())
 
 #----------------------------------------------------------------------#
 
