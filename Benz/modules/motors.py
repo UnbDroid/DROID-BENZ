@@ -12,7 +12,7 @@ motor_right = Motor(Port.B)
 velocity = 2
 class command_stack():
     def __init__(self):
-        self.lista = [["straight_cm",12],["turn_left",90]]
+        self.lista = []
     
     def forward_cm(self,cm):
         tempo = StopWatch()
@@ -22,7 +22,6 @@ class command_stack():
         duration = ((cm*10)/velocity)*10
         while tempo.time() <= duration:
             tempo.resume()
-            print(tempo.time())
             motors.drive(velocity*100, 0)
             if obstacle():
                 stop(False)
@@ -40,13 +39,13 @@ class command_stack():
         print(duration)
         tempo.resume()
         while tempo.time() <= duration:
-            print(3)
             motors.drive(velocity*100, 0)
             if obstacle():
                 stop(False)
                 self.reset()
                 break
         stop(False)
+        turn_right(180, False)
 
     def append(self, command):
         self.lista.append(command)
@@ -84,6 +83,7 @@ class command_stack():
     
     def reverse(self):    
         while not self.isEmpty():
+            print(self.lista)
             print(self.size())
             self.unpille()
 
@@ -156,7 +156,7 @@ def turn_left(angle, save = True):
         motor_left.run_angle(200, -control_signal -(set_point - motor_right.angle())*0.1, wait=False)
         motor_right.run_angle(200, control_signal +(set_point - motor_right.angle())*0.1, wait=True)
         # print(" motor right and left :",motor_right.angle(), motor_left.angle())
-        print("difference", abs(set_point - motor_right.angle()))
+        # print("difference", abs(set_point - motor_right.angle()))
     stop_motors()
     if save:
         stack.append(["turn_right", angle])
@@ -175,7 +175,7 @@ def turn_right(angle, save = True):
         motor_left.run_angle(200, control_signal + (set_point - motor_right.angle())*0.1, wait=False)
         motor_right.run_angle(200, -control_signal -(set_point - motor_right.angle())*0.1, wait=True)
         # print(" motor right and left :",motor_right.angle(), motor_left.angle())
-        print("difference", abs(set_point - motor_left.angle()))
+        # print("difference", abs(set_point - motor_left.angle()))
     stop_motors()
     # print("Saí")
     if save:
