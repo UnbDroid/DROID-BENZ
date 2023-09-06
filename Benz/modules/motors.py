@@ -12,7 +12,7 @@ motor_right = Motor(Port.B)
 velocity = 2
 class command_stack():
     def __init__(self):
-        self.lista = []
+        self.lista = [["straight_cm",12],["turn_left",90]]
     
     def forward_cm(self,cm):
         tempo = StopWatch()
@@ -32,12 +32,15 @@ class command_stack():
     def backward_cm(self, cm):
         tempo = StopWatch()
         tempo.pause()
+        print(1)
         tempo.reset()
-        turn_right(180)
+        turn_right(180,False)
+        print(2)
         duration = ((cm*10)/velocity)*10
         print(duration)
         tempo.resume()
         while tempo.time() <= duration:
+            print(3)
             motors.drive(velocity*100, 0)
             if obstacle():
                 stop(False)
@@ -66,13 +69,13 @@ class command_stack():
         elif command[0] == "back_cm":
             self.backward_cm(command[1])
         elif command[0] == "turn_left":
-            turn_left(command[1])
+            turn_left(command[1],False)
         elif command[0] == "back":
             move_backward(command[1],False)
         elif command[0] == "forward":
             move_forward(command[1],False)
         elif command[0] == "turn_right":
-            turn_right(command[1])
+            turn_right(command[1],False)
         elif command[0] == "stop":
             stop(False)
         return command
@@ -147,13 +150,13 @@ def turn_left(angle, save = True):
     set_point = 871*(angle/360)
     set_point = round(set_point)
     stop_motors()
-    while not (abs(set_point - motor_right.angle()) <= 11):
+    while not (abs(set_point - motor_right.angle()) <= 18):
         current_angle = motor_right.angle()
         control_signal = calculate_pid(kp, ki, set_point, current_angle)
         motor_left.run_angle(200, -control_signal -(set_point - motor_right.angle())*0.1, wait=False)
         motor_right.run_angle(200, control_signal +(set_point - motor_right.angle())*0.1, wait=True)
         # print(" motor right and left :",motor_right.angle(), motor_left.angle())
-        # print("difference", set_point - motor_right.angle())
+        print("difference", abs(set_point - motor_right.angle()))
     stop_motors()
     if save:
         stack.append(["turn_right", angle])
@@ -166,13 +169,13 @@ def turn_right(angle, save = True):
     set_point = 871*(angle/360)
     set_point = round(set_point)
     stop_motors()
-    while not (abs(set_point-motor_left.angle()) <= 11):
+    while not (abs(set_point-motor_left.angle()) <= 18):
         current_angle = motor_left.angle()
         control_signal = calculate_pid(kp, ki, set_point, current_angle)
         motor_left.run_angle(200, control_signal + (set_point - motor_right.angle())*0.1, wait=False)
         motor_right.run_angle(200, -control_signal -(set_point - motor_right.angle())*0.1, wait=True)
         # print(" motor right and left :",motor_right.angle(), motor_left.angle())
-        # print("difference", set_point - motor_left.angle())
+        print("difference", abs(set_point - motor_left.angle()))
     stop_motors()
     # print("Saí")
     if save:
@@ -185,7 +188,7 @@ def turn_right_180(angle, save = True):
     set_point = 871*(angle/360)
     set_point = round(set_point)
     stop_motors()
-    while not (abs(set_point-motor_left.angle()) <= 11):
+    while not (abs(set_point-motor_left.angle()) <= 18):
         current_angle = motor_left.angle()
         control_signal = calculate_pid(kp, ki, set_point, current_angle)
         motor_left.run_angle(200, control_signal, wait=False)
@@ -257,7 +260,7 @@ def turn_180():
     motors.turn(180)
     print("já tornou")
     
-def stop(save = False):
+def stop(save = True):
     motors.stop()
     if save:
         stack.append(['stop'])

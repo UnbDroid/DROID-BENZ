@@ -3,7 +3,7 @@ from pybricks.hubs import EV3Brick
 from pybricks.ev3devices import (InfraredSensor, UltrasonicSensor)
 from pybricks.parameters import Stop, Direction, Button
 from pybricks.tools import wait, StopWatch, DataLog
-
+import time
 #from pybricks.media.ev3dev import SoundFile, ImageFile
 
 from modules.motors import *
@@ -38,10 +38,14 @@ from modules.claw import *
 #----------------------------------------------------------------------------------------------------------------------------------
 
 #Programa principal (minúsuclo pq é o programa principal lmfao)
-close_claw(760)
-school()
+# close_claw(760)
+# school()
 #
+school()
+time.sleep(5)
+stack.reverse()
 # 
+# stack.backward_cm(12)
 #turn_right(90)
 #move_forward_cm(90)
 #check_point()

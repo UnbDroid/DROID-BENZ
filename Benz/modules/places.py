@@ -234,7 +234,6 @@ def decision(tube):
 #Funções referentes ao trajeto do robô
 
 def school2():
-    command_stack()
     move_backward_cm(35)
    # stack.append(["straight_cm", 35])
     
@@ -251,7 +250,6 @@ def school2():
     stack.reverse()
 
 def school():
-    command_stack()
     move_backward_cm(35)
    # stack.append(["straight_cm", 35])
     if obstacle(False):
@@ -286,10 +284,9 @@ def school():
         turn_right(90)
       #  stack.append(["turn_left", 90])
   #  stack.append(["back_cm", 15])
-    leave_passenger()
+    #leave_passenger()
 
 def city_hall2():
-    command_stack()
     move_backward_cm(35)
     stack.append(["straight_cm", 35])
     #depois verificar tubo
@@ -304,7 +301,6 @@ def city_hall2():
     stack.reverse()
 
 def city_hall(): #check
-    command_stack()
     move_backward_cm(35)
     if obstacle(False):
         move_backward_cm(60)
