@@ -53,14 +53,17 @@ red_right = [[40,8,7],[62,30,26]]#check
 blue_left = [[0,18,34],[23,38,54]]
 blue_right = [[0,18,52],[18,38,74]]#check
 
-yellow_left = [[62, 76, 13], [78, 92, 29]]
-yellow_right = [[43, 68, 13], [59, 84, 29]]#check
+yellow_left = [[63, 77, 11], [79, 93, 27]]
+yellow_right = [[45, 66, 13], [61, 82, 29]]#check
+
+yell_i_black_left = [[63, 77, 11], [79, 93, 27]]
+yell_i_black_right = [[63, 77, 11], [79, 93, 27]]
 
 green_left = [[30,5,0],[49,25,20]]
 green_right = [[54,5,0],[77,25,20]]
 
-black_left = [[0,0, 0],[15, 16, 14]]
-black_right = [[0,2,0],[13, 17, 13]]
+black_left = [[0,0, 0],[13, 16, 14]]
+black_right = [[0,0,0],[13, 17, 15]]
 
 brown_left = [[20,10,0],[35,30,18]]
 brown_right = [[24,9,0],[45,32,15]] 

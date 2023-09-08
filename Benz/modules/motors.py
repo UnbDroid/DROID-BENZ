@@ -24,16 +24,16 @@ class command_stack():
             tempo.resume()
             motors.drive(velocity*100, 0)
             if obstacle():
-                stop(False)
+                stop()
                 self.reset()
                 break
-        stop(False)
-    def backward_cm(self, cm):
+        stop()
+    def backward_cm(self, cm): #volta para trás metodo
         tempo = StopWatch()
         tempo.pause()
         print(1)
         tempo.reset()
-        turn_right(180,False)
+        turn_right(180)
         print(2)
         duration = ((cm*10)/velocity)*10
         print(duration)
@@ -41,11 +41,11 @@ class command_stack():
         while tempo.time() <= duration:
             motors.drive(velocity*100, 0)
             if obstacle():
-                stop(False)
+                stop()
                 self.reset()
                 break
-        stop(False)
-        turn_right(180, False)
+        stop()
+        turn_right(180)
 
     def append(self, command):
         self.lista.append(command)
@@ -66,17 +66,17 @@ class command_stack():
         if command[0] == "straight_cm":
             self.forward_cm(command[1])
         elif command[0] == "back_cm":
-            self.backward_cm(command[1])
+            move_backward_cm(command[1])
         elif command[0] == "turn_left":
-            turn_left(command[1],False)
+            turn_left(command[1])
         elif command[0] == "back":
-            move_backward(command[1],False)
+            move_backward(command[1])
         elif command[0] == "forward":
-            move_forward(command[1],False)
+            move_forward(command[1])
         elif command[0] == "turn_right":
-            turn_right(command[1],False)
+            turn_right(command[1])
         elif command[0] == "stop":
-            stop(False)
+            stop()
         return command
     def onTop(self):
         return self.lista[-1]
@@ -107,8 +107,8 @@ def move_forward2(velocity):
 def move_forward(velocity):
     kp_right = 1
     kp_left = 0.68
-    ki_right = 0
-    ki_left = 0
+    ki_right = 0.0002
+    ki_left = 0.0002
 
     control_signal_right = calculate_pid(kp_right, ki_right, velocity, motor_right.speed())
     control_signal_left = calculate_pid(kp_left, ki_left, velocity, motor_left.speed())
@@ -128,26 +128,30 @@ def move_forward(velocity):
         
     
 
-def move_forward_cm(mm, save = True) :
+def move_forward_cm(mm, save = False, reference = "B") :
     motors.straight(mm*10)
-    if save:
+    if save and reference == "F":
+        stack.append(["straight_cm", mm])
+    elif save:
         stack.append(["back_cm", mm])
         
 def move_backward(velocity):
     motors.drive(-velocity, 0)
     
-def move_backward_cm(mm, save = True) :
+def move_backward_cm(mm, save = False, reference = "F") :
     motors.straight(-mm*10)
-    if save:
+    if save and reference == "F":
         stack.append(["straight_cm", mm])
+    elif save:
+        stack.append(["back_cm", mm])
     
 def move_right(velocity):
     motors.drive(0, velocity)
 
-def turn_left(angle, save = True):
-    kp = 0.3
-    ki = 0
-    set_point = 871*(angle/360)
+def turn_left(angle, save = False, reference = 'R'):
+    kp = 0.75
+    ki = 0.0002
+    set_point = 844*(angle/360)
     set_point = round(set_point)
     stop_motors()
     while not (abs(set_point - motor_right.angle()) <= 18):
@@ -158,34 +162,38 @@ def turn_left(angle, save = True):
         # print(" motor right and left :",motor_right.angle(), motor_left.angle())
         # print("difference", abs(set_point - motor_right.angle()))
     stop_motors()
-    if save:
+    if save and reference == 'L':
+        stack.append(["turn_left", angle])
+    elif save and reference == 'R':
         stack.append(["turn_right", angle])
 
 
-
-def turn_right(angle, save = True):
-    kp = 0.5
-    ki = 0
-    set_point = 871*(angle/360)
+def turn_right(angle, save = False, reference = 'L'):
+    kp = 0.58
+    ki = 0.0002
+    print("rightou")
+    set_point = 844*(angle/360)
     set_point = round(set_point)
     stop_motors()
-    while not (abs(set_point-motor_left.angle()) <= 18):
+    while not (abs(set_point-motor_left.angle()) <= 10):
         current_angle = motor_left.angle()
         control_signal = calculate_pid(kp, ki, set_point, current_angle)
         motor_left.run_angle(200, control_signal + (set_point - motor_right.angle())*0.1, wait=False)
         motor_right.run_angle(200, -control_signal -(set_point - motor_right.angle())*0.1, wait=True)
         # print(" motor right and left :",motor_right.angle(), motor_left.angle())
-        # print("difference", abs(set_point - motor_left.angle()))
+        print("difference", abs(set_point - motor_left.angle()))
     stop_motors()
     # print("Saí")
-    if save:
+    if save and reference == 'L':
         stack.append(["turn_left", angle])
+    elif save and reference == 'R':
+        stack.append(["turn_right", angle])
 
-def turn_right_180(angle, save = True):
+def turn_right_180(angle = 180, save = False):
     #kp = 0.1
-    kp = 0.25
-    ki = 0.001
-    set_point = 871*(angle/360)
+    kp = 0.95
+    ki = 0
+    set_point = 844*(angle/360)
     set_point = round(set_point)
     stop_motors()
     while not (abs(set_point-motor_left.angle()) <= 18):
@@ -218,30 +226,10 @@ def stop_motors():
     motor_right.reset_angle(0)
 
 
-   # if motor_left.angle() != valor_a_girar:
-    #    motor_left.run_angle(50, (motor_left.angle() - valor_a_girar), wait=True)
-
-    #if motor_right.angle() != valor_a_girar:
-     #   motor_right.run_angle(50, (motor_right.angle() + valor_a_girar), wait=True)
-   
-  #  if save:
-   #     stack.append(["turn_left", angle])
-   # stack.append(["turn_left", angle])
     
 def move_left(velocity):
     motors.drive(0, -velocity)
-    
-def turn_left2(angle, save = False):
-    stop()
-    motor_left.reset_angle(0)
-    motor_right.reset_angle(0)
-    motor_left.run_angle(150, (-226 * (angle / 90)), wait=False)
-    motor_right.run_angle(150, (226 * (angle / 90)), wait=True)
-    print(motor_left.angle())
-    print(motor_right.angle())
-    if save:
-        stack.append(["turn_right", angle])
-    
+
 
     
 def turn_90_left_and_move_distance(distance):
@@ -260,7 +248,7 @@ def turn_180():
     motors.turn(180)
     print("já tornou")
     
-def stop(save = True):
+def stop(save = False):
     motors.stop()
     if save:
         stack.append(['stop'])
@@ -305,12 +293,12 @@ def reposition_wall():
         print("1")
         while seeLeft() not in colors:
             circle_left()
-        stop(False)
+        stop()
     elif seeRight() not in colors and seeLeft() in  colors:
         print("2")
         while seeRight() not in colors:
             circle_right()
-        stop(False)
+        stop()
     else:
         print("Todo fudido")
     print("rodou tudo")

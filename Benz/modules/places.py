@@ -104,7 +104,7 @@ def recognize_first2():
                 stop()
                 reposition_wall()
                 stop()
-                turn_right_180(180)
+                turn_right_180()
                 stop()
                 wait(500)
         stop()
@@ -164,7 +164,7 @@ def find_passenger():
     while not side_detection():
         move_forward(8*360)
     stop()   
-    move_backward_cm(6)   
+    move_backward_cm(4)   
     turn_left(90)
     stop()
     wait(500)
@@ -199,6 +199,7 @@ def check_point():
     reposition("Red")
     stop()
     tube = message()
+    print(tube)
     decision(tube)
 
 def decision(tube):
@@ -211,7 +212,7 @@ def decision(tube):
         place = dic_10[color]  
     if place == "ESCOLA":
         print("Indo para a escola")
-        school2()
+        school()
     elif place == "PREFEITURA":
         print("Indo para a prefeitura")
         city_hall()
@@ -233,21 +234,6 @@ def decision(tube):
         #get back from school depois      
 #Funções referentes ao trajeto do robô
 
-def school2():
-    move_backward_cm(35)
-   # stack.append(["straight_cm", 35])
-    
-    #depois verificar tubo
-    turn_left(90)
-    #stack.append(["turn_right", 90])
-    move_forward_cm(32)
-    stack.append(["back_cm", 30])
-    turn_right(90)
-    stack.append(["turn_left", 90])
-    leave_passenger()
-    move_backward_cm(15)
-    print(stack.lista)
-    stack.reverse()
 
 def school():
     move_backward_cm(35)
@@ -265,40 +251,16 @@ def school():
             turn_left(90)
             move_forward_cm(35)
             turn_right(90)
-            #leave_passenger()
         else:
             turn_left(90)
-          #  stack.append(["turn_right", 90])
             move_forward_cm(90)
-           # stack.append(["back_cm", 90])
-            turn_right(90)
-            #stack.append(["turn_leftt", 90])
-           # leave_passenger()
-    #depois verificar tubo
+            turn_right(90, True, 'R')
     else:
         print("Deu certo")
         turn_left(90)
-        #stack.append(["turn_right", 90])
         move_forward_cm(30)
-       # stack.append(["back_cm", 30])
         turn_right(90)
-      #  stack.append(["turn_left", 90])
-  #  stack.append(["back_cm", 15])
-    #leave_passenger()
-
-def city_hall2():
-    move_backward_cm(35)
-    stack.append(["straight_cm", 35])
-    #depois verificar tubo
-    turn_left(90)
-    stack.append(["turn_right", 90])
-    move_forward_cm(30)
-    stack.append(["back_cm", 15])
-    turn_left(90)
-    stack.append(["turn_right", 90])
     leave_passenger()
-    stack.append(["back_cm", 15])
-    stack.reverse()
 
 def city_hall(): #check
     move_backward_cm(35)
@@ -311,25 +273,17 @@ def city_hall(): #check
     else:
         turn_left(90)
         move_forward_cm(30)
-        turn_left(90)
+        turn_left(90, True, 'L')
     leave_passenger()
 
 def library():
-    move_backward_cm(95)#verificar se é isto mesmo que a distancia da biblioteca
-    turn_left(90)
-    move_forward_cm(30)
+    move_backward_cm(130)#verificar se é isto mesmo que a distancia da biblioteca
     turn_left(90)
     leave_passenger()
-
-def museum2():
-    move_backward_cm(95)
-    turn_left(90)
-    move_forward_cm(95)
-    turn_left(90)
-    leave_passenger()
+    turn_right_180()
 
 def museum():
-    move_backward_cm(32)
+    move_backward_cm(35)
     if obstacle(False):
         move_backward_cm(60)
         turn_left(90) #mexer caso eleveja o primeiro obstaculo
@@ -349,48 +303,33 @@ def museum():
                 move_foward_cm(30)
                 turn_left(90)
     else:
-        turn_left(96)
-        move_forward_cm(120)
-        turn_left(94)
-        move_forward_cm(75)
-        turn_left(94)
-        move_forward_cm(25)
-        turn_right(94)
-        
-    #leave_passenger()
-
-
-def drugstore2():
-    move_backward_cm(40)
-    #depois verificar tubo
-    turn_left(93)
-    move_forward_cm(60)
-    turn_left(93)
-    move_forward_cm(25)
-    turn_right(90)
+        turn_left(90)
+        move_forward_cm(60)
+        turn_left(90)
+        move_forward_cm(90)
+        turn_right(90)
     leave_passenger()
 
-
 def drugstore():
-    move_backward_cm(40)
+    move_backward_cm(36)
     # depois verificar tubo
     if obstacle(False):
         move_backward_cm(60)
         turn_right(90)
         move_backward_cm(45)
         if obstacle(False):
-            move_backward_cm(55)
-            turn_left(90)
-            move_forward_cm(25)
-            turn_right(90)
+            move_backward_cm(55, True, "F")
+            turn_left(90, True)
+            move_forward_cm(25, True)
+            turn_right(90, True)
         else:
-            turn_left(90)
-            move_forward_cm(25)
-            turn_left(90)
+            turn_left(90, True)
+            move_forward_cm(25, True)
+            turn_left(90, True)
     else:
-        turn_left(93)
+        turn_left(90)
         move_forward_cm(60)
-        turn_left(93)
+        turn_left(90, True, "R")
         if obstacle():
             turn_right(90)
             move_forward_cm(60)
@@ -398,21 +337,12 @@ def drugstore():
             move_forward_cm(25)
             turn_left(90)
         else:
-            move_forward_cm(25)
-            turn_right(90)
+            move_forward_cm(35, True, "F")
+            turn_right(90, True, "R")
     leave_passenger()
-
-def bakery2():
-    move_backward_cm(35)
-    #depois verificar tubo
-    turn_left(90)
-    move_forward_cm(95)
-    turn_right(90)
-    leave_passenger()
-
 
 def bakery():
-    move_backward_cm(35)
+    move_backward_cm(36)
     #depois verificar tubo
     if obstacle(False):
         move_backward_cm(78.1)
@@ -439,6 +369,7 @@ def bakery():
                 turn_right(90)
     else:
         turn_left(90)
+        wait(500)
         move_forward_cm(60)
         if obstacle():
             turn_left(90)
@@ -473,12 +404,14 @@ def bakery():
                 move_forward_cm(65)
                 turn_right(90)
         else:
-            move_forward(30)
-            turn_right(90)
+            move_forward_cm(30, True, "F")
+            stack.reset()
+            turn_right(90, True, 'R')
+            wait(500)
     leave_passenger()
 
 def park():
-    move_backward_cm(55)
+    move_backward_cm(45, True)
     if obstacle(False):
         move_backward_cm(55)
         turn_left(90)
@@ -494,55 +427,88 @@ def park():
                 turn_right(90)
                 
     else:
-        turn_left(90)
-        move_forward_cm(65)
+        turn_left(90,True)
+        move_forward_cm(65, True)
         if obstacle():
             pass
         else:
+            turn_right(90)
             move_forward_cm(45)
+            turn_left(90)
     leave_passenger()
 
 def leave_passenger():
     print("Deixando o passageiro")
     while not saw_yellow() and not saw_black():
         move_forward(8*360)
-    stop(False)
+    stop()
     reposition_wall()
     enter()
-    open_claw(850)
+    open_claw()
     move_backward_cm(15) #fazer leave depois
-    #stack.reverse() 
+    stack.reverse() 
 
 def enter():
     entered = False
+    media_R_min = 17
+    media_R_max = 27
+    media_L_min = 25
+    media_L_max = 35
     while not entered:
-        print(yellowRight()," ", yellowLeft())
+        calibration(sensor_color_left)
+        calibration(sensor_color_right)
+       # print(yellowRight()," ", yellowLeft())
         if(yellowRight() and yellowLeft()):
-            stop(False)
+            stop()
             reposition("Yellow")
-            move_forward_cm(10, False)
-            return None
+            move_forward_cm(10)
+            break
         elif yellowLeft() and blackRight():
-            stop(False)
+            stop()
             reposition_wall()
-            move_backward_cm(3, False)
-            turn_right(90, False)
-            move_backward_cm(3, False)
-            stop(False)
-            turn_left(90, False)
-            stop(False)
+            move_backward_cm(3)
+            turn_right(90)
+            move_backward_cm(3)
+            stop()
+            turn_left(90)
+            stop()
             reposition_wall()
-            move_backward_cm(2, False)
+            move_backward_cm(2)
         elif yellowRight() and blackLeft():
-            stop(False)
+            stop()
             reposition_wall()
-            move_backward_cm(3, False)
-            turn_left(90, False)
-            move_backward_cm(3, False)
-            stop(False)
-            turn_right(90, False)
-            stop(False)
+            move_backward_cm(3)
+            turn_left(90)
+            move_backward_cm(3)
+            stop()
+            turn_right(90)
+            stop()
             reposition_wall()
-            move_backward_cm(2, False)
+            move_backward_cm(2)
+        elif sensor_color_left.rgb()[0] >= media_R_min and sensor_color_left.rgb()[0] <= media_R_max:
+            print("Porcentagem 0,5% esquerda")
+            stop()
+            reposition_wall()
+            move_backward_cm(3)
+            turn_left(90)
+            move_backward_cm(3)
+            stop()
+            turn_right(90)
+            stop()
+            reposition_wall()
+            move_backward_cm(2)
+
+        elif sensor_color_right.rgb()[0]>= media_L_min and sensor_color_right.rgb()[0] <= media_L_max:
+            print("Porcentagem 0,5% direita")
+            stop()
+            reposition_wall()
+            move_backward_cm(3)
+            turn_right(90)
+            move_backward_cm(3)
+            stop()
+            turn_left(90)
+            stop()
+            reposition_wall()
+            move_backward_cm(2)
         else:
-            move_forward_cm(1, False)
+            move_forward_cm(1)
