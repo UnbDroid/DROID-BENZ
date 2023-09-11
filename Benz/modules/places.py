@@ -22,43 +22,70 @@ total_of_passengers_of_15cm = 1
 time_forward = 0
 
 
-def recognize_first():
-    print("starting")
-    #print(saw_red())
-    while not saw_red() and not saw_blue():
-        print("andando")
-        move_forward(140)
-        if(saw_black() or saw_yellow()):
-           stop()
-           reposition_wall()
-           move_backward_cm(3) #calcular
-           turn_left(90)  
-           stop()
-           wait(500)       
 
-    stop()
-    if saw_red(): 
-        #turn_left(180)
-        move_forward_cm(30)
-        turn_right(90)
-        stop()
-        wait(500)
-        while not saw_blue():
-            move_forward(150)
-            if(saw_black()):
-                turn_left(180)
-        stop()
-    if(saw_blue()):
-        stop()
-        reposition("Blue")
-        move_backward_cm(9)
-        turn_right(90)
-        find_passenger()
-    recognize_first()
-    
-    #colocar para ir para trás
 
 #1: 872 2: 874
+
+
+def recognize_first():
+    print("starting")
+    # print(saw_red())
+    while not saw_red() and not saw_blue():
+        # print("andando")
+        move_forward(360*15)
+        if (saw_black() or saw_yellow() or obstacle()):
+            stop()
+            reposition_wall()
+            move_backward_cm(10)  # calcular
+            turn_left(90)
+            stop()
+            move_forward_cm(30, False, "S", False)
+            wait(500)
+            turn_right(90)
+            
+
+    stop()
+    if saw_red():
+        reposition("Red")
+        move_backward_cm(2)
+        stop()
+        reposition("Red")   
+        stop()
+        wait(500)
+        move_backward_cm(35)
+        turn_right(90)
+        wait(500)
+        while not saw_blue():
+            move_forward(360*10)
+            if obstacle():
+                return("saw obstacle")
+            if (saw_black() or saw_yellow()):
+                print("ops")
+                move_backward_cm(2)
+                stop()
+                reposition_wall()
+                stop()
+                turn_right(90)
+                wait(500)
+                turn_right(90)
+                stop()
+                wait(500)
+        stop()
+    if (saw_blue()):
+        move_backward_cm(2)
+        stop()
+        reposition("Blue")
+        move_backward_cm(7)
+        turn_right(90)
+        wait(500)
+        find_passenger()
+    print("Bora para o próximo")
+    recognize_first()
+
+
+
+
+
 
 def final_tube():
     tempo = StopWatch()
@@ -70,54 +97,6 @@ def final_tube():
             tempo.reset()
     stop()
     print("Ready to start taking passangers")
-
-def recognize_first2():
-    print("starting")
-    # print(saw_red())
-    while not saw_red() and not saw_blue():
-        print("andando")
-        move_forward(360*15)
-        if (saw_black() or saw_yellow() or obstacle()):
-            stop()
-            if saw_black() or saw_yellow():
-                reposition_wall()
-            move_backward_cm(3)  # calcular
-            turn_left(90)
-            stop()
-            wait(500)
-
-    stop()
-    if saw_red():
-        move_backward_cm(2)
-        stop()
-        reposition("Red")
-        
-        stop()
-        wait(500)
-        move_backward_cm(37)
-        turn_right(90)
-        wait(500)
-        while not saw_blue():
-            move_forward(360*10)
-            if (saw_black()):
-                move_backward_cm(2)
-                stop()
-                reposition_wall()
-                stop()
-                turn_right_180()
-                stop()
-                wait(500)
-        stop()
-    if (saw_blue()):
-        stop()
-        reposition("Blue")
-        move_backward_cm(7)
-        turn_right(90)
-        wait(500)
-        find_passenger()
-    print("Bora para o próximo")
-    recognize_first2()
-
 
 
 
@@ -161,9 +140,14 @@ def recognize():
 def find_passenger():
     print("procurando")
     final_tube()
-    while not side_detection():
+    while not side_detection() and not saw_red():
         move_forward(8*360)
     stop()   
+    if(saw_red()):
+        reposition("Red")
+        while not side_detection():
+            move_backward(100)
+        stop()
     move_backward_cm(4)   
     turn_left(90)
     stop()
@@ -191,7 +175,7 @@ def check_point():
     #stop()
     wait(500)
     while not saw_red():
-        print("andando")
+       # print("andando")
         move_forward(50*360)
     stop()
     move_backward_cm(1)
@@ -201,6 +185,39 @@ def check_point():
     tube = message()
     print(tube)
     decision(tube)
+
+
+def decisionteste(tube):
+    color = tube[0]
+    size = tube[1]
+    stack.reset()
+    if size == "15":
+        place = dic_15[color]
+    else:
+        place = dic_10[color]  
+    if place == "ESCOLA":
+        print("Indo para a escola")
+        #school()
+    elif place == "PREFEITURA":
+        print("Indo para a prefeitura")
+        #city_hall()
+    elif place == "BIBLIOTECA":
+        print("Indo para a biblioteca")
+        #library()
+    elif place == "FARMACIA":
+        print("Indo para a farmácia")
+        #drugstore()
+    elif place == "MUSEU":
+        print("Indo para o museu")
+        #museum()
+    elif place == "PARQUE":
+        print("Indo para o parque")
+        #park()
+    elif place == "PADARIA":
+        print("Indo para a padaria")
+       # bakery()
+
+
 
 def decision(tube):
     color = tube[0]
@@ -259,7 +276,7 @@ def school():
         print("Deu certo")
         turn_left(90)
         move_forward_cm(30)
-        turn_right(90)
+        turn_right(90, True, 'R')
     leave_passenger()
 
 def city_hall(): #check
@@ -277,7 +294,18 @@ def city_hall(): #check
     leave_passenger()
 
 def library():
-    move_backward_cm(130)#verificar se é isto mesmo que a distancia da biblioteca
+    move_backward_cm(65)#verificar se é isto mesmo que a distancia da biblioteca
+    turn_right(90)
+    while not saw_blue():
+       # print("andando")
+        move_forward(360*15)
+    stop()
+    reposition("Blue")
+    move_backward_cm(3.5)
+    stop()
+    wait(500)
+    turn_left(90)
+    move_backward_cm(65)
     turn_left(90)
     leave_passenger()
     turn_right_180()
@@ -303,12 +331,12 @@ def museum():
                 move_foward_cm(30)
                 turn_left(90)
     else:
-        turn_left(90)
-        move_forward_cm(60)
-        turn_left(90)
+        turn_left(90, True)
+        move_forward_cm(60, True)
+        turn_left(90, True)
         move_forward_cm(98)
         turn_right(90)
-    #leave_passenger()
+    leave_passenger()
 
 def drugstore():
     move_backward_cm(36)
@@ -445,7 +473,12 @@ def leave_passenger():
     reposition_wall()
     enter()
     open_claw()
-    move_backward_cm(15) #fazer leave depois
+    print("dando ré")
+    while not saw_yellow() and not saw_black():
+        move_backward(80)
+    stop()
+    reposition_wall()
+    move_backward_cm(10) #fazer leave depois
     stack.reverse() 
 
 def enter():

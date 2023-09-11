@@ -62,8 +62,8 @@ yell_i_black_right = [[63, 77, 11], [79, 93, 27]]
 green_left = [[30,5,0],[49,25,20]]
 green_right = [[54,5,0],[77,25,20]]
 
-black_left = [[0,0, 0],[13, 16, 14]]
-black_right = [[0,0,0],[13, 17, 15]]
+black_left = [[0,0, 0],[8, 10, 8]]
+black_right = [[0,0,0],[7, 11, 9]]
 
 brown_left = [[20,10,0],[35,30,18]]
 brown_right = [[24,9,0],[45,32,15]] 
@@ -130,7 +130,7 @@ def saw_red():
     return redRight() and redLeft()
 
 def saw_black():
-    return blackRight() or blackLeft()
+    return blackRight() and blackLeft()
 
 def saw_yellow():
     return yellowRight() or yellowLeft()
@@ -182,5 +182,5 @@ def seeLeft():
         print("vi amarelo")
         return "Yellow"
     else:
-        print("vi branco")
+    #    print("vi branco")
         return "White"

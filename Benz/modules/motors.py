@@ -105,8 +105,8 @@ def move_forward2(velocity):
     motors.drive(velocity, 0)
 
 def move_forward(velocity):
-    kp_right = 1
-    kp_left = 0.68
+    kp_right = 0.9#1
+    kp_left = 1 #0.68
     ki_right = 0.0002
     ki_left = 0.0002
 
@@ -128,8 +128,30 @@ def move_forward(velocity):
         
     
 
-def move_forward_cm(mm, save = False, reference = "B") :
-    motors.straight(mm*10)
+def move_forward_cm(cm, save = False, reference = "B", standard = True) :
+    if not standard:
+        tempo = StopWatch()
+        tempo.pause()
+        tempo.reset()
+        print(tempo.time())
+        velocity = 200
+        duration = ((cm*10)/velocity)*1000
+        while tempo.time() <= duration:
+            tempo.resume()
+            move_forward(velocity*360)
+            if obstacle() or saw_red():
+                stop()
+                reposition("Red")
+                move_backward_cm(3)
+                wait(500)
+                turn_right(90)
+                turn_right(90)
+                wait(500)
+                move_forward_cm(65, False, "S", False)
+                break
+        stop()
+    else:
+        motors.straight(cm*10)
     if save and reference == "F":
         stack.append(["straight_cm", mm])
     elif save:
@@ -149,7 +171,7 @@ def move_right(velocity):
     motors.drive(0, velocity)
 
 def turn_left(angle, save = False, reference = 'R'):
-    kp = 0.75
+    kp = 0.9
     ki = 0.0002
     set_point = 828*(angle/360)
     set_point = round(set_point)
@@ -191,8 +213,8 @@ def turn_right(angle, save = False, reference = 'L'):
 
 def turn_right_180(angle = 180, save = False):
     #kp = 0.1
-    kp = 0.95
-    ki = 0
+    kp = 0.58
+    ki = 0.0002
     set_point = 828*(angle/360)
     set_point = round(set_point)
     stop_motors()
@@ -260,6 +282,7 @@ def calibrate():
     wait(1000)
 
 def reposition(color):
+    print("Se alinhando")
     print("Entrou")
     if seeRight() != color and seeLeft() == color:
         print("Diferenciou")

@@ -13,11 +13,44 @@ from modules.places import *
 from modules.claw import *
 
 #----------------------------------------------------------------------------------------------------------------------------------
-#+close_claw(750)
+#turn_left(90)
+'''close_claw(750)
+open_claw()
+ev3.speaker.beep(200)'''
+
+#open_claw(250)
+#while True:
+#  move_forward(10*360)
+ # print(seeRight())
+  #print(seeLeft())3
+  #wait(1000)'''
+#turn_right_180()
+
+'''while not saw_blue():
+    print("andando")
+    move_forward(360*15)
+stop()
+wait(500)
+turn_left(90)'''
+
+#check_point()
+#close_claw()
+recognize_first()
+
+#close_claw(750)
+#open_claw()
 #drugstore()
 #Teste dos lugares
 
 #school()
+#city_hall()
+#library()
+#bakery()
+#drugstore()
+#museum()
+
+
+
 #turn_right(90)
 #turn_left(90)
 
@@ -37,11 +70,11 @@ from modules.claw import *
 
 #----------------------------------------------------------------------#
 #regular o giro
-motors.turn(300)
+'''motors.turn(300)
 while not blackRight() or not blackLeft():
   motors.turn(1)
 motors.stop()
-print(motor_left.angle(), motor_right.angle())
+print(motor_left.angle(), motor_right.angle())'''
 
 #----------------------------------------------------------------------#
 
