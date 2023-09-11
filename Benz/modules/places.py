@@ -306,9 +306,9 @@ def museum():
         turn_left(90)
         move_forward_cm(60)
         turn_left(90)
-        move_forward_cm(90)
+        move_forward_cm(98)
         turn_right(90)
-    leave_passenger()
+    #leave_passenger()
 
 def drugstore():
     move_backward_cm(36)

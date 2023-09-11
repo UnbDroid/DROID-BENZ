@@ -16,8 +16,7 @@ from modules.claw import *
 #+close_claw(750)
 #drugstore()
 #Teste dos lugares
-close_claw(20)
-museum()
+
 #school()
 #turn_right(90)
 #turn_left(90)
@@ -38,12 +37,12 @@ museum()
 
 #----------------------------------------------------------------------#
 #regular o giro
-'''motors.turn(330)
+motors.turn(300)
 while not blackRight() or not blackLeft():
   motors.turn(1)
 motors.stop()
 print(motor_left.angle(), motor_right.angle())
-'''
+
 #----------------------------------------------------------------------#
 
 #---------------------------------------------------------------------#
