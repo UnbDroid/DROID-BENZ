@@ -13,13 +13,17 @@ from modules.places import *
 from modules.claw import *
 
 #----------------------------------------------------------------------------------------------------------------------------------
+#close_claw(700)
 #turn_left(90)
+#array = [1, 2, 3]
+#calibration_auto(sensor_color_left, array)
 '''close_claw(750)
 open_claw()
 ev3.speaker.beep(200)'''
-open_claw(500)
+#close_claw(750)
 #wait(700)
-recognize_first()
+#recognize_first()
+#school()
 #open_claw()
 #close_claw(10)
 #while True:
@@ -93,10 +97,13 @@ print(motor_left.angle(), motor_right.angle())'''
 
 #-------------------------------------------------------------------------------------------------------
 #calibrando cores 
-#while True:
- # calibration(sensor_color_right)
-  #calibration(sensor_color_left)
-  #wait(3000)
+'''array = [[57,7,0],[78,27,25]]
+while True:
+  print("R")
+  calibration_auto(sensor_color_right, array)
+  print("L")
+  calibration_auto(sensor_color_left, array)
+  wait(3000)'''
 #------------------------------------------------------------------------------------------------------
 #calibration_auto(sensor_color_right, yell_i_black_left)
 #turn_right1(90)
