@@ -41,7 +41,7 @@ blue = [[0, 1, 5], [12, 14, 21]]  # check
 
 green = [[0, 13, 0], [11, 28, 13]]  # check
 
-brown = [[36, 56, 54], [52, 72, 70]]  # check
+brown = [[0, 0, 0], [12, 13, 9]]  # check
 
 
 def calibration(sensor):
