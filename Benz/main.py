@@ -20,7 +20,7 @@ from modules.colors import *
 
 # The server must be started before the client!
 
-"""from pybricks.messaging import BluetoothMailboxClient, TextMailbox
+from pybricks.messaging import BluetoothMailboxClient, TextMailbox
 time.sleep(2)
 # This is the name of the remote EV3 or PC we are connecting to.
 SERVER = 'ev3dev'
@@ -32,17 +32,17 @@ print('establishing connection...')
 client.connect(SERVER)
 print('connected!')
 mbox.send("Hello")
-"""
+
 
 # In this program, the client sends the first message and then waits for the
 # server to reply.
-"""
+
 while True:
   print(mbox.read())
   if mbox.read() == "True":
     print("checkando")
     txt = check()
-    mbox.send(txt)"""
+    mbox.send(txt)
 
 
 # green = calibration_auto(sensor_color, green)
@@ -54,4 +54,4 @@ while True:
 # #   calibration(sensor_color)
 # #   wait(1000)
 
-calibration_auto(sensor_color, brown)
+# calibration_auto(sensor_color, brown)

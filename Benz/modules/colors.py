@@ -1,6 +1,7 @@
 from pybricks.parameters import Color
 from pybricks.parameters import Port
 from pybricks.ev3devices import ColorSensor
+from pybricks.tools import StopWatch
 from pybricks.nxtdevices import ColorSensor as ColorNxt
 
 sensor_color = ColorSensor(Port.S2)
@@ -102,7 +103,13 @@ def size():
 
 def check():
     color = see()
-    if color == "White":
-        time.sleep(1)
-        color = see()
+    time = StopWatch()
+    time.pause()
+    time.reset()
+    while time.time() <= 2000:
+        time.resume()
+        if color == "White":
+            color = see()
+        else:
+            break
     return color + " " + size()
