@@ -294,8 +294,7 @@ def city_hall(): #check
     leave_passenger()
 
 def library():
-    move_backward_cm(65)#verificar se é isto mesmo que a distancia da biblioteca
-    turn_right(90)
+    backward_and_turn(65, 'R')
     while not saw_blue():
        # print("andando")
         move_forward(380)
@@ -305,31 +304,24 @@ def library():
     stop()
     wait(500)
     turn_left(90)
-    move_backward_cm(65)
-    turn_left(90)
+    backward_and_turn(65, 'L')
     leave_passenger()
     turn_right_180()
 
 def museum():
     move_backward_cm(35)
     if obstacle(False):
-        move_backward_cm(60)
-        turn_left(90) #mexer caso eleveja o primeiro obstaculo
+        backward_and_turn(60, 'L')
         move_forward_cm(30)
         if obstacle(False):
-            move_forward_cm(60)
-            turn_left(90)
-            move_forward_cm(35)
-            turn_left(90)
-            move_forward_cm(20)
-            turn_right(90)
+            forward_and_turn(60, 'L')
+            forward_and_turn(35, 'L')
+            forward_and_turn(20, 'R')
             if obstacle():
                 turn_left(90)
-                move_forward_cm(15)
-                turn_right(90)
+                forward_and_turn(15, 'R')
             else:
-                move_forward_cm(30)
-                turn_left(90)
+                forward_and_turn(30, 'L')
     else:
         turn_left(90, True)
         move_forward_cm(60, True)
@@ -342,8 +334,7 @@ def drugstore():
     move_backward_cm(36)
     # depois verificar tubo
     if obstacle(False):
-        move_backward_cm(60)
-        turn_right(90)
+        backward_and_turn(60, 'R')
         move_backward_cm(45)
         if obstacle(False):
             move_backward_cm(55, True, "F")
