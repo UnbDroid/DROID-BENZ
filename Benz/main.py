@@ -119,5 +119,5 @@ while i < 5:
 
 
 while True:
-  print(1)
   print(message())
+  wait(1000)
