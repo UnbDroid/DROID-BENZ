@@ -13,29 +13,43 @@ from modules.places import *
 from modules.claw import *
 
 #----------------------------------------------------------------------------------------------------------------------------------
+#close_claw(700)
 #turn_left(90)
+#array = [1, 2, 3]
+#calibration_auto(sensor_color_left, array)
 '''close_claw(750)
 open_claw()
 ev3.speaker.beep(200)'''
-
-#open_claw(250)
+#close_claw(750)
+#wait(700)
+#recognize_first()
+#school()
+#open_claw()
+#close_claw(10)
 #while True:
 #  move_forward(10*360)
  # print(seeRight())
   #print(seeLeft())3
   #wait(1000)'''
 #turn_right_180()
-
+#turn_left(90)
 '''while not saw_blue():
     print("andando")
-    move_forward(360*15)
+    move_forward(500)
 stop()
 wait(500)
 turn_left(90)'''
+'''
+    
+    if control_signal_right > 300:
+        control_signal_right = 300
 
+    if control_signal_left > 300:
+        control_signal_left = 300
+'''
 #check_point()
 #close_claw()
-recognize_first()
+
 
 #close_claw(750)
 #open_claw()
@@ -83,20 +97,22 @@ print(motor_left.angle(), motor_right.angle())'''
 
 #-------------------------------------------------------------------------------------------------------
 #calibrando cores 
-#while True:
- # calibration(sensor_color_right)
-  #calibration(sensor_color_left)
-  #wait(3000)
+'''array = [[57,7,0],[78,27,25]]
+while True:
+  print("R")
+  calibration_auto(sensor_color_right, array)
+  print("L")
+  calibration_auto(sensor_color_left, array)
+  wait(3000)'''
 #------------------------------------------------------------------------------------------------------
 #calibration_auto(sensor_color_right, yell_i_black_left)
-
+#turn_right1(90)
 '''i = 0
 while i < 5:
-  turn_left(90)
+  turn_right(90)
   print("Virei")
   stop()
   wait(1000)
   i+=1
   
-  '''
-
+'''

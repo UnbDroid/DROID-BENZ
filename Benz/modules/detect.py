@@ -11,13 +11,23 @@ infra_sensor = InfraredSensor(Port.S4)
 
 ev3 = EV3Brick()
 
+'''SERVER = 'ev3dev'
+
+client = BluetoothMailboxClient()
+mbox = TextMailbox('greeting', client)
+
+print('establishing connection...')
+client.connect(SERVER)
+print('connected!')
+'''
+
 '''server = BluetoothMailboxServer()
 eve3box = TextMailbox('greeting', server)
 
 print('waiting for connection...')
 server.wait_for_connection()
-print('connected!')
-'''
+print('connected!')'''
+
 def obstacle(default = True):
     if default:
         if ultra_sensor.distance() <= 200:
