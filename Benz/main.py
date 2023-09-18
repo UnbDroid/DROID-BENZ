@@ -67,7 +67,7 @@ time.sleep(2)
 
 # In this program, the client sends the first message and then waits for the
 # server to reply.
-while connected:
+while True:
     print(mbox.read())
     if mbox.read() == "True":
       print("checkando")
