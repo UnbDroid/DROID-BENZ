@@ -116,3 +116,8 @@ while i < 5:
   i+=1
   
 '''
+
+
+while True:
+  print(1)
+  print(message())
