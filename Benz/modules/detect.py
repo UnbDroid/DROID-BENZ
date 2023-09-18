@@ -21,12 +21,12 @@ client.connect(SERVER)
 print('connected!')
 '''
 
-server = BluetoothMailboxServer()
+'''server = BluetoothMailboxServer()
 eve3box = TextMailbox('greeting', server)
 
 print('waiting for connection...')
 server.wait_for_connection()
-print('connected!')
+print('connected!')'''
 
 def obstacle(default = True):
     if default:
@@ -38,7 +38,7 @@ def obstacle(default = True):
             #ev3.speaker.beep(300)
             return False
     else:
-        if infra_sensor.distance() <= 23:
+        if infra_sensor.distance() <= 30:
             ev3.speaker.beep(200)
             return True
         else:
@@ -62,7 +62,7 @@ def collision():
         print("cuidado motorista")
 
 def side_detection():
-    if infra_sensor.distance() <= 20: ############### lembrar de adicionar sensor
+    if infra_sensor.distance() <= 25: #25 ############### lembrar de adicionar sensor
         return True
     else:
         return False

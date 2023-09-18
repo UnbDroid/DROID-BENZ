@@ -13,8 +13,10 @@ from modules.places import *
 from modules.claw import *
 
 #----------------------------------------------------------------------------------------------------------------------------------
-#close_claw(700)
-#turn_left(90)
+#museum()
+#open_claw(780)
+#open_claw(720)
+#turn_right(90)
 #array = [1, 2, 3]
 #calibration_auto(sensor_color_left, array)
 '''close_claw(750)
@@ -24,21 +26,16 @@ ev3.speaker.beep(200)'''
 #wait(700)
 #recognize_first()
 #school()
-#open_claw()
-#close_claw(10)
-#while True:
-#  move_forward(10*360)
- # print(seeRight())
-  #print(seeLeft())3
-  #wait(1000)'''
-#turn_right_180()
-#turn_left(90)
+#move_backward_cm(60)
+#moving_backward_cm(60)
+
 '''while not saw_blue():
     print("andando")
     move_forward(500)
 stop()
 wait(500)
 turn_left(90)'''
+#turn_left(90)
 '''
     
     if control_signal_right > 300:
@@ -49,14 +46,18 @@ turn_left(90)'''
 '''
 #check_point()
 #close_claw()
-
-
+'''Teste para andar em cm
+motor_left.run_angle(280, 1872,  wait=False)
+motor_right.run_angle(280, 1872,  wait=True)
+print("Esquerdo", (motor_left.angle()))
+print("Direito", (motor_right.angle()))
+'''
 #close_claw(750)
 #open_claw()
 #drugstore()
 #Teste dos lugares
-
-#school()
+#turn_right(360)
+school()
 #city_hall()
 #library()
 #bakery()
@@ -65,13 +66,6 @@ turn_left(90)'''
 
 
 
-#turn_right(90)
-#turn_left(90)
-
-# enter()
-
-#school()
-#print(stack.lista)
 
 
 #----------------------------------------------------------------------------------------------------------------------------------
@@ -117,7 +111,7 @@ while i < 5:
   
 '''
 
-
+'''
 while True:
   print(message())
-  wait(1000)
+  wait(1000)'''

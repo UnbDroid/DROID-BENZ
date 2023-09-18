@@ -142,7 +142,7 @@ def saw_red():
     return redRight() and redLeft()
 
 def saw_black():
-    return blackRight() and blackLeft()
+    return blackRight() or blackLeft()
 
 def saw_yellow():
     return yellowRight() or yellowLeft()

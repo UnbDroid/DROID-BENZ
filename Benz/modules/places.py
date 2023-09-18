@@ -114,6 +114,7 @@ def forward_and_turn(cm, side, save = False):
     elif side == 'R':
         move_forward_cm(cm)
         turn_right(90, save)
+    wait(500)
 
 def backward_and_turn(cm, side, save = False):
     if side == 'L':
@@ -122,6 +123,7 @@ def backward_and_turn(cm, side, save = False):
     elif side == 'R':
         move_backward_cm(cm)
         turn_right(90, save)
+    wait(500)
 
 
 def final_tube():
@@ -194,10 +196,10 @@ def find_passenger():
     stop()
     reposition("Blue")
     print("vou te pegar")
-    close_claw(250)
+   # close_claw(250)
     move_forward_cm(4)
     #verificar se tem algo na frente por preucação
-    close_claw()
+  #  close_claw()
     move_backward_cm(6)
     stop()
     reposition("Blue")
@@ -259,25 +261,33 @@ def decision(tube):
 
 def school():
     move_backward_cm(35)
+    wait(500)
     if obstacle(False):
         backward_and_turn(60, 'L')
-        move_forward_cm(60)
+        move_forward_cm(62)
+        turn_right(90, True) #ver isso
 
-        if obstacle(False):
-            backward_and_turn(60, 'L')
+        if obstacle():
+            print("Vish, acidente")
+            turn_left(90)
             forward_and_turn(60, 'R')
-            forward_and_turn(55, 'L')
-            forward_and_turn(35, 'R')
+            forward_and_turn(60, 'R')
+            move_forward_cm(60, True, 'F')
+            turn_left(90, True)
+           # forward_and_turn(60, 'L')
+            move_forward_cm(25, True, "F")
         else:
             print("Sem obstáculo")
-            turn_left(90)
-            forward_and_turn(90, 'R')
+            move_forward_cm(90, True, 'F')
 
     else:
         print("Sem obstáculo")
         turn_left(90)
+        wait(500)
         move_forward_cm(30)
-        turn_right(90, True, 'R')
+    wait(500)
+    turn_right(90, True, 'R')
+        
     leave_passenger()
 
 def city_hall(): #check
@@ -296,7 +306,6 @@ def city_hall(): #check
 def library():
     backward_and_turn(65, 'R')
     while not saw_blue():
-       # print("andando")
         move_forward(380)
     stop()
     reposition("Blue")
@@ -323,12 +332,26 @@ def museum():
             else:
                 forward_and_turn(30, 'L')
     else:
-        turn_left(90, True)
-        move_forward_cm(60, True)
-        turn_left(90, True)
-        move_forward_cm(98)
-        turn_right(90)
+        turn_left(90)
+        move_forward_cm(60)
+        turn_left(90)
+        wait(500)
+        move_forward_cm(30)
+        turn_left(90)
+        get_break()
+        move_backward_cm(10)
+        turn_right(90, True, 'R')
+        move_forward_cm(30)
+        move_forward_cm(30, True, 'F' )
+        turn_right(90, True, 'R')
+
     leave_passenger()
+def get_break():
+    while not saw_yellow() and not saw_black():
+        move_forward(300)
+    move_backward_cm(2)
+    stop()
+    reposition_wall()
 
 def drugstore():
     move_backward_cm(36)
@@ -465,11 +488,12 @@ def leave_passenger():
     stop()
     reposition_wall()
     enter()
-    open_claw()
+   # open_claw()
     print("dando ré")
     move_backward_cm(11)
+    stop()
     while not saw_yellow() and not saw_black():
-        move_forward(90)
+        move_forward_cm(1)
     stop()
     reposition_wall()
     move_backward_cm(10) #fazer leave depois
