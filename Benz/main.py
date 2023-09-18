@@ -13,7 +13,7 @@ from pybricks.messaging import BluetoothMailboxClient, TextMailbox
 
 #!/usr/bin/env pybricks-micropython
 
-"""#####
+#####
 SERVER = 'ev3dev'
 
 client = BluetoothMailboxClient()
@@ -28,7 +28,7 @@ print('connected!')
 mbox.send('hello!')
 mbox.wait()
 print(mbox.read())
-"""
+
 ####
 # Before running this program, make sure the client and server EV3 bricks are
 # paired using Bluetooth, but do NOT connect them. The program will take care
@@ -67,20 +67,31 @@ time.sleep(2)
 
 # In this program, the client sends the first message and then waits for the
 # server to reply.
-"""while True:
+while True:
     print(mbox.read())
     if mbox.read() == "True":
       print("checkando")
       txt = check()
-      mbox.send(txt)"""
+      mbox.send(txt)
 
 
+"""while True:
+  test(green)
+  print("#####################################")
+  wait(5000)"""
 
+"""rgb = [0,0,0]
 
-calibration_auto(sensor_color, brown)
-# for i in range(100):
-#   print(check())
-#   time.sleep(1)
+# calibration_auto(sensor_color, brown)
+for i in range(10):
+  aux = sensor_sup.rgb()
+  print(aux)
+  rgb[0] += aux[0]
+  rgb[1] += aux[1]
+  rgb[2] += aux[2]
+  time.sleep(1)
+print("rgb", rgb)
+print("rgb", rgb/10)"""
 # #print(see())
 # # while True:
 # #   calibration(sensor_color)
