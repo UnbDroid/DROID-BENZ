@@ -72,7 +72,13 @@ white_left = [[68, 92, 84], [84, 108, 100]]
 white_right = [[44, 81, 92], [60, 97, 108]]
 
 
-#left 
+
+#left
+
+def yellow_i_black_left():
+    rgb = sensor_color_left.rgb()
+    return ((yell_i_black_left[0][0] <= rgb[0] and rgb[0] <= yell_i_black_left[1][0]) and (yell_i_black_left[0][1] <= rgb[1] and rgb[1] <= yell_i_black_left[1][1]) and (yell_i_black_left[0][2] <= rgb[2] and rgb[2] <= yell_i_black_left[1][2]))
+ 
 def whiteLeft():
     rgb = sensor_color_left.rgb()
     return ( (white_left[0][0] <= rgb[0] and rgb[0] <=white_left[1][0]) and (white_left[0][1] <= rgb[1] and rgb[1] <=white_left[1][1]) and (white_left[0][2] <= rgb[2] and rgb[2] <=white_left[1][2]) )
@@ -99,6 +105,12 @@ def brownLeft() :
     return ( (brown_left[0][0] <= rgb[0] and rgb[0] <=brown_left[1][0]) and (brown_left[0][1] <= rgb[1] and rgb[1] <=brown_left[1][1]) and (brown_left[0][2] <= rgb[2] and rgb[2] <=brown_left[1][2]) )
 
 #right
+
+
+def yellow_i_black_right():
+    rgb = sensor_color_right.rgb()
+    return ((yell_i_black_right[0][0] <= rgb[0] and rgb[0] <= yell_i_black_right[1][0]) and (yell_i_black_right[0][1] <= rgb[1] and rgb[1] <= yell_i_black_right[1][1]) and (yell_i_black_right[0][2] <= rgb[2] and rgb[2] <= yell_i_black_right[1][2]))
+
 def whiteRight():
     rgb = sensor_color_left.rgb()
     return ( (white_left[0][0] <= rgb[0] and rgb[0] <=white_left[1][0]) and (white_left[0][1] <= rgb[1] and rgb[1] <=white_left[1][1]) and (white_left[0][2] <= rgb[2] and rgb[2] <=white_left[1][2]) )
@@ -143,7 +155,8 @@ def saw_brown():
     
 def saw_white():
     return whiteRight() or whiteLeft()
-
+def saw_yellow_black():
+    return yellow_i_black_right() or yellow_i_black_left()
 def seeRight():
     if redRight():
         return "Red"

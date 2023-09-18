@@ -491,9 +491,9 @@ def enter():
         calibration(sensor_color_left)
         calibration(sensor_color_right)
        # print(yellowRight()," ", yellowLeft())
-        if(yellowRight() and yellowLeft()):
+        if ((yellowRight() and yellowLeft()) or (saw_yellow() and saw_yellow_black())):
             stop()
-            reposition("Yellow")
+            reposition_wall()
             move_forward_cm(10)
             break
         elif yellowLeft() and blackRight():
