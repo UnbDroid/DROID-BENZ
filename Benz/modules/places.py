@@ -28,6 +28,8 @@ time_forward = 0
 
 
 def recognize_first():
+    print("Esquerdo", (motor_left.angle()))
+    print("Direito", (motor_right.angle()))
     stop_motors()
     print("starting")
     while not saw_red() and not saw_blue():
@@ -77,7 +79,7 @@ def path_blue():
     stop()
     wait(500)
     move_backward_cm(5)
-    stop()
+    stop_motors()
     turn_right(90)
     wait(500)
     find_passenger()

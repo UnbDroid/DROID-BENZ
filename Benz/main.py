@@ -124,5 +124,25 @@ while True:
 for i in range(4):
   turn_right(90)
   wait(500)'''
-recognize_first()
-# move_forward_cm(30)
+# recognize_first()
+
+
+
+while True:
+  move_backward(-320) 
+
+#teste para andar
+'''stop_motors()
+move_backward_cm(60)
+stop_motors()'''
+'''print(motor_left.angle())
+print(motor_right.angle())
+move_forward_cm(15)
+print("###############")
+print(motor_left.angle())
+print(motor_right.angle())
+print("###############")
+stop_motors()
+print(motor_left.angle())
+print(motor_right.angle())
+'''

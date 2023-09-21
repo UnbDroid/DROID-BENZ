@@ -139,20 +139,21 @@ def move_forward(velocity):
 def moving_straight_cm(distance, velocity = 400):
     motor_left.reset_angle(0)
     motor_right.reset_angle(0)
-    angle = (distance * 1749)/63
+    angle = (distance * 1672)/69
     while motor_left.angle() < angle or motor_right.angle() < angle:
         move_forward(velocity)  
     # print(left_motor.angle(), right_motor.angle()) # Teste para o erro
     print("Esquerdo", (motor_left.angle()))
     print("Direito", (motor_right.angle()))
+    
     stop_motors()
 
 def moving_backward_cm(distance):
     motor_left.reset_angle(0)
     motor_right.reset_angle(0)
-    angle = (distance * -1749)/63
+    angle = (distance * -1672)/69
     while motor_left.angle() > angle or motor_right.angle() > angle:
-        move_forward(-320)  
+        move_backward(-320)  
     # print(left_motor.angle(), right_motor.angle()) # Teste para o erro
     print("Esquerdo", (motor_left.angle()))
     print("Direito", (motor_right.angle()))
@@ -174,7 +175,28 @@ def move_forward_cm(cm, save = False, reference = "B") :
         stack.append(["back_cm", cm])
         
 def move_backward(velocity):
-    motors.drive(-velocity, 0)
+    kp_right = 0.665 #0.06
+    kp_left = 0.635
+     #0.0648
+    ki_right = 0 #0.00000025
+    ki_left = 0
+
+
+    control_signal_right = motor_right.speed()
+    control_signal_left = motor_left.speed()
+
+
+    control_signal_right += calculate_pid(kp_right, ki_right, velocity, control_signal_right)
+    control_signal_left += calculate_pid(kp_left, ki_left, velocity, control_signal_left)
+
+    if control_signal_left < 1 and control_signal_left > -1:
+        control_signal_left = 1
+    if control_signal_right < 1 and control_signal_right > -1:
+        control_signal_right = 1
+    
+    motor_left.run(control_signal_left)
+    motor_right.run(control_signal_right)
+    print(" motor right and left :",motor_right.angle(), motor_left.angle())
     
 def move_backward_cm(mm, save = False, reference = "F") :
     moving_backward_cm(mm)
@@ -275,6 +297,7 @@ def calculate_pid(kp, ki, set_point, current_value):
     return control_signal
 
 def stop_motors():
+    wait(500)
     motors.stop()
     motor_left.reset_angle(0)
     motor_right.reset_angle(0)
