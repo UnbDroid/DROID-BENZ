@@ -26,8 +26,8 @@ eve3box = TextMailbox('greeting', server)
 
 print('waiting for connection...')
 server.wait_for_connection()
-print('connected!')'''
-
+print('connected!')
+'''
 def obstacle(default = True):
     if default:
         if ultra_sensor.distance() <= 200:

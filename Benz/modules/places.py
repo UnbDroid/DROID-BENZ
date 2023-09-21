@@ -73,12 +73,12 @@ def path_obstacle():
         wait(500)
 
 def path_blue():
-    move_backward_cm(1.5)
+    move_backward_cm(0.2)
     stop()
     reposition("Blue")
     stop()
     wait(500)
-    move_backward_cm(5)
+    move_backward_cm(0.75)
     stop_motors()
     turn_right(90)
     wait(500)
@@ -132,8 +132,8 @@ def backward_and_turn(cm, side, save = False):
 def final_tube():
     tempo = StopWatch()
     tempo.reset()
-    while tempo.time() <= 1500:
-        move_backward(80)  # implementar questão do tempo sem ver nada
+    while tempo.time() <= 3000:
+        move_backward(-120)  # implementar questão do tempo sem ver nada
         if side_detection():  # ainda sendo implementado
             print("Voltando")
             tempo.reset()
@@ -188,9 +188,9 @@ def find_passenger():
     if(saw_red()):
         reposition("Red")
         while not side_detection():
-            move_backward(100)
+            move_backward(-100)
         stop()
-    move_backward_cm(3)   
+    #move_backward_cm(0.1)   
     turn_left(90)
     stop()
     wait(500)

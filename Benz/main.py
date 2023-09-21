@@ -14,8 +14,10 @@ from modules.claw import *
 
 #----------------------------------------------------------------------------------------------------------------------------------
 #museum()
-# open_claw(500)
-#open_claw(50)
+#find_passenger()
+#recognize_first()
+open_claw(700)
+#close_claw(50)
 #turn_right(90)
 #array = [1, 2, 3]
 #calibration_auto(sensor_color_left, array)
@@ -124,12 +126,8 @@ while True:
 for i in range(4):
   turn_right(90)
   wait(500)'''
-# recognize_first()
 
 
-
-while True:
-  move_backward(-320) 
 
 #teste para andar
 '''stop_motors()
