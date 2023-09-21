@@ -21,12 +21,12 @@ client.connect(SERVER)
 print('connected!')
 '''
 
-'''server = BluetoothMailboxServer()
+server = BluetoothMailboxServer()
 eve3box = TextMailbox('greeting', server)
 
 print('waiting for connection...')
 server.wait_for_connection()
-print('connected!')'''
+print('connected!')
 
 def obstacle(default = True):
     if default:

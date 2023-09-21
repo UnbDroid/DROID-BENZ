@@ -14,8 +14,8 @@ from modules.claw import *
 
 #----------------------------------------------------------------------------------------------------------------------------------
 #museum()
-#open_claw(780)
-#open_claw(720)
+# open_claw(500)
+#open_claw(50)
 #turn_right(90)
 #array = [1, 2, 3]
 #calibration_auto(sensor_color_left, array)
@@ -24,7 +24,8 @@ open_claw()
 ev3.speaker.beep(200)'''
 #close_claw(750)
 #wait(700)
-#recognize_first()
+# while True:
+#   move_forward_cm(1)
 #school()
 #move_backward_cm(60)
 #moving_backward_cm(60)
@@ -57,7 +58,7 @@ print("Direito", (motor_right.angle()))
 #drugstore()
 #Teste dos lugares
 #turn_right(360)
-school()
+#school()
 #city_hall()
 #library()
 #bakery()
@@ -78,12 +79,16 @@ school()
 
 #----------------------------------------------------------------------#
 #regular o giro
-'''motors.turn(300)
-while not blackRight() or not blackLeft():
-  motors.turn(1)
-motors.stop()
-print(motor_left.angle(), motor_right.angle())'''
-
+'''regulagem = [0,0]
+for i in range(4):
+  aux = regular()
+  regulagem[0]+=aux[0]/(i+1)
+  regulagem[1] += aux[1]/(i+1)
+  print(aux)
+  wait(4000)
+regulagem[0] = regulagem[0]/4
+regulagem[1] = regulagem[1]/4
+print("real oficial ",regulagem)'''
 #----------------------------------------------------------------------#
 
 #---------------------------------------------------------------------#
@@ -115,3 +120,10 @@ while i < 5:
 while True:
   print(message())
   wait(1000)'''
+'''
+for i in range(4):
+  turn_right(90)
+  wait(500)'''
+# recognize_first()
+open_claw()
+# move_forward_cm(30)

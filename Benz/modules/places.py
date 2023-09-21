@@ -28,6 +28,7 @@ time_forward = 0
 
 
 def recognize_first():
+    stop_motors()
     print("starting")
     while not saw_red() and not saw_blue():
         move_forward(380)
@@ -54,7 +55,7 @@ def path_black_or_yellow():
     move_backward_cm(10)  # calcular
     turn_left(90)
     stop()
-    move_forward_cm(30, False, "S", False)
+    move_forward_cm(30, False, "S")
     wait(500)
     turn_right(90)    
 
@@ -196,10 +197,10 @@ def find_passenger():
     stop()
     reposition("Blue")
     print("vou te pegar")
-   # close_claw(250)
+    close_claw(250)
     move_forward_cm(4)
     #verificar se tem algo na frente por preucação
-  #  close_claw()
+    close_claw()
     move_backward_cm(6)
     stop()
     reposition("Blue")
@@ -260,7 +261,7 @@ def decision(tube):
 #def path_ n                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
 
 def school():
-    move_backward_cm(35)
+    move_backward_cm(30)
     wait(500)
     if obstacle(False):
         backward_and_turn(60, 'L')
@@ -291,7 +292,7 @@ def school():
     leave_passenger()
 
 def city_hall(): #check
-    move_backward_cm(35)
+    move_backward_cm(30)
     if obstacle(False):
         backward_and_turn(60, 'L')
         forward_and_turn(30, 'R')
@@ -318,7 +319,7 @@ def library():
     turn_right_180()
 
 def museum():
-    move_backward_cm(35)
+    move_backward_cm(30)
     if obstacle(False):
         backward_and_turn(60, 'L')
         move_forward_cm(30)
@@ -354,7 +355,7 @@ def get_break():
     reposition_wall()
 
 def drugstore():
-    move_backward_cm(36)
+    move_backward_cm(30)
     # depois verificar tubo
     if obstacle(False):
         backward_and_turn(60, 'R')
@@ -384,7 +385,7 @@ def drugstore():
     leave_passenger()
 
 def bakery():
-    move_backward_cm(36)
+    move_backward_cm(30)
     #depois verificar tubo
     if obstacle(False):
         move_backward_cm(78.1)
@@ -488,7 +489,7 @@ def leave_passenger():
     stop()
     reposition_wall()
     enter()
-   # open_claw()
+    open_claw()
     print("dando ré")
     move_backward_cm(11)
     stop()
