@@ -124,6 +124,5 @@ while True:
 for i in range(4):
   turn_right(90)
   wait(500)'''
-# recognize_first()
-open_claw()
+recognize_first()
 # move_forward_cm(30)
