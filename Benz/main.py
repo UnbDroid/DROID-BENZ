@@ -8,7 +8,7 @@ from pybricks.parameters import Stop, Direction, Button
 from pybricks.tools import wait, StopWatch, DataLog
 import time
 from modules.colors import *
-#from pybricks.media.ev3dev import SoundFile, ImageFile
+# from pybricks.media.ev3dev import SoundFile, ImageFile
 from pybricks.messaging import BluetoothMailboxClient, TextMailbox
 
 #!/usr/bin/env pybricks-micropython
@@ -63,8 +63,6 @@ time.sleep(2)
       connected = False"""
 
 
-
-
 # In this program, the client sends the first message and then waits for the
 # server to reply.
 while True:
@@ -98,8 +96,6 @@ print("rgb", rgb/10)"""
 # #   wait(1000)
 
 
-
-
 """reflect = 0
 # calibration_auto(sensor_color, brown)
 for i in range(5):
@@ -107,4 +103,3 @@ for i in range(5):
   print(reflect)
 media = reflect/5
 print(media) """
-
