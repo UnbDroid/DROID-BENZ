@@ -16,9 +16,8 @@ from modules.claw import *
 #museum()
 #find_passenger()
 #recognize_first()
-open_claw(700)
-#close_claw(50)
-#turn_right(90)
+# close_claw(150)
+#turn_right(150)
 #array = [1, 2, 3]
 #calibration_auto(sensor_color_left, array)
 '''close_claw(750)
@@ -69,11 +68,13 @@ print("Direito", (motor_right.angle()))
 
 
 
-
+# recognize_first()
 
 #----------------------------------------------------------------------------------------------------------------------------------
-
-
+while True:
+  move_forward(300)
+  print("left ", motor_left.angle()," right ", motor_left.angle())
+# move_forward_cm(50)
 
 #----------------------------------------------------------------------------------------------------------------------------------
 
@@ -144,3 +145,10 @@ stop_motors()
 print(motor_left.angle())
 print(motor_right.angle())
 '''
+
+#sensor_color_left
+#sensor_color_right
+"""while True:
+  test(sensor_color_left, red_left)
+  print("#####################################")
+  wait(5000)"""

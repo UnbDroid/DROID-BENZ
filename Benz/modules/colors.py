@@ -48,22 +48,22 @@ def calibration_auto(sensor, array):
 teste = [[0,0,0],[0,0,0]]
 #arrumar o marrom e verde
 red_left = [[57,7,0],[78,27,25]]
-red_right = [[40,8,7],[62,30,26]]#check
+red_right = [[40,8,7],[62,30,26]]#ok
 
 blue_left = [[0,18,34],[23,38,54]]
-blue_right = [[0,18,52],[18,38,74]]#check
+blue_right = [[0,18,52],[18,38,74]]#ok
 
 yellow_left = [[63, 79, 9], [79, 95, 25]]
-yellow_right = [[42, 65, 12], [58, 81, 28]]#check
+yellow_right = [[42, 65, 12], [58, 81, 28]]#ok
 
 yell_i_black_left = [[63, 77, 11], [79, 93, 27]]
 yell_i_black_right = [[63, 77, 11], [79, 93, 27]]
 
-green_left = [[30,5,0],[49,25,20]]
-green_right = [[54,5,0],[77,25,20]]
+green_left = [[14,35,0],[24,55,20]]
+green_right = [[5,32,0],[20,45,20]] #ok
 
-black_left = [[0,0, 0],[8, 10, 8]]
-black_right = [[0,0,0],[7, 11, 9]]
+black_left = [[0,0, 0],[8, 16, 8]]
+black_right = [[0,0,0],[7, 15, 9]] #ok
 
 brown_left = [[20,10,0],[35,30,18]]
 brown_right = [[24,9,0],[45,32,15]] 
@@ -197,3 +197,10 @@ def seeLeft():
     else:
     #    print("vi branco")
         return "White"
+
+
+def test(sensor, color):
+    rgb = sensor.rgb()
+    print("r  ",(color[0][0] <= rgb[0] and rgb[0]  <= color[1][0]),"    ", rgb[0])
+    print("g  ", (color[0][1] <= rgb[1] and rgb[1] <= color[1][1]), "    ", rgb[1])
+    print("b  ", (color[0][2] <= rgb[2] and rgb[2] <= color[1][2]), "    ", rgb[2])

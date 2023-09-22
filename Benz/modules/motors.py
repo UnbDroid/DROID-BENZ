@@ -113,7 +113,7 @@ def move_forward2(velocity):
 
 def move_forward(velocity):
     kp_right = 1.08 #0.06
-    kp_left = 1.7
+    kp_left = 1.7  #1.7
      #0.0648
     ki_right = -0.7 #0.00000025
     ki_left = 0.01
@@ -139,7 +139,7 @@ def move_forward(velocity):
 def moving_straight_cm(distance, velocity = 400):
     motor_left.reset_angle(0)
     motor_right.reset_angle(0)
-    angle = (distance * 1672)/69
+    angle = (distance * 1055)/48
     while motor_left.angle() < angle or motor_right.angle() < angle:
         move_forward(velocity)  
     # print(left_motor.angle(), right_motor.angle()) # Teste para o erro
