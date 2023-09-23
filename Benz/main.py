@@ -13,68 +13,43 @@ from modules.places import *
 from modules.claw import *
 
 #----------------------------------------------------------------------------------------------------------------------------------
-#museum()
-#find_passenger()
+#Funções iniciais
 #recognize_first()
-# close_claw(150)
-#turn_right(150)
-#array = [1, 2, 3]
-#calibration_auto(sensor_color_left, array)
-'''close_claw(750)
-open_claw()
-ev3.speaker.beep(200)'''
-#close_claw(750)
-#wait(700)
-# while True:
-#   move_forward_cm(1)
-#school()
-#move_backward_cm(60)
-#moving_backward_cm(60)
 
-'''while not saw_blue():
-    print("andando")
-    move_forward(500)
-stop()
-wait(500)
-turn_left(90)'''
-#turn_left(90)
-'''
-    
-    if control_signal_right > 300:
-        control_signal_right = 300
 
-    if control_signal_left > 300:
-        control_signal_left = 300
-'''
-#check_point()
-#close_claw()
-'''Teste para andar em cm
-motor_left.run_angle(280, 1872,  wait=False)
-motor_right.run_angle(280, 1872,  wait=True)
+#----------------------------------------------------------------------------------------------------------------------------------
+#Teste para andar em cm
+'''motor_left.run_angle(280, -360,  wait=False)
+motor_right.run_angle(280, -360~,  wait=True)
 print("Esquerdo", (motor_left.angle()))
 print("Direito", (motor_right.angle()))
 '''
-#close_claw(750)
-#open_claw()
-#drugstore()
+
+
+#----------------------------------------------------------------------------------------------------------------------------------
 #Teste dos lugares
-#turn_right(360)
+
 #school()
 #city_hall()
 #library()
-#bakery()
+bakery()
 #drugstore()
 #museum()
 
 
-
-# recognize_first()
-
 #----------------------------------------------------------------------------------------------------------------------------------
-while True:
-  move_forward(300)
-  print("left ", motor_left.angle()," right ", motor_left.angle())
-# move_forward_cm(50)
+#Teste básicos
+
+#reposition_wall()
+#reposition("Red")
+#open_claw()
+#close_claw(750)
+
+#turn_right(90)
+#turn_left(90)
+
+#move_backward_cm(60)
+
 
 #----------------------------------------------------------------------------------------------------------------------------------
 
@@ -120,10 +95,7 @@ while i < 5:
 '''
 
 '''
-while True:
-  print(message())
-  wait(1000)'''
-'''
+
 for i in range(4):
   turn_right(90)
   wait(500)'''
@@ -145,10 +117,3 @@ stop_motors()
 print(motor_left.angle())
 print(motor_right.angle())
 '''
-
-#sensor_color_left
-#sensor_color_right
-"""while True:
-  test(sensor_color_left, red_left)
-  print("#####################################")
-  wait(5000)"""

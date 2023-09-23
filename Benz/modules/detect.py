@@ -11,15 +11,6 @@ infra_sensor = InfraredSensor(Port.S4)
 
 ev3 = EV3Brick()
 
-'''SERVER = 'ev3dev'
-
-client = BluetoothMailboxClient()
-mbox = TextMailbox('greeting', client)
-
-print('establishing connection...')
-client.connect(SERVER)
-print('connected!')
-'''
 
 '''server = BluetoothMailboxServer()
 eve3box = TextMailbox('greeting', server)
@@ -66,7 +57,6 @@ def side_detection():
         return True
     else:
         return False
-#outro brick
-#color_left_sensor = ColorSensor(Port.S3) #cima
+
 
 

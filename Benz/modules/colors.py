@@ -47,13 +47,13 @@ def calibration_auto(sensor, array):
 #min and max
 teste = [[0,0,0],[0,0,0]]
 #arrumar o marrom e verde
-red_left = [[57,7,0],[78,27,25]]
-red_right = [[40,8,7],[62,30,26]]#ok
+red_left = [[56, 9, 0], [72, 25, 15]]
+red_right = [[33, 3, 0], [49, 19, 15]]#ok
 
 blue_left = [[0,18,34],[23,38,54]]
 blue_right = [[0,18,52],[18,38,74]]#ok
 
-yellow_left = [[63, 79, 9], [79, 95, 25]]
+yellow_left = [[60, 77, 11], [76, 93, 28]]
 yellow_right = [[42, 65, 12], [58, 81, 28]]#ok
 
 yell_i_black_left = [[63, 77, 11], [79, 93, 27]]
@@ -150,8 +150,8 @@ def saw_yellow():
 def saw_blue():
     return blueRight() or blueLeft()
 
-def saw_brown():
-    return brownRight() or brownLeft()
+#def saw_brown():
+ #   return brownRight() or brownLeft()
     
 def saw_white():
     return whiteRight() or whiteLeft()
@@ -167,13 +167,13 @@ def seeRight():
         return "Black"
     # elif greenRight():
     #     return "Green"
-    elif brownRight():
-        return "Brown"
+   # elif brownRight():
+    #    return "Brown"
     elif yellowRight():
         print("vi amarelo")
         return "Yellow"
     else:
-        print("vi branco")
+      #  print("vi branco")
         return "White"
 
 def seeLeft():

@@ -39,10 +39,10 @@ class command_stack():
     def backward_cm(self, cm): #volta para trás metodo
         tempo = StopWatch()
         tempo.pause()
-        print(1)
+       # print(1)
         tempo.reset()
        # turn_right(180)
-        print(2)
+        #print(2)
         duration = ((cm*10)/velocity)*10
         print(duration)
         tempo.resume()
@@ -97,6 +97,7 @@ class command_stack():
             print(self.lista)
             print(self.size())
             self.unpille()
+            stop_motors()
 
 stack = command_stack()
 
@@ -143,24 +144,24 @@ def moving_straight_cm(distance, velocity = 400):
     while motor_left.angle() < angle or motor_right.angle() < angle:
         move_forward(velocity)  
     # print(left_motor.angle(), right_motor.angle()) # Teste para o erro
-    print("Esquerdo", (motor_left.angle()))
-    print("Direito", (motor_right.angle()))
+   # print("Esquerdo", (motor_left.angle()))
+    #print("Direito", (motor_right.angle()))
     
     stop_motors()
 
 def moving_backward_cm(distance):
     motor_left.reset_angle(0)
     motor_right.reset_angle(0)
-    angle = (distance * -1672)/69
+    angle = (distance * -1321)/55+6
     while motor_left.angle() > angle or motor_right.angle() > angle:
         move_backward(-320)  
     # print(left_motor.angle(), right_motor.angle()) # Teste para o erro
-    print("Esquerdo", (motor_left.angle()))
-    print("Direito", (motor_right.angle()))
+   # print("Esquerdo", (motor_left.angle()))
+    #print("Direito", (motor_right.angle()))
     stop_motors()
 
 def move_forward_cm(cm, save = False, reference = "B") :
-    if cm < 5:
+    if cm < 11:
         motor_left.reset_angle(0)
         motor_right.reset_angle(0)
         moving_straight_cm(cm, 100)
@@ -196,7 +197,7 @@ def move_backward(velocity):
     
     motor_left.run(control_signal_left)
     motor_right.run(control_signal_right)
-    print(" motor right and left :",motor_right.angle(), motor_left.angle())
+   # print(" motor right and left :",motor_right.angle(), motor_left.angle())
     
 def move_backward_cm(mm, save = False, reference = "F") :
     moving_backward_cm(mm)
@@ -222,9 +223,9 @@ def turn_left(angle, save = False, reference = 'R'):
         motor_left.run_angle(200, - current_angle -(set_point - motor_right.angle())*0.1, wait=False)
         motor_right.run_angle(200, current_angle +(set_point - motor_right.angle())*0.1, wait=True)
         #print(" motor right and left :",motor_right.angle(), motor_left.angle())
-        print(" motor left :",motor_left.angle())
-        print("difference", abs(set_point - motor_right.angle()))
-        print(set_point)
+        #print(" motor left :",motor_left.angle())
+        #print("difference", abs(set_point - motor_right.angle()))
+       # print(set_point)
     stop_motors()
     if save and reference == 'L':
         stack.append(["turn_left", angle])

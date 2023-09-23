@@ -113,9 +113,11 @@ def path_red():
 def forward_and_turn(cm, side, save = False):
     if side == 'L':
         move_forward_cm(cm)
+        stop_motors()
         turn_left(90, save)
     elif side == 'R':
         move_forward_cm(cm)
+        stop_motors()
         turn_right(90, save)
     wait(500)
 
@@ -199,10 +201,10 @@ def find_passenger():
     stop()
     reposition("Blue")
     print("vou te pegar")
-    close_claw(250)
+ #   close_claw(250)
     move_forward_cm(4)
     #verificar se tem algo na frente por preucação
-    close_claw()
+  #  close_claw()
     move_backward_cm(6)
     stop()
     reposition("Blue")
@@ -266,47 +268,59 @@ def school():
     move_backward_cm(30)
     wait(500)
     if obstacle(False):
-        backward_and_turn(60, 'L')
+        #caminho J-G-F
+        print("Vish, acidente")
+        backward_and_turn(62, 'L')
         move_forward_cm(62)
         turn_right(90, True) #ver isso
 
         if obstacle():
+            #caminho J-E-B-D-F
             print("Vish, acidente")
+            move_backward_cm(3)
             turn_left(90)
-            forward_and_turn(60, 'R')
-            forward_and_turn(60, 'R')
+            forward_and_turn(65, 'R')
+            move_forward_cm(60, True, 'F')
+            turn_right(90, True)
             move_forward_cm(60, True, 'F')
             turn_left(90, True)
-           # forward_and_turn(60, 'L')
             move_forward_cm(25, True, "F")
         else:
+
             print("Sem obstáculo")
-            move_forward_cm(90, True, 'F')
+            move_forward_cm(91, True, 'F')
 
     else:
+        #caminho I
         print("Sem obstáculo")
         turn_left(90)
         wait(500)
-        move_forward_cm(30)
+        move_forward_cm(26)
     wait(500)
     turn_right(90, True, 'R')
+    stop_motors()
         
     leave_passenger()
 
 def city_hall(): #check
     move_backward_cm(30)
+    stop_motors()
     if obstacle(False):
+        #caminho I
+        print("Vish, acidente")
         backward_and_turn(60, 'L')
-        forward_and_turn(30, 'R')
-
-    #depois verificar tubo
-    else:
-        turn_left(90)
         move_forward_cm(30)
+        turn_right(90, True, 'R')
+    else:
+        #caminho J
+        move_backward_cm(3)
+        turn_left(90)
+        move_forward_cm(25)
         turn_left(90, True, 'L')
     leave_passenger()
 
 def library():
+    #caminho sem obstáculo
     backward_and_turn(65, 'R')
     while not saw_blue():
         move_forward(380)
@@ -318,7 +332,8 @@ def library():
     turn_left(90)
     backward_and_turn(65, 'L')
     leave_passenger()
-    turn_right_180()
+    turn_right(90)
+    turn_right(90)
 
 def museum():
     move_backward_cm(30)
@@ -413,11 +428,14 @@ def bakery():
                 move_forward_cm(25)
                 turn_right(90)
     else:
+        #caminho I
+        move_backward_cm(3)
         turn_left(90)
-        wait(500)
         move_forward_cm(60)
+        wait(500)
         if obstacle():
             turn_left(90)
+            wait(500)
             if obstacle():
                 turn_left(90)
                 move_forward_cm(60)
@@ -441,17 +459,20 @@ def bakery():
                         turn_left(90)
                         move_forward_cm(25)
                         turn_right(90)
-            else:#####
+            else:
+                #caminho G-E-B-A
                 move_forward_cm(65)
                 turn_right(90)
-                move_forward_cm(65)
+                move_forward_cm(70)
                 turn_right(90)
-                move_forward_cm(65)
+                stop_motors()
+                move_forward_cm(90)
                 turn_right(90)
         else:
-            move_forward_cm(30, True, "F")
-            stack.reset()
+            #caminho D
+            move_forward_cm(30)
             turn_right(90, True, 'R')
+            stop_motors()
             wait(500)
     leave_passenger()
 
@@ -487,19 +508,19 @@ def park():
 def leave_passenger():
     print("Deixando o passageiro")
     while not saw_yellow() and not saw_black():
-        move_forward(280)
+        move_forward(180)
     stop()
     reposition_wall()
     enter()
-    open_claw()
+    #open_claw()
     print("dando ré")
-    move_backward_cm(11)
+    move_backward_cm(10)
     stop()
     while not saw_yellow() and not saw_black():
-        move_forward_cm(1)
+        move_forward(180)
     stop()
     reposition_wall()
-    move_backward_cm(10) #fazer leave depois
+    move_backward_cm(5) #fazer leave depois
     stack.reverse() 
 
 def enter():
