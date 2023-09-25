@@ -103,11 +103,11 @@ stack = command_stack()
 
 def circle_right():
     motor_right.run(80)
-    motor_left.run(-10)
+    motor_left.run(-40)
 
 def circle_left():
     motor_left.run(80)
-    motor_right.run(-10)
+    motor_right.run(-40)
 
 def move_forward2(velocity):
     motors.drive(velocity, 0)
@@ -137,27 +137,27 @@ def move_forward(velocity):
     motor_left.run(control_signal_left)
     motor_right.run(control_signal_right)
            
-def moving_straight_cm(distance, velocity = 400):
+def moving_straight_cm(distance, velocity = 350):
     motor_left.reset_angle(0)
     motor_right.reset_angle(0)
-    angle = (distance * 1055)/48
+    angle = (distance * 1460)/60
     while motor_left.angle() < angle or motor_right.angle() < angle:
         move_forward(velocity)  
     # print(left_motor.angle(), right_motor.angle()) # Teste para o erro
-   # print("Esquerdo", (motor_left.angle()))
-    #print("Direito", (motor_right.angle()))
+ #   print("Esquerdo", (motor_left.angle()))
+  #  print("Direito", (motor_right.angle()))
     
     stop_motors()
 
-def moving_backward_cm(distance):
+def moving_backward_cm(distance, velocity = 320):
     motor_left.reset_angle(0)
     motor_right.reset_angle(0)
     angle = (distance * -1321)/55+6
     while motor_left.angle() > angle or motor_right.angle() > angle:
-        move_backward(-320)  
+        move_backward(-velocity)  
     # print(left_motor.angle(), right_motor.angle()) # Teste para o erro
-   # print("Esquerdo", (motor_left.angle()))
-    #print("Direito", (motor_right.angle()))
+    print("Esquerdo", (motor_left.angle()))
+    print("Direito", (motor_right.angle()))
     stop_motors()
 
 def move_forward_cm(cm, save = False, reference = "B") :
@@ -200,8 +200,16 @@ def move_backward(velocity):
    # print(" motor right and left :",motor_right.angle(), motor_left.angle())
     
 def move_backward_cm(mm, save = False, reference = "F") :
-    moving_backward_cm(mm)
-   # motors.straight(-mm*10)
+   
+    if mm < 11:
+        motor_left.reset_angle(0)
+        motor_right.reset_angle(0)
+        moving_backward_cm(mm, 100)
+    else:
+        motor_left.reset_angle(0)
+        motor_right.reset_angle(0)
+        moving_backward_cm(mm)
+
     if save and reference == "F":
         stack.append(["straight_cm", mm])
     elif save:
@@ -214,7 +222,7 @@ def turn_left(angle, save = False, reference = 'R'):
     kp = 0.88
     ki = 0.0002
     wait(500)
-    set_point = 811*(angle/360)
+    set_point = 816*(angle/360)
     set_point = round(set_point)
     stop_motors()
     while not (abs(set_point - motor_right.angle()) <= 18):
@@ -238,13 +246,14 @@ def regular():
         motors.turn(1)
     motors.stop()
     lista = [motor_left.angle(), motor_right.angle()]
+    print(lista)
     return lista
 
 def turn_right(angle, save = False, reference = 'L'):
     kp = 0.90
     ki = 0.000075
     wait(500)
-    set_point = 811*(angle/360)
+    set_point = 816*(angle/360)
     set_point = round(set_point)
     stop_motors()
     while not (abs(set_point-motor_left.angle()) <= 72):
@@ -342,9 +351,6 @@ def reposition(color):
     print("Entrou")
     if seeRight() != color and seeLeft() == color:
         print("Diferenciou")
-        #if color == "White":
-         #   while seeRight() != color:
-          #      circle_right()
         while seeRight() != color:
             circle_right()
         stop()

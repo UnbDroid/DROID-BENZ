@@ -17,6 +17,7 @@ from modules.claw import *
 #recognize_first()
 
 
+#move_backward_cm(60)
 #----------------------------------------------------------------------------------------------------------------------------------
 #Teste para andar em cm
 '''motor_left.run_angle(280, -360,  wait=False)
@@ -32,7 +33,7 @@ print("Direito", (motor_right.angle()))
 #school()
 #city_hall()
 #library()
-bakery()
+#bakery()
 #drugstore()
 #museum()
 
@@ -57,6 +58,9 @@ bakery()
 
 #----------------------------------------------------------------------#
 #regular o giro
+#boa sorte :D
+#regular()
+
 '''regulagem = [0,0]
 for i in range(4):
   aux = regular()
@@ -116,4 +120,13 @@ print("###############")
 stop_motors()
 print(motor_left.angle())
 print(motor_right.angle())
+'''
+
+#teste de reposicionar
+'''while not saw_black():
+  move_forward(330)
+stop()
+move_backward_cm(0.1)
+stop()
+reposition_wall()
 '''

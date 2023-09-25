@@ -28,8 +28,7 @@ time_forward = 0
 
 
 def recognize_first():
-    print("Esquerdo", (motor_left.angle()))
-    print("Direito", (motor_right.angle()))
+    #trabalhar
     stop_motors()
     print("starting")
     while not saw_red() and not saw_blue():
@@ -68,7 +67,7 @@ def path_obstacle():
         path_blue()
     else:
         #testar
-        move_backward_cm(7)
+        move_backward_cm(15)
         turn_left(90)
         wait(500)
 
@@ -85,24 +84,31 @@ def path_blue():
     find_passenger()
 
 def path_red():
-    move_backward_cm(2)
+    wait(500)
+    move_backward_cm(1.5)
     stop()
     reposition("Red")   
     stop()
     wait(500)
-    move_backward_cm(35)
+    move_backward_cm(30)
     turn_right(90)
     wait(500)
     while not saw_blue():
         move_forward(380)
         if obstacle():
-            return("saw obstacle")
-        if (saw_black() or saw_yellow()):
-            print("ops")
+            stop()
+            stop_motors()
             move_backward_cm(2)
+            stop_motors()
+            turn_right()
+        if blackRight() and blackLeft():
+            print("ops")
+            move_backward_cm(0.1)
+            stop_motors()
             stop()
-            reposition_wall()
+            reposition("Black")
             stop()
+            move_backward_cm(3)
             turn_right(90)
             wait(500)
             turn_right(90)
@@ -267,7 +273,7 @@ def decision(tube):
 def school():
     move_backward_cm(30)
     wait(500)
-    if obstacle(False):
+    if obstacle("lado"):
         #caminho J-G-F
         print("Vish, acidente")
         backward_and_turn(62, 'L')
@@ -305,7 +311,7 @@ def school():
 def city_hall(): #check
     move_backward_cm(30)
     stop_motors()
-    if obstacle(False):
+    if obstacle("lado"):
         #caminho I
         print("Vish, acidente")
         backward_and_turn(60, 'L')
@@ -337,10 +343,10 @@ def library():
 
 def museum():
     move_backward_cm(30)
-    if obstacle(False):
+    if obstacle("lado"):
         backward_and_turn(60, 'L')
         move_forward_cm(30)
-        if obstacle(False):
+        if obstacle("lado"):
             forward_and_turn(60, 'L')
             forward_and_turn(35, 'L')
             forward_and_turn(20, 'R')
@@ -374,10 +380,10 @@ def get_break():
 def drugstore():
     move_backward_cm(30)
     # depois verificar tubo
-    if obstacle(False):
+    if obstacle("lado"):
         backward_and_turn(60, 'R')
         move_backward_cm(45)
-        if obstacle(False):
+        if obstacle("lado"):
             move_backward_cm(55, True, "F")
             turn_left(90, True)
             move_forward_cm(25, True)
@@ -404,28 +410,33 @@ def drugstore():
 def bakery():
     move_backward_cm(30)
     #depois verificar tubo
-    if obstacle(False):
-        move_backward_cm(78.1)
-        turn_right(90)
-        move_backward_cm(40)
-        if obstacle(False):
-            move_backward_cm(65)
+    if obstacle("lado"): 
+        #caminho J
+        move_backward_cm(60)
+        turn_left(90)
+        move_backward_cm(60)
+        if obstacle("lado"):
+            #caminho E-B-A
+            turn_left(90)
             turn_left(90)
             move_forward_cm(65)
             turn_right(90)
+            move_forward_cm(90)
+            turn_right(90)
         else:
+            #caminho G-D
             turn_left(90)
-            move_forward_cm(55)
-            if obstacle(False):
-                move_backward_cm(55)
+            move_forward_cm(55) #G
+            if obstacle("lado"):
+                move_backward_cm(55)#G
                 turn_left(90)
-                move_forward_cm(65)
+                move_forward_cm(65) #E
                 turn_right(90)
-                move_forward_cm(85)
+                move_forward_cm(90) #B-A
                 turn_right(90)
             else:
                 turn_left(90)
-                move_forward_cm(25)
+                move_forward_cm(25) #D
                 turn_right(90)
     else:
         #caminho I
@@ -437,33 +448,24 @@ def bakery():
             turn_left(90)
             wait(500)
             if obstacle():
+                #caminho I-J-E-B-A
                 turn_left(90)
-                move_forward_cm(60)
-                turn_left(90)
-                move_backward_cm(78.1)
+                move_forward_cm(60) #I
                 turn_right(90)
-                move_backward_cm(40)
-                if obstacle(False):
-                    pass
-                else:
-                    turn_left(90)
-                    move_forward_cm(55)
-                    if obstacle(False):
-                        move_backward_cm(55)
-                        turn_left(90)
-                        move_forward_cm(65)
-                        turn_right(90)
-                        move_forward_cm(85)
-                        turn_right(90)
-                    else:
-                        turn_left(90)
-                        move_forward_cm(25)
-                        turn_right(90)
+                move_forward_cm(60) #anda
+                turn_right(90)
+                move_forward_cm(60) #J
+                #se calibrar
+                move_forward_cm(60)#E
+                turn_right(90)
+                move_forward_cm(90) #B-A
+                turn_right(90)
+
             else:
                 #caminho G-E-B-A
                 move_forward_cm(65)
                 turn_right(90)
-                move_forward_cm(70)
+                move_forward_cm(65)
                 turn_right(90)
                 stop_motors()
                 move_forward_cm(90)
@@ -480,7 +482,7 @@ def bakery():
 
 def park():
     move_backward_cm(45, True)
-    if obstacle(False):
+    if obstacle("lado"):
         move_backward_cm(55)
         turn_left(90)
         move_forward_cm(55)
@@ -491,7 +493,7 @@ def park():
             move_forward_cm(65)
         else:
             move_forward_cm(60)
-            if obstacle(False):
+            if obstacle("lado"):
                 turn_right(90)
                 
     else:

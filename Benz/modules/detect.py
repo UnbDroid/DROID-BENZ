@@ -19,8 +19,9 @@ print('waiting for connection...')
 server.wait_for_connection()
 print('connected!')
 '''
-def obstacle(default = True):
-    if default:
+def obstacle(default = "frente"):
+    #criar o range
+    if default == "lado":
         if ultra_sensor.distance() <= 200:
             ev3.speaker.beep(200)
             return True

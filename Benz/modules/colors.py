@@ -47,8 +47,8 @@ def calibration_auto(sensor, array):
 #min and max
 teste = [[0,0,0],[0,0,0]]
 #arrumar o marrom e verde
-red_left = [[56, 9, 0], [72, 25, 15]]
-red_right = [[33, 3, 0], [49, 19, 15]]#ok
+red_left = [[63, 10, 2], [79, 26, 18]]
+red_right = [[42, 2, 3], [58, 18, 19]]#ok
 
 blue_left = [[0,18,34],[23,38,54]]
 blue_right = [[0,18,52],[18,38,74]]#ok
