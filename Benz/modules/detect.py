@@ -19,7 +19,7 @@ print('waiting for connection...')
 server.wait_for_connection()
 print('connected!')
 '''
-def obstacle(default = "frente"):
+def obstacle(default = "frente", scanner = False):
     #criar o range
     # angle
     if default == "frente":
@@ -34,7 +34,7 @@ def obstacle(default = "frente"):
             return False
     else:
         print(infra_sensor.distance())
-        if infra_sensor.distance() <= 20:
+        if infra_sensor.distance() <= 30:
             ev3.speaker.beep(200)
             return True
         else:

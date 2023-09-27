@@ -433,3 +433,12 @@ def reposition_wall():
         print("Todo fudido")
     print("rodou tudo")
 
+
+def verification_path():
+    for i in range(4):
+        turn_right(90)
+        if not obstacle():
+            pass
+        else:
+            return True
+    return False

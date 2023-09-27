@@ -225,10 +225,10 @@ def find_passenger():
     stop()
     reposition("Blue")
     print("vou te pegar")
- #   close_claw(250)
+    close_claw(250)
     move_forward_cm(4)
     #verificar se tem algo na frente por preucação
-  #  close_claw()
+    close_claw()
     move_backward_cm(6)
     stop()
     reposition("Blue")
@@ -289,13 +289,13 @@ def decision(tube):
 #def path_ n                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
 
 def school():
-    move_backward_cm(30)
+    move_backward_cm(40)
     wait(500)
     if obstacle("lado"):
         #caminho J-G-F
         print("Vish, acidente")
-        backward_and_turn(62, 'L')
-        move_forward_cm(62)
+        backward_and_turn(65, 'L')
+        move_forward_cm(72)
         turn_right(90, True) #ver isso
 
         if obstacle():
@@ -312,14 +312,14 @@ def school():
         else:
 
             print("Sem obstáculo")
-            move_forward_cm(91, True, 'F')
+            move_forward_cm(93, True, 'F')
 
     else:
         #caminho I
         print("Sem obstáculo")
         turn_left(90)
         wait(500)
-        move_forward_cm(26)
+        move_forward_cm(37)
     wait(500)
     turn_right(90, True, 'R')
     stop()
@@ -327,7 +327,7 @@ def school():
     leave_passenger()
 
 def city_hall(): #check
-    move_backward_cm(30)
+    move_backward_cm(43)
     stop()
     if obstacle("lado"):
         #caminho I
@@ -337,9 +337,9 @@ def city_hall(): #check
         turn_right(90, True, 'R')
     else:
         #caminho J
-        move_backward_cm(3)
+        #move_backward_cm(3)
         turn_left(90)
-        move_forward_cm(25)
+        move_forward_cm(39)
         turn_left(90, True, 'L')
     leave_passenger()
 
@@ -528,7 +528,7 @@ def park():
 def leave_passenger():
     print("Deixando o passageiro")
     while not saw_yellow() and not saw_black():
-        move_forward(180)
+        move_forward(240) #180 velocidade original
     stop()
     reposition_wall()
     enter()

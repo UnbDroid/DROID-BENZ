@@ -14,7 +14,7 @@ from modules.claw import *
 
 #----------------------------------------------------------------------------------------------------------------------------------
 #Funções iniciais
-recognize_first()
+# recognize_first()
 
 
 
@@ -33,7 +33,7 @@ print("Direito", (motor_right.angle()))
 #Teste dos lugares
 
 #school()
-#city_hall()
+city_hall()
 #library()
 #bakery()
 #drugstore()
@@ -138,4 +138,4 @@ print(motor_right.angle())
 #   wait(2000)
 
 '''while True:
-  obstacle()'''
+  obstacle("fuvhbinsfv")'''
