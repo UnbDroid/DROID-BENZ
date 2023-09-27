@@ -14,7 +14,9 @@ from modules.claw import *
 
 #----------------------------------------------------------------------------------------------------------------------------------
 #Funções iniciais
-#recognize_first()
+recognize_first()
+
+
 
 
 #move_backward_cm(60)
@@ -48,7 +50,7 @@ print("Direito", (motor_right.angle()))
 
 #turn_right(90)
 #turn_left(90)
-
+#move_forward_cm(60)
 #move_backward_cm(60)
 
 
@@ -89,14 +91,14 @@ while True:
 #calibration_auto(sensor_color_right, yell_i_black_left)
 #turn_right1(90)
 '''i = 0
-while i < 5:
-  turn_right(90)
+while i < 8:
+  turn_left(90)
   print("Virei")
   stop()
   wait(1000)
-  i+=1
+  i+=1'''
   
-'''
+
 
 '''
 
@@ -123,10 +125,17 @@ print(motor_right.angle())
 '''
 
 #teste de reposicionar
-'''while not saw_black():
-  move_forward(330)
-stop()
-move_backward_cm(0.1)
-stop()
-reposition_wall()
-'''
+# stop()
+# while not saw_black():
+#   move_forward(330)
+# stop()
+#move_backward_cm(0.5)
+# reposition("Black")
+# '''
+#reposition("Blue")
+# while True:
+#   test(sensor_color_left,blue_i_white_left)
+#   wait(2000)
+
+'''while True:
+  obstacle()'''

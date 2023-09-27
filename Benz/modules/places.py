@@ -29,19 +29,37 @@ time_forward = 0
 
 def recognize_first():
     #trabalhar
-    stop_motors()
+    wall_red = 0
+    obstacle_count = 0
+    wall_black_or_yellow = 0
+
+    stop()
     print("starting")
-    while not saw_red() and not saw_blue():
-        move_forward(380)
+    while not saw_blue():
+        move_forward(330)
         if obstacle():
+           # if(obstacle_count == 2):
+                #ish
+            obstacle_count += 1
             path_obstacle()
 
         if (saw_black() or saw_yellow()):
-            path_black_or_yellow()
-    stop()
+            if wall_red == 2:
+                wall_red = 0
+                stop()
+                reposition("Black")
+                move_backward(15)
+                turn_right(90)
+                wait(500)
+                turn_right(90)
+                wait(500)
+            else:
+                path_black_or_yellow()
 
-    if saw_red():
-        path_red()
+        if saw_red():
+            wall_red += 1
+            path_red()
+    stop()
 
     if (saw_blue()):
         path_blue()
@@ -53,58 +71,58 @@ def recognize_first():
 def path_black_or_yellow():
     stop()
     reposition_wall()
-    move_backward_cm(10)  # calcular
-    turn_left(90)
     stop()
-    move_forward_cm(30, False, "S")
-    wait(500)
-    turn_right(90)    
+    move_backward_cm(15) 
+    stop() # calcular
+    turn_left(90)
+   
 
 def path_obstacle():
+    stop()
     #código para verificar se viu um tubo ou não
-    move_forward_cm(2)
+    move_forward_cm(1.5)
     if(saw_blue()):
         path_blue()
     else:
         #testar
-        move_backward_cm(15)
-        turn_left(90)
+        move_backward_cm(10)
+        stop()
+        turn_right(90)
         wait(500)
 
 def path_blue():
-    move_backward_cm(0.2)
+    #move_backward_cm(0.2)
     stop()
     reposition("Blue")
     stop()
     wait(500)
     move_backward_cm(0.75)
-    stop_motors()
+    stop()
     turn_right(90)
     wait(500)
     find_passenger()
 
 def path_red():
-    wait(500)
-    move_backward_cm(1.5)
+   # move_backward_cm(1.5)
     stop()
     reposition("Red")   
     stop()
-    wait(500)
-    move_backward_cm(30)
+    move_backward_cm(43)
+    stop()
     turn_right(90)
-    wait(500)
-    while not saw_blue():
+    stop()
+    '''while not saw_blue():
         move_forward(380)
         if obstacle():
             stop()
-            stop_motors()
+            stop()
             move_backward_cm(2)
-            stop_motors()
+            stop()
             turn_right()
         if blackRight() and blackLeft():
             print("ops")
             move_backward_cm(0.1)
-            stop_motors()
+            stop()
             stop()
             reposition("Black")
             stop()
@@ -113,17 +131,17 @@ def path_red():
             wait(500)
             turn_right(90)
             stop()
-            wait(500)
+            wait(500)'''
     stop()
 
 def forward_and_turn(cm, side, save = False):
     if side == 'L':
         move_forward_cm(cm)
-        stop_motors()
+        stop()
         turn_left(90, save)
     elif side == 'R':
         move_forward_cm(cm)
-        stop_motors()
+        stop()
         turn_right(90, save)
     wait(500)
 
@@ -304,13 +322,13 @@ def school():
         move_forward_cm(26)
     wait(500)
     turn_right(90, True, 'R')
-    stop_motors()
+    stop()
         
     leave_passenger()
 
 def city_hall(): #check
     move_backward_cm(30)
-    stop_motors()
+    stop()
     if obstacle("lado"):
         #caminho I
         print("Vish, acidente")
@@ -467,14 +485,14 @@ def bakery():
                 turn_right(90)
                 move_forward_cm(65)
                 turn_right(90)
-                stop_motors()
+                stop()
                 move_forward_cm(90)
                 turn_right(90)
         else:
             #caminho D
             move_forward_cm(30)
             turn_right(90, True, 'R')
-            stop_motors()
+            stop()
             wait(500)
     leave_passenger()
 
@@ -589,3 +607,4 @@ def enter():
             move_backward_cm(2)
         else:
             move_forward_cm(1)
+

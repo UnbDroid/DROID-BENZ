@@ -21,8 +21,11 @@ print('connected!')
 '''
 def obstacle(default = "frente"):
     #criar o range
-    if default == "lado":
-        if ultra_sensor.distance() <= 200:
+    # angle
+    if default == "frente":
+        # angle = -angle
+        # turn_right(angle)
+        if ultra_sensor.distance() <= 50:
             ev3.speaker.beep(200)
             return True
         else:
@@ -30,7 +33,8 @@ def obstacle(default = "frente"):
             #ev3.speaker.beep(300)
             return False
     else:
-        if infra_sensor.distance() <= 30:
+        print(infra_sensor.distance())
+        if infra_sensor.distance() <= 20:
             ev3.speaker.beep(200)
             return True
         else:

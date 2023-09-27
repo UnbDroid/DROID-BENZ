@@ -97,24 +97,24 @@ class command_stack():
             print(self.lista)
             print(self.size())
             self.unpille()
-            stop_motors()
+            stop()
 
 stack = command_stack()
 
 def circle_right():
     motor_right.run(80)
-    motor_left.run(-40)
+    motor_left.run(-10)
 
 def circle_left():
     motor_left.run(80)
-    motor_right.run(-40)
+    motor_right.run(-10)
 
 def move_forward2(velocity):
     motors.drive(velocity, 0)
 
 def move_forward(velocity):
     kp_right = 1.08 #0.06
-    kp_left = 1.7  #1.7
+    kp_left = 0.38  #1.7
      #0.0648
     ki_right = -0.7 #0.00000025
     ki_left = 0.01
@@ -147,7 +147,7 @@ def moving_straight_cm(distance, velocity = 350):
  #   print("Esquerdo", (motor_left.angle()))
   #  print("Direito", (motor_right.angle()))
     
-    stop_motors()
+    stop()
 
 def moving_backward_cm(distance, velocity = 320):
     motor_left.reset_angle(0)
@@ -158,7 +158,7 @@ def moving_backward_cm(distance, velocity = 320):
     # print(left_motor.angle(), right_motor.angle()) # Teste para o erro
     print("Esquerdo", (motor_left.angle()))
     print("Direito", (motor_right.angle()))
-    stop_motors()
+    stop()
 
 def move_forward_cm(cm, save = False, reference = "B") :
     if cm < 11:
@@ -219,22 +219,22 @@ def move_right(velocity):
     motors.drive(0, velocity)
 
 def turn_left(angle, save = False, reference = 'R'):
-    kp = 0.88
-    ki = 0.0002
+    kp = 0.91
+    ki = 0.00002 #se tiver rodando mais coloca menos
     wait(500)
-    set_point = 816*(angle/360)
+    set_point = 793*(angle/360)
     set_point = round(set_point)
-    stop_motors()
-    while not (abs(set_point - motor_right.angle()) <= 18):
+    stop()
+    while not (abs(set_point - motor_right.angle()) <= 4):
         current_angle = motor_right.angle()
         current_angle  += calculate_pid(kp, ki, set_point, current_angle)
         motor_left.run_angle(200, - current_angle -(set_point - motor_right.angle())*0.1, wait=False)
         motor_right.run_angle(200, current_angle +(set_point - motor_right.angle())*0.1, wait=True)
         #print(" motor right and left :",motor_right.angle(), motor_left.angle())
         #print(" motor left :",motor_left.angle())
-        #print("difference", abs(set_point - motor_right.angle()))
+        print("difference", abs(set_point - motor_right.angle()))
        # print(set_point)
-    stop_motors()
+    stop()
     if save and reference == 'L':
         stack.append(["turn_left", angle])
     elif save and reference == 'R':
@@ -251,11 +251,11 @@ def regular():
 
 def turn_right(angle, save = False, reference = 'L'):
     kp = 0.90
-    ki = 0.000075
+    ki = 0.000065 #sempre olhar isso
     wait(500)
-    set_point = 816*(angle/360)
+    set_point = 793*(angle/360)
     set_point = round(set_point)
-    stop_motors()
+    stop()
     while not (abs(set_point-motor_left.angle()) <= 72):
         current_angle = motor_left.angle()
         current_angle  += calculate_pid(kp, ki, set_point, current_angle)
@@ -263,12 +263,12 @@ def turn_right(angle, save = False, reference = 'L'):
         motor_right.run_angle(200, -current_angle  -(set_point - motor_right.angle())*0.1, wait=True)
         #print(" motor left :",motor_left.angle())
         #regular sempre
-     #   print("difference", abs(set_point - motor_left.angle()))
+        print("difference", abs(set_point - motor_left.angle()))
 
         #print(set_point)
        # print(current_angle)
     print("rightou")
-    stop_motors()
+    stop()
     # print("Saí")
     if save and reference == 'L':
         stack.append(["turn_left", angle])
@@ -281,7 +281,7 @@ def turn_right_180(angle = 180, save = False):
     ki = 0.0002
     set_point = 811*(angle/360)
     set_point = round(set_point)
-    stop_motors()
+    stop()
     while not (abs(set_point-motor_left.angle()) <= 18):
         current_angle = motor_left.angle()
         control_signal = calculate_pid(kp, ki, set_point, current_angle)
@@ -289,7 +289,7 @@ def turn_right_180(angle = 180, save = False):
         motor_right.run_angle(200, -control_signal, wait=True)
         # print(" motor right and left :",motor_right.angle(), motor_left.angle())
         # print("difference", set_point - motor_left.angle())
-    stop_motors()
+    stop()
     # print("Saí")
     if save:
         stack.append(["turn_left", angle])
@@ -305,13 +305,6 @@ def calculate_pid(kp, ki, set_point, current_value):
     control_signal = proporcional + i
 
     return control_signal
-
-def stop_motors():
-    wait(500)
-    motors.stop()
-    motor_left.reset_angle(0)
-    motor_right.reset_angle(0)
-
 
     
 def move_left(velocity):
@@ -336,7 +329,15 @@ def turn_180():
     print("já tornou")
     
 def stop(save = False):
-    motors.stop()
+    motor_left.hold()
+    motor_right.hold()
+    while motor_right.speed() != 0 or motor_left.speed() != 0:
+        wait(500)
+    motor_left.reset_angle(0)
+    motor_right.reset_angle(0)
+    # print(" motor right and left :",motor_right.speed(), motor_left.speed())
+  
+   # wait(200) 
     if save:
         stack.append(['stop'])
     #stack.append(["stop"])
@@ -346,28 +347,72 @@ def calibrate():
     stop()
     wait(1000)
 
-def reposition(color):
-    print("Se alinhando")
-    print("Entrou")
-    if seeRight() != color and seeLeft() == color:
-        print("Diferenciou")
-        while seeRight() != color:
-            circle_right()
-        stop()
-    elif seeRight() == color and seeLeft() != color:
-        print("1")
-        while seeLeft() != color:
-            circle_left()
-        stop()
-    elif seeRight() == seeLeft():
-        print("2")
-        #pass
-    elif seeRight() != color and seeLeft() != color:
-        while seeRight() != color:
-            circle_right()
-        stop()
-    print("rodou tudo")
+# def reposition(color):
+#     print("Se alinhando")
+#     print("Entrou")
+#     if seeRight() != color and seeLeft() == color:
+#         print("Diferenciou")
+#         while seeRight() != color:
+#             circle_right()
+#         stop()
+#     elif seeRight() == color and seeLeft() != color:
+#         print("1")
+#         while seeLeft() != color:
+#             circle_left()
+#         stop()
+#     elif seeRight() == seeLeft():
+#         print("2")
+#         #pass
+#     elif seeRight() != color and seeLeft() != color:
+#         while seeRight() != color:
+#             circle_right()
+#         stop()
+#     print("rodou tudo")
 
+
+def reposition(color):
+    aligned = False
+    tolerance = 25
+    max_left = {"Red" : red_left[1], "Blue" : blue_left[1], "Yellow" : yellow_left[1], "Green" : green_left[1], "Black" : black_left[1], "Brown" : brown_left[1], "Blue_White" : blue_i_white_left[1]}
+    max_right = {"Red" : red_right[1], "Blue" : blue_right[1], "Yellow" : yellow_right[1], "Green" : green_right[1], "Black" : black_right[1], "Brown" : brown_right[1], "Blue_White" : blue_i_white_right[1]}
+    if seeRight() == color or seeLeft() == color:
+        while not aligned:
+            rgb_l = sensor_color_left.rgb()
+            rgb_r = sensor_color_right.rgb()
+            p_rgb_l = percentagem(rgb_l, max_left[color])
+            p_rgb_r = percentagem(rgb_r, max_right[color])
+            print(p_rgb_l - p_rgb_r)
+            if ((p_rgb_l - tolerance) <= p_rgb_r <= (p_rgb_l  + tolerance)) or ((p_rgb_r - tolerance) <= p_rgb_l <= (p_rgb_r  + tolerance)):
+                stop()
+                aligned = True
+                return True
+            elif p_rgb_r > p_rgb_l: #caso a percentagem da direita seja maior que a esquerda
+                motor_right.hold()
+                print("esquerdinha")
+                motor_left.run(30)
+
+            elif p_rgb_r < p_rgb_l:
+                motor_left.hold()
+                print("direitiinha")
+                motor_right.run(30)
+    else:
+        print("A cor não´é compativel em nenhum dos lados : ", color)
+        return False
+
+def reposition_all():
+	if reposition("Red"):
+		pass
+	elif reposition("Blue"):
+		pass
+	elif reposition("Black"):
+		pass
+	elif reposition("Green"):
+		pass
+	elif reposition("Yellow"):
+		pass
+	else:
+		reposition_wall()
+		print("Nothing to reposition")
 
 def reposition_wall():
     colors =  ["Yellow","Black"]

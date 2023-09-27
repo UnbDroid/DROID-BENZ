@@ -11,6 +11,11 @@ global teste
 def calibration(sensor):
     print(sensor.rgb())
 
+def treshold(color1, color2):
+    aux = [[(color1[0][0]+color2[0][0])/2, (color1[0][1]+color2[0][1])/2, (color1[0][2]+color2[0][2])/2],[(color1[1][0]+color2[0][0])/2, (color1[0][1]+color2[0][1])/2, (color1[0][2]+color2[0][2])/2]]
+    print(aux)
+    return aux
+
 def calibration_auto2(sensor, array):
   #  global array
    # global teste
@@ -71,9 +76,15 @@ brown_right = [[24,9,0],[45,32,15]]
 white_left = [[67, 88, 73], [83, 104, 89]]
 white_right = [[46, 80, 92], [62, 96, 108]]
 
+blue_i_white_left = [[18, 37, 36], [28, 47, 46]]
+blue_i_white_right = [[8, 26, 63], [18, 36, 73]]
+
 
 
 #left
+def blue_i_white_l():
+    rgb = sensor_color_left.rgb()
+    return ((blue_i_white_left[0][0] <= rgb[0] and rgb[0] <= blue_i_white_left[1][0]) and (blue_i_white_left[0][1] <= rgb[1] and rgb[1] <= blue_i_white_left[1][1]) and (blue_i_white_left[0][2] <= rgb[2] and rgb[2] <= blue_i_white_left[1][2]))
 
 def yellow_i_black_left():
     rgb = sensor_color_left.rgb()
@@ -106,6 +117,9 @@ def brownLeft() :
 
 #right
 
+def blue_i_white_r():
+    rgb = sensor_color_right.rgb()
+    return ((blue_i_white_right[0][0] <= rgb[0] and rgb[0] <= blue_i_white_right[1][0]) and (blue_i_white_right[0][1] <= rgb[1] and rgb[1] <= blue_i_white_right[1][1]) and (blue_i_white_right[0][2] <= rgb[2] and rgb[2] <= blue_i_white_right[1][2]))
 
 def yellow_i_black_right():
     rgb = sensor_color_right.rgb()
@@ -150,6 +164,9 @@ def saw_yellow():
 def saw_blue():
     return blueRight() or blueLeft()
 
+def saw_blue_white():
+    return blue_i_white_l() or blue_i_white_r()
+
 #def saw_brown():
  #   return brownRight() or brownLeft()
     
@@ -172,6 +189,8 @@ def seeRight():
     elif yellowRight():
         print("vi amarelo")
         return "Yellow"
+    elif saw_blue_white():
+        return "Blue_White"
     else:
       #  print("vi branco")
         return "White"
@@ -204,3 +223,9 @@ def test(sensor, color):
     print("r  ",(color[0][0] <= rgb[0] and rgb[0]  <= color[1][0]),"    ", rgb[0])
     print("g  ", (color[0][1] <= rgb[1] and rgb[1] <= color[1][1]), "    ", rgb[1])
     print("b  ", (color[0][2] <= rgb[2] and rgb[2] <= color[1][2]), "    ", rgb[2])
+    print("#####################################################################")
+
+def percentagem(rgb, color_max): # porcentagem do maior valor
+	aux = [(color_max[0]/rgb[0]), (color_max[1]/rgb[1]), (color_max[2]/rgb[2])]
+	aux = ((aux[0] + aux [1] + aux[2])*100)//3
+	return aux
