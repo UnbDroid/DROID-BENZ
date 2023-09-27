@@ -332,8 +332,8 @@ def city_hall(): #check
     if obstacle("lado"):
         #caminho I
         print("Vish, acidente")
-        backward_and_turn(60, 'L')
-        move_forward_cm(30)
+        backward_and_turn(65, 'L')
+        move_forward_cm(35)
         turn_right(90, True, 'R')
     else:
         #caminho J
@@ -553,7 +553,7 @@ def enter():
         calibration(sensor_color_left)
         calibration(sensor_color_right)
        # print(yellowRight()," ", yellowLeft())
-        if ((yellowRight() and yellowLeft()) or (saw_yellow() and saw_yellow_black())):
+        if ((yellowRight() and yellowLeft()) or (yellow_i_black_left() and yellowRight())or (yellow_i_black_right() and yellowLeft())):
             stop()
             reposition_wall()
             move_forward_cm(10)
