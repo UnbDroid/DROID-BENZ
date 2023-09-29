@@ -25,7 +25,7 @@ def obstacle(default = "frente", scanner = False):
     if default == "frente":
         # angle = -angle
         # turn_right(angle)
-        if ultra_sensor.distance() <= 50:
+        if ultra_sensor.distance() <= 120:
             ev3.speaker.beep(200)
             return True
         else:

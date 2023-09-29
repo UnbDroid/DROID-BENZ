@@ -219,13 +219,13 @@ def move_right(velocity):
     motors.drive(0, velocity)
 
 def turn_left(angle, save = False, reference = 'R'):
-    kp = 0.91
-    ki = 0.00002 #se tiver rodando mais coloca menos
+    kp = 0.92
+    ki = 0.0000001 #se tiver rodando mais coloca menos
     wait(500)
-    set_point = 793*(angle/360)
+    set_point = 808*(angle/360)
     set_point = round(set_point)
     stop()
-    while not (abs(set_point - motor_right.angle()) <= 4):
+    while not (abs(set_point - motor_right.angle()) <= 6):
         current_angle = motor_right.angle()
         current_angle  += calculate_pid(kp, ki, set_point, current_angle)
         motor_left.run_angle(200, - current_angle -(set_point - motor_right.angle())*0.1, wait=False)
@@ -253,7 +253,7 @@ def turn_right(angle, save = False, reference = 'L'):
     kp = 0.90
     ki = 0.000065 #sempre olhar isso
     wait(500)
-    set_point = 793*(angle/360)
+    set_point = 808*(angle/360)
     set_point = round(set_point)
     stop()
     while not (abs(set_point-motor_left.angle()) <= 72):

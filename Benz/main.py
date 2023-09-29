@@ -33,11 +33,12 @@ print("Direito", (motor_right.angle()))
 #Teste dos lugares
 
 #school()
-city_hall()
+#city_hall()
 #library()
 #bakery()
 #drugstore()
 #museum()
+park()
 
 
 #----------------------------------------------------------------------------------------------------------------------------------
@@ -91,7 +92,7 @@ while True:
 #calibration_auto(sensor_color_right, yell_i_black_left)
 #turn_right1(90)
 '''i = 0
-while i < 8:
+while i < 4:
   turn_left(90)
   print("Virei")
   stop()
@@ -138,4 +139,7 @@ print(motor_right.angle())
 #   wait(2000)
 
 '''while True:
-  obstacle("fuvhbinsfv")'''
+  obstacle("frente")
+  print(ultra_sensor.distance())
+  wait(5000)'''
+  
