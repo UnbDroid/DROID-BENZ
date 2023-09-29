@@ -25,8 +25,17 @@ time_forward = 0
 
 
 #1: 872 2: 874
+'''def find_blue():
+    wall_red = 0
+    obstacle_count = 0
+    wall_black_or_yellow = 0
 
+    print("starting")
+    while not saw_blue() and not saw_black() and not saw_yellow() and not saw_red() and not obstacle():
+        move_forward(330)
+        if obstacle():
 
+'''
 def recognize_first():
     #trabalhar
     wall_red = 0
@@ -53,6 +62,8 @@ def recognize_first():
                 wait(500)
                 turn_right(90)
                 wait(500)
+            elif wall_red == 1:
+                break 
             else:
                 path_black_or_yellow()
 
@@ -96,7 +107,7 @@ def path_blue():
     reposition("Blue")
     stop()
     wait(500)
-    move_backward_cm(0.75)
+    move_backward_cm(3)
     stop()
     turn_right(90)
     wait(500)
@@ -205,9 +216,15 @@ def recognize():
     print("start")
 
 
-def find_passenger():
+def find_passenger(final = True):
     print("procurando")
-    final_tube()
+    if final:
+        final_tube()
+    else:
+        turn_right(90)
+        stop()
+        turn_right(90)
+
     while not side_detection() and not saw_red():
         move_forward(280)
     stop()   
@@ -216,7 +233,7 @@ def find_passenger():
         while not side_detection():
             move_backward(-100)
         stop()
-    #move_backward_cm(0.1)   
+    move_backward_cm(3)   
     turn_left(90)
     stop()
     wait(500)
@@ -225,10 +242,10 @@ def find_passenger():
     stop()
     reposition("Blue")
     print("vou te pegar")
-    close_claw(250)
+   # close_claw(250)
     move_forward_cm(4)
     #verificar se tem algo na frente por preucação
-    close_claw()
+    #close_claw()
     move_backward_cm(6)
     stop()
     reposition("Blue")
@@ -284,6 +301,9 @@ def decision(tube):
     elif place == "PADARIA":
         print("Indo para a padaria")
         bakery()
+    else:
+        open_claw()
+        find_passenger(False)
         #get back from school depois      
 #Funções referentes ao trajeto do robô
 #def path_ n                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
@@ -554,7 +574,7 @@ def bakery():
                 turn_right(90)
         else:
             #caminho D
-            move_forward_cm(25)
+            move_forward_cm(22)
             turn_right(90, True, 'R')
             stop()
             wait(500)
@@ -654,7 +674,7 @@ def leave_passenger():
     stop()
     reposition_wall()
     enter()
-    #open_claw()
+  #  open_claw()
     print("dando ré")
     move_backward_cm(10)
     stop()
@@ -662,7 +682,7 @@ def leave_passenger():
         move_forward(180)
     stop()
     reposition_wall()
-    move_backward_cm(5) #fazer leave depois
+    move_backward_cm(15) #fazer leave depois
     stack.reverse() 
 
 def enter():
@@ -671,6 +691,7 @@ def enter():
     media_R_max = 27
     media_L_min = 25
     media_L_max = 35
+    count = 0
     while not entered:
         calibration(sensor_color_left)
         calibration(sensor_color_right)
@@ -680,7 +701,7 @@ def enter():
             reposition_wall()
             move_forward_cm(10)
             break
-        elif yellowLeft() and blackRight():
+        elif count < 2 and yellowLeft() and blackRight():
             stop()
             reposition_wall()
             move_backward_cm(3)
@@ -691,7 +712,8 @@ def enter():
             stop()
             reposition_wall()
             move_backward_cm(2)
-        elif yellowRight() and blackLeft():
+            count += 1
+        elif count < 2 and yellowRight() and blackLeft():
             stop()
             reposition_wall()
             move_backward_cm(3)
@@ -702,7 +724,8 @@ def enter():
             stop()
             reposition_wall()
             move_backward_cm(2)
-        elif sensor_color_left.rgb()[0] >= media_R_min and sensor_color_left.rgb()[0] <= media_R_max:
+            count += 1
+        elif count < 2 and sensor_color_left.rgb()[0] >= media_R_min and sensor_color_left.rgb()[0] <= media_R_max:
             print("Porcentagem 0,5% esquerda")
             stop()
             reposition_wall()
@@ -714,8 +737,9 @@ def enter():
             stop()
             reposition_wall()
             move_backward_cm(2)
+            count += 1
 
-        elif sensor_color_right.rgb()[0]>= media_L_min and sensor_color_right.rgb()[0] <= media_L_max:
+        elif count < 2 and sensor_color_right.rgb()[0]>= media_L_min and sensor_color_right.rgb()[0] <= media_L_max:
             print("Porcentagem 0,5% direita")
             stop()
             reposition_wall()
@@ -727,6 +751,7 @@ def enter():
             stop()
             reposition_wall()
             move_backward_cm(2)
+            count += 1
         else:
             move_forward_cm(1)
 

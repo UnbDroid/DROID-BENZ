@@ -14,7 +14,7 @@ from modules.claw import *
 
 #----------------------------------------------------------------------------------------------------------------------------------
 #Funções iniciais
-# recognize_first()
+#recognize_first()
 
 
 
@@ -38,7 +38,7 @@ print("Direito", (motor_right.angle()))
 #bakery()
 #drugstore()
 #museum()
-park()
+#park()
 
 
 #----------------------------------------------------------------------------------------------------------------------------------
@@ -101,10 +101,10 @@ while i < 4:
   
 
 
-'''
 
-for i in range(4):
-  turn_right(90)
+'''for i in range(4):
+ # turn_right(90)
+  turn_left(90)
   wait(500)'''
 
 

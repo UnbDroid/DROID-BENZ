@@ -137,7 +137,7 @@ def move_forward(velocity):
     motor_left.run(control_signal_left)
     motor_right.run(control_signal_right)
            
-def moving_straight_cm(distance, velocity = 350):
+def moving_straight_cm(distance, velocity = 380):
     motor_left.reset_angle(0)
     motor_right.reset_angle(0)
     angle = (distance * 1460)/60
@@ -164,7 +164,7 @@ def move_forward_cm(cm, save = False, reference = "B") :
     if cm < 11:
         motor_left.reset_angle(0)
         motor_right.reset_angle(0)
-        moving_straight_cm(cm, 100)
+        moving_straight_cm(cm, 150)
     else:
         motor_left.reset_angle(0)
         motor_right.reset_angle(0)
@@ -204,7 +204,7 @@ def move_backward_cm(mm, save = False, reference = "F") :
     if mm < 11:
         motor_left.reset_angle(0)
         motor_right.reset_angle(0)
-        moving_backward_cm(mm, 100)
+        moving_backward_cm(mm, 150)
     else:
         motor_left.reset_angle(0)
         motor_right.reset_angle(0)
@@ -219,13 +219,13 @@ def move_right(velocity):
     motors.drive(0, velocity)
 
 def turn_left(angle, save = False, reference = 'R'):
-    kp = 0.92
-    ki = 0.0000001 #se tiver rodando mais coloca menos
+    kp = 0.87
+    ki = 0.00002 #0.0000001 #se tiver rodando mais coloca menos
     wait(500)
-    set_point = 808*(angle/360)
+    set_point = 815*(angle/360)
     set_point = round(set_point)
     stop()
-    while not (abs(set_point - motor_right.angle()) <= 6):
+    while not (abs(set_point - motor_right.angle()) <= 20):
         current_angle = motor_right.angle()
         current_angle  += calculate_pid(kp, ki, set_point, current_angle)
         motor_left.run_angle(200, - current_angle -(set_point - motor_right.angle())*0.1, wait=False)
@@ -250,13 +250,13 @@ def regular():
     return lista
 
 def turn_right(angle, save = False, reference = 'L'):
-    kp = 0.90
-    ki = 0.000065 #sempre olhar isso
+    kp = 0.85
+    ki = 0.00006 #sempre olhar isso
     wait(500)
-    set_point = 808*(angle/360)
+    set_point = 815*(angle/360)
     set_point = round(set_point)
     stop()
-    while not (abs(set_point-motor_left.angle()) <= 72):
+    while not (abs(set_point-motor_left.angle()) <= 82):
         current_angle = motor_left.angle()
         current_angle  += calculate_pid(kp, ki, set_point, current_angle)
         motor_left.run_angle(200, current_angle  + (set_point - motor_right.angle())*0.1, wait=False)
