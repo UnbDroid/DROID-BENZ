@@ -205,21 +205,21 @@ def seeRight():
 
 def seeLeft():
     if redLeft():
-        print("vi vermelho")
+        # print("vi vermelho")
         return "Red"
     elif blueLeft():
-        print("vi azul")
+        # print("vi azul")
         return "Blue"
     elif blackLeft():
-        print("vi preto")
+        # print("vi preto")
         return "Black"
     # elif greenLeft():
     #     return "Green"
     elif brownLeft():
-        print("vi marrom")
+        # print("vi marrom")
         return "Brown"
     elif yellowLeft():
-        print("vi amarelo")
+        # print("vi amarelo")
         return "Yellow"
     else:
     #    print("vi branco")

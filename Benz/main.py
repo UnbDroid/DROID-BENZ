@@ -143,7 +143,6 @@ print(motor_right.angle())
   print(ultra_sensor.distance())
   wait(5000)'''
 
-reposition2("Black")
 # while True:
 #   move_backward(800)
 # calibration_auto(sensor_color_right, white_right)
