@@ -15,7 +15,8 @@ from modules.claw import *
 #----------------------------------------------------------------------------------------------------------------------------------
 #Funções iniciais
 #recognize_first()
-
+#move_backward_cm(36) 
+find_blue(0)
 
 
 
@@ -62,7 +63,9 @@ print("Direito", (motor_right.angle()))
 #----------------------------------------------------------------------#
 #regular o giro
 #boa sorte :D
+#stop()
 #regular()
+#802
 
 '''regulagem = [0,0]
 for i in range(4):

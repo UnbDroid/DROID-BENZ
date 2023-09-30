@@ -75,8 +75,8 @@ yell_i_black_right = [[63, 77, 11], [79, 93, 27]]
 green_left = [[14,35,0],[24,55,20]]
 green_right = [[5,32,0],[20,45,20]] #ok
 
-black_left = [[0,0, 0],[8, 16, 8]]
-black_right = [[0,0,0],[7, 15, 9]] #ok
+black_left = [[0,0, 0],[20, 21, 18]]
+black_right = [[0,0,0],[7, 24, 21]] #ok
 
 brown_left = [[20,10,0],[35,30,18]]
 brown_right = [[24,9,0],[45,32,15]] 

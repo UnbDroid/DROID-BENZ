@@ -137,7 +137,7 @@ def move_forward(velocity):
     motor_left.run(control_signal_left)
     motor_right.run(control_signal_right)
            
-def moving_straight_cm(distance, velocity = 380):
+def moving_straight_cm(distance, velocity = 400):
     motor_left.reset_angle(0)
     motor_right.reset_angle(0)
     angle = (distance * 1460)/60
@@ -149,7 +149,7 @@ def moving_straight_cm(distance, velocity = 380):
     
     stop()
 
-def moving_backward_cm(distance, velocity = 320):
+def moving_backward_cm(distance, velocity = 380):
     motor_left.reset_angle(0)
     motor_right.reset_angle(0)
     angle = (distance * -1321)/55+6
@@ -178,7 +178,7 @@ def move_forward_cm(cm, save = False, reference = "B") :
 def move_backward(velocity):
     kp_right = 0.6315 #0.06
     kp_left = 0.635
-    print("movando back")
+   # print("movando back")
      #0.0648
     ki_right = 0 #0.00000025
     ki_left = 0
@@ -188,8 +188,8 @@ def move_backward(velocity):
     control_signal_left = motor_left.speed()
 
 
-    control_signal_right += calculate_pid(kp_right, ki_right, velocity, control_signal_right)
-    control_signal_left += calculate_pid(kp_left, ki_left, velocity, control_signal_left)
+    control_signal_right += calculate_pid(kp_right, ki_right, -velocity, control_signal_right)
+    control_signal_left += calculate_pid(kp_left, ki_left, -velocity, control_signal_left)
 
     if control_signal_left < 1 and control_signal_left > -1:
         control_signal_left = 1
@@ -355,12 +355,12 @@ def reposition():
     left = True
     right = True
     while seeLeft() != "White" or seeRight() != "White":
-        move_backward(100)
+        move_backward_cm(1)
         print(1)
     stop()
     move_forward(60)
     while seeLeft() == "White" or seeRight() == "White":
-        print("RIGHT ", seeRight(), "LEFT ", seeLeft())
+       # print("RIGHT ", seeRight(), "LEFT ", seeLeft())
         if seeLeft() != "White" and left:
             motor_left.hold()
             motor_left.stop()
