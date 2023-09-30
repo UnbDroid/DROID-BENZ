@@ -12,9 +12,17 @@ def calibration(sensor):
     print(sensor.rgb())
 
 def treshold(color1, color2):
-    aux = [[(color1[0][0]+color2[0][0])/2, (color1[0][1]+color2[0][1])/2, (color1[0][2]+color2[0][2])/2],[(color1[1][0]+color2[0][0])/2, (color1[0][1]+color2[0][1])/2, (color1[0][2]+color2[0][2])/2]]
-    print(aux)
-    return aux
+    R = abs(color1[0]-color2[0])
+    G = abs(color1[1]-color2[1])
+    B = abs(color1[2]+color2[2])
+    aux = [R, G , B]
+    index = aux.index(max(aux))
+    if index == 0:
+        return "R"
+    elif index == 1:
+        return "G"
+    else:
+        return "B"
 
 def calibration_auto2(sensor, array):
   #  global array
@@ -74,7 +82,7 @@ brown_left = [[20,10,0],[35,30,18]]
 brown_right = [[24,9,0],[45,32,15]] 
 
 white_left = [[67, 88, 73], [83, 104, 89]]
-white_right = [[46, 80, 92], [62, 96, 108]]
+white_right = [[48, 80, 92], [64, 96, 108]]
 
 blue_i_white_left = [[18, 37, 36], [28, 47, 46]]
 blue_i_white_right = [[8, 26, 63], [18, 36, 73]]
@@ -229,3 +237,6 @@ def percentagem(rgb, color_max): # porcentagem do maior valor
 	aux = [(color_max[0]/rgb[0]), (color_max[1]/rgb[1]), (color_max[2]/rgb[2])]
 	aux = ((aux[0] + aux [1] + aux[2])*100)//3
 	return aux
+
+def proportion(color_max, color_max_sup):
+    return [(color_max_sup[0]/color_max[0]), (color_max_sup[1]/color_max[1]), (color_max_sup[2]/color_max[2])]

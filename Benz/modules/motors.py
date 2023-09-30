@@ -176,7 +176,7 @@ def move_forward_cm(cm, save = False, reference = "B") :
         stack.append(["back_cm", cm])
         
 def move_backward(velocity):
-    kp_right = 0.665 #0.06
+    kp_right = 0.6315 #0.06
     kp_left = 0.635
      #0.0648
     ki_right = 0 #0.00000025
@@ -195,8 +195,8 @@ def move_backward(velocity):
     if control_signal_right < 1 and control_signal_right > -1:
         control_signal_right = 1
     
-    motor_left.run(control_signal_left)
-    motor_right.run(control_signal_right)
+    motor_left.run(-control_signal_left)
+    motor_right.run(-control_signal_right)
    # print(" motor right and left :",motor_right.angle(), motor_left.angle())
     
 def move_backward_cm(mm, save = False, reference = "F") :
@@ -370,17 +370,202 @@ def calibrate():
 #     print("rodou tudo")
 
 
-def reposition(color):
+
+"""
+def reposition2(color):
     aligned = False
-    tolerance = 25
-    max_left = {"Red" : red_left[1], "Blue" : blue_left[1], "Yellow" : yellow_left[1], "Green" : green_left[1], "Black" : black_left[1], "Brown" : brown_left[1], "Blue_White" : blue_i_white_left[1]}
-    max_right = {"Red" : red_right[1], "Blue" : blue_right[1], "Yellow" : yellow_right[1], "Green" : green_right[1], "Black" : black_right[1], "Brown" : brown_right[1], "Blue_White" : blue_i_white_right[1]}
+    tolerance_l = 20
+    tolerance_r = 20
+    media_left = {"Red": red_left[1], "Blue": [65, 85, 68], "Yellow": yellow_left[1], "Green": green_left[1], "Black": black_left[1], "Brown": brown_left[1], "Blue_White": blue_i_white_left[1]}
+    media_right = {"Red": red_right[1], "Blue": [46, 76, 98], "Yellow": yellow_right[1], "Green": green_right[1],"Black": black_right[1], "Brown": brown_right[1], "Blue_White": blue_i_white_right[1]}
     if seeRight() == color or seeLeft() == color:
+        while not (seeRight() == color and seeLeft() == color):
+            if seeRight() != color:
+                motor_right.run(30)
+            if seeLeft() != color:
+                motor_left.run(30)
+        choose = treshold(media_left[color],white_left[1]) #mudar nome de choose
+        print(choose)
         while not aligned:
             rgb_l = sensor_color_left.rgb()
             rgb_r = sensor_color_right.rgb()
-            p_rgb_l = percentagem(rgb_l, max_left[color])
-            p_rgb_r = percentagem(rgb_r, max_right[color])
+            # rgb_r = [(rgb_r[0]*proporcion[0]), (rgb_r[1] * proporcion[1]), (rgb_r[2]*proporcion[2])]
+            # p_rgb_l = percentagem(rgb_l, max_left[color])
+            # p_rgb_r = percentagem(rgb_r, max_left[color])
+            # print(p_rgb_l - p_rgb_r)
+            if choose == "R":
+                tresh = media_left["Blue"][0]
+                print("LEFT ", rgb_l[0], " RIGHT ", rgb_r[0], " TRESH L ", tresh, " TRESH R ", tresh)
+                if (rgb_l[0] - tolerance_l) <= tresh <= (rgb_l[0] + tolerance_l) and (rgb_r[0] - tolerance_r) <= tresh <= (rgb_r[0] + tolerance_r):
+                    return True
+                elif (rgb_l[0]) <= (tresh - tolerance_l):
+                    motor_right.hold()
+                    # print("esquerdinha")
+                    motor_left.run(-30)
+                elif (rgb_l[0]) >= (tresh + tolerance_l):
+                    motor_right.hold()
+                    # print("esquerdinha")
+                    motor_left.run(30)
+                elif (rgb_r[0]) <= (tresh - tolerance_r):
+                    motor_right.hold()
+                    # print("direitiinha")
+                    motor_right.run(30)
+                elif (rgb_r[0]) >= (tresh + tolerance_r):
+                    motor_right.hold()
+                    # print("direitiinha")
+                    motor_right.run(-30)
+            if choose == "G":
+                tresh = media_left["Blue"][1]
+                print("LEFT ", rgb_l[1], " RIGHT ", rgb_r[1], " TRESH L ", tresh, " TRESH R ", tresh)
+                if (rgb_l[1] - tolerance_l) <= tresh <= (rgb_l[1] + tolerance_l) and (rgb_r[1] - tolerance_r) <= tresh <= (rgb_r[1] + tolerance_r):
+                    return True
+                elif (rgb_l[1]) <= (tresh - tolerance_l):
+                    motor_right.hold()
+                    # print("esquerdinha")
+                    motor_left.run(-30)
+                elif (rgb_l[1]) >= (tresh + tolerance_l):
+                    motor_right.hold()
+                    # print("esquerdinha")
+                    motor_left.run(30)
+                elif (rgb_r[1]) <= (tresh - tolerance_r):
+                    motor_right.hold()
+                    # print("direitiinha")
+                    motor_right.run(30)
+                elif (rgb_r[1]) >= (tresh + tolerance_r):
+                    motor_right.hold()
+                    # print("direitiinha")
+                    motor_right.run(-30)
+            if choose == "B":
+                tresh = media_left["Blue"][1]
+                print("LEFT ", rgb_l[2], " RIGHT ", rgb_r[2], " TRESH L ", tresh, " TRESH R ", tresh)
+                if (rgb_l[2] - tolerance_l) <= tresh <= (rgb_l[2] + tolerance_l) and (rgb_r[2] - tolerance_r) <= tresh <= (rgb_r[2] + tolerance_r):
+                    return True
+                elif (rgb_l[2]) <= (tresh - tolerance_l):
+                    motor_right.hold()
+                    # print("esquerdinha")
+                    motor_left.run(-30)
+                elif (rgb_l[2]) >= (tresh + tolerance_l):
+                    motor_right.hold()
+                    # print("esquerdinha")
+                    motor_left.run(30)
+                elif (rgb_r[2]) <= (tresh - tolerance_r):
+                    motor_right.hold()
+                    # print("direitiinha")
+                    motor_right.run(30)
+                elif (rgb_r[2]) >= (tresh + tolerance_r):
+                    motor_right.hold()
+                    # print("direitiinha")
+                    motor_right.run(-30)
+    else:
+        print("A cor não´é compativel em nenhum dos lados : ", color)
+        return False
+"""
+def reposition2(color):
+    media_left = {"Red": red_left[1], "Blue": [65, 85, 68], "Yellow": yellow_left[1], "Green": green_left[1], "Black": black_left[1], "Brown": brown_left[1], "Blue_White": blue_i_white_left[1]}
+    media_right = {"Red": red_right[1], "Blue": [46, 76, 98], "Yellow": yellow_right[1], "Green": green_right[1],"Black": black_right[1], "Brown": brown_right[1], "Blue_White": blue_i_white_right[1]}
+    repositioned = False
+    if seeRight() == color or seeLeft() == color:
+        while not (seeRight() == color and seeLeft() == color):
+            print("LEFT ", seeLeft() == color, " RIGHT ", seeRight() == color, "9")
+            if seeRight() != color:
+                    motor_right.run(30)
+            if seeLeft() != color:
+                motor_left.run(30)
+        while seeRight() == color or seeLeft() == color:
+            print("LEFT ", seeLeft() == color, " RIGHT ", seeRight() == color, "10")
+            move_backward(20)
+        while not seeRight() == color and not seeLeft() == color:
+            print("LEFT ", seeLeft() == color, " RIGHT ", seeRight() == color, "11")
+            move_forward(30)
+        stop()
+    else:
+        print("ERROU FEIO")
+        # while not repositioned:
+        #     print("LEFT ", seeLeft() == color, " RIGHT ", seeRight() == color, "12")
+        #     rgb_l = sensor_color_left.rgb()
+        #     rgb_r = sensor_color_right.rgb()
+        #     # rgb_r = [(rgb_r[0]*proporcion[0]), (rgb_r[1] * proporcion[1]), (rgb_r[2]*proporcion[2])]
+        #     # p_rgb_l = percentagem(rgb_l, max_left[color])
+        #     # p_rgb_r = percentagem(rgb_r, max_left[color])
+        #     # print(p_rgb_l - p_rgb_r)
+        #     if choose == "R":
+        #         tresh = media_left["Blue"][0]
+        #         print("LEFT ", rgb_l[0], " RIGHT ", rgb_r[0], " TRESH L ", tresh, " TRESH R ", tresh)
+        #         if (rgb_l[0] - tolerance_l) <= tresh <= (rgb_l[0] + tolerance_l) and (rgb_r[0] - tolerance_r) <= tresh <= (rgb_r[0] + tolerance_r):
+        #             return True
+        #         elif (rgb_l[0]) <= (tresh - tolerance_l):
+        #             motor_right.hold()
+        #             # print("esquerdinha")
+        #             motor_left.run(-30)
+        #         elif (rgb_l[0]) >= (tresh + tolerance_l):
+        #             motor_right.hold()
+        #             # print("esquerdinha")
+        #             motor_left.run(30)
+        #         elif (rgb_r[0]) <= (tresh - tolerance_r):
+        #             motor_right.hold()
+        #             # print("direitiinha")
+        #             motor_right.run(30)
+        #         elif (rgb_r[0]) >= (tresh + tolerance_r):
+        #             motor_right.hold()
+        #             # print("direitiinha")
+        #             motor_right.run(-30)
+        #     if choose == "G":
+        #         tresh = media_left["Blue"][1]
+        #         print("LEFT ", rgb_l[1], " RIGHT ", rgb_r[1], " TRESH L ", tresh, " TRESH R ", tresh)
+        #         if (rgb_l[1] - tolerance_l) <= tresh <= (rgb_l[1] + tolerance_l) and (rgb_r[1] - tolerance_r) <= tresh <= (rgb_r[1] + tolerance_r):
+        #             return True
+        #         elif (rgb_l[1]) <= (tresh - tolerance_l):
+        #             motor_right.hold()
+        #             # print("esquerdinha")
+        #             motor_left.run(-30)
+        #         elif (rgb_l[1]) >= (tresh + tolerance_l):
+        #             motor_right.hold()
+        #             # print("esquerdinha")
+        #             motor_left.run(30)
+        #         elif (rgb_r[1]) <= (tresh - tolerance_r):
+        #             motor_right.hold()
+        #             # print("direitiinha")
+        #             motor_right.run(30)
+        #         elif (rgb_r[1]) >= (tresh + tolerance_r):
+        #             motor_right.hold()
+        #             # print("direitiinha")
+        #             motor_right.run(-30)
+        #     if choose == "B":
+        #         tresh = media_left["Blue"][1]
+        #         print("LEFT ", rgb_l[2], " RIGHT ", rgb_r[2], " TRESH L ", tresh, " TRESH R ", tresh)
+        #         if (rgb_l[2] - tolerance_l) <= tresh <= (rgb_l[2] + tolerance_l) and (rgb_r[2] - tolerance_r) <= tresh <= (rgb_r[2] + tolerance_r):
+        #             return True
+        #         elif (rgb_l[2]) <= (tresh - tolerance_l):
+        #             motor_right.hold()
+        #             # print("esquerdinha")
+        #             motor_left.run(-30)
+        #         elif (rgb_l[2]) >= (tresh + tolerance_l):
+        #             motor_right.hold()
+        #             # print("esquerdinha")
+        #             motor_left.run(30)
+        #         elif (rgb_r[2]) <= (tresh - tolerance_r):
+        #             motor_right.hold()
+        #             # print("direitiinha")
+        #             motor_right.run(30)
+        #         elif (rgb_r[2]) >= (tresh + tolerance_r):
+        #             motor_right.hold()
+        #             # print("direitiinha")
+        #             motor_right.run(-30)
+        
+
+def reposition(color):
+    aligned = False
+    tolerance = 0.5
+    max_left = {"Red" : red_left[1], "Blue" : blue_left[1], "Yellow" : yellow_left[1], "Green" : green_left[1], "Black" : black_left[1], "Brown" : brown_left[1], "Blue_White" : blue_i_white_left[1]}
+    max_right = {"Red" : red_right[1], "Blue" : blue_right[1], "Yellow" : yellow_right[1], "Green" : green_right[1], "Black" : black_right[1], "Brown" : brown_right[1], "Blue_White" : blue_i_white_right[1]}
+    if seeRight() == color or seeLeft() == color:
+        proporcion = proportion(max_right[color], max_left[color])
+        while not aligned:
+            rgb_l = sensor_color_left.rgb()
+            rgb_r = sensor_color_right.rgb()
+            rgb_r = [(rgb_r[0]*proporcion[0]), (rgb_r[1]*proporcion[1]), (rgb_r[2]*proporcion[2])]
+            #p_rgb_l = percentagem(rgb_l, max_left[color])
+            #p_rgb_r = percentagem(rgb_r, max_left[color])
             print(p_rgb_l - p_rgb_r)
             if ((p_rgb_l - tolerance) <= p_rgb_r <= (p_rgb_l  + tolerance)) or ((p_rgb_r - tolerance) <= p_rgb_l <= (p_rgb_r  + tolerance)):
                 stop()

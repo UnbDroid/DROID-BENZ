@@ -25,17 +25,191 @@ time_forward = 0
 
 
 #1: 872 2: 874
-'''def find_blue():
-    wall_red = 0
-    obstacle_count = 0
-    wall_black_or_yellow = 0
+def find_blue(walls_num):
+    tempo = StopWatch()
+    side_to_turn = ["Left", 1]
 
-    print("starting")
-    while not saw_blue() and not saw_black() and not saw_yellow() and not saw_red() and not obstacle():
-        move_forward(330)
-        if obstacle():
+    if walls_num < 4:
+        stop()
 
-'''
+        print("starting")
+        while not saw_blue() and not saw_black() and not saw_yellow() and not saw_red() and not obstacle():
+            move_forward(330)
+        time_forward = [motor_left.angle(), motor_right.angle()]
+        stop()
+        if saw_red():
+            reposition("Red")
+        elif saw_black():
+            reposition("Black")
+        elif saw_yellow():
+            reposition("Yellow")
+        if not saw_blue() and not saw_red() and not saw_yellow() and not obstacle():
+            while not saw_blue() and not saw_red() and not saw_yellow() and not obstacle():
+                move_forward(-330) #n entendi
+            stop()
+
+        if saw_red():
+            print("Parede vermelha")
+            stop()
+            move_backward_cm(36) #ver valor
+            turn_left(90)
+            stop()
+            while not saw_blue():
+                move_forward(350)
+                if saw_black() or saw_yellow():
+                    stop()
+                    reposition_all() #reposicionar
+                    turn_left(90)
+                    stop()
+                    turn_left(90)
+                elif obstacle():
+                    stop()
+                    path_obstacle()
+                stop()
+                if side_to_turn[0] == "Left":
+                    turn_left(90)
+                    if side_to_turn[1] == 2:
+                        side_to_turn = ["Right", 1]
+                    elif side_to_turn[1] == 1:
+                        side_to_turn[1] += 1
+                else:
+                    turn_right(90)
+                    if side_to_turn[1] == 2:
+                        side_to_turn = ["Left", 1]
+                    elif side_to_turn[1] ==1:
+                        side_to_turn[1] += 1
+                tempo.reset()
+                while not saw_red() and not obstacle():
+                    move_forward(350)
+                stop()
+                if tempo.time() < 3000 or obstacle():
+                    if not obstacle():
+                        reposition_all() #verificar
+                        move_backward(7)
+                        stop()
+                        turn_right(90)
+                        stop()
+                        turn_right(90)
+                    while not saw_red() and not saw_black():
+                        move_forward(350)
+                    stop()
+                    if saw_red():
+                        reposition("Red")
+                        stop()
+                        move_backward_cm(36)
+                        if side_to_turn[0] == "Left":
+                            turn_left(90)
+                            if side_to_turn[1] == 2:
+                                side_to_turn = ["Right", 1]
+                            elif side_to_turn[1] == 1:
+                                side_to_turn[1] += 1
+                        else:
+                            turn_right(90)
+                            if side_to_turn[1] == 2:
+                                side_to_turn = ["Left", 1]
+                            elif side_to_turn[1] == 1:
+                                side_to_turn += 1
+                elif saw_black():
+                    reposition("Black")
+                    move_backword_cm(7)
+                    if side_to_turn[0] == "Left":
+                        turn_left(90)
+                        if side_to_turn[1] == 2:
+                            side_to_turn = ["Left", 1]
+                        elif side_to_turn[1] == 1:
+                            side_to_turn[1] += 1
+                    else:
+                        turn_right(90)
+                        stop()
+                        if side_to_turn[1] == 2:
+                            side_to_turn = ["Left", 1]
+                        elif side_to_turn[1] == 1:
+                            side_to_turn[1] += 1
+                    find_blue(0)
+                elif obstacle():
+                    stop()
+                    path_obstacle()
+                    if side_to_turn[0] == "Left":
+                        turn_left(90)
+                        if side_to_turn[1] == 2:
+                            side_to_turn = ["Right", 1]
+                        elif side_to_turn[1] == 1:
+                            side_to_turn[1] += 1
+                    else:
+                        turn_right(90)
+                        stop()
+                        if side_to_turn[1] == 2:
+                            side_to_turn = ["Left", 1]
+                        elif side_to_turn[1] == 1:
+                            side_to_turn[1] += 1
+                    while not saw_blue():
+                        move_forward(350)
+                        if saw_black() or saw_yellow():
+                            stop()
+                            reposition_all() #se arrumar
+                            move_backward_cm(7)
+                            if side_to_turn[0] == "Left":
+                                turn_left(90)
+                                if side_to_turn[1] == 2:
+                                    side_to_turn = ["Right", 1]
+                                elif side_to_turn[1] == 1:
+                                    side_to_turn[1] += 1
+                            else:
+                                turn_right(90)
+                                stop()
+                                if side_to_turn[1] == 2:
+                                    side_to_turn = ["Left", 1]
+                                elif side_to_turn[1] == 1:
+                                    side_to_turn[1] += 1
+                        elif obstacle():
+                            stop()
+                            path_obstacle()
+                            if side_to_turn[0] == "Left":
+                                turn_left(90)
+                                if side_to_turn[1] == 2:
+                                    side_to_turn = ["Right", 1]
+                                elif side_to_turn[1] == 1:
+                                    side_to_turn[1] += 1
+                            else:
+                                turn_right(90)
+                                stop()
+                                if side_to_turn[1] == 2:
+                                    side_to_turn = ["Left", 1]
+                                elif side_to_turn[1] == 1:
+                                    side_to_turn[1] += 1
+                            
+                        elif saw_red():
+                            stop()
+                            reposition("Red")
+                            stop()
+                            move_backward_cm(36)
+                            if side_to_turn[0] == "Left":
+                                turn_left(90)
+                                if side_to_turn[1] == 2:
+                                    side_to_turn = ["Right", 1]
+                                elif side_to_turn[1] == 1:
+                                    side_to_turn[1] += 1
+                            else:
+                                turn_right(90)
+                                if side_to_turn[1] == 2:
+                                    side_to_turn = ["Left", 1]
+                                elif side_to_turn[1] == 1:
+                                    side_to_turn += 1
+
+def swap_and_add():
+    if side_to_turn[0] == "Left":
+        turn_left(90)
+        if side_to_turn[1] == 2:
+            side_to_turn = ["Right", 1]
+        elif side_to_turn[1] == 1:
+            side_to_turn[1] += 1
+    else:
+        turn_right(90)
+        if side_to_turn[1] == 2:
+            side_to_turn = ["Left", 1]
+        elif side_to_turn[1] == 1:
+            side_to_turn += 1
+
 def recognize_first():
     #trabalhar
     wall_red = 0
