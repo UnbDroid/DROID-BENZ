@@ -15,8 +15,8 @@ from modules.claw import *
 #----------------------------------------------------------------------------------------------------------------------------------
 #Funções iniciais
 #recognize_first()
-#move_backward_cm(36) 
-find_blue(0)
+print(scanner_initial("Red"))
+#find_blue(0)
 
 
 
@@ -104,10 +104,9 @@ while i < 4:
   
 
 
-
 '''for i in range(4):
- # turn_right(90)
-  turn_left(90)
+  turn_right(90)
+ # turn_left(90)
   wait(500)'''
 
 

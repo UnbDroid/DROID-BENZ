@@ -400,6 +400,156 @@ def recognize_first():
     print("Bora para o próximo")
     recognize_first()
 
+def recognize():
+    obstacle_count = 0
+    red_wall = 0
+    yellow_wall = 0
+    black_wall = 0
+    maybe_red = 0
+    wall_first = 0
+    
+    while not saw_blue():
+        if saw_blue():
+            stop()
+            reposition()
+            return False
+            
+        if saw_red():
+            stop()
+            reposition()
+            if wall_first == 0:
+                case = scanner_initial("Red")
+                wall_first += 1              
+            elif red_wall == 2:
+                #algo
+                red_wall = 0
+            red_wall +=1
+            
+        if saw_black():
+            stop()
+            reposition()
+            if wall_first == 0:
+                case = scanner_initial("Black")
+                wall_first += 1   
+            elif black_wall == 1 and obstacle_count == 0:
+                stop()
+                turn_left(90)
+                stop()
+                turn_left(90)
+            black_wall += 1
+            
+
+        if saw_yellow():
+            stop()
+            reposition()
+            if wall_first == 0:
+                case = scanner_initial("Yellow")
+                wall_first += 1  
+            yellow_wall += 1 
+            
+        if obstacle():
+            path_obstacle()
+
+        if wall_first == 1:
+            if case == 1: #[Black, Vermelho, Yellow]
+                move_backward_cm(38) #verificar
+                maybe_red += 1
+                stop()
+                turn_left(90)
+            elif case == 2: #[Yellow, Vermelho, Yellow]
+                move_backward_cm(38)
+                stop()
+                turn_right(90)
+                
+            elif case == 3: #[Yellow, White, Yellow]
+                pass
+            elif case == 4: #[Black, White, Yellow]
+                pass
+            
+            elif case == 5: #[Yellow, Red, Yellow]
+                move_backward_cm(38)
+                stop()
+                turn_right(90)
+            elif case == 6: #[White, Black, White]
+                pass
+
+                
+
+def forward_while_white(distance = 10):
+    while distance != 0 and saw_white():
+        move_forward_cm(1)
+        distance -= 1
+    stop()
+    reposition()
+    return 10 - distance
+
+    
+
+def scanner_initial(first):
+    paredes = []
+    paredes.append(first)
+    distance = 10
+    move_backward_cm(distance)
+    if first != "Red":
+        for i in range(3):
+            stop()
+            turn_right(90)
+            distance = forward_while_white()
+            left = seeLeft()
+            right = seeRight()
+            if (left == "Black" and right == "Yellow") or (left == "Yellow" and right == "Black") or (left == "Yellow" and right == "Yellow"):
+                paredes.append("Yellow")
+            elif right == "Red" or left == "Red":
+                paredes = ["Red"]
+                break
+            elif left == "Black" or right == "Black":
+                paredes.append("Black")
+            else:
+                paredes.append("White")
+            move_backward_cm(distance)
+        turn_right(90)
+    else:
+        paredes = ["Red"]
+    if "Red" in  paredes or first == "Red":
+        turn_left(90)
+        distance = forward_while_white()
+        left = seeLeft()
+        right = seeRight()
+        if (left == "Black" and right == "Yellow") or (left == "Yellow" and right == "Black") or (left == "Yellow" and right == "Yellow"):
+            paredes.insert(0, "Yellow")
+        elif left == "Black" or right == "Black":
+            paredes.insert(0, "Black")
+        move_backward_cm(15)
+        turn_left(90)
+        turn_left(90)
+        distance = forward_while_white()
+        left = seeLeft()
+        right = seeRight()
+        if (left == "Black" and right == "Yellow") or (left == "Yellow" and right == "Black") or (left == "Yellow" and right == "Yellow"):
+            paredes.append("Yellow")
+        elif left == "Black" or right == "Black":
+            paredes.append("Black")
+        move_backward_cm(15)
+        turn_left(90)
+        print(paredes)
+    return cases(paredes)
+        
+    
+def cases(lista):
+    if lista[1] == "Red":
+        if lista[0] == "Black" and lista[2] == "Yellow":
+            return 1
+        elif lista.count("Yellow") == 2:
+            return 5
+        else:
+            return 2
+    else:
+        if lista.count("Yellow") == 2:
+            return 3
+        elif lista.count("White") == 3:
+            return 6
+        else:
+            return 4
 
 def path_black_or_yellow():
     stop()
@@ -417,11 +567,12 @@ def path_obstacle():
     if(saw_blue()):
         path_blue()
     else:
-        #testar
-        move_backward_cm(10)
+        move_backward_cm(10) #ver o tam
         stop()
         turn_right(90)
-        wait(500)
+        stop()
+        turn_right(90)
+        stop()
 
 def path_blue():
     #move_backward_cm(0.2)
