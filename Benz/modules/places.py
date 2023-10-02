@@ -1188,12 +1188,14 @@ def enter():
         if ((yellowRight() and yellowLeft()) or (yellow_i_black_left() and yellowRight())or (yellow_i_black_right() and yellowLeft())):
             stop()
             reposition_wall()
+            reposition()
             move_forward_cm(10)
             break
         elif count < 2 and yellowLeft() and blackRight():
             stop()
+            reposition()
             reposition_wall()
-            move_backward_cm(3)
+            move_backward_cm(5)
             turn_right(90)
             move_backward_cm(3)
             stop()
@@ -1205,7 +1207,8 @@ def enter():
         elif count < 2 and yellowRight() and blackLeft():
             stop()
             reposition_wall()
-            move_backward_cm(3)
+            reposition()
+            move_backward_cm(5)
             turn_left(90)
             move_backward_cm(3)
             stop()

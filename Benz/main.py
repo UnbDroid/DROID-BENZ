@@ -39,7 +39,7 @@ print("Direito", (motor_right.angle()))
 #library()
 #bakery()
 #drugstore()
-museum()
+# museum()
 #park()
 
 
@@ -150,3 +150,5 @@ print(motor_right.angle())
 #   move_backward(800)
 # calibration_auto(sensor_color_right, white_right)
 # [16, 39, 65]
+
+enter()

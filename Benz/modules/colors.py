@@ -219,7 +219,7 @@ def seeLeft():
         # print("vi marrom")
         return "Brown"
     elif yellowLeft():
-        # print("vi amarelo")
+        # print("vi ama)
         return "Yellow"
     else:
     #    print("vi branco")
