@@ -15,8 +15,9 @@ from modules.claw import *
 #----------------------------------------------------------------------------------------------------------------------------------
 #Funções iniciais
 #recognize_first()
-print(scanner_initial("Red"))
+#print(scanner_initial("Red"))
 #find_blue(0)
+#find_passenger()
 
 
 
@@ -38,7 +39,7 @@ print("Direito", (motor_right.angle()))
 #library()
 #bakery()
 #drugstore()
-#museum()
+museum()
 #park()
 
 
@@ -48,7 +49,7 @@ print("Direito", (motor_right.angle()))
 #reposition_wall()
 #reposition("Red")
 #open_claw()
-#close_claw(750)
+#close_claw(700)
 
 #turn_right(90)
 #turn_left(90)

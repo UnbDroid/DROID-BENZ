@@ -183,7 +183,7 @@ def find_blue(walls_num):
                                 
                             elif saw_red():
                                 stop()
-                                reposition("Red")
+                                reposition()
                                 stop()
                                 move_backward_cm(38)
                                 if side_to_turn[0] == "Left":
@@ -577,7 +577,7 @@ def path_obstacle():
 def path_blue():
     #move_backward_cm(0.2)
     stop()
-    reposition("Blue")
+    reposition()
     stop()
     wait(500)
     move_backward_cm(3)
@@ -589,7 +589,7 @@ def path_blue():
 def path_red():
    # move_backward_cm(1.5)
     stop()
-    reposition("Red")   
+    reposition()   
     stop()
     move_backward_cm(43)
     stop()
@@ -702,7 +702,7 @@ def find_passenger(final = True):
         move_forward(280)
     stop()   
     if(saw_red()):
-        reposition("Red")
+        reposition()
         while not side_detection():
             move_backward_cm(-100)
         stop()
@@ -713,7 +713,7 @@ def find_passenger(final = True):
     while not blueRight() and not blueLeft():
         move_forward(180) 
     stop()
-    reposition("Blue")
+    reposition()
     print("vou te pegar")
    # close_claw(250)
     move_forward_cm(4)
@@ -721,7 +721,7 @@ def find_passenger(final = True):
     #close_claw()
     move_backward_cm(6)
     stop()
-    reposition("Blue")
+    reposition()
     move_backward_cm(6)
     check_point()
     #ver como vai ser tratado o return
@@ -738,7 +738,7 @@ def check_point():
     stop()
     move_backward_cm(1)
     stop()
-    reposition("Red")
+    reposition()
     stop()
     tube = message()
     print(tube)
@@ -842,7 +842,7 @@ def library():
     while not saw_blue():
         move_forward(380)
     stop()
-    reposition("Blue")
+    reposition()
     move_backward_cm(10)
     stop()
     wait(500)
@@ -868,7 +868,7 @@ def museum():
             turn_left(90)
             while not saw_red():
                 move_forward(350)
-            reposition("Red")
+            reposition()
             move_backward_cm(10)
             turn_right(90)
         else:
@@ -880,20 +880,36 @@ def museum():
         if obstacle("lado"):
             move_backward_cm(75)
             turn_left(90)
-            move_forward_cm(70)
+            move_forward_cm(75)
             turn_right(90)
-            move_forward_cm(80)
             if obstacle():
-                move_backward_cm(10)
+                turn_right(90)
+                move_forward_cm(75)
                 turn_left(90)
-                while not saw_red():
-                    move_forward(350)
-                reposition("Red")
-                move_backward_cm(10)
+                while not saw_black():
+                    move_forward(300)
+                move_backward_cm(15)
+                turn_left(90)
+                move_forward_cm(75)
+                turn_left(90)
+                move_forward_cm(35)
                 turn_right(90)
             else:
-                move_forward_cm(25)
                 turn_left(90)
+                move_forward_cm(70)
+                turn_right(90)
+                move_forward_cm(80)
+                if obstacle():
+                    move_backward_cm(10)
+                    turn_left(90)
+                    while not saw_red():
+                        move_forward(350)
+                    reposition()
+                    move_backward_cm(10)
+                    turn_right(90)
+                else:
+                    move_forward_cm(25)
+                    turn_left(90)
             
         
         else:
@@ -906,7 +922,7 @@ def museum():
             else:
                 while not saw_red():
                     move_forward(350)
-                reposition("Red")
+                reposition()
                 move_backward_cm(10)
                 turn_right(90)
             
@@ -1028,7 +1044,7 @@ def bakery():
                 while not saw_red():
                     move_forward(360)
                 #move_forward_cm(105) #B-A
-                reposition("Red")
+                reposition()
                 move_backward_cm(10)
                 turn_right(90)
 
@@ -1093,7 +1109,7 @@ def park():
                 turn_left(90)
                 while not saw_red():
                     move_forward(250)
-                reposition("Red")
+                reposition()
                 move_backward_cm(10)
                 turn_right(90)
                 
@@ -1117,7 +1133,7 @@ def park():
                 turn_left(90)
                 while not saw_red():
                     move_forward(250)
-                reposition("Red")
+                reposition()
                 move_backward_cm(10)
                 turn_right(90)
         else:
