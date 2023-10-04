@@ -14,16 +14,19 @@ from modules.claw import *
 
 #----------------------------------------------------------------------------------------------------------------------------------
 #Funções iniciais
-#recognize_first()
-#print(scanner_initial("Red"))
-#find_blue(0)
-#find_passenger()
+### recognize_first() arrumar a logica.!!!
+
+recognize_first() ## Função inicial até o azul
+#open_claw()
 
 
+# find_passenger() scanneamento
+#check_point() vai pro check point( VERMELHO )
+#decision(tube) Vai entregar o tubo
 
-#move_backward_cm(60)
 #----------------------------------------------------------------------------------------------------------------------------------
 #Teste para andar em cm
+
 '''motor_left.run_angle(280, -360,  wait=False)
 motor_right.run_angle(280, -360~,  wait=True)
 print("Esquerdo", (motor_left.angle()))
@@ -39,7 +42,7 @@ print("Direito", (motor_right.angle()))
 #library()
 #bakery()
 #drugstore()
-# museum()
+#museum()
 #park()
 
 
@@ -56,6 +59,11 @@ print("Direito", (motor_right.angle()))
 #move_forward_cm(60)
 #move_backward_cm(60)
 
+
+'''while not saw_black():
+  move_forward(500)
+
+stop()'''
 
 #----------------------------------------------------------------------------------------------------------------------------------
 
@@ -93,24 +101,16 @@ while True:
   calibration_auto(sensor_color_left, array)
   wait(3000)'''
 #------------------------------------------------------------------------------------------------------
-#calibration_auto(sensor_color_right, yell_i_black_left)
-#turn_right1(90)
+#treinar kp e ki
 '''i = 0
 while i < 4:
-  turn_left(90)
+  turn_right(90)
   print("Virei")
   stop()
   wait(1000)
   i+=1'''
   
-
-
-'''for i in range(4):
-  turn_right(90)
- # turn_left(90)
-  wait(500)'''
-
-
+#------------------------------------------------------------------------------------------------------
 
 #teste para andar
 '''stop_motors()
@@ -151,4 +151,4 @@ print(motor_right.angle())
 # calibration_auto(sensor_color_right, white_right)
 # [16, 39, 65]
 
-enter()
+#enter()

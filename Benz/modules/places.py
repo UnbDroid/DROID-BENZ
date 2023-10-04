@@ -22,328 +22,6 @@ total_of_passengers_of_15cm = 1
 time_forward = 0
 
 
-
-
-#1: 872 2: 874
-def find_blue(walls_num):
-    tempo = StopWatch()
-    side_to_turn = ["Left", 1]
-
-    if walls_num < 4:
-        stop()
-
-        print("starting")
-        while not saw_blue() and not saw_black() and not saw_yellow() and not saw_red() and not obstacle():
-            move_forward(380)
-        time_forward = [motor_left.angle(), motor_right.angle()]
-        stop()
-        if saw_red():
-            print("Parede vermelha 1")
-            reposition()
-        elif saw_black():
-            reposition()
-        elif saw_yellow():
-            reposition()
-        if not saw_blue() and not saw_red() and not saw_black() and not saw_yellow() and not obstacle():
-            while not saw_blue() and not saw_black() and not saw_red() and not saw_yellow() and not obstacle():
-                move_forward(380)
-
-            stop()
-
-        if saw_red():
-            print("Parede vermelha 2")
-            stop()
-            move_backward_cm(40) #ver valor
-            turn_left(90)
-            stop()
-            while not saw_blue():
-                print("Entrei aqui")
-                move_forward(380)
-                if saw_black() or saw_yellow():
-                    stop()
-                    print("Parede preta")
-                    
-                    reposition() #reposicionar
-                    move_backward_cm(15)
-                    turn_left(90)
-                    stop()
-                    turn_left(90)
-                elif obstacle():
-                    stop()
-                    path_obstacle()
-                
-                    if side_to_turn[0] == "Left":
-                        turn_left(90)
-                        if side_to_turn[1] == 2:
-                            side_to_turn = ["Right", 1]
-                        elif side_to_turn[1] == 1:
-                            side_to_turn[1] += 1
-                    else:
-                        turn_right(90)
-                        if side_to_turn[1] == 2:
-                            side_to_turn = ["Left", 1]
-                        elif side_to_turn[1] ==1:
-                            side_to_turn[1] += 1
-                    tempo.reset()
-                    while not saw_red() and not obstacle() and not saw_blue()  and not saw_yellow():
-                        move_forward(380)
-                    stop()
-                    if tempo.time() < 3000 or obstacle():
-                        if not obstacle():
-                            reposition() #verificar
-                        while not saw_red() and not saw_black() and not saw_yellow() and not saw_blue():
-                            move_forward(390)
-                        stop()
-                        if saw_red():
-                            print("Parede vermelha")
-                            reposition()
-                            stop()
-                            move_backward_cm(38)
-                            if side_to_turn[0] == "Left":
-                                turn_left(90)
-                                if side_to_turn[1] == 2:
-                                    side_to_turn = ["Right", 1]
-                                elif side_to_turn[1] == 1:
-                                    side_to_turn[1] += 1
-                            else:
-                                turn_right(90)
-                                if side_to_turn[1] == 2:
-                                    side_to_turn = ["Left", 1]
-                                elif side_to_turn[1] == 1:
-                                    side_to_turn += 1
-                    elif saw_black():
-                        print("Parede preta")
-                        reposition()
-                        move_backward_cm(8)
-                        if side_to_turn[0] == "Left":
-                            turn_left(90)
-                            if side_to_turn[1] == 2:
-                                side_to_turn = ["Left", 1]
-                            elif side_to_turn[1] == 1:
-                                side_to_turn[1] += 1
-                        else:
-                            turn_right(90)
-                            stop()
-                            if side_to_turn[1] == 2:
-                                side_to_turn = ["Left", 1]
-                            elif side_to_turn[1] == 1:
-                                side_to_turn[1] += 1
-                        find_blue(0)
-                    elif obstacle():
-                        stop()
-                        path_obstacle()
-                        if side_to_turn[0] == "Left":
-                            turn_left(90)
-                            if side_to_turn[1] == 2:
-                                side_to_turn = ["Right", 1]
-                            elif side_to_turn[1] == 1:
-                                side_to_turn[1] += 1
-                        else:
-                            turn_right(90)
-                            stop()
-                            if side_to_turn[1] == 2:
-                                side_to_turn = ["Left", 1]
-                            elif side_to_turn[1] == 1:
-                                side_to_turn[1] += 1
-                        while not saw_blue():
-                            move_forward(380)
-                            if saw_black() or saw_yellow():
-                                stop()
-                                reposition() #se arrumar
-                                move_backward_cm(7)
-                                if side_to_turn[0] == "Left":
-                                    turn_left(90)
-                                    if side_to_turn[1] == 2:
-                                        side_to_turn = ["Right", 1]
-                                    elif side_to_turn[1] == 1:
-                                        side_to_turn[1] += 1
-                                else:
-                                    turn_right(90)
-                                    stop()
-                                    if side_to_turn[1] == 2:
-                                        side_to_turn = ["Left", 1]
-                                    elif side_to_turn[1] == 1:
-                                        side_to_turn[1] += 1
-                            elif obstacle():
-                                stop()
-                                path_obstacle()
-                                if side_to_turn[0] == "Left":
-                                    turn_left(90)
-                                    if side_to_turn[1] == 2:
-                                        side_to_turn = ["Right", 1]
-                                    elif side_to_turn[1] == 1:
-                                        side_to_turn[1] += 1
-                                else:
-                                    turn_right(90)
-                                    stop()
-                                    if side_to_turn[1] == 2:
-                                        side_to_turn = ["Left", 1]
-                                    elif side_to_turn[1] == 1:
-                                        side_to_turn[1] += 1
-                                
-                            elif saw_red():
-                                stop()
-                                reposition()
-                                stop()
-                                move_backward_cm(38)
-                                if side_to_turn[0] == "Left":
-                                    turn_left(90)
-                                    if side_to_turn[1] == 2:
-                                        side_to_turn = ["Right", 1]
-                                    elif side_to_turn[1] == 1:
-                                        side_to_turn[1] += 1
-                                else:
-                                    turn_right(90)
-                                    if side_to_turn[1] == 2:
-                                        side_to_turn = ["Left", 1]
-                                    elif side_to_turn[1] == 1:
-                                        side_to_turn += 1
-            else:
-                print("Cheguei aqui")
-                if saw_blue():
-                    stop()
-                    reposition()
-                    return 0
-                stop()
-                reposition()
-                move_backward_cm(38)
-                if (side_to_turn[0] == "Left" and side_to_turn[1] == 1) or (side_to_turn[0] == "Right" and side_to_turn[1] == 2):
-                    turn_left(90)
-                else:
-                    turn_right(90)
-
-                while not saw_blue() or not saw_red() or not obstacle() or not saw_black() or not saw_yellow():
-                        print("oi friends")
-                        move_forward(360)
-                        stop()
-                        if saw_red():
-                            reposition()
-                            move_backward_cm(38)
-                            if side_to_turn[0] == "ESQUERDA":
-                                stop()
-                                turn_left(90)
-                                if side_to_turn[1] == 2:
-                                    side_to_turn = ["DIREITA", 1]
-                                elif side_to_turn[1] == 1:
-                                    side_to_turn[1] += 1
-                            else:
-                                turn_right(90)
-                                if side_to_turn[1] == 2:
-                                    side_to_turn = ["ESQUERDA", 1]
-                                elif side_to_turn[1] == 1:
-                                    side_to_turn[1] += 1
-                        elif saw_black():
-                            stop()
-                            reposition()
-                            move_backward_cm(8)
-                            if side_to_turn[0] == "ESQUERDA":
-                                turn_left(90)
-                                if side_to_turn[1] == 2:
-                                    side_to_turn = ["DIREITA", 1]
-                                elif side_to_turn[1] == 1:
-                                    side_to_turn[1] += 1
-                            else:
-                                turn_right(90)
-                                if side_to_turn[1] == 2:
-                                    side_to_turn = ["ESQUERDA", 1]
-                                elif side_to_turn[1] == 1:
-                                    side_to_turn[1] += 1
-                            find_blue(0)
-                        elif obstacle():
-                            stop()
-                            if side_to_turn[0] == "ESQUERDA":
-                                turn_left(90)
-                                if side_to_turn[1] == 2:
-                                    side_to_turn = ["DIREITA", 1]
-                                elif side_to_turn[1] == 1:
-                                    side_to_turn[1] += 1
-                            else:
-                                turn_right(90)
-                                if side_to_turn[1] == 2:
-                                    side_to_turn = ["ESQUERDA", 1]
-                                elif side_to_turn[1] == 1:
-                                    side_to_turn[1] += 1
-                            while not saw_blue():
-                                move_forward_cm(500)
-                                if saw_black() or saw_yellow():
-                                    stop()
-                                    reposition()
-                                    move_backward_cm(8)
-                                    if side_to_turn[0] == "ESQUERDA":
-                                        turn_left(90)
-                                        if side_to_turn[1] == 2:
-                                            side_to_turn = ["DIREITA", 1]
-                                        elif side_to_turn[1] == 1:
-                                            side_to_turn[1] += 1
-                                    else:
-                                        turn_right(90)
-                                        if side_to_turn[1] == 2:
-                                            side_to_turn = ["ESQUERDA", 1]
-                                        elif side_to_turn[1] == 1:
-                                            side_to_turn[1] += 1
-                                elif obstacle():
-                                    stop()
-                                    if side_to_turn[0] == "ESQUERDA":
-                                        turn_left(90)
-                                        if side_to_turn[1] == 2:
-                                            side_to_turn = ["DIREITA", 1]
-                                        elif side_to_turn[1] == 1:
-                                            side_to_turn[1] += 1
-                                    else:
-                                        turn_right(90)
-                                        if side_to_turn[1] == 2:
-                                            side_to_turn = ["ESQUERDA", 1]
-                                        elif side_to_turn[1] == 1:
-                                            side_to_turn[1] += 1
-                                elif saw_red():
-                                    stop()
-                                    reposition()
-                                    move_backward_cm(38)
-                                    if side_to_turn[0] == "ESQUERDA":
-                                        turn_left(90)
-                                        if side_to_turn[1] == 2:
-                                            side_to_turn = ["DIREITA", 1]
-                                        elif side_to_turn[1] == 1:
-                                            side_to_turn[1] += 1
-                                    else:
-                                        turn_right(90)
-                                        if side_to_turn[1] == 2:
-                                            side_to_turn = ["ESQUERDA", 1]
-                                        elif side_to_turn[1] == 1:
-                                            side_to_turn[1] += 1
-
-
-
-
-
-
-
-       
-        elif saw_black() or saw_yellow() or obstacle():
-            print("Tentando me achar")
-            if saw_black() or saw_yellow():
-                stop()
-                move_backward_cm(15)
-                stop()
-            elif obstacle():
-                path_obstacle()
-                stop()
-            turn_right(90)
-            print("Vai somar mais um no numero_de_paredes")
-            print(walls_num)
-            find_blue(walls_num + 1)
-    else:
-        reposition()
-        turn_right(90)
-        while ultra_sensor.distance() > 145 and not saw_black() and not saw_yelllow():
-            move_forward(350)
-        stop()
-        if saw_black() or saw_yellow():
-            reposition()
-            move_backward_cm(8)
-        find_blue(0)
-
-
 def swap_and_add():
     if side_to_turn[0] == "Left":
         turn_left(90)
@@ -366,6 +44,7 @@ def recognize_first():
 
     stop()
     print("starting")
+    
     while not saw_blue():
         move_forward(330)
         if obstacle():
@@ -399,6 +78,69 @@ def recognize_first():
 
     print("Bora para o próximo")
     recognize_first()
+
+def path_black_or_yellow():
+    stop()
+    reposition()
+    stop()
+    move_backward_cm(15) 
+    stop() # calcular
+    turn_left(90)
+   
+
+def path_obstacle():
+    stop()
+    #código para verificar se viu um tubo ou não
+    move_forward_cm(1.5)
+    if(saw_blue()):
+        path_blue()
+    else:
+        move_backward_cm(10) #ver o tam
+        stop()
+        turn_right(90)
+        stop()
+        turn_right(90)
+        stop()
+
+def path_blue():
+    stop()
+    reposition()
+    stop()
+    move_backward_cm(5)
+    stop()
+    turn_right(90)
+    find_passenger()
+
+def path_red():
+    stop()
+    reposition()   
+    stop()
+    move_backward_cm(43)
+    stop()
+    turn_right(90)
+    stop()
+    '''while not saw_blue():
+        move_forward(380)
+        if obstacle():
+            stop()
+            stop()
+            move_backward_cm(2)
+            stop()
+            turn_right()
+        if blackRight() and blackLeft():
+            print("ops")
+            move_backward_cm(0.1)
+            stop()
+            stop()
+            reposition()
+            stop()
+            move_backward_cm(3)
+            turn_right(90)
+            wait(500)
+            turn_right(90)
+            stop()
+            wait(500)'''
+    stop()
 
 def recognize():
     obstacle_count = 0
@@ -473,8 +215,6 @@ def recognize():
             elif case == 6: #[White, Black, White]
                 pass
 
-                
-
 def forward_while_white(distance = 10):
     while distance != 0 and saw_white():
         move_forward_cm(1)
@@ -482,8 +222,6 @@ def forward_while_white(distance = 10):
     stop()
     reposition()
     return 10 - distance
-
-    
 
 def scanner_initial(first):
     paredes = []
@@ -533,8 +271,7 @@ def scanner_initial(first):
         turn_left(90)
         print(paredes)
     return cases(paredes)
-        
-    
+           
 def cases(lista):
     if lista[1] == "Red":
         if lista[0] == "Black" and lista[2] == "Yellow":
@@ -551,72 +288,6 @@ def cases(lista):
         else:
             return 4
 
-def path_black_or_yellow():
-    stop()
-    reposition_wall()
-    stop()
-    move_backward_cm(15) 
-    stop() # calcular
-    turn_left(90)
-   
-
-def path_obstacle():
-    stop()
-    #código para verificar se viu um tubo ou não
-    move_forward_cm(1.5)
-    if(saw_blue()):
-        path_blue()
-    else:
-        move_backward_cm(10) #ver o tam
-        stop()
-        turn_right(90)
-        stop()
-        turn_right(90)
-        stop()
-
-def path_blue():
-    #move_backward_cm(0.2)
-    stop()
-    reposition()
-    stop()
-    wait(500)
-    move_backward_cm(3)
-    stop()
-    turn_right(90)
-    wait(500)
-    find_passenger()
-
-def path_red():
-   # move_backward_cm(1.5)
-    stop()
-    reposition()   
-    stop()
-    move_backward_cm(43)
-    stop()
-    turn_right(90)
-    stop()
-    '''while not saw_blue():
-        move_forward(380)
-        if obstacle():
-            stop()
-            stop()
-            move_backward_cm(2)
-            stop()
-            turn_right()
-        if blackRight() and blackLeft():
-            print("ops")
-            move_backward_cm(0.1)
-            stop()
-            stop()
-            reposition()
-            stop()
-            move_backward_cm(3)
-            turn_right(90)
-            wait(500)
-            turn_right(90)
-            stop()
-            wait(500)'''
-    stop()
 
 def forward_and_turn(cm, side, save = False):
     if side == 'L':
@@ -643,7 +314,7 @@ def final_tube():
     tempo = StopWatch()
     tempo.reset()
     while tempo.time() <= 3000:
-        move_backward_cm(-120)  # implementar questão do tempo sem ver nada
+        move_backward(-250) # implementar questão do tempo sem ver nada
         if side_detection():  # ainda sendo implementado
             print("Voltando")
             tempo.reset()
@@ -693,7 +364,7 @@ def find_passenger(final = True):
     print("procurando")
     if final:
         final_tube()
-    else:
+    else: #chegou no check-point e não identifico o tubo
         turn_right(90)
         stop()
         turn_right(90)
@@ -704,7 +375,7 @@ def find_passenger(final = True):
     if(saw_red()):
         reposition()
         while not side_detection():
-            move_backward_cm(-100)
+            move_backward(-250)
         stop()
     move_backward_cm(3)   
     turn_left(90)
@@ -713,16 +384,17 @@ def find_passenger(final = True):
     while not blueRight() and not blueLeft():
         move_forward(180) 
     stop()
-    reposition()
+    #reposition()
     print("vou te pegar")
-   # close_claw(250)
+    close_claw(250)
     move_forward_cm(4)
     #verificar se tem algo na frente por preucação
-    #close_claw()
+    close_claw()
     move_backward_cm(6)
     stop()
     reposition()
-    move_backward_cm(6)
+    stop()
+    move_backward_cm(10)
     check_point()
     #ver como vai ser tratado o return
     
@@ -774,12 +446,14 @@ def decision(tube):
     elif place == "PADARIA":
         print("Indo para a padaria")
         bakery()
-    else:
+    elif place == "Null":
+        print("Nada encontrado")
         open_claw()
         find_passenger(False)
-        #get back from school depois      
+
+        
+            
 #Funções referentes ao trajeto do robô
-#def path_ n                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
 
 def school():
     move_backward_cm(40)
@@ -880,9 +554,11 @@ def museum():
         if obstacle("lado"):
             move_backward_cm(75)
             turn_left(90)
-            move_forward_cm(75)
+            move_forward_cm(70)
             turn_right(90)
+            move_forward_cm(10)
             if obstacle():
+                move_backward_cm(10)
                 turn_right(90)
                 move_forward_cm(75)
                 turn_left(90)
@@ -895,9 +571,6 @@ def museum():
                 move_forward_cm(35)
                 turn_right(90)
             else:
-                turn_left(90)
-                move_forward_cm(70)
-                turn_right(90)
                 move_forward_cm(80)
                 if obstacle():
                     move_backward_cm(10)
@@ -909,9 +582,7 @@ def museum():
                     turn_right(90)
                 else:
                     move_forward_cm(25)
-                    turn_left(90)
-            
-        
+                    turn_left(90)        
         else:
             turn_left(90)
             move_forward_cm(75)
@@ -924,25 +595,15 @@ def museum():
                     move_forward(350)
                 reposition()
                 move_backward_cm(10)
-                turn_right(90)
-            
-            
-        # move_forward_cm(30)
-        # turn_left(90)
-        # #get_break()
-        # move_backward_cm(10)
-        # turn_right(90, True, 'R')
-        # move_forward_cm(30)
-        # move_forward_cm(30, True, 'F' )
-        # turn_right(90, True, 'R')
-
+                turn_right(90, True, "R")
     leave_passenger()
+
 def get_break():
     while not saw_yellow() and not saw_black():
         move_forward(300)
     move_backward_cm(2)
     stop()
-    reposition_wall()
+    reposition()
 
 def drugstore():
     move_backward_cm(43)
@@ -1017,7 +678,7 @@ def bakery():
     else:
         #caminho I
         move_backward_cm(3)
-        turn_left(90)
+        turn_left(90, True, "L")
         move_forward_cm(85)
         wait(500)
         if obstacle():
@@ -1063,7 +724,7 @@ def bakery():
                 turn_right(90)
         else:
             #caminho D
-            move_forward_cm(22)
+            move_forward_cm(22, True, 'F')
             turn_right(90, True, 'R')
             stop()
             wait(500)
@@ -1161,16 +822,16 @@ def leave_passenger():
     while not saw_yellow() and not saw_black():
         move_forward(240) #180 velocidade original
     stop()
-    reposition_wall()
+    reposition()
     enter()
-  #  open_claw()
+    open_claw()
     print("dando ré")
     move_backward_cm(10)
     stop()
     while not saw_yellow() and not saw_black():
         move_forward(180)
     stop()
-    reposition_wall()
+    reposition()
     move_backward_cm(15) #fazer leave depois
     stack.reverse() 
 
@@ -1187,26 +848,26 @@ def enter():
        # print(yellowRight()," ", yellowLeft())
         if ((yellowRight() and yellowLeft()) or (yellow_i_black_left() and yellowRight())or (yellow_i_black_right() and yellowLeft())):
             stop()
-            reposition_wall()
+            reposition()
             reposition()
             move_forward_cm(10)
             break
         elif count < 2 and yellowLeft() and blackRight():
             stop()
             reposition()
-            reposition_wall()
+            reposition()
             move_backward_cm(5)
             turn_right(90)
             move_backward_cm(3)
             stop()
             turn_left(90)
             stop()
-            reposition_wall()
+            reposition()
             move_backward_cm(2)
             count += 1
         elif count < 2 and yellowRight() and blackLeft():
             stop()
-            reposition_wall()
+            reposition()
             reposition()
             move_backward_cm(5)
             turn_left(90)
@@ -1214,34 +875,34 @@ def enter():
             stop()
             turn_right(90)
             stop()
-            reposition_wall()
+            reposition()
             move_backward_cm(2)
             count += 1
         elif count < 2 and sensor_color_left.rgb()[0] >= media_R_min and sensor_color_left.rgb()[0] <= media_R_max:
             print("Porcentagem 0,5% esquerda")
             stop()
-            reposition_wall()
+            reposition()
             move_backward_cm(3)
             turn_left(90)
             move_backward_cm(3)
             stop()
             turn_right(90)
             stop()
-            reposition_wall()
+            reposition()
             move_backward_cm(2)
             count += 1
 
         elif count < 2 and sensor_color_right.rgb()[0]>= media_L_min and sensor_color_right.rgb()[0] <= media_L_max:
             print("Porcentagem 0,5% direita")
             stop()
-            reposition_wall()
+            reposition()
             move_backward_cm(3)
             turn_right(90)
             move_backward_cm(3)
             stop()
             turn_left(90)
             stop()
-            reposition_wall()
+            reposition()
             move_backward_cm(2)
             count += 1
         else:

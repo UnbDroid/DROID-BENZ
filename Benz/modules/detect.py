@@ -10,35 +10,28 @@ ultra_sensor = UltrasonicSensor(Port.S3)
 infra_sensor = InfraredSensor(Port.S4)
 
 ev3 = EV3Brick()
-"""
+
 server = BluetoothMailboxServer()
 eve3box = TextMailbox('greeting', server)
 
 print('waiting for connection...')
 server.wait_for_connection()
 print('connected!')
-"""
+
 def obstacle(default = "frente", scanner = False):
-    #criar o range
-    # angle
+
     if default == "frente":
-        # angle = -angle
-        # turn_right(angle)
-        if ultra_sensor.distance() <= 120:
+        if ultra_sensor.distance() <= 150:
             ev3.speaker.beep(200)
             return True
         else:
-           # ev3.speaker.beep(200)
-            #ev3.speaker.beep(300)
             return False
     else:
         print(infra_sensor.distance())
-        if infra_sensor.distance() <= 30:
+        if infra_sensor.distance() <= 39:
             ev3.speaker.beep(200)
             return True
         else:
-           # ev3.speaker.beep(200)
-            #ev3.speaker.beep(300)
             return False
 
 
@@ -48,13 +41,6 @@ def message():
     print(eve3box.read())
     eve3box.send("False")
     return eve3box.read().split()
-
-
-
-
-def collision():
-     if (ultra_front_sensor.distance() > 0) :
-        print("cuidado motorista")
 
 def side_detection():
     if infra_sensor.distance() <= 25: #25 ############### lembrar de adicionar sensor

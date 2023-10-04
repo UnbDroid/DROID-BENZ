@@ -161,7 +161,7 @@ def brownRight() :
 #Declaration of detected colors
 
 def saw_red():
-    return redRight() and redLeft()
+    return redRight() or redLeft()
 
 def saw_black():
     return blackRight() or blackLeft()

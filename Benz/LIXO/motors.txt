@@ -112,3 +112,12 @@ def reposition2(color):
 #             circle_right()
 #         stop()
 #     print("rodou tudo")
+
+'''
+def circle_right():
+    motor_right.run(80)
+    motor_left.run(-10)
+
+def circle_left():
+    motor_left.run(80)
+    motor_right.run(-10) '''
