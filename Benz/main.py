@@ -12,7 +12,7 @@ from modules.detect import *
 from modules.places import *
 from modules.claw import *
 
-#find_passanger_2()
+
 #----------------------------------------------------------------------------------------------------------------------------------
 #Funções iniciais
 ### recognize_first() arrumar a logica.!!!

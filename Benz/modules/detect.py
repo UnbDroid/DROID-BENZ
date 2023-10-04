@@ -9,14 +9,14 @@ import time
 ultra_sensor = UltrasonicSensor(Port.S3)
 infra_sensor = InfraredSensor(Port.S4)
 
-# ev3 = EV3Brick()
+ev3 = EV3Brick()
 
-# server = BluetoothMailboxServer()
-# eve3box = TextMailbox('greeting', server)
+server = BluetoothMailboxServer()
+eve3box = TextMailbox('greeting', server)
 
-# print('waiting for connection...')
-# server.wait_for_connection()
-# print('connected!')
+print('waiting for connection...')
+server.wait_for_connection()
+print('connected!')
 
 def obstacle(default = "frente", scanner = False):
 

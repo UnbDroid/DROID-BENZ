@@ -103,12 +103,12 @@ def path_obstacle():
         stop()
 
 def path_blue():
-    stop()
-    reposition()
-    stop()
-    move_backward_cm(5)
-    stop()
-    turn_right(90)
+    # stop()
+    # reposition()
+    # stop()
+    # move_backward_cm(5)
+    # stop()
+    # turn_right(90)
     find_passenger()
 
 def path_red():
