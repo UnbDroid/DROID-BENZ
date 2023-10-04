@@ -226,6 +226,8 @@ def seeLeft():
         return "White"
 
 
+
+
 def test(sensor, color):
     rgb = sensor.rgb()
     print("r  ",(color[0][0] <= rgb[0] and rgb[0]  <= color[1][0]),"    ", rgb[0])

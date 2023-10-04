@@ -207,10 +207,10 @@ def move_backward_cm(mm, save = False, reference = "F") :
 
 
 def turn_left(angle, save = False, reference = 'R'):
-    kp = 0.94
+    kp = 1.02
     ki = 0.00002 #0.0000001 #se tiver rodando mais coloca menos
     wait(500)
-    set_point = 784*(angle/360)
+    set_point = 767*(angle/360)
     set_point = round(set_point)
     stop()
     while not (abs(set_point - motor_right.angle()) <= 25):
@@ -230,13 +230,13 @@ def turn_left(angle, save = False, reference = 'R'):
 
 
 def turn_right(angle, save = False, reference = 'L'):
-    kp = 0.895
+    kp = 0.99
     ki = 0.00006 #sempre olhar isso
     wait(500)
-    set_point = 784*(angle/360)
+    set_point = 767*(angle/360)
     set_point = round(set_point)
     stop()
-    while not (abs(set_point-motor_left.angle()) <= 9):
+    while not (abs(set_point-motor_left.angle()) <= 20):
         current_angle = motor_left.angle()
         current_angle  += calculate_pid(kp, ki, set_point, current_angle)
         motor_left.run_angle(200, current_angle  + (set_point - motor_right.angle())*0.1, wait=False)

@@ -360,7 +360,7 @@ def recognize():
     print("start")
 
 
-def find_passenger(final = True):
+def find_passenger_2(final = True):
     print("procurando")
     if final:
         final_tube()
@@ -397,6 +397,66 @@ def find_passenger(final = True):
     move_backward_cm(10)
     check_point()
     #ver como vai ser tratado o return
+    
+def find_passenger(final_tube = True): #Função feita pelo Josh e Felipe e Luiz
+    
+    #Já começa alinhado no azul
+    stop()
+    reposition()
+    stop()
+    move_backward_cm(5)
+    stop()
+    turn_left(90)
+    
+    threshold = ((25 + 85)/2)+15
+
+    while not saw_red():
+        valor = sensor_color_right.rgb()[1]
+        angulo = valor - threshold
+        k = 0.8
+        motors.drive(120, k*angulo)
+    motors.stop()
+    
+    
+    turn_left(90)
+    stop()
+    move_forward_cm(6)
+    stop()
+    turn_left(90)
+    
+    while not side_detection() and not saw_red():
+        move_forward(280)
+    
+    stop()
+    
+    if(saw_red()):
+        reposition()
+        while not side_detection():
+            move_backward(-250)
+        stop()
+    move_backward_cm(3)   
+    turn_left(90)
+    stop()
+    wait(500)
+    while not blueRight() and not blueLeft():
+        move_forward(180) 
+    stop()
+    #reposition()
+    print("vou te pegar")
+    close_claw(250)
+    reposition()
+    move_forward_cm(4)
+    #verificar se tem algo na frente por preucação
+    close_claw()
+    move_backward_cm(6)
+    stop()
+    reposition()
+    stop()
+    move_backward_cm(10)
+    check_point()
+    #ver como vai ser tratado o return
+    
+    
     
 
 
@@ -624,10 +684,20 @@ def drugstore():
         turn_left(90)
         move_forward_cm(75)
         if obstacle("lado"):
-            move_forward_cm(65)
-            turn_left(90)
-            move_forward_cm(35)
-            turn_left(90)
+            if obstacle():
+                move_backward_cm(75)
+                turn_left(90)
+                move_forward_cm(70)
+                turn_right(90)
+                move_forward_cm(130)
+                turn_right(90)
+                move_forward_cm(35)
+                turn_right(90)
+            else:
+                move_forward_cm(65)
+                turn_left(90)
+                move_forward_cm(35)
+                turn_left(90)
         else:
             turn_left(90)
             move_forward_cm(40, True, "F")
