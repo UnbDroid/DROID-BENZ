@@ -4,8 +4,8 @@
 
 </div>
 
-## Competição interna de 2023
-- Equipe: Droid-Benz
+## Competição Brasileira de Robótica de 2023
+- Equipe: DROID - BENZ
 - Robô: Hamilton
 
 
