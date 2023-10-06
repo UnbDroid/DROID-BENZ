@@ -16,7 +16,7 @@ from modules.claw import *
 #----------------------------------------------------------------------------------------------------------------------------------
 #Funções iniciais
 ### recognize_first() arrumar a logica.!!!
-recognize()
+#recognize()
 #recognize_first() ## Função inicial até o azul
 #open_claw()
 #while True:
@@ -105,15 +105,15 @@ while True:
   wait(3000)"""
 #------------------------------------------------------------------------------------------------------
 #treinar kp e ki
-'''i = 0
-while i <= 0 :
+i = 0
+while i <= 4 :
   #turn_left(90)
   turn_right(90)
   print("Virei")
   stop()
   wait(10000)
   i+=1
-  '''
+
 #------------------------------------------------------------------------------------------------------
 
 #teste para andar
