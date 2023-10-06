@@ -140,18 +140,24 @@ def recognize():
     case_4 = 0
     
     while not saw_blue():
-        move_forward(400)
-            
+        while not saw_red() and not saw_black() and not saw_yellow() and not obstacle() and not saw_blue():
+            move_forward(380)
+
+        stop()   
         if saw_red():
             stop()
             reposition()
             if wall_first == 0:
                 case = scanner_initial("Red")
-                wall_first += 1              
+                wall_first += 1   
+                while not saw_red():
+                    move_forward(350)
+                stop()
+                reposition()           
 
 
             elif case_1 == 2 or case_4 == 2:
-                move_backward_cm(35)
+                move_backward_cm(43)
                 turn_right(90)
                 stop()
                 case_1 = 4
@@ -159,6 +165,7 @@ def recognize():
         if saw_black():
             stop()
             reposition()
+            print("vi black")
             if wall_first == 0:
                 case = scanner_initial("Black")
                 wall_first += 1   
@@ -167,7 +174,7 @@ def recognize():
                 #E bateu na parede preta
                 stop()
                 reposition()
-                move_backward_cm(9)
+                move_backward_cm(10)
                 turn_right(90)
                 move_forward_cm(35) #B
                 turn_right(90)
@@ -180,8 +187,10 @@ def recognize():
             
 
         if saw_yellow():
+            print("VI preto")
             stop()
             reposition()
+            print("Entrei aqui")
             if wall_first == 0:
                 case = scanner_initial("Yellow")
                 wall_first += 1  
@@ -199,8 +208,8 @@ def recognize():
                     stop()
                     case_1 += 1
                 turn_left(90)
-                case_1 += 1
-                case_2 += 1
+                case_1 += 1 #3
+                case_2 += 1 
 
             elif case_1 == 2 or case_4 == 1:
                 #G
@@ -214,7 +223,7 @@ def recognize():
                 #vira para direita e vira na outra rua
                 turn_right(90)
                 stop()
-                move_forward_cm(35)
+                move_forward_cm(43)
                 stop()
                 turn_left(90)
                 stop()
@@ -227,13 +236,13 @@ def recognize():
             print(wall_first)
             if case == 1: #[Black, Vermelho, Yellow]
                 print("Entrei aqui")
-                move_backward_cm(38) #verificar
+                move_backward_cm(43) #verificar
                 maybe_red += 1
                 stop()
                 turn_left(90)
                 case_1 += 1
             elif case == 2: #[Yellow, Vermelho, Yellow]
-                move_backward_cm(38)
+                move_backward_cm(43)
                 stop()
                 turn_right(90)
                 case_2 += 1
@@ -254,25 +263,32 @@ def recognize():
             elif case == 6: #[White, Black, White]
                 pass
 
-    if saw_blue():
-        stop()
-        reposition()
-        return False
+        if saw_blue():
+            stop()
+            reposition()
+            stop()
+            return False
         
 
-def forward_while_white(distance = 10):
-    print(distance != 0 and saw_white())
-    print(distance,"  ", saw_white())
-    while distance != 0 and saw_white():
-        print(distance)
-        move_forward_cm(2)
-        distance -= 2
+def forward_while_white(distance = 15):
+   # print(distance != 0 and saw_white())
+    #print(distance,"  ", saw_white())
+    time_h = StopWatch()
+    time_h.reset()
+    print("Tempo ", time_h.time())
+    while time_h.time() <= 2000 and not saw_black() and not saw_red() and not saw_yellow():
+        print("Tempo ", time_h.time())
+        move_forward(240) 
+
     stop()
-    print(whiteRight(),"   ", whiteLeft())
-    if not saw_white():
-        print("ue")
-        #reposition()
-    return 10 - distance
+    time_h.reset()
+    print("Ora ora")
+    
+    if saw_black() or saw_red() or  saw_yellow():
+        reposition()
+        distance = 17
+
+    return 15
 
 def scanner_initial(first):
     paredes = []
@@ -296,6 +312,7 @@ def scanner_initial(first):
             else:
                 paredes.append("White")
             move_backward_cm(distance)
+            print(paredes)
         turn_right(90)
     else:
         paredes = ["Red"]

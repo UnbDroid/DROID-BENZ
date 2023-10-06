@@ -145,7 +145,7 @@ def moving_straight_cm(distance, velocity = 400):
     
     stop()
 
-def moving_backward_cm(distance, velocity = 380):
+def moving_backward_cm(distance, velocity = 390):
     motor_left.reset_angle(0)
     motor_right.reset_angle(0)
     angle = (distance * -1321)/55+6
@@ -212,8 +212,8 @@ def move_backward_cm(mm, save = False, reference = "F") :
 
 
 def turn_left(angle, save = False, reference = 'R'):
-    kp = 1.0000000
-    ki = 0.0 #0.0000001 #se tiver rodando mais coloca menos
+    kp = 1.005
+    ki = 0.001 #0.0000001 #se tiver rodando mais coloca menos
     wait(500)
     set_point = 784*(angle/360)
     set_point = round(set_point)
@@ -221,8 +221,8 @@ def turn_left(angle, save = False, reference = 'R'):
     while not (abs(set_point - motor_right.angle()) <= 177):
         current_angle = motor_right.angle()
         current_angle  += calculate_pid(kp, ki, set_point, current_angle)
-        motor_left.run_angle(200, - current_angle -(set_point - motor_right.angle())*0.1, wait=False)
-        motor_right.run_angle(200, current_angle +(set_point - motor_right.angle())*0.1, wait=True)
+        motor_left.run_angle(200, - current_angle , wait=False)
+        motor_right.run_angle(200, current_angle, wait=True)
         #print(" motor right and left :",motor_right.angle(), motor_left.angle())
         #print(" motor left :",motor_left.angle())
         print("difference", abs(set_point - motor_right.angle()))
@@ -235,7 +235,7 @@ def turn_left(angle, save = False, reference = 'R'):
 
 
 def turn_right(angle, save = False, reference = 'L'):
-    kp = 1.002 # Crecendo vai pra direita Diminuindo vai pra esquerda
+    kp = 1.0015 # Crecendo vai pra direita Diminuindo vai pra esquerda
     ki = 0 #0.00006 #sempre olhar isso
     # wait(500)
     set_point = 784*(angle/360)
@@ -246,8 +246,8 @@ def turn_right(angle, save = False, reference = 'L'):
     while not (abs(set_point-motor_left.angle()) <= 177): #18
         current_angle = motor_left.angle()
         current_angle  += calculate_pid(kp, ki, set_point, current_angle)
-        motor_left.run_angle(200, current_angle  + (set_point - motor_right.angle())*0.1, wait=False)
-        motor_right.run_angle(200, -current_angle  -(set_point - motor_right.angle())*0.1, wait=True)
+        motor_left.run_angle(200, current_angle , wait=False)
+        motor_right.run_angle(200, -current_angle , wait=True)
         #print(" motor left :",motor_left.angle())
         #regular sempre
         print("difference", abs(set_point - motor_left.angle()))
@@ -299,7 +299,7 @@ def stop(save = False):
     motor_left.hold()
     motor_right.hold()
     while motor_right.speed() != 0 or motor_left.speed() != 0:
-        wait(500)
+        wait(200)
     motor_left.reset_angle(0)
     motor_right.reset_angle(0)
 
