@@ -81,8 +81,8 @@ black_right = [[0,0,0],[7, 24, 21]] #ok
 brown_left = [[20,10,0],[35,30,18]]
 brown_right = [[24,9,0],[45,32,15]] 
 
-white_left = [[67, 88, 73], [83, 104, 89]]
-white_right = [[48, 80, 92], [64, 96, 108]]
+white_left = [[63, 81, 63], [79, 97, 79]]
+white_right = [[45, 71, 92], [61, 87, 108]]
 
 blue_i_white_left = [[18, 37, 36], [28, 47, 46]]
 blue_i_white_right = [[8, 26, 63], [18, 36, 73]]
@@ -160,6 +160,9 @@ def brownRight() :
 
 #Declaration of detected colors
 
+def saw_wall():
+    return (blackRight() and blackLeft()) or (yellowRight() and yellowLeft()) or (blackRight() and yellowLeft()) or (yellowRight() and blackLeft())
+
 def saw_red():
     return redRight() or redLeft()
 
@@ -234,6 +237,7 @@ def test(sensor, color):
     print("g  ", (color[0][1] <= rgb[1] and rgb[1] <= color[1][1]), "    ", rgb[1])
     print("b  ", (color[0][2] <= rgb[2] and rgb[2] <= color[1][2]), "    ", rgb[2])
     print("#####################################################################")
+    wait(2000)
 
 def percentagem(rgb, color_max): # porcentagem do maior valor
 	aux = [(color_max[0]/rgb[0]), (color_max[1]/rgb[1]), (color_max[2]/rgb[2])]

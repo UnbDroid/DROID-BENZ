@@ -114,7 +114,12 @@ def move_forward(velocity):
 
     control_signal_right = motor_right.speed()
     control_signal_left = motor_left.speed()
-
+    if saw_wall():
+        pass
+    elif blackLeft() or yellowLeft():
+        turn_right(2)
+    elif blackRight() or yellowRight():
+        turn_left(2)
 
     control_signal_right += calculate_pid(kp_right, ki_right, velocity, control_signal_right)
     control_signal_left += calculate_pid(kp_left, ki_left, velocity, control_signal_left)
@@ -152,13 +157,13 @@ def moving_backward_cm(distance, velocity = 380):
     stop()
 
 def move_forward_cm(cm, save = False, reference = "B") :
-    if cm < 11:
-        motor_left.reset_angle(0)
-        motor_right.reset_angle(0)
-        moving_straight_cm(cm, 150) #! analizar esses valores
+    motor_left.reset_angle(0)
+    motor_right.reset_angle(0)
+    if cm > 0 and cm < 3:
+        moving_straight_cm(cm, 220) #! analizar esses valores
+    elif cm < 11:
+        moving_straight_cm(cm, 280) #! analizar esses valores
     else:
-        motor_left.reset_angle(0)
-        motor_right.reset_angle(0)
         moving_straight_cm(cm)
 
     if save and reference == "F":
@@ -194,7 +199,7 @@ def move_backward_cm(mm, save = False, reference = "F") :
     if mm < 11:
         motor_left.reset_angle(0)
         motor_right.reset_angle(0)
-        moving_backward_cm(mm, 150)
+        moving_backward_cm(mm, 300)
     else:
         motor_left.reset_angle(0)
         motor_right.reset_angle(0)
@@ -207,13 +212,13 @@ def move_backward_cm(mm, save = False, reference = "F") :
 
 
 def turn_left(angle, save = False, reference = 'R'):
-    kp = 1.02
+    kp = 0.91
     ki = 0.00002 #0.0000001 #se tiver rodando mais coloca menos
     wait(500)
-    set_point = 767*(angle/360)
+    set_point = 747*(angle/360)
     set_point = round(set_point)
     stop()
-    while not (abs(set_point - motor_right.angle()) <= 25):
+    while not (abs(set_point - motor_right.angle()) <= 29):
         current_angle = motor_right.angle()
         current_angle  += calculate_pid(kp, ki, set_point, current_angle)
         motor_left.run_angle(200, - current_angle -(set_point - motor_right.angle())*0.1, wait=False)
@@ -230,13 +235,15 @@ def turn_left(angle, save = False, reference = 'R'):
 
 
 def turn_right(angle, save = False, reference = 'L'):
-    kp = 0.99
-    ki = 0.00006 #sempre olhar isso
-    wait(500)
-    set_point = 767*(angle/360)
+    kp = 1.1142 # Crecendo vai pra direita Diminuindo vai pra esquerda
+    ki = 0 #0.00006 #sempre olhar isso
+    # wait(500)
+    set_point = 784*(angle/360)
     set_point = round(set_point)
+
     stop()
-    while not (abs(set_point-motor_left.angle()) <= 20):
+    
+    while not (abs(set_point-motor_left.angle()) <= 177): #18
         current_angle = motor_left.angle()
         current_angle  += calculate_pid(kp, ki, set_point, current_angle)
         motor_left.run_angle(200, current_angle  + (set_point - motor_right.angle())*0.1, wait=False)
@@ -260,7 +267,7 @@ def turn_right_180(angle = 180, save = False): #! ajustar
     set_point = 811*(angle/360)
     set_point = round(set_point)
     stop()
-    while not (abs(set_point-motor_left.angle()) <= 18):
+    while not (abs(set_point-motor_left.angle()) <= 18): #18
         current_angle = motor_left.angle()
         control_signal = calculate_pid(kp, ki, set_point, current_angle)
         motor_left.run_angle(200, control_signal, wait=False)
@@ -272,7 +279,19 @@ def turn_right_180(angle = 180, save = False): #! ajustar
     if save:
         stack.append(["turn_left", angle])
 
-        
+def jota(inverted = False):
+    move_forward_cm(60)
+    if inverted:
+        turn_right(90)
+    else:
+        turn_left(90)
+    move_forward_cm(75)
+    if inverted:
+        turn_right(90)
+    else:
+        turn_left(90)
+    move_forward_cm(95)
+    
 
 
     
@@ -336,7 +355,7 @@ def verification_path():
 # FUNÇÕES DE TESTES ------------------------------------------------------
 
 def regular(): # Função de ajustar os valores
-    motors.turn(300)
+    motors.turn(280)
     while not blackRight() or not blackLeft():
         motors.turn(1)
     motors.stop()

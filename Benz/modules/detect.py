@@ -11,13 +11,13 @@ infra_sensor = InfraredSensor(Port.S4)
 
 ev3 = EV3Brick()
 
-server = BluetoothMailboxServer()
+'''server = BluetoothMailboxServer()
 eve3box = TextMailbox('greeting', server)
 
 print('waiting for connection...')
 server.wait_for_connection()
 print('connected!')
-
+'''
 def obstacle(default = "frente", scanner = False):
 
     if default == "frente":
@@ -26,7 +26,7 @@ def obstacle(default = "frente", scanner = False):
             return True
         else:
             return False
-    else:
+    elif default == "lado":
         print(infra_sensor.distance())
         if infra_sensor.distance() <= 39:
             ev3.speaker.beep(200)

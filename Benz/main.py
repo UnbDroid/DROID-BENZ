@@ -16,10 +16,12 @@ from modules.claw import *
 #----------------------------------------------------------------------------------------------------------------------------------
 #Funções iniciais
 ### recognize_first() arrumar a logica.!!!
-
-recognize_first() ## Função inicial até o azul
+# recognize()
+#forward_while_white()
+#recognize_first() ## Função inicial até o azul
 #open_claw()
-
+while True:
+  test(sensor_color_left, white_left)
 
 # find_passenger() scanneamento
 #check_point() vai pro check point( VERMELHO )
@@ -94,23 +96,24 @@ print("real oficial ",regulagem)'''
 
 #-------------------------------------------------------------------------------------------------------
 #calibrando cores 
-'''array = [[57,7,0],[78,27,25]]
+"""array = [[57,7,0],[78,27,25]]
 while True:
   print("R")
   calibration_auto(sensor_color_right, array)
   print("L")
   calibration_auto(sensor_color_left, array)
-  wait(3000)'''
+  wait(3000)"""
 #------------------------------------------------------------------------------------------------------
 #treinar kp e ki
 '''i = 0
-while i < 4:
-  turn_left(90)
+while i <= 0 :
+  #turn_left(90)
+  turn_right(90)
   print("Virei")
   stop()
-  wait(1000)
-  i+=1'''
-  
+  wait(10000)
+  i+=1
+  '''
 #------------------------------------------------------------------------------------------------------
 
 #teste para andar

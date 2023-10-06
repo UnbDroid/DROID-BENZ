@@ -21,21 +21,6 @@ total_of_passengers_of_10cm = 1
 total_of_passengers_of_15cm = 1
 time_forward = 0
 
-
-def swap_and_add():
-    if side_to_turn[0] == "Left":
-        turn_left(90)
-        if side_to_turn[1] == 2:
-            side_to_turn = ["Right", 1]
-        elif side_to_turn[1] == 1:
-            side_to_turn[1] += 1
-    else:
-        turn_right(90)
-        if side_to_turn[1] == 2:
-            side_to_turn = ["Left", 1]
-        elif side_to_turn[1] == 1:
-            side_to_turn += 1
-
 def recognize_first():
     #trabalhar
     wall_red = 0
@@ -143,18 +128,19 @@ def path_red():
     stop()
 
 def recognize():
+    stop()
+    print("starting")
     obstacle_count = 0
-    red_wall = 0
-    yellow_wall = 0
-    black_wall = 0
+
     maybe_red = 0
     wall_first = 0
+    case_1 = 0
+    case_2 = 0
+    case_3 = 0
+    case_4 = 0
     
     while not saw_blue():
-        if saw_blue():
-            stop()
-            reposition()
-            return False
+        move_forward(400)
             
         if saw_red():
             stop()
@@ -162,10 +148,13 @@ def recognize():
             if wall_first == 0:
                 case = scanner_initial("Red")
                 wall_first += 1              
-            elif red_wall == 2:
-                #algo
-                red_wall = 0
-            red_wall +=1
+
+
+            elif case_1 == 2 or case_4 == 2:
+                move_backward_cm(35)
+                turn_right(90)
+                stop()
+                case_1 = 4
             
         if saw_black():
             stop()
@@ -173,12 +162,21 @@ def recognize():
             if wall_first == 0:
                 case = scanner_initial("Black")
                 wall_first += 1   
-            elif black_wall == 1 and obstacle_count == 0:
+            
+            elif case_1 == 3 or case_2 == 3:
+                #E bateu na parede preta
+                stop()
+                reposition()
+                move_backward_cm(9)
+                turn_right(90)
+                move_forward_cm(35) #B
+                turn_right(90)
+            else:
+                move_backward_cm(10)
                 stop()
                 turn_left(90)
                 stop()
                 turn_left(90)
-            black_wall += 1
             
 
         if saw_yellow():
@@ -189,39 +187,93 @@ def recognize():
                 wall_first += 1  
             yellow_wall += 1 
             
-        if obstacle():
-            path_obstacle()
+        if obstacle():            
+            #vai virando aos poucos 
+            if case_1 == 1 or case_2 == 2:
+                #Vê obstáculo no J 
+                stop()
+                move_backward_cm(5)
+                stop()
+                print("Vi e irei virar")
+                if obstacle("lado"):
+                    turn_left(90)
+                    stop()
+                    case_1 += 1
+                turn_left(90)
+                case_1 += 1
+                case_2 += 1
+
+            elif case_1 == 2 or case_4 == 1:
+                #G
+                stop()
+                move_backward_cm(5)
+                stop()
+                turn_left(90)
+                case_1 += 1
+                case_4 += 1
+            elif case_1 == 4 or case_2 == 1 :
+                #vira para direita e vira na outra rua
+                turn_right(90)
+                stop()
+                move_forward_cm(35)
+                stop()
+                turn_left(90)
+                stop()
+                case_2 += 1 
+            else:
+                path_obstacle()
 
         if wall_first == 1:
+            wall_first = 2
+            print(wall_first)
             if case == 1: #[Black, Vermelho, Yellow]
+                print("Entrei aqui")
                 move_backward_cm(38) #verificar
                 maybe_red += 1
                 stop()
                 turn_left(90)
+                case_1 += 1
             elif case == 2: #[Yellow, Vermelho, Yellow]
                 move_backward_cm(38)
                 stop()
                 turn_right(90)
+                case_2 += 1
                 
             elif case == 3: #[Yellow, White, Yellow]
-                pass
+                turn_left(90)
+                case_3 += 1
+                
             elif case == 4: #[Black, White, Yellow]
-                pass
-            
-            elif case == 5: #[Yellow, Red, Yellow]
-                move_backward_cm(38)
-                stop()
                 turn_right(90)
+                stop()
+                case_4 += 1
+            
+         #   elif case == 5: #[Yellow, Red, Yellow]
+          #      move_backward_cm(38)
+           #     stop()
+            #    turn_right(90)
             elif case == 6: #[White, Black, White]
                 pass
 
+    if saw_blue():
+        stop()
+        reposition()
+        return False
+        
+
 def forward_while_white(distance = 10):
+    print(distance != 0 and saw_white())
+    print(distance,"  ", saw_white())
     while distance != 0 and saw_white():
+        print(distance)
         move_forward_cm(1)
         distance -= 1
     stop()
-    reposition()
-    return 10 - distance
+    print(whiteRight(),"   ", whiteLeft())
+    if not saw_white():
+        print("ue")
+        #reposition()
+    return 5 - distance
 
 def scanner_initial(first):
     paredes = []
@@ -276,16 +328,22 @@ def cases(lista):
     if lista[1] == "Red":
         if lista[0] == "Black" and lista[2] == "Yellow":
             return 1
+            #Preto, vermelho, amarelo
         elif lista.count("Yellow") == 2:
             return 5
+            #Amarelo, vermelho, amarelo
         else:
             return 2
+            #Acho que n precisa
     else:
         if lista.count("Yellow") == 2:
             return 3
+            #Amarelo, Branco e Amarelo
         elif lista.count("White") == 3:
             return 6
+            #rapaz, to sem zap
         else:
+            #Preto, Branco e Amarelo
             return 4
 
 
@@ -321,43 +379,6 @@ def final_tube():
     stop()
     print("Ready to start taking passangers")
 
-
-
-def recognize():
-    down = 0
-    up = 0
-    center = 0
-    turn_90_right()
-    move_forward(480)
-    if(saw_black_left() and saw_black_right()):
-        stop()
-        down += 1
-    elif (saw_yellow_left() and saw_yellow_right()):
-        up += 1
-
-    turn_180()
-    move_forward(360*10)
-
-    if(saw_yellow_left() and saw_yellow_right()):
-        stop()
-        down += 1
-        up += 1
-
-    turn_90_left()
-    move_forward(150)
-
-    if(saw_red_right() and saw_red_left()):
-        stop()
-        down += 1
-        up += 1
-    if(down == 3):
-        move_forward_cm(15)
-        turn_90_right()
-    if(up == 3):
-        move_forward_cm(15)
-        turn_90_leftt()
-
-    print("start")
 
 
 def find_passenger_2(final = True):

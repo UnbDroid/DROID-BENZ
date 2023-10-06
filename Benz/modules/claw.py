@@ -4,7 +4,7 @@ from pybricks.tools import  StopWatch
 from pybricks.parameters import Stop
 
 
-motor_claw = Motor(Port.D)
+motor_claw = Motor(Port.C)
 
 time_open_claw = 2500 
 
