@@ -16,12 +16,12 @@ from modules.claw import *
 #----------------------------------------------------------------------------------------------------------------------------------
 #Funções iniciais
 ### recognize_first() arrumar a logica.!!!
-# recognize()
-#forward_while_white()
+recognize()
 #recognize_first() ## Função inicial até o azul
 #open_claw()
-while True:
-  test(sensor_color_left, white_left)
+#while True:
+'''  test(sensor_color_left, white_left)
+  wait(2000)'''
 
 # find_passenger() scanneamento
 #check_point() vai pro check point( VERMELHO )

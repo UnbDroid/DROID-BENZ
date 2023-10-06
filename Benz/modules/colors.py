@@ -1,5 +1,4 @@
-from pybricks.parameters import  Color
-from pybricks.parameters import Port
+from pybricks.parameters import  Color, Port
 from pybricks.ev3devices import ColorSensor
 
 sensor_color_left = ColorSensor(Port.S2) 

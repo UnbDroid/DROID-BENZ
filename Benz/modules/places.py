@@ -185,7 +185,6 @@ def recognize():
             if wall_first == 0:
                 case = scanner_initial("Yellow")
                 wall_first += 1  
-            yellow_wall += 1 
             
         if obstacle():            
             #vai virando aos poucos 
@@ -266,14 +265,14 @@ def forward_while_white(distance = 10):
     print(distance,"  ", saw_white())
     while distance != 0 and saw_white():
         print(distance)
-        move_forward_cm(1)
-        distance -= 1
+        move_forward_cm(2)
+        distance -= 2
     stop()
     print(whiteRight(),"   ", whiteLeft())
     if not saw_white():
         print("ue")
         #reposition()
-    return 5 - distance
+    return 10 - distance
 
 def scanner_initial(first):
     paredes = []
