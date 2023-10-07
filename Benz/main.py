@@ -15,20 +15,33 @@ from modules.claw import *
 
 #----------------------------------------------------------------------------------------------------------------------------------
 #Funções iniciais
-#recognize()
-#find_passenger()
 '''recognize() 
 while True:
   print("Buscando passageiro")
-  find_passenger()
-  tubo = check_point()
-  decision(tubo)
+  find_passenger() #scanneamento
+  tubo = check_point() #vai pro check point( VERMELHO )
+  decision(tubo) #Vai entregar o tubo
   leave_passenger()'''
     
+#-------------------------------------------------------------------------------------------------------
+#calibrando cores 
+'''array = [[57,7,0],[78,27,25]] #isso aqui é para ter uma base mas n interfere no resultado
+while True:
+  print("Cor azul")
+  #print("Cor amarelo")
+  #print("Cor vermelho")
+  #print("Cor preto")
+  print("RGB do direito")
+  calibration_auto(sensor_color_right, array)
+  print("RGB do esquerdo")
+  calibration_auto(sensor_color_left, array)
+  wait(3000)'''
 
-# find_passenger() scanneamento
-#check_point() vai pro check point( VERMELHO )
-#decision(tube) Vai entregar o tubo
+#coloque o valor aqui do azul = Direito: [[0, 10, 34], [16, 26, 50]]       Esquerdo: [[7, 14, 24], [23, 30, 40]]
+#coloque o valor aqui do amarelo = Direito: [[31, 58, 8], [47, 74, 24]]       Esquerdo:  [[55, 79, 8], [71, 95, 24]]
+#coloque o valor aqui do vermelho = Direito: [[37, 5, 5], [53, 21, 21]]      Esquerdo: [[62, 8, 5], [78, 24, 21]]
+#coloque o valor aqui do preto = Direito: [[-2, 6, 3], [14, 22, 19]]      Esquerdo:  [[3, 7, 0], [19, 23, 16]]
+
 
 #----------------------------------------------------------------------------------------------------------------------------------
 #Teste para andar em cm
@@ -59,7 +72,7 @@ print("Direito", (motor_right.angle()))
 #open_claw()
 #close_claw(700)
 #stop()
-#turn_right(90)
+#69o,turn_right(90)
 #turn_left(90)
 #move_backward_cm(60)
 #move_backward_cm(60)
@@ -74,7 +87,6 @@ stop()'''
 
 
 
-#----------------------------------------------------------------------#
 #regular o giro
 #boa sorte :D
 #stop()
@@ -96,25 +108,18 @@ print("real oficial ",regulagem)'''
 #---------------------------------------------------------------------#
 
 
-#-------------------------------------------------------------------------------------------------------
-#calibrando cores 
-'''array = [[57,7,0],[78,27,25]]
-while True:
-  print("R")
-  calibration_auto(sensor_color_right, array)
-  print("L")
-  calibration_auto(sensor_color_left, array)
-  wait(3000)'''
+
 #------------------------------------------------------------------------------------------------------
 #treinar kp e ki
 i = 0
-while i < 10 :
+while i < 2 :
+  #turn_left(90)
   turn_left(90)
-  #turn_right(90)
   print("Virei")
   stop()
   wait(1000)
   i+=1
+#turn_left(90)
 
 #------------------------------------------------------------------------------------------------------
 
@@ -158,3 +163,4 @@ print(motor_right.angle())
 # [16, 39, 65]
 
 #enter()
+
