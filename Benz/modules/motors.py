@@ -212,7 +212,33 @@ def move_backward_cm(mm, save = False, reference = "F") :
 
 
 def turn_left(angle, save = False, reference = 'R'):
-    kp = 1.01
+    kp_left = 0.98 # Crecendo vai pra direita Diminuindo vai pra esquerda 0.953
+    ki_left = 0 #0.00006 #sempre olhar isso
+    kp_right = 0.79 # Crecendo vai mais Diminuindo vai menos
+    ki_right = 0  #0.00006 #sempre olhar isso
+    # wait(500)
+    set_point = 784*(angle/360)
+    set_point = round(set_point)
+    
+    current_angle_left = motor_left.angle()
+    current_angle_right = motor_right.angle()
+    current_angle_left  += calculate_pid(kp_left, ki_left, set_point, current_angle_left)
+    current_angle_right  += calculate_pid(kp_right, ki_right, set_point, current_angle_right)
+    
+    motor_left.run_angle(200, -current_angle_left  + (set_point - motor_left.angle())*0.1, wait=False)
+    motor_right.run_angle(200, current_angle_right  - (set_point - motor_left.angle())*0.1, wait=True)
+    #print(" motor left :",motor_left.angle())
+    #regular sempre
+    print("difference", abs(set_point - motor_left.angle()))
+    #print(set_point)
+    # print(current_angle)
+    print("leftou")
+
+    if save and reference == 'L':
+        stack.append(["turn_left", angle])
+    elif save and reference == 'R':
+        stack.append(["turn_right", angle])
+''' kp = 1.01
     ki = 0.00002 #0.0000001 #se tiver rodando mais coloca menos
     wait(500)
     set_point = 784*(angle/360)
@@ -227,15 +253,38 @@ def turn_left(angle, save = False, reference = 'R'):
         #print(" motor left :",motor_left.angle())
         print("difference", abs(set_point - motor_right.angle()))
        # print(set_point)
+    stop()'''
+
+
+def turn_right(angle, save = False, reference = 'L'):
+    kp_left = 0.968 # Crecendo vai pra direita Diminuindo vai pra esquerda 0.953
+    ki_left = 0.000001 #0.00006 #sempre olhar isso
+    kp_right = 0.953 # Crecendo vai pra direita Diminuindo vai pra esquerda
+    ki_right = 0.00006 #0.00006 #sempre olhar isso
+    # wait(500)
+    set_point = 784*(angle/360)
+    set_point = round(set_point)
+    
+    current_angle_left = motor_left.angle()
+    current_angle_right = motor_right.angle()
+    current_angle_left  += calculate_pid(kp_left, ki_left, set_point, current_angle_left)
+    current_angle_right  += calculate_pid(kp_right, ki_right, set_point, current_angle_right)
+    
+    motor_left.run_angle(200, current_angle_left  + (set_point - motor_right.angle())*0.1, wait=False)
+    motor_right.run_angle(200, -current_angle_right  -(set_point - motor_right.angle())*0.1, wait=True)
+    #print(" motor left :",motor_left.angle())
+    #regular sempre
+    print("difference", abs(set_point - motor_left.angle()))
+    #print(set_point)
+    # print(current_angle)
+    print("rightou")
     stop()
+    # print("SaÃ­")
     if save and reference == 'L':
         stack.append(["turn_left", angle])
     elif save and reference == 'R':
         stack.append(["turn_right", angle])
-
-
-def turn_right(angle, save = False, reference = 'L'):
-    kp = 0.951 # Crecendo vai pra direita Diminuindo vai pra esquerda
+'''    kp = 0.951 # Crecendo vai pra direita Diminuindo vai pra esquerda
     ki = 0 #0.00006 #sempre olhar isso
     # wait(500)
     set_point = 784*(angle/360)
@@ -252,14 +301,8 @@ def turn_right(angle, save = False, reference = 'L'):
         #regular sempre
         print("difference", abs(set_point - motor_left.angle()))
         #print(set_point)
-       # print(current_angle)
-    print("rightou")
-    stop()
-    # print("SaÃ­")
-    if save and reference == 'L':
-        stack.append(["turn_left", angle])
-    elif save and reference == 'R':
-        stack.append(["turn_right", angle])
+       # print(current_angle)'''
+
 def turn_right_180(angle = 180, save = False): #! ajustar
     kp = 0.58
     ki = 0.0002

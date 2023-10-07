@@ -17,15 +17,14 @@ from modules.claw import *
 #Funções iniciais
 #recognize()
 #find_passenger()
-recognize() 
+'''recognize() 
 while True:
   print("Buscando passageiro")
   find_passenger()
   tubo = check_point()
   decision(tubo)
-  leave_passenger()
+  leave_passenger()'''
     
-
 
 # find_passenger() scanneamento
 #check_point() vai pro check point( VERMELHO )
@@ -108,15 +107,15 @@ while True:
   wait(3000)'''
 #------------------------------------------------------------------------------------------------------
 #treinar kp e ki
-'''i = 0
+i = 0
 while i < 10 :
-  #turn_left(90)
-  turn_right(90)
+  turn_left(90)
+  #turn_right(90)
   print("Virei")
   stop()
   wait(1000)
   i+=1
-'''
+
 #------------------------------------------------------------------------------------------------------
 
 #teste para andar
