@@ -15,12 +15,16 @@ from modules.claw import *
 
 #----------------------------------------------------------------------------------------------------------------------------------
 #Funções iniciais
-### recognize_first() arrumar a logica.!!!
-#forward_while_white()
-recognize()
-#recognize_first() ## Função inicial até o azul
-#open_claw()
-#while True:
+#recognize()
+#find_passenger()
+recognize() 
+while True:
+  print("Buscando passageiro")
+  find_passenger()
+  tubo = check_point()
+  decision(tubo)
+  leave_passenger()
+    
 
 
 # find_passenger() scanneamento
@@ -48,7 +52,6 @@ print("Direito", (motor_right.angle()))
 #museum()
 #park()
 
-
 #----------------------------------------------------------------------------------------------------------------------------------
 #Teste básicos
 
@@ -56,10 +59,10 @@ print("Direito", (motor_right.angle()))
 #reposition("Red")
 #open_claw()
 #close_claw(700)
-
+#stop()
 #turn_right(90)
 #turn_left(90)
-#move_forward_cm(60)
+#move_backward_cm(60)
 #move_backward_cm(60)
 
 
@@ -106,14 +109,14 @@ while True:
 #------------------------------------------------------------------------------------------------------
 #treinar kp e ki
 '''i = 0
-while i < 4 :
+while i < 10 :
   #turn_left(90)
   turn_right(90)
   print("Virei")
   stop()
   wait(1000)
-  i+=1'''
-
+  i+=1
+'''
 #------------------------------------------------------------------------------------------------------
 
 #teste para andar

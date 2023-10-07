@@ -11,13 +11,13 @@ infra_sensor = InfraredSensor(Port.S4)
 
 ev3 = EV3Brick()
 
-'''server = BluetoothMailboxServer()
+server = BluetoothMailboxServer()
 eve3box = TextMailbox('greeting', server)
 
 print('waiting for connection...')
 server.wait_for_connection()
 print('connected!')
-'''
+
 def obstacle(default = "frente", scanner = False):
 
     if default == "frente":
