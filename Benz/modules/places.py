@@ -138,6 +138,7 @@ def recognize():
     case_2 = 0
     case_3 = 0
     case_4 = 0
+    case_5 = 0
     
     while not saw_blue():
         while not saw_red() and not saw_black() and not saw_yellow() and not obstacle() and not saw_blue():
@@ -152,13 +153,16 @@ def recognize():
             print("vi black")
             if wall_first == 0:
                 case = scanner_initial("Black")
-                while not saw_black():
-                    move_forward(350)
-                stop()
-                reposition() 
+                if case != 5:
+                    while not saw_black():
+                        move_forward(350)
+                    stop()
+                    reposition() 
+
                 wall_first += 1   
             elif case_3 == 3:
                 turn_right(90)
+                stop()
                 turn_right(90)
 
             elif case_1 == 7 or case_2 == 3 or case_4 == 8 :
@@ -168,15 +172,18 @@ def recognize():
                 reposition()
                 move_backward_cm(10)
                 turn_right(90)
+                stop()
                 move_forward_cm(60) #B
+                stop()
                 turn_right(90)
+                stop()
              
             else:
-               # move_backward_cm(10)
-                #stop()
-                #turn_left(90)
-                #stop()
-                #turn_left(90)
+                move_backward_cm(10)
+                stop()
+                turn_left(90)
+                stop()
+                turn_left(90)
                 case_1 = 8
 
 
@@ -205,6 +212,10 @@ def recognize():
             elif case_1 == 5 or case_2 == 3:
                 move_backward_cm(43)
                 turn_right(90)
+            elif case_5 >= 1 :
+                wall_first = 0
+                case_5 = 0
+                stop()
             else:
                 move_backward_cm(43)
                 turn_right(90)
@@ -245,6 +256,12 @@ def recognize():
                 case_1 += 1 #2
                 case_2 += 1 
                 case_4 += 1
+            elif case_5 == 1:
+                turn_right(90)
+                case_5 += 1
+            elif case_5 == 2:
+                turn_right(180)
+                case_5 += 1
             elif case_3 == 1:
                 turn_right(90)
                 turn_right(90)
@@ -296,7 +313,7 @@ def recognize():
 
 
 
-        if wall_first == 0: #colocar 2
+        if wall_first == 1: #colocar 2
             wall_first = 2
             print(wall_first)
             if case == 1: #[Black, Vermelho, Yellow]
@@ -324,8 +341,15 @@ def recognize():
                 case_4 += 1
                 print("Case ", case_4)
             
-            elif case == 6: #[White, Black, White]
-                pass
+            elif case == 5: #[White, Black, White]
+                print("Caso 5")
+                move_backward_cm(10)
+                turn_right(90)
+                stop()
+                turn_right(90)
+                case_5 += 1
+            else:
+                move_backward_cm(10)
 
         if saw_blue():
             print("VI azul")
@@ -340,7 +364,7 @@ def forward_while_white(distance = 15):
     #print(distance,"  ", saw_white())
     time_h = StopWatch()
     time_h.reset()
-    print("Tempo ", time_h.time())
+   # print("Tempo ", time_h.time())
     while time_h.time() <= 2000 and not saw_black() and not saw_red() and not saw_yellow():
         print("Tempo ", time_h.time())
         move_forward(240) 
@@ -370,8 +394,7 @@ def scanner_initial(first):
             if (left == "Black" and right == "Yellow") or (left == "Yellow" and right == "Black") or (left == "Yellow" and right == "Yellow"):
                 paredes.append("Yellow")
             elif right == "Red" or left == "Red":
-                paredes = ["Red"]
-                break
+                paredes.append("Red")
             elif left == "Black" or right == "Black":
                 paredes.append("Black")
             else:
@@ -381,7 +404,8 @@ def scanner_initial(first):
         turn_right(90)
     else:
         paredes = ["Red"]
-    if "Red" in  paredes or first == "Red":
+        move_backward_cm(6)
+    if  first == "Red":
         turn_left(90)
         distance = forward_while_white()
         left = seeLeft()
@@ -392,6 +416,7 @@ def scanner_initial(first):
             paredes.insert(0, "Black")
         move_backward_cm(15)
         turn_left(90)
+        stop()
         turn_left(90)
         distance = forward_while_white()
         left = seeLeft()
@@ -400,28 +425,30 @@ def scanner_initial(first):
             paredes.append("Yellow")
         elif left == "Black" or right == "Black":
             paredes.append("Black")
+        stop
         move_backward_cm(15)
+        stop()
         turn_left(90)
         print(paredes)
     return cases(paredes)
            
 def cases(lista):
-    if lista[1] == "Red":
-        if lista[0] == "Black" and lista[2] == "Yellow":
+    if "Red" in lista:
+        if "Black" in lista and "Yellow" in lista:
             return 1
             #Preto, vermelho, amarelo
         elif lista.count("Yellow") == 2:
-            return 5
+            return 2
             #Amarelo, vermelho, amarelo
         else:
-            return 2
-            #Acho que n precisa
+            return 13 #surtei
     else:
         if lista.count("Yellow") == 2:
             return 3
             #Amarelo, Branco e Amarelo
         elif lista.count("White") == 3:
-            return 6
+            print("caso bacana")
+            return 5
             #rapaz, to sem zap
         else:
             #Preto, Branco e Amarelo
