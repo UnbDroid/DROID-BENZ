@@ -153,6 +153,7 @@ def recognize():
             print("vi black")
             if wall_first == 0:
                 case = scanner_initial("Black")
+<<<<<<< HEAD
                 if case != 5:
                     while not saw_black():
                         move_forward(350)
@@ -160,6 +161,17 @@ def recognize():
                     reposition() 
 
                 wall_first += 1   
+=======
+                while not saw_black():
+                    move_forward(350)
+                stop()
+                reposition() 
+                wall_first += 1
+            elif case_5 == 1:
+                turn_right(90)
+                turn_right(90)
+                case_5 += 1   
+>>>>>>> 5662c8bbaa5d3852c9319c354112461b8ed23369
             elif case_3 == 3:
                 turn_right(90)
                 stop()
@@ -256,12 +268,18 @@ def recognize():
                 case_1 += 1 #2
                 case_2 += 1 
                 case_4 += 1
+<<<<<<< HEAD
             elif case_5 == 1:
                 turn_right(90)
                 case_5 += 1
             elif case_5 == 2:
                 turn_right(180)
                 case_5 += 1
+=======
+            elif case_5 == 2:
+                #caso só black
+                turn_left(90)
+>>>>>>> 5662c8bbaa5d3852c9319c354112461b8ed23369
             elif case_3 == 1:
                 turn_right(90)
                 turn_right(90)
@@ -441,14 +459,21 @@ def cases(lista):
         elif lista.count("Yellow") == 2:
             return 2
             #Amarelo, vermelho, amarelo
+<<<<<<< HEAD
         else:
             return 13 #surtei
+=======
+            #Acho que n precisa
+>>>>>>> 5662c8bbaa5d3852c9319c354112461b8ed23369
     else:
         if lista.count("Yellow") == 2:
             return 3
             #Amarelo, Branco e Amarelo
         elif lista.count("White") == 3:
+<<<<<<< HEAD
             print("caso bacana")
+=======
+>>>>>>> 5662c8bbaa5d3852c9319c354112461b8ed23369
             return 5
             #rapaz, to sem zap
         else:
