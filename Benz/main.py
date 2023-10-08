@@ -37,7 +37,7 @@ print(mbox.read())
 # The server must be started before the client!
 
 
-time.sleep(2)
+# time.sleep(2)
 # This is the name of the remote EV3 or PC we are connecting to.
 """while True:
   server = BluetoothMailboxServer()
@@ -103,3 +103,8 @@ for i in range(5):
   print(reflect)
 media = reflect/5
 print(media) """
+
+
+# while True:
+#   print(size())
+#   wait(1000)

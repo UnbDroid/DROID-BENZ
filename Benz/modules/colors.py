@@ -15,9 +15,9 @@ def calibration(sensor):
 # min and max
 
 
-def calibration_auto(sensor, array):
+def calibration_auto(array):
     global teste
-    colors = sensor.rgb()
+    colors = sensor_color.rgb()
     # min
     print("Calibrando as cores")
 
@@ -34,15 +34,15 @@ def calibration_auto(sensor, array):
 
 
 # arrumar o marrom e verde
-red = [[30, 0, 0], [55, 13, 9]]  # check
+red = [[36, 0, 0], [52, 16, 15]]  # check
 
-blue = [[0, 4, 10.1], [5, 12, 16]]  # check
+blue = [[3, 38, 69], [19, 54, 85]]  # check
 
 #yellow = [[35, 64, 11], [55, 82, 30]]  
 
-green = [[0, 14, 0], [11, 30, 15]]  # check
+green = [[1, 52, 25], [17, 68, 41]]  # check
 
-brown = [[5, 2, 1.5], [17, 15, 10]]  # check
+brown = [[5, 1, 0], [21, 17, 12]]  # check
 #rgb[15.6, 7.6, 5.8]
 
 def calibration(sensor):
@@ -102,11 +102,19 @@ def see():
 
 
 def size():
-    if sensor_sup.reflection() <= 6:
-        return "10"
-    else:
-        return "15"
+    for i in range(20):
+        cor = sensor_sup.rgb()
+        if  cor[0] >= 10 or cor[1] >= 10 or cor[2] >= 10:
+            return "15"
+    return "10"
 
+def test(sensor, color):
+    rgb = sensor.rgb()
+    print("r  ",(color[0][0] <= rgb[0] and rgb[0]  <= color[1][0]),"    ", rgb[0])
+    print("g  ", (color[0][1] <= rgb[1] and rgb[1] <= color[1][1]), "    ", rgb[1])
+    print("b  ", (color[0][2] <= rgb[2] and rgb[2] <= color[1][2]), "    ", rgb[2])
+    print("#####################################################################")
+    wait(2000)
 
 def check():
     color = see()
@@ -119,4 +127,7 @@ def check():
             color = see()
         else:
             break
-    return color + " " + size()
+    tamanho = size()
+    if tamanho == "10":
+        tamanho = size()
+    return color + " " + tamanho
