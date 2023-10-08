@@ -153,7 +153,7 @@ def recognize():
             print("vi black")
             if wall_first == 0:
                 case = scanner_initial("Black")
-<<<<<<< HEAD
+  
                 if case != 5:
                     while not saw_black():
                         move_forward(350)
@@ -161,7 +161,7 @@ def recognize():
                     reposition() 
 
                 wall_first += 1   
-=======
+ 
                 while not saw_black():
                     move_forward(350)
                 stop()
@@ -171,7 +171,6 @@ def recognize():
                 turn_right(90)
                 turn_right(90)
                 case_5 += 1   
->>>>>>> 5662c8bbaa5d3852c9319c354112461b8ed23369
             elif case_3 == 3:
                 turn_right(90)
                 stop()
@@ -268,18 +267,17 @@ def recognize():
                 case_1 += 1 #2
                 case_2 += 1 
                 case_4 += 1
-<<<<<<< HEAD
+
             elif case_5 == 1:
                 turn_right(90)
                 case_5 += 1
             elif case_5 == 2:
                 turn_right(180)
                 case_5 += 1
-=======
+
             elif case_5 == 2:
                 #caso só black
                 turn_left(90)
->>>>>>> 5662c8bbaa5d3852c9319c354112461b8ed23369
             elif case_3 == 1:
                 turn_right(90)
                 turn_right(90)
@@ -459,21 +457,18 @@ def cases(lista):
         elif lista.count("Yellow") == 2:
             return 2
             #Amarelo, vermelho, amarelo
-<<<<<<< HEAD
+
         else:
             return 13 #surtei
-=======
-            #Acho que n precisa
->>>>>>> 5662c8bbaa5d3852c9319c354112461b8ed23369
+
     else:
         if lista.count("Yellow") == 2:
             return 3
             #Amarelo, Branco e Amarelo
         elif lista.count("White") == 3:
-<<<<<<< HEAD
+
             print("caso bacana")
-=======
->>>>>>> 5662c8bbaa5d3852c9319c354112461b8ed23369
+
             return 5
             #rapaz, to sem zap
         else:
@@ -680,8 +675,8 @@ def school():
         #caminho J-G-F
         print("Vish, acidente")
         backward_and_turn(65, 'L')
-        move_forward_cm(72,True)
-        turn_right(90, True) #ver isso
+        move_forward_cm(72) 
+        turn_right(90, True) #ver isso *
 
         if obstacle():
             #caminho J-E-B-D-F
@@ -689,15 +684,15 @@ def school():
             move_backward_cm(3)
             turn_left(90)
             forward_and_turn(65, 'R')
-            move_forward_cm(60, True, 'F')
-            turn_right(90, True)
-            move_forward_cm(60, True, 'F')
-            turn_left(90, True)
+            move_forward_cm(60, True, 'F') 
+            turn_right(90, True) *
+            move_forward_cm(60, True, 'F') 
+            turn_left(90, True) *
             move_forward_cm(25, True, "F")
         else:
 
             print("Sem obstáculo")
-            move_forward_cm(93, True, 'F')
+            move_forward_cm(93, True, 'F') 
 
     else:
         #caminho I
@@ -706,7 +701,7 @@ def school():
         wait(500)
         move_forward_cm(31)
     wait(500)
-    turn_right(90, True, 'R')
+    turn_right(90, True, 'R') *
     stop()
 
     leave_passenger()
@@ -718,20 +713,18 @@ def city_hall(): #check
         #caminho I
         print("Vish, acidente")
         backward_and_turn(65, 'L')
-        move_forward_cm(35, True)
+        move_forward_cm(35) 
         turn_right(90, True, 'R')
     else:
         #caminho J
         move_backward_cm(3)
         turn_left(90)
         move_forward_cm(39)
-        turn_left(90, True, 'L')
+        turn_left(90, True, 'L') 
     leave_passenger()
 #############################
 def library():
     #caminho sem obstáculo
-
-    
     backward_and_turn(65, 'R')
     while not saw_blue():
         move_forward(380)
@@ -744,34 +737,31 @@ def library():
     while not saw_red():
         move_forward(350)
     stop()
+    reposition()
     move_backward_cm(10)
     turn_right(90, True)
     leave_passenger()
-    # turn_left(90)
-    # backward_and_turn(65, 'L')
-    # leave_passenger()
-    # turn_right(90)
-    # turn_right(90)
 #############################
 def museum():
     move_backward_cm(43)
     if obstacle("lado"):
-        backward_and_turn(70, 'L')
+        backward_and_turn(70, 'L') 
         move_forward_cm(80)
         if obstacle():
             move_backward_cm(10)
             turn_left(90)
             while not saw_red():
                 move_forward(350)
+            stop()
             reposition()
             move_backward_cm(10, True)
             turn_right(90, True, "L")
         else:
-            move_forward_cm(25, True)
-            turn_left(90, True, "R")
+            move_forward_cm(25) 
+            turn_left(90, True, "R") 
     else:
-        turn_left(90)
-        move_forward_cm(75)
+        turn_left(90, True)
+        move_forward_cm(75, True, "F")
         if obstacle("lado"):
             move_backward_cm(75)
             turn_left(90)
@@ -798,26 +788,28 @@ def museum():
                 if obstacle():
                     move_backward_cm(10)
                     turn_left(90)
-                    while not saw_red():
+                    while not saw_red() and not obstacle():
                         move_forward(350)
+                    stop()
                     reposition()
                     move_backward_cm(10, True)
                     turn_right(90, True, "L")
                 else:
-                    move_forward_cm(25, True)
+                    move_forward_cm(25, True, "F")
                     turn_left(90, True, "R")        
         else:
-            turn_left(90)
-            move_forward_cm(75)
+            turn_left(90, True, "L")
+            move_forward_cm(75, True, "F")
             if obstacle():
-                turn_right(90, True, "L")
-                move_forward_cm(35, True)
-                turn_left(90, True, "R")
+                turn_right(90, True)
+                move_forward_cm(35, True, "F")
+                turn_left(90, True, "L")
             else:
                 while not saw_red():
                     move_forward(350)
+                stop()
                 reposition()
-                move_backward_cm(10, True)
+                move_backward_cm(10, True, "F")
                 turn_right(90, True, "R")
     leave_passenger()
 ###################################################
