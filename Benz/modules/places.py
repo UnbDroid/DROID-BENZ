@@ -138,6 +138,7 @@ def recognize():
     case_2 = 0
     case_3 = 0
     case_4 = 0
+    case_5 = 0
     
     while not saw_blue():
         while not saw_red() and not saw_black() and not saw_yellow() and not obstacle() and not saw_blue():
@@ -156,7 +157,11 @@ def recognize():
                     move_forward(350)
                 stop()
                 reposition() 
-                wall_first += 1   
+                wall_first += 1
+            elif case_5 == 1:
+                turn_right(90)
+                turn_right(90)
+                case_5 += 1   
             elif case_3 == 3:
                 turn_right(90)
                 turn_right(90)
@@ -172,11 +177,11 @@ def recognize():
                 turn_right(90)
              
             else:
-               # move_backward_cm(10)
-                #stop()
-                #turn_left(90)
-                #stop()
-                #turn_left(90)
+                move_backward_cm(10)
+                stop()
+                turn_left(90)
+                stop()
+                turn_left(90)
                 case_1 = 8
 
 
@@ -245,6 +250,9 @@ def recognize():
                 case_1 += 1 #2
                 case_2 += 1 
                 case_4 += 1
+            elif case_5 == 2:
+                #caso só black
+                turn_left(90)
             elif case_3 == 1:
                 turn_right(90)
                 turn_right(90)
@@ -413,15 +421,13 @@ def cases(lista):
         elif lista.count("Yellow") == 2:
             return 5
             #Amarelo, vermelho, amarelo
-        else:
-            return 2
             #Acho que n precisa
     else:
         if lista.count("Yellow") == 2:
             return 3
             #Amarelo, Branco e Amarelo
         elif lista.count("White") == 3:
-            return 6
+            return 5
             #rapaz, to sem zap
         else:
             #Preto, Branco e Amarelo
