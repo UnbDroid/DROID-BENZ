@@ -114,12 +114,7 @@ def move_forward(velocity):
 
     control_signal_right = motor_right.speed()
     control_signal_left = motor_left.speed()
-    if saw_wall():
-        pass
-    elif blackLeft() or yellowLeft():
-        turn_right(2)
-    elif blackRight() or yellowRight():
-        turn_left(2)
+    
 
     control_signal_right += calculate_pid(kp_right, ki_right, velocity, control_signal_right)
     control_signal_left += calculate_pid(kp_left, ki_left, velocity, control_signal_left)
@@ -156,7 +151,7 @@ def moving_backward_cm(distance, velocity = 390):
     # print("Direito", (motor_right.angle()))
     stop()
 
-def move_forward_cm(cm, save = False, reference = "B") :
+def move_forward_cm(cm, save = False, reference = "F") :
     motor_left.reset_angle(0)
     motor_right.reset_angle(0)
     if cm > 0 and cm < 3:
@@ -214,8 +209,8 @@ def move_backward_cm(mm, save = False, reference = "F") :
 def turn_left(angle, save = False, reference = 'R'):
     kp_left = 0.86 # Crecendo vai pra direita Diminuindo vai pra esquerda 0.953
     ki_left = 0 #0.00006 #sempre olhar isso
-    kp_right = 1 # Crecendo vai mais Diminuindo vai menos
-    ki_right = 0  #0.00006 #sempre olhar isso
+    kp_right = 0.95 # Crecendo vai mais Diminuindo vai menos
+    ki_right = 0.0005  #0.00006 #sempre olhar isso
     # wait(500)
     set_point = 784*(angle/360)
     set_point = round(set_point)
@@ -414,5 +409,5 @@ def calculate_pid(kp, ki, set_point, current_value):
     integral += error
     i = integral*ki
     control_signal = proporcional + i
-    print("Control ", control_signal)
+   # print("Control ", control_signal)
     return control_signal
