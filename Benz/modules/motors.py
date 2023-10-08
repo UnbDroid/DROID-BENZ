@@ -114,12 +114,6 @@ def move_forward(velocity):
 
     control_signal_right = motor_right.speed()
     control_signal_left = motor_left.speed()
-    # if saw_wall():
-    #     pass
-    # elif blackLeft() or yellowLeft():
-    #     turn_right(2)
-    # elif blackRight() or yellowRight():
-    #     turn_left(2)
 
     control_signal_right += calculate_pid(kp_right, ki_right, velocity, control_signal_right)
     control_signal_left += calculate_pid(kp_left, ki_left, velocity, control_signal_left)

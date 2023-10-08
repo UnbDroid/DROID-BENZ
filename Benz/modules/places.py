@@ -426,6 +426,7 @@ def scanner_initial(first):
         elif left == "Black" or right == "Black":
             paredes.append("Black")
         stop
+        
         move_backward_cm(15)
         stop()
         turn_left(90)
