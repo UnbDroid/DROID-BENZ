@@ -80,7 +80,7 @@ while True:
 
 """rgb = [0,0,0]
 
-# calibration_auto(sensor_color, brown)
+calibration_auto(brown)
 for i in range(10):
   aux = sensor_sup.rgb()
   print(aux)
@@ -95,7 +95,8 @@ print("rgb", rgb/10)"""
 # #   calibration(sensor_color)
 # #   wait(1000)
 
-
+# for i in range(9):
+#   print(check())
 """reflect = 0
 # calibration_auto(sensor_color, brown)
 for i in range(5):
