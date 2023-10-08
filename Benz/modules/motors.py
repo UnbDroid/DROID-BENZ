@@ -103,7 +103,7 @@ stack = command_stack()
 
 
 def move_forward(velocity):
-    kp_right = 1.0 #1.08
+    kp_right = 0.95 #1.08
     kp_left = 1.0 #0.38 
     
     #kp left crescendo vai direita
@@ -143,7 +143,7 @@ def moving_straight_cm(distance, velocity = 400):
 def moving_backward_cm(distance, velocity = 400):
     motor_left.reset_angle(0)
     motor_right.reset_angle(0)
-    angle = (distance * -1321)/52
+    angle = (distance * -1535)/55
     while ( motor_left.angle() > angle or motor_right.angle() > angle ) or (motor_left.angle == 0 and motor_right.angle == 0) :
         move_backward(-velocity)  
     # print(left_motor.angle(), right_motor.angle()) # Teste para o erro
@@ -168,9 +168,9 @@ def move_forward_cm(cm, save = False, reference = "F") :
         
 def move_backward(velocity):
     kp_right = 0.6315 #0.06
-    kp_left = 0.635
-    ki_right = 0 #0.00000025
-    ki_left = 0
+    kp_left = 0.63
+    ki_right = 0.0000000001 #0.00000025
+    ki_left = 0.00000003
 
 
     control_signal_right = motor_right.speed()
@@ -187,7 +187,7 @@ def move_backward(velocity):
     
     motor_left.run(-control_signal_left)
     motor_right.run(-control_signal_right)
-   # print(" motor right and left :",motor_right.angle(), motor_left.angle())
+    print(" motor right and left :",motor_right.angle(), motor_left.angle())
     
 def move_backward_cm(mm, save = False, reference = "F") :
    

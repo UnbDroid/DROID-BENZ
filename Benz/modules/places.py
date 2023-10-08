@@ -694,8 +694,8 @@ def school():
     if obstacle("lado"):
         #caminho J-G-F
         print("Vish, acidente")
-        backward_and_turn(65, 'L')
-        move_forward_cm(72) 
+        backward_and_turn(63, 'L')
+        move_forward_cm(62) 
         turn_right(90, True) #ver isso *
 
         if obstacle():
@@ -711,7 +711,7 @@ def school():
             move_forward_cm(25, True, "F")
         else:
             print("Sem obstáculo")
-            move_forward_cm(100, True, 'F') 
+            move_forward_cm(98, True, 'F') 
 
     else:
         #caminho I
