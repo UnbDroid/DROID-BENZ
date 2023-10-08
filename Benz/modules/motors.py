@@ -130,7 +130,7 @@ def move_forward(velocity):
 def moving_straight_cm(distance, velocity = 400):
     motor_left.reset_angle(0)
     motor_right.reset_angle(0)
-    angle = (distance * 1580)/60
+    angle = (distance * 1584)/57
     while motor_left.angle() < angle or motor_right.angle() < angle:
         move_forward(velocity)  
         
@@ -140,7 +140,7 @@ def moving_straight_cm(distance, velocity = 400):
     
     stop()
 
-def moving_backward_cm(distance, velocity = 390):
+def moving_backward_cm(distance, velocity = 400):
     motor_left.reset_angle(0)
     motor_right.reset_angle(0)
     angle = (distance * -1321)/52
@@ -157,7 +157,7 @@ def move_forward_cm(cm, save = False, reference = "F") :
     if cm > 0 and cm < 3:
         moving_straight_cm(cm, 220) #! analizar esses valores
     elif cm < 11:
-        moving_straight_cm(cm, 280) #! analizar esses valores
+        moving_straight_cm(cm, 350) #! analizar esses valores
     else:
         moving_straight_cm(cm)
 

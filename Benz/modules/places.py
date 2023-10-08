@@ -689,7 +689,7 @@ def decision(tube):
 #Funções referentes ao trajeto do robô
 
 def school():
-    move_backward_cm(40)
+    move_backward_cm(35)
     wait(500)
     if obstacle("lado"):
         #caminho J-G-F
@@ -711,14 +711,14 @@ def school():
             move_forward_cm(25, True, "F")
         else:
             print("Sem obstáculo")
-            move_forward_cm(93, True, 'F') 
+            move_forward_cm(100, True, 'F') 
 
     else:
         #caminho I
         print("Sem obstáculo")
         turn_left(90)
         wait(500)
-        move_forward_cm(31)
+        move_forward_cm(28)
     wait(500)
     turn_right(90, True, 'R') 
     stop()
@@ -1064,7 +1064,7 @@ def leave_passenger():
         move_forward_cm(10)
     else:
         enter()
-    open_claw()
+    #open_claw()
     print("dando ré")
     stop()
     move_backward_cm(15)
