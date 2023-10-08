@@ -761,7 +761,7 @@ def museum():
             turn_left(90, True, "R") 
     else:
         turn_left(90, True)
-        move_forward_cm(75, True, "F")
+        move_forward_cm(75, True, "F2")
         if obstacle("lado"):
             move_backward_cm(75)
             turn_left(90)
