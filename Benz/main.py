@@ -84,10 +84,10 @@ print("Direito", (motor_right.angle()))
 #----------------------------------------------------------------------------------------------------------------------------------
 #Teste dos lugares
 #
-school()
+#school()
 #city_hall()
 #library()
-#bakery()
+bakery()
 #drugstore()
 #museum()
 #park()

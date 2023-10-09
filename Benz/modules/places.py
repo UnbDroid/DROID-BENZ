@@ -694,8 +694,8 @@ def school():
     if obstacle("lado"):
         #caminho J-G-F
         print("Vish, acidente")
-        backward_and_turn(63, 'L')
-        move_forward_cm(62) 
+        backward_and_turn(66, 'L')
+        move_forward_cm(65) 
         turn_right(90, True) #ver isso *
 
         if obstacle():
@@ -711,7 +711,7 @@ def school():
             move_forward_cm(25, True, "F")
         else:
             print("Sem obstáculo")
-            move_forward_cm(98, True, 'F') 
+            move_forward_cm(85, True, 'F') 
 
     else:
         #caminho I
@@ -917,8 +917,8 @@ def bakery():
     else:
         #caminho I
         move_backward_cm(3)
-        turn_left(90, True, "L")
-        move_forward_cm(85)
+        turn_left(90)
+        move_forward_cm(75)
         wait(500)
         if obstacle():
             move_backward_cm(10)
@@ -963,7 +963,7 @@ def bakery():
                 turn_right(90, True, "R")
         else:
             #caminho D
-            move_forward_cm(22, True, 'F')
+            move_forward_cm(17, True, 'F')
             turn_right(90, True, 'R')
             stop()
             wait(500)

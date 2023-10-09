@@ -130,7 +130,7 @@ def move_forward(velocity):
 def moving_straight_cm(distance, velocity = 400):
     motor_left.reset_angle(0)
     motor_right.reset_angle(0)
-    angle = (distance * 1584)/57
+    angle = (distance * 1580)/60
     while motor_left.angle() < angle or motor_right.angle() < angle:
         move_forward(velocity)  
         
@@ -143,7 +143,7 @@ def moving_straight_cm(distance, velocity = 400):
 def moving_backward_cm(distance, velocity = 400):
     motor_left.reset_angle(0)
     motor_right.reset_angle(0)
-    angle = (distance * -1535)/55
+    angle = (distance * -1321)/52
     while ( motor_left.angle() > angle or motor_right.angle() > angle ) or (motor_left.angle == 0 and motor_right.angle == 0) :
         move_backward(-velocity)  
     # print(left_motor.angle(), right_motor.angle()) # Teste para o erro
