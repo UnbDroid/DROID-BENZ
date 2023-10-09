@@ -13,32 +13,25 @@ from modules.places import *
 from modules.claw import *
 
 
+#enter()
+#find_passenger()
+#check_point()
+#reposition()
 #----------------------------------------------------------------------------------------------------------------------------------
 #Funções iniciais
-#school()
-# while True:
-#   move_forward(380)
-#enter()
-#recognize()
-# turn_right(90)
-# reposition()
-#-------------------------------------------------------------------------------------------------------
 
-'''while recognize():
+#-------------------------------------------------------------------------------------------------------
+while recognize():
    print("Buscando passageiro")
    find_passenger() #scanneamento
    tubo = check_point() #vai pro check point( VERMELHO )
    print("Opa vou ver")
-   decision(tubo) #Vai entregar o tubo  #print("Cor preto")'''
-   
-''' print("RGB do direito")
-  calibration_auto(sensor_color_right, array)
-  print("RGB do esquerdo")
-  calibration_auto(sensor_color_left, array)
-  wait(3000)
-'''
+   decision(tubo) #Vai entregar o tubo  #print("Cor preto"
 
-#black e yellow right
+
+
+
+
 '''Devolvendo os valores
 [[1, 9, 3], [17, 25, 19]]
 L
@@ -58,13 +51,13 @@ L'''
 
 
 #calibrando cores 
-"""array = [[57,7,0],[78,27,25]]
+'''array = [[57,7,0],[78,27,25]]
 while True:
   print("R")
   calibration_auto(sensor_color_right, array)
   print("L")
   calibration_auto(sensor_color_left, array)
-  wait(3000)"""
+  wait(3000)'''
 #coloque o valor aqui do azul = Direito: [[0, 10, 34], [16, 26, 50]]       Esquerdo: [[7, 14, 24], [23, 30, 40]]
 #coloque o valor aqui do amarelo = Direito: [[31, 58, 8], [47, 74, 24]]       Esquerdo:  [[55, 79, 8], [71, 95, 24]]
 #coloque o valor aqui do vermelho = Direito: [[37, 5, 5], [53, 21, 21]]      Esquerdo: [[62, 8, 5], [78, 24, 21]]
@@ -87,7 +80,7 @@ print("Direito", (motor_right.angle()))
 #school()
 #city_hall()
 #library()
-bakery()
+#bakery()
 #drugstore()
 #museum()
 #park()
@@ -136,17 +129,17 @@ print("real oficial ",regulagem)'''
 #---------------------------------------------------------------------#
 
 
-
+"""qQQQQQQQQQQ111111111111111111111111111111111111111111111Q"""
 #------------------------------------------------------------------------------------------------------
 #treinar kp e ki
-"""i = 0
+'''i = 0
 while i < 10 :
-  #turn_left(90)
   turn_right(90)
+  #turn_right(90)
   print("Virei")
   stop()
   wait(1000)
-  i+=1"""
+  i+=1'''
 #turn_left(90)
 
 #------------------------------------------------------------------------------------------------------

@@ -103,14 +103,15 @@ stack = command_stack()
 
 
 def move_forward(velocity):
-    kp_right = 0.95 #1.08
-    kp_left = 1.0 #0.38 
+    kp_right = 0.75 #1.08
+    kp_left = 0.775
+     #0.38 
     
     #kp left crescendo vai direita
     
       
-    ki_right = 0.1 #-0.7
-    ki_left = 0.05 #0.01
+    ki_right = 0.00005 #0.005 #-0.7
+    ki_left = 0.1 #0.08 #0.01
 
     control_signal_right = motor_right.speed()
     control_signal_left = motor_left.speed()
@@ -127,7 +128,7 @@ def move_forward(velocity):
     motor_left.run(control_signal_left)
     motor_right.run(control_signal_right)
            
-def moving_straight_cm(distance, velocity = 400):
+def moving_straight_cm(distance, velocity = 500):
     motor_left.reset_angle(0)
     motor_right.reset_angle(0)
     angle = (distance * 1580)/60
@@ -140,8 +141,8 @@ def moving_straight_cm(distance, velocity = 400):
     
     stop()
 
-def moving_backward_cm(distance, velocity = 400):
-    motor_left.reset_angle(0)
+def moving_backward_cm(distance, velocity = 420):
+    motor_left.reset_angle(0) 
     motor_right.reset_angle(0)
     angle = (distance * -1321)/52
     while ( motor_left.angle() > angle or motor_right.angle() > angle ) or (motor_left.angle == 0 and motor_right.angle == 0) :
@@ -207,10 +208,10 @@ def move_backward_cm(mm, save = False, reference = "F") :
 
 
 def turn_left(angle, save = False, reference = 'R'):
-    kp_left = 0.86 # Crecendo vai pra direita Diminuindo vai pra esquerda 0.953
-    ki_left = 0 #0.00006 #sempre olhar isso
-    kp_right = 0.95 # Crecendo vai mais Diminuindo vai menos
-    ki_right = 0.0005  #0.00006 #sempre olhar isso
+    kp_left = 0.88 # Crecendo vai pra direita Diminuindo vai pra esquerda 0.953
+    ki_left = 0.001 #0.00006 #sempre olhar isso
+    kp_right = 0.89 # Crecendo vai mais Diminuindo vai menos
+    ki_right = 0 #0.0005  #0.00006 #sempre olhar isso
     # wait(500)
     set_point = 784*(angle/360)
     set_point = round(set_point)
@@ -252,10 +253,10 @@ def turn_left(angle, save = False, reference = 'R'):
 
 
 def turn_right(angle, save = False, reference = 'L'): #check
-    kp_left = 0.92 # 47Crecendo vai pra direita Diminuindo vai pra esquerda 0.953
-    ki_left = 0.00000007 #0.00006 #sempre olhar isso
-    kp_right = 0.88 # Crecendo vai pra direita Diminuindo vai pra esquerda
-    ki_right = 0.000001 #0.00006 #sempre olhar isso
+    kp_left = 0.89 # 47Crecendo vai pra direita Diminuindo vai pra esquerda 0.953
+    ki_left = 0 #0.00000007 #0.00006 #sempre olhar isso
+    kp_right = 0.86 # Crecendo vai pra direita Diminuindo vai pra esquerda
+    ki_right = 0#0.000005 #0.00006 #sempre olhar isso
     # wait(500)
     set_point = 784*(angle/360)
     set_point = round(set_point)
@@ -350,13 +351,22 @@ def reposition():
     stop()
     left = True
     right = True
+    count_l = 0
+    count_r = 0
+
     while seeLeft() != "White" or seeRight() != "White":
         move_backward_cm(1)
         print(1)
+        
     stop()
     move_forward(60)
     while seeLeft() == "White" or seeRight() == "White":
-       # print("RIGHT ", seeRight(), "LEFT ", seeLeft())
+        #print("COUNT LL ", count_l, "    COUNT RRR   ", count_r)
+        if left and not right :
+            count_l += 1
+        if right and not left :
+            count_r += 1
+
         if seeLeft() != "White" and left:
             motor_left.hold()
             motor_left.stop()
@@ -369,11 +379,25 @@ def reposition():
             motor_left.run(20)
             motor_right.run(-1)
             right = False
+        if count_l >= 100 or count_r >= 100:
+            right = False
+            left = False
+            for i in range(count_l):
+                motor_right.run(1)
+                motor_left.run(-20)
+            for i in range( count_r):
+                motor_right.run(-20)
+                motor_left.run(1)
+                move_backward_cm(8)
+                reposition()
         if right and left:
             move_forward(60)
         if not right and not left:
+            stop()
+            #print("PORRAAAAAA")
             return 0
         
+
 
 
 
