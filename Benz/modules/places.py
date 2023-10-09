@@ -161,18 +161,13 @@ def recognize():
                     stop()
                     return True
 
-                if case != 5:
-                    while not saw_black() and not saw_red() and not saw_blue() and not saw_yellow():
+
+                wall_first += 1   
+                if case != 5 and case != 4:
+                    while not saw_black() and not obstacle() and not saw_red() and not saw_blue() and not saw_yellow():
                         move_forward(380)
                     stop()
                     reposition() 
-                
-                wall_first += 1   
- 
-                while not saw_black() and not obstacle() and not saw_red() and not saw_blue() and not saw_yellow():
-                    move_forward(380)
-                stop()
-                reposition() 
                 wall_first += 1
             elif case_5 == 1:
                 turn_right(90)
@@ -255,6 +250,7 @@ def recognize():
                 case = scanner_initial("Yellow")
                 wall_first += 1  
             else:
+                print("Opa")
                 move_backward_cm(10)
                 turn_right(90)
             
@@ -363,7 +359,7 @@ def recognize():
                 case_3 += 1
                 
             elif case == 4: #[Black, White, Yellow]
-                move_backward_cm(10)
+                #move_backward_cm(10)
                 turn_right(90)
                 stop()
                 case_4 += 1
