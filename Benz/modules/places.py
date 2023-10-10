@@ -1084,7 +1084,7 @@ def leave_passenger():
         move_forward_cm(10)
     else:
         enter()
-    #open_claw()
+    open_claw()
     print("dando ré")
     stop()
     move_backward_cm(15)
