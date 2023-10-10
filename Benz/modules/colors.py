@@ -200,17 +200,7 @@ def saw_yellow_black():
 def and_saw_blue():
     return blueRight() and blueLeft()
 
-def inside():
-    return and_saw_blue() or and_saw_brown() or and_saw_green() or and_saw_red()
 
-def and_saw_red():
-    return redRight() and redLeft()
-
-def and_saw_green():
-    return greenRight() and greenLeft()
-
-def and_saw_brown():
-    return brownRight() and brownLeft()
 
 def seeRight():
     if redRight():

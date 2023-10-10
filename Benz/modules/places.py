@@ -610,12 +610,13 @@ def find_passenger(final_tube = True): #Função feita pelo Josh e Felipe e Luiz
         stop()
     
 
-    move_backward_cm(15)  #3
+    move_backward_cm(25)  #3
     turn_left(90)
     while not blueRight() and not blueLeft():
         move_forward(180) 
     #stop()
     stop()
+    reposition()
     move_forward_cm(10)
     turn_right(90)
     #move_forward_cm(10)
@@ -627,15 +628,16 @@ def find_passenger(final_tube = True): #Função feita pelo Josh e Felipe e Luiz
 
     #reposition()
     print("vou te pegar")
-   # close_claw(250)
+    #close_claw(250)
    # reposition()
-   # move_forward_cm(4)
+    move_forward_cm(10) #ida para frente
     #verificar se tem algo na frente por preucação
-    #close_claw()
+    close_claw(750)
     move_backward_cm(10)
     turn_right(90)
     stop()
-    move_forward_cm(10)
+    move_forward_cm(15)
+   # turn_right(90)
     #stop()
     #reposition()
     stop()
@@ -1033,16 +1035,15 @@ def park():
             else:
                 turn_left(90)
                 while not saw_red():
-                    move_forward(250)
-                reposition()
-                move_backward_cm(10)
-                turn_right(90)
+                    move_forward(300)
+                move_backward_cm(10,True, "F")
+                turn_left(90, True, "L")
                 
     else:
-        turn_left(90)
+        turn_left(90) #I
         move_forward_cm(80)
         if obstacle():
-            move_backward_cm(10)
+            move_backward_cm(10) #G
             turn_left(90)
             move_forward_cm(70)
             turn_right(90)
@@ -1059,8 +1060,8 @@ def park():
                 while not saw_red():
                     move_forward(350)
                 reposition()
-                move_backward_cm(10)
-                turn_right(90)
+                move_backward_cm(10,True)
+                turn_right(90,True)
         else:
             while not saw_black():
                 move_forward(400)
@@ -1076,8 +1077,7 @@ def park():
                     move_forward(300)
                 move_backward_cm(10,True, "F")
                 turn_left(90, True, "L")
-                
-                    
+                             
             
     leave_passenger()
 
@@ -1143,33 +1143,7 @@ def enter():
             reposition()
             move_backward_cm(2)
             count += 1
-        elif count < 2 and sensor_color_left.rgb()[0] >= media_R_min and sensor_color_left.rgb()[0] <= media_R_max:
-            print("Porcentagem 0,5% esquerda")
-            stop()
-            reposition()
-            move_backward_cm(10)
-            turn_left(90)
-            move_backward_cm(3)
-            stop()
-            turn_right(90)
-            stop()
-            reposition()
-            move_backward_cm(2)
-            count += 1
-
-        elif count < 2 and sensor_color_right.rgb()[0]>= media_L_min and sensor_color_right.rgb()[0] <= media_L_max:
-            print("Porcentagem 0,5% direita")
-            stop()
-            reposition()
-            move_backward_cm(10)
-            turn_right(90)
-            move_backward_cm(3)
-            stop()
-            turn_left(90)
-            stop()
-            reposition()
-            move_backward_cm(2)
-            count += 1
+         
         else:
             move_forward_cm(1)
 
