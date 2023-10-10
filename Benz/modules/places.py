@@ -1115,7 +1115,7 @@ def enter():
         calibration(sensor_color_left)
         calibration(sensor_color_right)
        # print(yellowRight()," ", yellowLeft())
-        if ((yellowRight() and yellowLeft()) or (yellow_i_black_left() and yellowRight())or (yellow_i_black_right() and yellowLeft())):
+        if ((yellowRight() and yellowLeft()) or (yellow_i_black_left() and yellowRight())or (yellow_i_black_right() and yellowLeft()) or inside()):
 
             move_forward_cm(3.5)
             break
@@ -1124,7 +1124,7 @@ def enter():
             reposition()
             move_backward_cm(10)
             turn_right(90)
-            move_backward_cm(4)
+            move_backward_cm(3)
             stop()
             turn_left(90)
             stop()
@@ -1136,7 +1136,7 @@ def enter():
             reposition()
             move_backward_cm(10)
             turn_left(90)
-            move_backward_cm(4)
+            move_backward_cm(3)
             stop()
             turn_right(90)
             stop()
@@ -1149,7 +1149,7 @@ def enter():
             reposition()
             move_backward_cm(10)
             turn_left(90)
-            move_backward_cm(5)
+            move_backward_cm(3)
             stop()
             turn_right(90)
             stop()
@@ -1163,7 +1163,7 @@ def enter():
             reposition()
             move_backward_cm(10)
             turn_right(90)
-            move_backward_cm(5)
+            move_backward_cm(3)
             stop()
             turn_left(90)
             stop()

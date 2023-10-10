@@ -20,7 +20,7 @@ from modules.claw import *
 #----------------------------------------------------------------------------------------------------------------------------------
 #Funções iniciais
 #leave_passenger()
-recognize()
+# recognize()
 #find_passenger()
 #-------------------------------------------------------------------------------------------------------
 '''while recognize():
@@ -61,13 +61,13 @@ L'''
 
 
 #calibrando cores 
-'''array = [[57,7,0],[78,27,25]]
+array = [[57,7,0],[78,27,25]]
 while True:
   print("R")
   calibration_auto(sensor_color_right, array)
   print("L")
   calibration_auto(sensor_color_left, array)
-  wait(3000)'''
+  wait(3000)
 #coloque o valor aqui do azul = Direito: [[0, 10, 34], [16, 26, 50]]       Esquerdo: [[7, 14, 24], [23, 30, 40]]
 #coloque o valor aqui do amarelo = Direito: [[31, 58, 8], [47, 74, 24]]       Esquerdo:  [[55, 79, 8], [71, 95, 24]]
 #coloque o valor aqui do vermelho = Direito: [[37, 5, 5], [53, 21, 21]]      Esquerdo: [[62, 8, 5], [78, 24, 21]]

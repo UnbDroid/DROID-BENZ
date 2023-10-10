@@ -251,7 +251,8 @@ def turn_left(angle, save = False, reference = 'R'):
        # print(set_point)
     stop()'''
 
-
+def not_wall():
+    return and_saw_blue() or and_saw_red() or and_saw_brown() or and_saw_green()
 def turn_right(angle, save = False, reference = 'L'): #check
     kp_left = 0.89 # 47Crecendo vai pra direita Diminuindo vai pra esquerda 0.953
     ki_left = 0 #0.00000007 #0.00006 #sempre olhar isso
