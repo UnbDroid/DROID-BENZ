@@ -141,7 +141,6 @@ def recognize():
     case_5 = 0
     
     while not saw_blue():
-       # turn_right(90)
         while not saw_red() and not saw_black() and not saw_yellow() and not obstacle() and not saw_blue():
             move_forward(450)
         stop()  
@@ -354,12 +353,12 @@ def recognize():
                 case_2 += 1 #1
                 
             elif case == 3: #[Yellow, White, Yellow]
-                move_backward_cm(10)
+                move_backward_cm(25)
                 turn_left(90)
                 case_3 += 1
                 
             elif case == 4: #[Black, White, Yellow]
-                #move_backward_cm(10)
+                move_backward_cm(25)
                 turn_right(90)
                 stop()
                 case_4 += 1
@@ -411,7 +410,7 @@ def forward_while_white(distance = 15):
 def scanner_initial(first):
     paredes = []
     paredes.append(first)
-    distance = 10
+    distance = 8
     move_backward_cm(distance)
     if first != "Red":
         for i in range(4):
@@ -445,7 +444,7 @@ def scanner_initial(first):
             paredes.insert(0, "Yellow")
         elif left == "Black" or right == "Black":
             paredes.insert(0, "Black")
-        move_backward_cm(10)
+        move_backward_cm(8)
         turn_left(90)
         stop()
         turn_left(90)
@@ -460,7 +459,7 @@ def scanner_initial(first):
             return 10
         stop
         
-        move_backward_cm(15)
+        move_backward_cm(8)
         stop()
         turn_left(90)
         print(paredes)
@@ -488,7 +487,7 @@ def cases(lista):
 
             return 5
             #rapaz, to sem zap
-        else:
+        elif lista.count("White") == 2 and lista.count("Black") == 1:
             #Preto, Branco e Amarelo
             return 4
 
@@ -553,10 +552,10 @@ def find_passenger_2(final = True):
     stop()
     #reposition()
     print("vou te pegar")
-    close_claw(250)
+  #  close_claw(250)
     move_forward_cm(4)
     #verificar se tem algo na frente por preucação
-    close_claw()
+   # close_claw()
     move_backward_cm(10)
     stop()
    # reposition()
@@ -611,26 +610,32 @@ def find_passenger(final_tube = True): #Função feita pelo Josh e Felipe e Luiz
         stop()
     
 
-    move_backward_cm(12)  #3
+    move_backward_cm(15)  #3
     turn_left(90)
-    stop()
-    move_backward_cm(10)
-    turn_right(90)
-
-    move_forward_cm(8)
-    turn_left(90)
-    stop()
     while not blueRight() and not blueLeft():
         move_forward(180) 
+    #stop()
     stop()
+    move_forward_cm(10)
+    turn_right(90)
+    #move_forward_cm(10)
+
+   # move_forward_cm(8)
+    #turn_left(90)
+    
+    stop()
+
     #reposition()
     print("vou te pegar")
-    close_claw(250)
-    reposition()
-    move_forward_cm(4)
+   # close_claw(250)
+   # reposition()
+   # move_forward_cm(4)
     #verificar se tem algo na frente por preucação
-    close_claw()
+    #close_claw()
     move_backward_cm(10)
+    turn_right(90)
+    stop()
+    move_forward_cm(10)
     #stop()
     #reposition()
     stop()
@@ -696,10 +701,12 @@ def decision(tube):
     elif place == "PADARIA":
         print("Indo para a padaria")
         bakery()
-    elif place == "NUll":
+    elif place == "NULL":
         print("Nada encontrado")
         open_claw()
         find_passenger(False)
+        tubo = check_point()
+        decision(tubo)
     
 
         
@@ -1081,19 +1088,19 @@ def leave_passenger():
     stop()
     reposition()
     if (yellowRight() and yellowLeft()):
-        move_forward_cm(10)
+        move_forward_cm(3.5)
     else:
         enter()
     #open_claw()
     print("dando ré")
     stop()
-    move_backward_cm(15)
+    move_backward_cm(3)
     stop()
   #  while not saw_yellow() and not saw_black():
    #     move_forward(240)
    # stop()
     reposition()
-    move_backward_cm(15) #fazer leave depois
+    move_backward_cm(10) #fazer leave depois
     stack.reverse()
   #  recognize() 
 
@@ -1110,7 +1117,7 @@ def enter():
        # print(yellowRight()," ", yellowLeft())
         if ((yellowRight() and yellowLeft()) or (yellow_i_black_left() and yellowRight())or (yellow_i_black_right() and yellowLeft())):
 
-            move_forward_cm(4)
+            move_forward_cm(3.5)
             break
         elif count < 2 and yellowLeft() and blackRight():
             stop()
@@ -1142,7 +1149,7 @@ def enter():
             reposition()
             move_backward_cm(10)
             turn_left(90)
-            move_backward_cm(4)
+            move_backward_cm(5)
             stop()
             turn_right(90)
             stop()
@@ -1165,3 +1172,86 @@ def enter():
             count += 1
         else:
             move_forward_cm(1)
+
+
+###################################
+def turn_to_tube():
+    move_backward_cm(6)
+    while whiteRight():
+        print("meia lua")
+        motor_right.run(20)
+        motor_left.hold()
+    stop()
+
+def find_passenger3(): #Função feita pelo Josh e Felipe e Luiz
+    
+    #Já começa alinhado no azul
+   # stop()
+    #reposition()
+    #stop()
+    move_backward_cm(5)
+    stop()
+    turn_left(90)
+    
+    threshold = ((25 + 85)/2)+15
+
+    while not saw_red():
+        valor = sensor_color_right.rgb()[1]
+        angulo = valor - threshold
+        k = 0.8
+        motors.drive(200, k*angulo)
+    motors.stop()
+    
+    reposition()
+    move_backward_cm(10)
+    turn_left(90)
+    stop()
+    #move_forward_cm(6)
+    #stop()
+    turn_left(90)
+    
+    threshold = ((17 + 95)/2)+15
+
+
+    while not side_detection() and not saw_red():
+        valor = sensor_color_left.rgb()[1]
+        angulo = valor - threshold
+        k = 0.9  #0.8
+        motors.drive(200, -k*angulo)
+    motors.stop()
+    
+    stop()
+    
+    if(saw_red()):
+        reposition()
+        while not side_detection():
+            move_backward(-250)
+        stop()
+    # close_claw(250)
+    turn_to_tube()
+    stop()
+    reposition()
+
+
+   # move_forward_cm(8)
+    #turn_left(90)
+    
+    stop()
+
+    #reposition()
+    print("vou te pegar")
+    
+   # reposition()
+   # move_forward_cm(4)
+    #verificar se tem algo na frente por preucação
+    # close_claw()
+    move_backward_cm(10)
+    turn_left(90)
+    stop()
+    move_forward_cm(10)
+    #stop()
+    #reposition()
+    stop()
+    #move_backward_cm(8)
+
+    #ver como vai ser tratado o return

@@ -59,14 +59,14 @@ def calibration_auto(sensor, array):
 #min and max
 teste = [[0,0,0],[0,0,0]]
 #arrumar o marrom e verde
-red_left = [[62, 8, 5], [78, 24, 21]]
-red_right = [[37, 5, 5], [53, 21, 21]]#ok
+red_left = [[62, 10, 1], [78, 26, 17]]
+red_right = [[41, 6, 2], [57, 22, 18]]#ok
 
-blue_left = [[7, 14, 24], [23, 30, 40]]
-blue_right = [[0, 10, 34], [16, 26, 50]]#ok
+blue_left = [[4, 18, 28], [20, 34, 44]]
+blue_right = [[0, 13, 40], [13, 29, 56]]#ok
 
-yellow_left = [[50, 71, 4], [66, 87, 20]]
-yellow_right = [[37, 60, 8], [53, 76, 24]]#ok
+yellow_left = [[58, 76, 8], [74, 92, 24]]
+yellow_right = [[43, 68, 12], [59, 84, 28]]  # ok
 
 yell_i_black_left = [[63, 77, 11], [79, 93, 27]]
 yell_i_black_right = [[63, 77, 11], [79, 93, 27]]
@@ -74,8 +74,8 @@ yell_i_black_right = [[63, 77, 11], [79, 93, 27]]
 green_left = [[14,35,0],[24,55,20]]
 green_right = [[5,32,0],[20,45,20]] #ok
 
-black_left = [[0,0, 0],[20, 21, 18]]
-black_right = [[0,0,0],[7, 24, 21]] #ok
+black_left = [[0, 0, 0], [14, 16, 13]]
+black_right = [[0, 0, 0], [13, 17, 15]]  # ok
 
 brown_left = [[20,10,0],[35,30,18]]
 brown_right = [[24,9,0],[45,32,15]] 
@@ -85,6 +85,7 @@ white_right = [[45, 71, 92], [61, 87, 108]]
 
 blue_i_white_left = [[18, 37, 36], [28, 47, 46]]
 blue_i_white_right = [[8, 26, 63], [18, 36, 73]]
+
 
 
 

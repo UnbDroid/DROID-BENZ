@@ -14,12 +14,14 @@ from modules.claw import *
 
 
 #enter()
-#find_passenger()
-#check_point()
-#reposition()
+#school()
+#bakery()
+#leave_passenger()
 #----------------------------------------------------------------------------------------------------------------------------------
 #Funções iniciais
-#open_claw()
+#leave_passenger()
+recognize()
+#find_passenger()
 #-------------------------------------------------------------------------------------------------------
 '''while recognize():
    print("Buscando passageiro")
@@ -28,8 +30,16 @@ from modules.claw import *
    print("Opa vou ver")
    decision(tubo) #Vai entregar o tubo  #print("Cor preto"
 
-
 '''
+# while recognize():
+#    print("Buscando passageiro")
+#    find_passenger3() #scanneamento
+#    tubo = check_point() #vai pro check point( VERMELHO )
+#    print("Opa vou ver")
+#    decision(tubo) #Vai entregar o tubo  #print("Cor preto"
+
+
+
 
 
 '''Devolvendo os valores
@@ -77,13 +87,13 @@ print("Direito", (motor_right.angle()))
 #----------------------------------------------------------------------------------------------------------------------------------
 #Teste dos lugares
 #
-reposition()
+#reposition()
 #school()
 #city_hall()
 #library()
 #bakery()
 #drugstore()
-museum()
+#museum()
 #park()
 
 #----------------------------------------------------------------------------------------------------------------------------------
@@ -100,8 +110,8 @@ museum()
 #move_backward_cm(60)
 #move_backward_cm(60)
 
-
-'''while not saw_black():
+'''
+while not saw_red():
   move_forward(500)
 
 stop()'''
