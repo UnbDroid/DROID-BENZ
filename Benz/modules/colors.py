@@ -131,3 +131,10 @@ def check():
     if tamanho == "10":
         tamanho = size()
     return color + " " + tamanho
+def verify():
+    rgb = sensor_sup.rgb()
+    if rgb[0] >= 5 or rgb[1] >= 5 or rgb[2] >= 5:
+        return "TRUE" #Para quando existe um tubo
+    else:
+        return "FALSE" #Para qunaod ele nn pegou nada
+        
