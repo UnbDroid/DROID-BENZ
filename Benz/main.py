@@ -21,7 +21,7 @@ from modules.claw import *
 #Funções iniciais
 #open_claw()
 #-------------------------------------------------------------------------------------------------------
-while recognize():
+'''while recognize():
    print("Buscando passageiro")
    find_passenger() #scanneamento
    tubo = check_point() #vai pro check point( VERMELHO )
@@ -29,7 +29,7 @@ while recognize():
    decision(tubo) #Vai entregar o tubo  #print("Cor preto"
 
 
-
+'''
 
 
 '''Devolvendo os valores
@@ -77,12 +77,13 @@ print("Direito", (motor_right.angle()))
 #----------------------------------------------------------------------------------------------------------------------------------
 #Teste dos lugares
 #
+reposition()
 #school()
 #city_hall()
 #library()
 #bakery()
 #drugstore()
-#museum()
+museum()
 #park()
 
 #----------------------------------------------------------------------------------------------------------------------------------

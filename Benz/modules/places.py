@@ -707,13 +707,13 @@ def decision(tube):
 #Funções referentes ao trajeto do robô
 
 def school():
-    move_backward_cm(40)
+    move_backward_cm(35)
     wait(500)
     if obstacle("lado"):
         #caminho J-G-F
         print("Vish, acidente")
-        backward_and_turn(66, 'L')
-        move_forward_cm(63) 
+        backward_and_turn(67, 'L')
+        move_forward_cm(70) 
         turn_right(90, True) #ver isso *
 
         if obstacle():
@@ -724,14 +724,16 @@ def school():
             forward_and_turn(65, 'R')
             move_forward_cm(60, True, 'F') 
             turn_right(90, True) 
-            move_forward_cm(60, True, 'F') 
+            move_forward_cm(65, True, 'F') 
             turn_left(90, True) 
             move_forward_cm(25, True, "F")
         else:
             print("Sem obstáculo")
-            move_forward_cm(110, True, 'F') #15
+            move_forward_cm(45, True, 'F') #15
+            move_forward_cm(45, True, 'F') #15
 
     else:
+        #fizemos
         #caminho I
         print("Sem obstáculo")
         turn_left(90)
@@ -772,7 +774,7 @@ def library():
     wait(500)
     turn_right(90, True)
     while not saw_red():
-        move_forward(350)
+        move_forward(600)
     stop()
     reposition()
     move_backward_cm(10)
@@ -780,22 +782,22 @@ def library():
     leave_passenger()
 #############################
 def museum():
-    move_backward_cm(43)
+    move_backward_cm(39)
     if obstacle("lado"):
-        backward_and_turn(70, 'L') 
+        backward_and_turn(72, 'L') 
         move_forward_cm(80)
         if obstacle():
-            move_backward_cm(10)
-            turn_left(90)
+            move_backward_cm(10, True, "F")
+            turn_left(90, True)
             while not saw_red():
                 move_forward(350)
             stop()
             reposition()
-            move_backward_cm(10, True)
-            turn_right(90, True, "L")
+            move_backward_cm(10, True, "F")
+            turn_right(90, True, "R")
         else:
-            move_forward_cm(25) 
-            turn_left(90, True, "R") 
+            move_forward_cm(22) 
+            turn_left(90, True, "L") 
     else:
         turn_left(90, True)
         move_forward_cm(72)
@@ -860,13 +862,13 @@ def drugstore():
         move_backward_cm(70)
         if obstacle("lado"):
             move_backward_cm(70, True, "F")
-            turn_left(90, True)
-            move_forward_cm(40, True, "F")
-            turn_right(90, True)
+            turn_left(90, True, "L")
+            move_forward_cm(30, True, "F")
+            turn_right(90, True, "R")
         else:
-            turn_left(90, True)
-            move_forward_cm(35, True, "F")
-            turn_left(90, True)
+            turn_left(90, True, "L")
+            move_forward_cm(30, True, "F")
+            turn_left(90, True, "L")
     else:
         turn_left(90,True)
         move_forward_cm(72)
@@ -882,12 +884,12 @@ def drugstore():
                 turn_right(90, True, "L")
             else:
                 move_forward_cm(65)
-                turn_left(90,True, "R")
-                move_forward_cm(35, True)
-                turn_left(90, True, "R")
+                turn_left(90,True, "L")
+                move_forward_cm(30, True)
+                turn_left(90, True, "L")
         else:
             turn_left(90)
-            move_forward_cm(30, True, "F")
+            move_forward_cm(38, True, "F")
             turn_right(90, True, "R")
     leave_passenger()
 ###########################################
@@ -1082,7 +1084,7 @@ def leave_passenger():
         move_forward_cm(10)
     else:
         enter()
-    open_claw()
+    #open_claw()
     print("dando ré")
     stop()
     move_backward_cm(15)

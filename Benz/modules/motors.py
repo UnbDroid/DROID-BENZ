@@ -128,7 +128,7 @@ def move_forward(velocity):
     motor_left.run(control_signal_left)
     motor_right.run(control_signal_right)
            
-def moving_straight_cm(distance, velocity = 500):
+def moving_straight_cm(distance, velocity = 600):
     motor_left.reset_angle(0)
     motor_right.reset_angle(0)
     angle = (distance * 1580)/60
@@ -141,7 +141,7 @@ def moving_straight_cm(distance, velocity = 500):
     
     stop()
 
-def moving_backward_cm(distance, velocity = 420):
+def moving_backward_cm(distance, velocity = 1600):
     motor_left.reset_angle(0) 
     motor_right.reset_angle(0)
     angle = (distance * -1321)/52
@@ -195,7 +195,7 @@ def move_backward_cm(mm, save = False, reference = "F") :
     if mm < 11:
         motor_left.reset_angle(0)
         motor_right.reset_angle(0)
-        moving_backward_cm(mm, 300)
+        moving_backward_cm(mm, 400)
     else:
         motor_left.reset_angle(0)
         motor_right.reset_angle(0)
@@ -370,23 +370,23 @@ def reposition():
         if seeLeft() != "White" and left:
             motor_left.hold()
             motor_left.stop()
-            motor_right.run(20)
-            motor_left.run(-1)
+            motor_right.run(60)
+            motor_left.run(-3)
             left = False
         if seeRight() != "White" and right:
             motor_right.hold()
             motor_right.stop()
-            motor_left.run(20)
-            motor_right.run(-1)
+            motor_left.run(60)
+            motor_right.run(-3)
             right = False
         if count_l >= 100 or count_r >= 100:
             right = False
             left = False
             for i in range(count_l):
                 motor_right.run(1)
-                motor_left.run(-20)
+                motor_left.run(-60)
             for i in range( count_r):
-                motor_right.run(-20)
+                motor_right.run(-60)
                 motor_left.run(1)
                 move_backward_cm(8)
                 reposition()
