@@ -863,9 +863,9 @@ def library():
     leave_passenger()
 #############################
 def museum():
-    move_backward_cm(39)
+    move_backward_cm(38)
     if obstacle("lado"):
-        backward_and_turn(72, 'L') 
+        backward_and_turn(70, 'L') 
         move_forward_cm(80)
         if obstacle():
             move_backward_cm(10, True, "F")
@@ -881,7 +881,7 @@ def museum():
             turn_left(90, True, "L") 
     else:
         turn_left(90, True)
-        move_forward_cm(72)
+        move_forward_cm(70)
         if obstacle("lado"):
             move_backward_cm(75)
             turn_left(90)
@@ -1092,25 +1092,27 @@ def park():
             else:
                 while not saw_red():
                     move_forward(250)
-                move_backward_cm(15)
-                turn_left(90)
+                move_backward_cm(15, True, "F")
+                turn_left(90, True)
             
         else:
             while not saw_black():
                 move_forward(400)
             reposition()
-            move_backward_cm(10)
+            move_backward_cm(11)
             if obstacle("lado"):
                 turn_right(90)
                 move_forward_cm(40)
                 turn_left(90)
             else:
-                turn_left(90)
+                turn_left(90, True)
                 while not saw_red():
                     move_forward(250)
+                stop()
                 reposition()
-                move_backward_cm(10)
-                turn_right(90)
+                move_backward_cm(9)
+                save("F",25)
+                turn_right(90, True, "R")
                 
     else:
         turn_left(90)
@@ -1148,7 +1150,8 @@ def park():
             else:
                 while not saw_red():
                     move_forward(300)
-                move_backward_cm(10,True, "F")
+                move_backward_cm(10)
+                save("F",4)
                 turn_left(90, True, "L")
                 
                     
@@ -1162,7 +1165,7 @@ def leave_passenger():
     stop()
     reposition()
     if (yellowRight() and yellowLeft()):
-        move_forward_cm(10)
+        move_forward_cm(3.5)
     else:
         enter()
     open_claw()
@@ -1197,7 +1200,7 @@ def enter():
        # print(yellowRight()," ", yellowLeft())
         if ((yellowRight() and yellowLeft()) or (yellow_i_black_left() and yellowRight())or (yellow_i_black_right() and yellowLeft()) or inside()):
 
-            move_forward_cm(4)
+            move_forward_cm(3.5)
             break
         elif count < 2 and yellowLeft() and blackRight():
             stop()

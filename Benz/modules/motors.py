@@ -101,17 +101,26 @@ class command_stack():
 
 stack = command_stack()
 
-
+def save(reference, param):
+    if reference == "F":
+        stack.append(["forward_cm", param])
+    elif reference == "B":
+        stack.append(["back_cm", param])
+    elif reference == "L":
+        stack.append(["turn_left", param])
+    elif reference == "R":
+        stack.append(["turn_right", param])
+    
 def move_forward(velocity):
-    kp_right = 0.75 #1.08
-    kp_left = 0.775
+    kp_right = 0.46 #1.08
+    kp_left = 0.89
      #0.38 
     
     #kp left crescendo vai direita
     
       
-    ki_right = 0.00005 #0.005 #-0.7
-    ki_left = 0.1 #0.08 #0.01
+    ki_right = 0.0005 #0.005 #-0.7
+    ki_left = 0.0001 #0.08 #0.01
 
     control_signal_right = motor_right.speed()
     control_signal_left = motor_left.speed()
@@ -190,7 +199,7 @@ def move_backward(velocity):
     motor_right.run(-control_signal_right)
     print(" motor right and left :",motor_right.angle(), motor_left.angle())
     
-def move_backward_cm(mm, save = False, reference = "F") :
+def move_backward_cm(mm, save = False, reference = "B") :
    
     if mm < 11:
         motor_left.reset_angle(0)
@@ -202,15 +211,16 @@ def move_backward_cm(mm, save = False, reference = "F") :
         moving_backward_cm(mm)
 
     if save and reference == "F":
-        stack.append(["straight_cm", mm])
+        stack.append(["forward_cm", mm])
     elif save:
+        
         stack.append(["back_cm", mm])
 
 
 def turn_left(angle, save = False, reference = 'R'):
     kp_left = 0.88 # Crecendo vai pra direita Diminuindo vai pra esquerda 0.953
     ki_left = 0.001 #0.00006 #sempre olhar isso
-    kp_right = 0.89 # Crecendo vai mais Diminuindo vai menos
+    kp_right = 0.93 # Crecendo vai mais Diminuindo vai menos
     ki_right = 0 #0.0005  #0.00006 #sempre olhar isso
     # wait(500)
     set_point = 784*(angle/360)
@@ -253,7 +263,7 @@ def turn_left(angle, save = False, reference = 'R'):
 
 
 def turn_right(angle, save = False, reference = 'L'): #check
-    kp_left = 0.89 # 47Crecendo vai pra direita Diminuindo vai pra esquerda 0.953
+    kp_left = 0.88 # 47Crecendo vai pra direita Diminuindo vai pra esquerda 0.953
     ki_left = 0 #0.00000007 #0.00006 #sempre olhar isso
     kp_right = 0.86 # Crecendo vai pra direita Diminuindo vai pra esquerda
     ki_right = 0#0.000005 #0.00006 #sempre olhar isso
