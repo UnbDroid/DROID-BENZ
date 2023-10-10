@@ -112,7 +112,7 @@ def save(reference, param):
         stack.append(["turn_right", param])
     
 def move_forward(velocity):
-    kp_right = 0.46 #1.08
+    kp_right = 0.72 #1.08
     kp_left = 0.89
      #0.38 
     
@@ -150,7 +150,7 @@ def moving_straight_cm(distance, velocity = 600):
     
     stop()
 
-def moving_backward_cm(distance, velocity = 1600):
+def moving_backward_cm(distance, velocity = 1400):
     motor_left.reset_angle(0) 
     motor_right.reset_angle(0)
     angle = (distance * -1321)/52
@@ -218,10 +218,10 @@ def move_backward_cm(mm, save = False, reference = "B") :
 
 
 def turn_left(angle, save = False, reference = 'R'):
-    kp_left = 0.88 # Crecendo vai pra direita Diminuindo vai pra esquerda 0.953
-    ki_left = 0.001 #0.00006 #sempre olhar isso
-    kp_right = 0.93 # Crecendo vai mais Diminuindo vai menos
-    ki_right = 0 #0.0005  #0.00006 #sempre olhar isso
+    kp_left = 0.85 # Crecendo vai pra direita Diminuindo vai pra esquerda 0.953
+    ki_left = 0 #0.001 #0.00006 #sempre olhar isso
+    kp_right = 0.9 # Crecendo vai mais Diminuindo vai menos
+    ki_right = 0 #0.001 #0.0005  #0.00006 #sempre olhar isso
     # wait(500)
     set_point = 784*(angle/360)
     set_point = round(set_point)
@@ -264,7 +264,7 @@ def turn_left(angle, save = False, reference = 'R'):
 
 def turn_right(angle, save = False, reference = 'L'): #check
     kp_left = 0.88 # 47Crecendo vai pra direita Diminuindo vai pra esquerda 0.953
-    ki_left = 0 #0.00000007 #0.00006 #sempre olhar isso
+    ki_left = 0.01 #0.00000007 #0.00006 #sempre olhar isso
     kp_right = 0.86 # Crecendo vai pra direita Diminuindo vai pra esquerda
     ki_right = 0#0.000005 #0.00006 #sempre olhar isso
     # wait(500)
@@ -369,7 +369,7 @@ def reposition():
         print(1)
         
     stop()
-    move_forward(60)
+    move_forward(100)
     while seeLeft() == "White" or seeRight() == "White":
         #print("COUNT LL ", count_l, "    COUNT RRR   ", count_r)
         if left and not right :
@@ -401,7 +401,7 @@ def reposition():
                 move_backward_cm(8)
                 reposition()
         if right and left:
-            move_forward(60)
+            move_forward(100)
         if not right and not left:
             stop()
             #print("PORRAAAAAA")

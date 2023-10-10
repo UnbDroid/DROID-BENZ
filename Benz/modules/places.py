@@ -143,7 +143,7 @@ def recognize():
     while not saw_blue():
        # turn_right(90)
         while not saw_red() and not saw_black() and not saw_yellow() and not obstacle() and not saw_blue():
-            move_forward(450)
+            move_forward(700)
         stop()  
 
             
@@ -653,7 +653,7 @@ def check_point():
         valor = sensor_color_right.rgb()[1]
         angulo = valor - threshold
         k = 0.8
-        motors.drive(150, k*angulo)
+        motors.drive(200, k*angulo)
     motors.stop()
     
     stop()
@@ -698,8 +698,8 @@ def decision(tube):
         bakery()
     elif place == "NUll":
         print("Nada encontrado")
-        open_claw()
-        find_passenger(False)
+        #open_claw()
+        #find_passenger(False)
     
 
         
@@ -784,16 +784,17 @@ def library():
 def museum():
     move_backward_cm(38)
     if obstacle("lado"):
-        backward_and_turn(70, 'L') 
-        move_forward_cm(80)
+        backward_and_turn(65, 'L') 
+        move_forward_cm(70)
         if obstacle():
-            move_backward_cm(10, True, "F")
+            move_backward_cm(3, True, "F")
             turn_left(90, True)
             while not saw_red():
                 move_forward(350)
             stop()
             reposition()
-            move_backward_cm(10, True, "F")
+            move_backward_cm(8)
+            save("F", 30)
             turn_right(90, True, "R")
         else:
             move_forward_cm(22) 
@@ -870,7 +871,7 @@ def drugstore():
             move_forward_cm(30, True, "F")
             turn_left(90, True, "L")
     else:
-        turn_left(90,True)
+        turn_left(90)
         move_forward_cm(72)
         if obstacle("lado"):
             if obstacle():
@@ -884,12 +885,12 @@ def drugstore():
                 turn_right(90, True, "L")
             else:
                 move_forward_cm(65)
-                turn_left(90,True, "L")
+                turn_left(90,True, "R")
                 move_forward_cm(30, True)
                 turn_left(90, True, "L")
         else:
-            turn_left(90)
-            move_forward_cm(38, True, "F")
+            turn_left(90, True)
+            move_forward_cm(35, True, "F")
             turn_right(90, True, "R")
     leave_passenger()
 ###########################################
@@ -1090,13 +1091,13 @@ def leave_passenger():
     open_claw()
     print("dando ré")
     stop()
-    move_backward_cm(15)
+    move_backward_cm(10)
     stop()
   #  while not saw_yellow() and not saw_black():
    #     move_forward(240)
    # stop()
     reposition()
-    move_backward_cm(15) #fazer leave depois
+    move_backward_cm(10) #fazer leave depois
     stack.reverse()
   #  recognize() 
 
@@ -1111,7 +1112,7 @@ def enter():
         calibration(sensor_color_left)
         calibration(sensor_color_right)
        # print(yellowRight()," ", yellowLeft())
-        if ((yellowRight() and yellowLeft()) or (yellow_i_black_left() and yellowRight())or (yellow_i_black_right() and yellowLeft())):
+        if ((yellowRight() and yellowLeft()) or (yellow_i_black_left() and yellowRight())or (yellow_i_black_right() and yellowLeft()) or inside()):
 
             move_forward_cm(3.5)
             break
@@ -1120,7 +1121,7 @@ def enter():
             reposition()
             move_backward_cm(10)
             turn_right(90)
-            move_backward_cm(4)
+            move_backward_cm(3)
             stop()
             turn_left(90)
             stop()
@@ -1132,7 +1133,7 @@ def enter():
             reposition()
             move_backward_cm(10)
             turn_left(90)
-            move_backward_cm(4)
+            move_backward_cm(3)
             stop()
             turn_right(90)
             stop()
@@ -1145,7 +1146,7 @@ def enter():
             reposition()
             move_backward_cm(10)
             turn_left(90)
-            move_backward_cm(4)
+            move_backward_cm(3)
             stop()
             turn_right(90)
             stop()
@@ -1159,7 +1160,7 @@ def enter():
             reposition()
             move_backward_cm(10)
             turn_right(90)
-            move_backward_cm(5)
+            move_backward_cm(3)
             stop()
             turn_left(90)
             stop()

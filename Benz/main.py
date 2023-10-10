@@ -12,23 +12,21 @@ from modules.detect import *
 from modules.places import *
 from modules.claw import *
 
-#open_claw()
-#enter()
-#school()
-#bakery()
-#leave_passenger()
+
 #----------------------------------------------------------------------------------------------------------------------------------
 #Funções iniciais
-#leave_passenger()
+#scanner_initial("Yellow")
+
 #recognize()
 #find_passenger()
-#-------------------------------------------------------------------------------------------------------
-while recognize():
-   print("Buscando passageiro")
-   find_passenger() #scanneamento
-   tubo = check_point() #vai pro check point( VERMELHO )
-   print("Opa vou ver")
-   decision(tubo) #Vai entregar o tubo  #print("Cor preto"
+
+recognize() 
+while True:
+  print("Buscando passageiro")
+  find_passenger()
+  tubo = check_point()
+  decision(tubo)
+
 
 
 # while recognize():
@@ -139,19 +137,19 @@ print("real oficial ",regulagem)'''
 
 #---------------------------------------------------------------------#
 
-
+#move_backward_cm(100)
 """qQQQQQQQQQQ111111111111111111111111111111111111111111111Q"""
 #------------------------------------------------------------------------------------------------------
 #treinar kp e ki
 '''i = 0
 while i < 10 :
-  turn_right(90)
- # turn_left(90)
+ # turn_right(90)
+  turn_left(90)
   print("Virei")
   stop()
   wait(1000)
   i+=1'''
-#turn_left(90)
+#turn_le'''
 
 #------------------------------------------------------------------------------------------------------
 

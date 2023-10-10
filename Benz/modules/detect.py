@@ -22,7 +22,7 @@ print('connected!')
 def obstacle(default = "frente", distance = 39):
 
     if default == "frente":
-        if ultra_sensor.distance() <= 150:
+        if ultra_sensor.distance() <= 180:
             ev3.speaker.beep(200)
             return True
         else:
