@@ -3,7 +3,7 @@ from pybricks.parameters import Port
 from pybricks.ev3devices import ColorSensor
 from pybricks.tools import StopWatch
 from pybricks.nxtdevices import ColorSensor as ColorNxt
-
+import time
 sensor_color = ColorSensor(Port.S2)
 sensor_sup = ColorNxt(Port.S3)
 
@@ -36,11 +36,11 @@ def calibration_auto(array):
 # arrumar o marrom e verde
 red = [[23, 0, 0], [39, 12, 10]] #check
 
-blue = [[1, 31, 58], [17, 47, 74]]  # check
+blue = [[1, 22, 40], [17, 34, 53]]  # check
 
 #yellow = [[35, 64, 11], [55, 82, 30]]  
 
-green = [[0, 45, 22], [16, 61, 38]]  # check
+green = [[0, 38, 20], [16, 52, 38]]  # check
 
 brown = [[0, 0, 0], [14, 16, 10]]
 #rgb[15.6, 7.6, 5.8]
@@ -114,7 +114,7 @@ def test(sensor, color):
     print("g  ", (color[0][1] <= rgb[1] and rgb[1] <= color[1][1]), "    ", rgb[1])
     print("b  ", (color[0][2] <= rgb[2] and rgb[2] <= color[1][2]), "    ", rgb[2])
     print("#####################################################################")
-    wait(2000)
+    time.sleep(2)
 
 def check():
     color = see()
@@ -131,9 +131,11 @@ def check():
     if tamanho == "10":
         tamanho = size()
     return color + " " + tamanho
+
+
 def verify():
     rgb = sensor_sup.rgb()
-    if rgb[0] >= 5 or rgb[1] >= 5 or rgb[2] >= 5:
+    if rgb[0] >= 3 or rgb[1] >= 3 or rgb[2] >= 3:
         return "TRUE" #Para quando existe um tubo
     else:
         return "FALSE" #Para qunaod ele nn pegou nada

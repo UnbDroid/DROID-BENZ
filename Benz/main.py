@@ -16,8 +16,8 @@ from pybricks.messaging import BluetoothMailboxClient, TextMailbox
 #####
 SERVER = 'ev3dev'
 ev3 = EV3Brick()
-for i in range(100):
-  ev3.beep(200)
+for i in range(20):
+  ev3.speaker.beep(200)
 
 client = BluetoothMailboxClient()
 mbox = TextMailbox('greeting', client)
@@ -70,11 +70,12 @@ print(mbox.read())
 # server to reply.
 while True:
     print(mbox.read())
-    if mbox.read() == "True":
+    txt = mbox.read()
+    if  txt == "True":
       print("checkando")
       txt = check()
       mbox.send(txt)
-    elif mbox.read == "verify:
+    elif  txt == "verify":
       txt = verify()
       mbox.send(txt)
 
@@ -112,6 +113,7 @@ media = reflect/5
 print(media) """
 
 
-# while True:
-#   print(size())
-#   wait(1000)
+"""while True:
+  test(sensor_color, brown)
+  wait(1000)
+"""
