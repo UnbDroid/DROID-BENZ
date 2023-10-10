@@ -12,16 +12,18 @@ from modules.detect import *
 from modules.places import *
 from modules.claw import *
 
-
+#open_claw()
 #enter()
-#find_passenger()
-#check_point()
-#reposition()
+#school()
+#bakery()
+#leave_passenger()
 #----------------------------------------------------------------------------------------------------------------------------------
 #Funções iniciais
-#open_claw()
+#leave_passenger()
+#recognize()
+#find_passenger()
 #-------------------------------------------------------------------------------------------------------
-'''while recognize():
+while recognize():
    print("Buscando passageiro")
    find_passenger() #scanneamento
    tubo = check_point() #vai pro check point( VERMELHO )
@@ -29,7 +31,15 @@ from modules.claw import *
    decision(tubo) #Vai entregar o tubo  #print("Cor preto"
 
 
-'''
+# while recognize():
+#    print("Buscando passageiro")
+#    find_passenger3() #scanneamento
+#    tubo = check_point() #vai pro check point( VERMELHO )
+#    print("Opa vou ver")
+#    decision(tubo) #Vai entregar o tubo  #print("Cor preto"
+
+
+
 
 
 '''Devolvendo os valores
@@ -77,13 +87,13 @@ print("Direito", (motor_right.angle()))
 #----------------------------------------------------------------------------------------------------------------------------------
 #Teste dos lugares
 #
-reposition()
+#eposition()
 #school()
 #city_hall()
 #library()
 #bakery()
 #drugstore()
-museum()
+#museum()
 #park()
 
 #----------------------------------------------------------------------------------------------------------------------------------
@@ -93,7 +103,7 @@ museum()
 #reposition("Red")
 #open_claw()
 #
-#close_claw(750)
+
 #stop()
 #69o,turn_right(90)
 #turn_left(90)
@@ -101,7 +111,7 @@ museum()
 #move_backward_cm(60)
 
 
-'''while not saw_black():
+'''while not saw_red():
   move_forward(500)
 
 stop()'''
@@ -136,7 +146,7 @@ print("real oficial ",regulagem)'''
 '''i = 0
 while i < 10 :
   turn_right(90)
-  #turn_right(90)
+ # turn_left(90)
   print("Virei")
   stop()
   wait(1000)
