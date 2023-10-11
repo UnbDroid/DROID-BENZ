@@ -6,7 +6,6 @@ from pybricks.hubs import EV3Brick
 from pybricks.ev3devices import (InfraredSensor, UltrasonicSensor)
 from pybricks.parameters import Stop, Direction, Button
 from pybricks.tools import wait, StopWatch, DataLog
-import time
 from modules.colors import *
 # from pybricks.media.ev3dev import SoundFile, ImageFile
 from pybricks.messaging import BluetoothMailboxClient, TextMailbox
@@ -14,7 +13,7 @@ from pybricks.messaging import BluetoothMailboxClient, TextMailbox
 #!/usr/bin/env pybricks-micropython
 
 #####
-SERVER = 'ev3dev'
+"""SERVER = 'ev3dev'
 ev3 = EV3Brick()
 for i in range(20):
   ev3.speaker.beep(200)
@@ -26,11 +25,8 @@ print('establishing connection...')
 client.connect(SERVER)
 print('connected!')
 
-# In this program, the client sends the first message and then waits for the
+"""# In this program, the client sends the first message and then waits for the
 # server to reply.
-mbox.send('hello!')
-mbox.wait()
-print(mbox.read())
 
 ####
 # Before running this program, make sure the client and server EV3 bricks are
@@ -68,7 +64,7 @@ print(mbox.read())
 
 # In this program, the client sends the first message and then waits for the
 # server to reply.
-while True:
+"""while True:
     print(mbox.read())
     txt = mbox.read()
     if  txt == "True":
@@ -78,7 +74,7 @@ while True:
     elif  txt == "verify":
       txt = verify()
       mbox.send(txt)
-
+"""
 
 """while True:
   test(green)
@@ -101,11 +97,12 @@ print("rgb", rgb/10)"""
 # # while True:
 # #   calibration(sensor_color)
 # #   wait(1000)
+calibration_auto(blue)
 
 # for i in range(9):
 #   print(check())
 """reflect = 0
-# calibration_auto(sensor_color, brown)
+calibration_auto(sensor_color, brown)
 for i in range(5):
   reflect += sensor_sup.reflection()
   print(reflect)
