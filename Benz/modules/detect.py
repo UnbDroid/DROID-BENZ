@@ -36,15 +36,20 @@ def obstacle(default = "frente", distance = 39):
             return False
 
 
-def message():
-    eve3box.send("True")
+def message(txt = "True"):
+    eve3box.send(txt)
     eve3box.wait()
     print(eve3box.read())
     eve3box.send("False")
-    return eve3box.read().split()
+    txt = eve3box.read()
+    if txt in ["FALSE", "TRUE"]:
+        return txt
+    txt = txt.split() 
 
-def side_detection():
-    if infra_sensor.distance() <= 8: #25 ############### lembrar de adicionar sensor
+    return txt
+
+def side_detection(tam = 8):
+    if infra_sensor.distance() <= tam: #25 ############### lembrar de adicionar sensor
         print(infra_sensor.distance())
         return True
     else:

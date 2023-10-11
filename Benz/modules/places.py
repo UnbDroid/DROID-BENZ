@@ -143,7 +143,7 @@ def recognize():
     while not saw_blue():
        # turn_right(90)
         while not saw_red() and not saw_black() and not saw_yellow() and not obstacle() and not saw_blue():
-            move_forward(700)
+            move_forward(650)
         stop()  
 
             
@@ -528,21 +528,13 @@ def final_tube():
 
 
 def find_passenger_2(final = True):
-    print("procurando")
-    if final:
-        final_tube()
-    else: #chegou no check-point e não identifico o tubo
-        turn_right(90)
-        stop()
-        turn_right(90)
-
-    while not side_detection() and not saw_red():
-        move_forward(280)
+    while not side_detection(24) and not saw_red():
+        move_forward(330)
     stop()   
     if(saw_red()):
         reposition()
-        while not side_detection():
-            move_backward(-260)
+        while not side_detection(30):
+            move_backward(-400)
         stop()
     move_backward_cm(3)   
     turn_left(90)
@@ -553,24 +545,20 @@ def find_passenger_2(final = True):
     stop()
     #reposition()
     print("vou te pegar")
-    close_claw(250)
+    close_claw(600)
     move_forward_cm(4)
     #verificar se tem algo na frente por preucação
     close_claw()
     move_backward_cm(10)
     stop()
+
    # reposition()
     #stop()
    # move_backward_cm(10)
-    check_point()
+   # check_point()
     #ver como vai ser tratado o return
     
 def find_passenger(final_tube = True): #Função feita pelo Josh e Felipe e Luiz
-    
-    #Já começa alinhado no azul
-   # stop()
-    #reposition()
-    #stop()
     move_backward_cm(5)
     stop()
     turn_left(90)
@@ -586,11 +574,9 @@ def find_passenger(final_tube = True): #Função feita pelo Josh e Felipe e Luiz
     
     reposition()
     move_backward_cm(10)
-    turn_left(90)
+    turn_right(90)
     stop()
-    #move_forward_cm(6)
-    #stop()
-    turn_left(90)
+    turn_right(90)
     
     threshold = ((17 + 95)/2)+15
 
@@ -609,7 +595,6 @@ def find_passenger(final_tube = True): #Função feita pelo Josh e Felipe e Luiz
         while not side_detection():
             move_backward(-250)
         stop()
-    
 
     move_backward_cm(12)  #3
     turn_left(90)
@@ -625,15 +610,26 @@ def find_passenger(final_tube = True): #Função feita pelo Josh e Felipe e Luiz
     stop()
     #reposition()
     print("vou te pegar")
-    close_claw(250)
+    close_claw(600)
     reposition()
     move_forward_cm(4)
     #verificar se tem algo na frente por preucação
     close_claw()
-    move_backward_cm(10)
+    move_backward_cm(15)
     #stop()
     #reposition()
     stop()
+    tube_true = message("verify")
+    if tube_true == "FALSE":
+        open_claw()
+        stop()
+        turn_right(90)
+        find_passenger_2()
+        
+
+
+    #return(tube_true)
+    #if tube_true == False:
     #move_backward_cm(8)
 
     #ver como vai ser tratado o return
@@ -707,7 +703,7 @@ def decision(tube):
 #Funções referentes ao trajeto do robô
 
 def school():
-    move_backward_cm(35)
+    move_backward_cm(40)
     wait(500)
     if obstacle("lado"):
         #caminho J-G-F
@@ -872,7 +868,9 @@ def drugstore():
             turn_left(90, True, "L")
     else:
         turn_left(90)
+        stop()
         move_forward_cm(72)
+        stop()
         if obstacle("lado"):
             if obstacle():
                 move_backward_cm(75)
@@ -885,11 +883,11 @@ def drugstore():
                 turn_right(90, True, "L")
             else:
                 move_forward_cm(65)
-                turn_left(90,True, "R")
+                turn_left(90,True, "L")
                 move_forward_cm(30, True)
                 turn_left(90, True, "L")
         else:
-            turn_left(90, True)
+            turn_left(90, True, "R")
             move_forward_cm(35, True, "F")
             turn_right(90, True, "R")
     leave_passenger()
@@ -1169,3 +1167,86 @@ def enter():
             count += 1
         else:
             move_forward_cm(1)
+
+
+###################################
+
+def turn_to_tube():
+    move_backward_cm(15)
+    while not blueRight():
+        motor_right.run(20)
+        motor_left.run(-3)
+    stop()
+
+def find_passenger3(): #Função feita pelo Josh e Felipe e Luiz
+    
+    #Já começa alinhado no azul
+   # stop()
+    #reposition()
+    #stop()
+    move_backward_cm(5)
+    stop()
+    turn_left(90)
+    
+    threshold = ((25 + 85)/2)+15
+
+    while not saw_red():
+        valor = sensor_color_right.rgb()[1]
+        angulo = valor - threshold
+        k = 0.8
+        motors.drive(200, k*angulo)
+    motors.stop()
+    
+    reposition()
+    move_backward_cm(10)
+    turn_left(90)
+    stop()
+    #move_forward_cm(6)
+    #stop()
+    turn_left(90)
+    
+    threshold = ((17 + 95)/2)+15
+
+
+    while not side_detection() and not saw_red():
+        valor = sensor_color_left.rgb()[1]
+        angulo = valor - threshold
+        k = 0.9  #0.8
+        motors.drive(200, -k*angulo)
+    motors.stop()
+    
+    stop()
+    
+    if(saw_red()):
+        reposition()
+        while not side_detection():
+            move_backward(-250)
+        stop()
+    close_claw(600)
+    turn_to_tube()
+    stop()
+    reposition()
+
+
+   # move_forward_cm(8)
+    #turn_left(90)
+    
+    stop()
+
+    #reposition()
+    print("vou te pegar")
+    
+   # reposition()
+   # move_forward_cm(4)
+    #verificar se tem algo na frente por preucação
+    close_claw()
+    move_backward_cm(10)
+    turn_left(90)
+    stop()
+    move_forward_cm(10)
+    #stop()
+    #reposition()
+    stop()
+    #move_backward_cm(8)
+
+    #ver como vai ser tratado o return

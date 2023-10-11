@@ -12,21 +12,27 @@ from modules.detect import *
 from modules.places import *
 from modules.claw import *
 
-
+#decision(["White","10"])
 #----------------------------------------------------------------------------------------------------------------------------------
 #Funções iniciais
 #scanner_initial("Yellow")
+#close_claw2()
+#open_claw2()
+                                                   
+#close_claw(600)
+#close_claw(1000)
 
-#recognize()
-#find_passenger()
-
-recognize() 
-while True:
+#open_claw()
+while recognize():
   print("Buscando passageiro")
-  find_passenger()
-  tubo = check_point()
-  decision(tubo)
-
+  find_passenger() #scanneamento
+  tubo = check_point() #vai pro check point( VERMELHO )
+  for i in range(500,0, -100):
+    ev3.speaker.beep(i)
+  print("Opa vou ver")
+  decision(tubo) #Vai entregar o tubo  #print("Cor preto"
+  for i in range(800,0, -100):
+    ev3.speaker.beep(i)
 
 
 # while recognize():
@@ -184,9 +190,9 @@ print(motor_right.angle())
 
 '''while True:
   obstacle("frente")
-  print(ultra_sensor.distance())
-  wait(5000)'''
-
+  print(infra_sensor.distance())
+  wait(5000)
+'''
 # while True:
 #   move_backward(800)
 # calibration_auto(sensor_color_right, white_right)
@@ -194,3 +200,13 @@ print(motor_right.angle())
 
 #enter()
 
+
+
+
+"""while recognize():
+   print("Buscando passageiro")
+   find_passenger3() #scanneamento
+   tubo = check_point() #vai pro check point( VERMELHO )
+   print("Opa vou ver")
+   decision(tubo) #Vai entregar o tubo  #print("Cor preto"
+"""
