@@ -113,7 +113,7 @@ def save(reference, param):
     
 def move_forward(velocity):
     kp_right = 0.72 #1.08
-    kp_left = 0.89
+    kp_left = 0.86
      #0.38 
     
     #kp left crescendo vai direita
@@ -220,7 +220,7 @@ def move_backward_cm(mm, save = False, reference = "B") :
 def turn_left(angle, save = False, reference = 'R'):
     kp_left = 0.85 # Crecendo vai pra direita Diminuindo vai pra esquerda 0.953
     ki_left = 0 #0.001 #0.00006 #sempre olhar isso
-    kp_right = 0.9 # Crecendo vai mais Diminuindo vai menos
+    kp_right = 0.8675 # Crecendo vai mais Diminuindo vai menos
     ki_right = 0 #0.001 #0.0005  #0.00006 #sempre olhar isso
     # wait(500)
     set_point = 784*(angle/360)
@@ -263,8 +263,8 @@ def turn_left(angle, save = False, reference = 'R'):
 
 
 def turn_right(angle, save = False, reference = 'L'): #check
-    kp_left = 0.88 # 47Crecendo vai pra direita Diminuindo vai pra esquerda 0.953
-    ki_left = 0.01 #0.00000007 #0.00006 #sempre olhar isso
+    kp_left = 0.875 # 47Crecendo vai pra direita Diminuindo vai pra esquerda 0.953
+    ki_left = 0 #0.00000007 #0.00006 #sempre olhar isso
     kp_right = 0.86 # Crecendo vai pra direita Diminuindo vai pra esquerda
     ki_right = 0#0.000005 #0.00006 #sempre olhar isso
     # wait(500)

@@ -23,6 +23,7 @@ from modules.claw import *
 #close_claw(1000)
 
 #open_claw()
+
 while recognize():
   print("Buscando passageiro")
   find_passenger() #scanneamento
@@ -33,7 +34,7 @@ while recognize():
   decision(tubo) #Vai entregar o tubo  #print("Cor preto"
   for i in range(800,0, -100):
     ev3.speaker.beep(i)
-
+ 
 
 # while recognize():
 #    print("Buscando passageiro")
@@ -115,10 +116,11 @@ print("Direito", (motor_right.angle()))
 #move_backward_cm(60)
 
 
-'''while not saw_red():
+"""while not saw_red():
   move_forward(500)
 
-stop()'''
+stop()"""
+# move_backward_cm(100)
 
 #----------------------------------------------------------------------------------------------------------------------------------
 

@@ -615,7 +615,7 @@ def find_passenger(final_tube = True): #Função feita pelo Josh e Felipe e Luiz
     move_forward_cm(4)
     #verificar se tem algo na frente por preucação
     close_claw()
-    move_backward_cm(15)
+    move_backward_cm(9)
     #stop()
     #reposition()
     stop()
@@ -754,7 +754,7 @@ def city_hall(): #check
         #caminho J
         move_backward_cm(3)
         turn_left(90)
-        move_forward_cm(40)
+        move_forward_cm(35)
         turn_left(90, True, 'L') 
     leave_passenger()
 #############################
