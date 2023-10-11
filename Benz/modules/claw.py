@@ -23,6 +23,7 @@ def close_claw2(seconds =  500) :
 def close_claw(quantidade = 1000 , time = 1900 ):
     motor_claw.run_angle(time, -quantidade, wait = True)
     motor_claw.hold()
+    return 
 
 def open_claw(quantidade = 1600, time = 1900 ):
     motor_claw.run_angle(time, quantidade, wait = True)

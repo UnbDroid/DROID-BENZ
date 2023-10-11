@@ -12,17 +12,15 @@ from modules.detect import *
 from modules.places import *
 from modules.claw import *
 
-#decision(["White","10"])
-#----------------------------------------------------------------------------------------------------------------------------------
-#Funções iniciais
-#scanner_initial("Yellow")
-#close_claw2()
-#open_claw2()
-                                                   
-#close_claw(600)
-#close_claw(1000)
 
-#open_claw()
+
+
+while len(ev3.buttons.pressed()) == 0:
+  pass
+wait(500)
+
+#----------------------------------------------------------------------------------------------------------------------------------
+
 
 while recognize():
   print("Buscando passageiro")
@@ -35,6 +33,19 @@ while recognize():
   for i in range(800,0, -100):
     ev3.speaker.beep(i)
  
+
+
+
+
+'''    move_backward_cm(12)  #3
+    turn_left(90)
+    stop()
+    move_backward_cm(10)
+    turn_right(90)
+
+    move_forward_cm(8)
+    turn_left(90)
+    stop()'''
 
 # while recognize():
 #    print("Buscando passageiro")
@@ -149,14 +160,16 @@ print("real oficial ",regulagem)'''
 """qQQQQQQQQQQ111111111111111111111111111111111111111111111Q"""
 #------------------------------------------------------------------------------------------------------
 #treinar kp e ki
-'''i = 0
-while i < 10 :
+'''close_claw(1600)
+i = 0
+while i < 4 :
  # turn_right(90)
   turn_left(90)
   print("Virei")
   stop()
   wait(1000)
-  i+=1'''
+  i+=1
+open_claw()'''
 #turn_le'''
 
 #------------------------------------------------------------------------------------------------------
@@ -212,3 +225,12 @@ print(motor_right.angle())
    print("Opa vou ver")
    decision(tubo) #Vai entregar o tubo  #print("Cor preto"
 """
+"""while True:
+  if buttons.pressed():
+    verification = True
+  while verification:
+    if not buttons.pressed():
+      recognize()
+
+
+    verification = False"""

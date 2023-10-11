@@ -549,7 +549,7 @@ def find_passenger_2(final = True):
     move_forward_cm(4)
     #verificar se tem algo na frente por preucação
     close_claw()
-    move_backward_cm(10)
+    move_backward_cm(8)
     stop()
 
    # reposition()
@@ -589,22 +589,16 @@ def find_passenger(final_tube = True): #Função feita pelo Josh e Felipe e Luiz
     motors.stop()
     
     stop()
-    
+    move_backward_cm(5)
+    turn_left(90)
+    move_backward(5)
     if(saw_red()):
         reposition()
         while not side_detection():
             move_backward(-250)
         stop()
 
-    move_backward_cm(12)  #3
-    turn_left(90)
-    stop()
-    move_backward_cm(10)
-    turn_right(90)
 
-    move_forward_cm(8)
-    turn_left(90)
-    stop()
     while not blueRight() and not blueLeft():
         move_forward(180) 
     stop()
@@ -615,10 +609,9 @@ def find_passenger(final_tube = True): #Função feita pelo Josh e Felipe e Luiz
     move_forward_cm(4)
     #verificar se tem algo na frente por preucação
     close_claw()
-    move_backward_cm(9)
-    #stop()
-    #reposition()
+    move_backward_cm(8)
     stop()
+    reposition()
     tube_true = message("verify")
     if tube_true == "FALSE":
         open_claw()
@@ -761,14 +754,9 @@ def city_hall(): #check
 def library():
     #caminho sem obstáculo
     backward_and_turn(65, 'R')
-    while not saw_blue():
-        move_forward(380)
-    stop()
-    reposition()
-    move_backward_cm(10)
+    turn_right(90)
     stop()
     wait(500)
-    turn_right(90, True)
     while not saw_red():
         move_forward(600)
     stop()
@@ -893,7 +881,7 @@ def drugstore():
     leave_passenger()
 ###########################################
 def bakery():
-    move_backward_cm(35)
+    move_backward_cm(40)
     #depois verificar tubo
     if obstacle("lado"): 
         #caminho J
@@ -1099,7 +1087,7 @@ def leave_passenger():
     stack.reverse()
   #  recognize() 
 
-def enter():
+def enter3():
     entered = False
     media_R_min = 17
     media_R_max = 27
@@ -1250,3 +1238,46 @@ def find_passenger3(): #Função feita pelo Josh e Felipe e Luiz
     #move_backward_cm(8)
 
     #ver como vai ser tratado o return
+
+
+############teste
+
+
+def enter():
+    entered = False
+    media_R_min = 17
+    media_R_max = 27
+    media_L_min = 25
+    media_L_max = 35
+    count = 0
+    while not entered:
+        calibration(sensor_color_left)
+        calibration(sensor_color_right)
+       # print(yellowRight()," ", yellowLeft())
+        if ((yellowRight() and yellowLeft()) or (yellow_i_black_left() and yellowRight())or (yellow_i_black_right() and yellowLeft()) or inside()):
+            move_forward_cm(3.5)
+            break
+        elif yellowLeft() and blackRight():
+            stop()
+            reposition()
+            move_backward_cm(10)
+            turn_left(22)
+            while not saw_yellow() and not saw_black():
+                move_forward(400)
+            stop()
+            break
+            
+            
+        elif yellowRight() and blackLeft():
+            stop()
+            reposition()
+            move_backward_cm(10)
+            turn_right(22) #20
+            while not saw_yellow() and not saw_black():
+                move_forward(400)
+            stop()
+            break
+        else:
+            move_forward_cm(1)
+    reposition()
+    move_forward_cm(3)

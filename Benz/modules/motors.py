@@ -218,9 +218,9 @@ def move_backward_cm(mm, save = False, reference = "B") :
 
 
 def turn_left(angle, save = False, reference = 'R'):
-    kp_left = 0.85 # Crecendo vai pra direita Diminuindo vai pra esquerda 0.953
+    kp_left = 0.9 # Crecendo vai pra direita Diminuindo vai pra esquerda 0.953
     ki_left = 0 #0.001 #0.00006 #sempre olhar isso
-    kp_right = 0.8675 # Crecendo vai mais Diminuindo vai menos
+    kp_right = 0.87 # Crecendo vai mais Diminuindo vai menos
     ki_right = 0 #0.001 #0.0005  #0.00006 #sempre olhar isso
     # wait(500)
     set_point = 784*(angle/360)
