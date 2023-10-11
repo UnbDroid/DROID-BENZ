@@ -40,7 +40,7 @@ blue = [[1, 22, 40], [17, 34, 53]]  # check
 
 #yellow = [[35, 64, 11], [55, 82, 30]]  
 
-green = [[0, 38, 20], [16, 52, 38]]  # check
+green = [[0, 48, 20], [16, 63, 38]]  # check
 
 brown = [[0, 0, 0], [14, 16, 10]]
 #rgb[15.6, 7.6, 5.8]
@@ -134,7 +134,7 @@ def check():
 
 
 def verify():
-    rgb = sensor_sup.rgb()
+    rgb = sensor_color.rgb()
     if rgb[0] >= 3 or rgb[1] >= 3 or rgb[2] >= 3:
         return "TRUE" #Para quando existe um tubo
     else:

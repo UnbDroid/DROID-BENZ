@@ -114,6 +114,6 @@ print(media) """
 
 
 """while True:
-  test(sensor_color, brown)
-  wait(1000)
-"""
+  test(sensor_color, red)
+  print(verify())
+  wait(1000)"""
