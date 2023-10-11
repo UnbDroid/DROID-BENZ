@@ -34,15 +34,15 @@ def calibration_auto(array):
 
 
 # arrumar o marrom e verde
-red = [[30, 0, 0], [46, 14, 12]]  # check
+red = [[31, 0, 0], [47, 14, 11]]  # check
 
-blue = [[3, 37, 65], [19, 53, 81]]  # check
+blue = [[2, 29, 59], [18, 45, 79]]  # check
 
 #yellow = [[35, 64, 11], [55, 82, 30]]  
 
-green = [[0, 51, 23], [16, 67, 39]]  # check
+green = [[0, 38, 19], [16, 50, 35]]  # check
 
-brown = [[0, 1, 0], [16, 17, 12]]
+brown = [[0, 0, 0], [14, 16, 9]]
 #rgb[15.6, 7.6, 5.8]
 
 def calibration(sensor):
