@@ -113,7 +113,7 @@ media = reflect/5
 print(media) """
 
 
-"""while True:
-  test(sensor_color, red)
-  print(verify())
-  wait(1000)"""
+# while True:
+#   # test(sensor_color, green)
+#   print(check())
+#   wait(1000)
