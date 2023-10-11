@@ -15,14 +15,7 @@ from modules.claw import *
 #decision(["White","10"])
 #----------------------------------------------------------------------------------------------------------------------------------
 #Funções iniciais
-#scanner_initial("Yellow")
-#close_claw2()
-#open_claw2()
-                                                   
-#close_claw(600)
-#close_claw(1000)
-
-#open_claw()
+#-------------------------------------------------------------------------------------------------------
 while recognize():
   print("Buscando passageiro")
   find_passenger() #scanneamento
@@ -91,7 +84,7 @@ print("Direito", (motor_right.angle()))
 #----------------------------------------------------------------------------------------------------------------------------------
 #Teste dos lugares
 #
-#eposition()
+#reposition()
 #school()
 #city_hall()
 #library()
@@ -99,7 +92,7 @@ print("Direito", (motor_right.angle()))
 #drugstore()
 #museum()
 #park()
-
+find_passenger2()
 #----------------------------------------------------------------------------------------------------------------------------------
 #Teste básicos
 

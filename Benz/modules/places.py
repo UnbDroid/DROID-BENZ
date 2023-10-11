@@ -635,7 +635,88 @@ def find_passenger(final_tube = True): #Função feita pelo Josh e Felipe e Luiz
     #ver como vai ser tratado o return
     
     
+
     
+def find_passenger2(final_tube = True): #Função feita pelo Josh e Felipe e Luiz
+    
+    #Já começa alinhado no azul
+   # stop()
+    #reposition()
+    #stop()
+    move_backward_cm(5)
+    stop()
+    turn_left(90)
+    
+    threshold = ((25 + 85)/2)+15
+
+    while not saw_red():
+        valor = sensor_color_right.rgb()[1]
+        angulo = valor - threshold
+        k = 0.8
+        motors.drive(200, k*angulo)
+    motors.stop()
+    
+    reposition()
+    move_backward_cm(10)
+    turn_left(90)
+    stop()
+    #move_forward_cm(6)
+    #stop()
+    turn_left(90)
+    
+    threshold = ((17 + 95)/2)+15
+
+
+    while not side_detection() and not saw_red():
+        valor = sensor_color_left.rgb()[1]
+        angulo = valor - threshold
+        k = 0.9  #0.8
+        motors.drive(200, -k*angulo)
+    motors.stop()
+    
+    stop()
+    
+    if(saw_red()):
+        reposition()
+        while not side_detection():
+            move_backward(-250)
+        stop()
+    
+
+    move_backward_cm(25)  #3
+    turn_left(90)
+    while not blueRight() and not blueLeft():
+        move_forward(180) 
+    #stop()
+    stop()
+    reposition()
+    move_forward_cm(10)
+    turn_right(90)
+    #move_forward_cm(10)
+
+   # move_forward_cm(8)
+    #turn_left(90)
+    
+    stop()
+
+    #reposition()
+    print("vou te pegar")
+    #close_claw(250)
+   # reposition()
+    move_forward_cm(10) #ida para frente
+    #verificar se tem algo na frente por preucação
+    close_claw(350)
+    stop()
+    close_claw(400)
+    move_backward_cm(10)
+    turn_right(90)
+    stop()
+    move_forward_cm(15)
+   # turn_right(90)
+    #stop()
+    #reposition()
+    stop()
+    #move_ba  
 
 
 def check_point():
@@ -1098,6 +1179,12 @@ def leave_passenger():
     move_backward_cm(10) #fazer leave depois
     stack.reverse()
   #  recognize() 
+
+
+
+
+
+
 
 def enter():
     entered = False
