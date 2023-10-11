@@ -113,14 +113,14 @@ def save(reference, param):
     
 def move_forward(velocity):
     kp_right = 0.72 #1.08
-    kp_left = 0.86
+    kp_left = 0.78
      #0.38 
     
     #kp left crescendo vai direita
     
       
-    ki_right = 0.0005 #0.005 #-0.7
-    ki_left = 0.0001 #0.08 #0.01
+    ki_right = 0 #0.0004 #0.005 #-0.7
+    ki_left = 0 #0.0001 #0.08 #0.01
 
     control_signal_right = motor_right.speed()
     control_signal_left = motor_left.speed()
@@ -218,10 +218,10 @@ def move_backward_cm(mm, save = False, reference = "B") :
 
 
 def turn_left(angle, save = False, reference = 'R'):
-    kp_left = 0.9 # Crecendo vai pra direita Diminuindo vai pra esquerda 0.953
+    kp_left = 0.85 # Crecendo vai pra direita Diminuindo vai pra esquerda 0.953
     ki_left = 0 #0.001 #0.00006 #sempre olhar isso
-    kp_right = 0.87 # Crecendo vai mais Diminuindo vai menos
-    ki_right = 0 #0.001 #0.0005  #0.00006 #sempre olhar isso
+    kp_right = 0.94 # Crecendo vai mais Diminuindo vai menos
+    ki_right = 0 # 0.001 #0.001 #0.0005  #0.00006 #sempre olhar isso
     # wait(500)
     set_point = 784*(angle/360)
     set_point = round(set_point)
@@ -263,10 +263,10 @@ def turn_left(angle, save = False, reference = 'R'):
 
 
 def turn_right(angle, save = False, reference = 'L'): #check
-    kp_left = 0.875 # 47Crecendo vai pra direita Diminuindo vai pra esquerda 0.953
-    ki_left = 0 #0.00000007 #0.00006 #sempre olhar isso
-    kp_right = 0.86 # Crecendo vai pra direita Diminuindo vai pra esquerda
-    ki_right = 0#0.000005 #0.00006 #sempre olhar isso
+    kp_left = 0.86 # 47Crecendo vai pra direita Diminuindo vai pra esquerda 0.953
+    ki_left = 0 #0.0001#0.00000007 #0.00006 #sempre olhar isso
+    kp_right = 0.89 # Crecendo vai pra direita Diminuindo vai pra esquerda
+    ki_right = 0.001#0.000005 #0.00006 #sempre olhar isso
     # wait(500)
     set_point = 784*(angle/360)
     set_point = round(set_point)

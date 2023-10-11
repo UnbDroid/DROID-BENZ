@@ -8,8 +8,9 @@ import time
 
 ultra_sensor = UltrasonicSensor(Port.S3)
 infra_sensor = InfraredSensor(Port.S4)
-
 ev3 = EV3Brick()
+
+
 
 server = BluetoothMailboxServer()
 eve3box = TextMailbox('greeting', server)

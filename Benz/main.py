@@ -26,6 +26,8 @@ while recognize():
   print("Buscando passageiro")
   find_passenger() #scanneamento
   tubo = check_point() #vai pro check point( VERMELHO )
+  if "White" in tubo:
+    tube[0] = "Blue"
   for i in range(500,0, -100):
     ev3.speaker.beep(i)
   print("Opa vou ver")
@@ -33,7 +35,6 @@ while recognize():
   for i in range(800,0, -100):
     ev3.speaker.beep(i)
  
-
 
 
 
@@ -160,62 +161,27 @@ print("real oficial ",regulagem)'''
 """qQQQQQQQQQQ111111111111111111111111111111111111111111111Q"""
 #------------------------------------------------------------------------------------------------------
 #treinar kp e ki
-'''close_claw(1600)
-i = 0
+
+'''i = 0
 while i < 4 :
- # turn_right(90)
-  turn_left(90)
+  turn_right(90)
+  #turn_left(90)
   print("Virei")
   stop()
   wait(1000)
-  i+=1
-open_claw()'''
-#turn_le'''
+  i+=1'''
+
 
 #------------------------------------------------------------------------------------------------------
 
 #teste para andar
-'''stop_motors()
-move_backward_cm(60)
-stop_motors()'''
-'''print(motor_left.angle())
-print(motor_right.angle())
-move_forward_cm(15)
-print("###############")
-print(motor_left.angle())
-print(motor_right.angle())
-print("###############")
-stop_motors()
-print(motor_left.angle())
-print(motor_right.angle())
-'''
 
-#teste de reposicionar
-# stop()
-# while not saw_black():
-#   move_forward(330)
-# stop()
-#move_backward_cm(0.5)
-# reposition("Black")
-# '''
-#reposition("Blue")
-# while True:
-#   test(sensor_color_left,blue_i_white_left)
-#   wait(2000)
 
 '''while True:
   obstacle("frente")
   print(infra_sensor.distance())
   wait(5000)
 '''
-# while True:
-#   move_backward(800)
-# calibration_auto(sensor_color_right, white_right)
-# [16, 39, 65]
-
-#enter()
-
-
 
 
 """while recognize():
@@ -234,3 +200,10 @@ print(motor_right.angle())
 
 
     verification = False"""
+
+'''while True:
+  open_claw()
+  wait(8000)
+  close_claw(1600)
+  wait(8000)'''
+  

@@ -507,11 +507,13 @@ def forward_and_turn(cm, side, save = False):
 def backward_and_turn(cm, side, save = False):
     if side == 'L':
         move_backward_cm(cm)
+        stop()
         turn_left(90, save)
     elif side == 'R':
         move_backward_cm(cm)
+        stop()
         turn_right(90, save)
-    wait(500)
+   
 
 
 def final_tube():
@@ -641,7 +643,7 @@ def check_point():
     while not saw_red():
         valor = sensor_color_right.rgb()[1]
         angulo = valor - threshold
-        k = 0.8
+        k = 0.9
         motors.drive(200, k*angulo)
     motors.stop()
     
@@ -753,12 +755,22 @@ def city_hall(): #check
 #############################
 def library():
     #caminho sem obstáculo
-    backward_and_turn(65, 'R')
-    turn_right(90)
+    move_backward_cm(10)
+    turn_left(90, True)
     stop()
-    wait(500)
+    turn_left(90, True)
+    stop()
+    
+    threshold = ((17 + 95)/2)+15
+
+
     while not saw_red():
-        move_forward(600)
+        valor = sensor_color_left.rgb()[1]
+        angulo = valor - threshold
+        k = 0.9  #0.8
+        motors.drive(200, -k*angulo)
+    motors.stop()
+    
     stop()
     reposition()
     move_backward_cm(10)
@@ -766,7 +778,7 @@ def library():
     leave_passenger()
 #############################
 def museum():
-    move_backward_cm(38)
+    move_backward_cm(40)
     if obstacle("lado"):
         backward_and_turn(65, 'L') 
         move_forward_cm(70)
@@ -785,6 +797,7 @@ def museum():
             turn_left(90, True, "L") 
     else:
         turn_left(90, True)
+        stop()
         move_forward_cm(70)
         if obstacle("lado"):
             move_backward_cm(75)
@@ -792,6 +805,7 @@ def museum():
             move_forward_cm(70)
             turn_right(90)
             move_forward_cm(10)
+            stop()
             if obstacle():
                 move_backward_cm(10)
                 turn_right(90)
@@ -823,9 +837,11 @@ def museum():
                     turn_left(90, True, "R")        
         else:
             turn_left(90)
-            move_forward_cm(93, True, "F") #depois arruma
+            stop()
+            move_forward_cm(85, True, "F") #depois arruma
             if obstacle():
                 turn_right(90, True)
+                stop()
                 move_forward_cm(35, True, "F")
                 turn_left(90, True, "L")
             else:
@@ -841,6 +857,7 @@ def museum():
 ###################################################
 def drugstore():
     move_backward_cm(40)
+    stop()
     # depois verificar tubo
     if obstacle("lado"):
         backward_and_turn(70, 'R')
@@ -848,7 +865,9 @@ def drugstore():
         if obstacle("lado"):
             move_backward_cm(70, True, "F")
             turn_left(90, True, "L")
+            stop()
             move_forward_cm(30, True, "F")
+            stop()
             turn_right(90, True, "R")
         else:
             turn_left(90, True, "L")
@@ -881,30 +900,34 @@ def drugstore():
     leave_passenger()
 ###########################################
 def bakery():
-    move_backward_cm(40)
+    move_backward_cm(39)
+    stop()
     #depois verificar tubo
     if obstacle("lado"): 
         #caminho J
         move_backward_cm(65)
         turn_right(90)
-        move_backward_cm(70)
+        move_backward_cm(72)
         if obstacle("lado"):
             #caminho E-B-A
             turn_left(90)
+            stop()
             turn_left(90)
             while not saw_black():
-                move_forward(400)
+                move_forward(600)
             reposition()
             move_backward_cm(15)
             turn_right(90)
             while not saw_red():
-                move_forward(400)
-            move_backward_cm(10, True)
-            turn_right(90,True, "L")
+                move_forward(550)
+            save("L", 90)
+            save("F", 85)
+            move_backward_cm(10, True, "F")
+            turn_right(90,True, "R")
         else:
             #caminho G-D
             turn_left(90)
-            move_forward_cm(70) #G
+            move_forward_cm(60) #G
             if obstacle("lado"):
                 move_backward_cm(70)#G
                 turn_left(90)
@@ -918,12 +941,14 @@ def bakery():
                 move_backward_cm(10, True)
                 turn_right(90, True, "L")
             else:
+                save("L",90)
+                save("F", 65)
                 turn_left(90, True , "R")
-                move_forward_cm(35, True) #D
-                turn_right(90,True, "L")
+                stop()
+                move_forward_cm(30, True) #D
+                turn_right(90,True, "R")
     else:
         #caminho I
-        move_backward_cm(1)
         turn_left(90)
         move_forward_cm(80)
         wait(500)
@@ -941,36 +966,45 @@ def bakery():
                 move_forward_cm(65) #anda
                 turn_right(90)
                 while not saw_black():
-                    move_forward(360)
+                    move_forward(600)
                 #move_forward_cm(70) #J
                 #se calibrar
                 #move_forward_cm(65)#E
                 reposition()
                 move_backward_cm(15)
+                stop()
                 turn_right(90)
                 while not saw_red():
-                    move_forward(360)
+                    move_forward(550)
                 #move_forward_cm(105) #B-A
                 reposition()
-                move_backward_cm(10, True)
+                save("L",90)
+                save("F", 85)
+                move_backward_cm(10, True, "F")
+                stop()
                 turn_right(90, True, "R")
 
             else:
                 #caminho G-E-B-A
-                move_forward_cm(65)
+                move_forward_cm(55)
                 turn_right(90)
                 while not saw_black():
-                    move_forward(450)
+                    move_forward(600)
+                stop()
+                reposition()
                 move_backward_cm(15)
                 turn_right(90)
                 stop()
                 while not saw_red():
-                    move_forward(400)
-                move_backward_cm(10, True)
+                    move_forward(550)
+                stop()
+                save("L", 90)
+                save("F", 80)
+                move_backward_cm(10, True, "F")
                 turn_right(90, True, "R")
         else:
             #caminho D
-            move_forward_cm(25, True, 'F')
+            move_forward_cm(24, True, 'F')
             turn_right(90, True, 'R')
             stop()
             wait(500)
@@ -993,8 +1027,8 @@ def park():
             turn_right(90)
             move_forward_cm(15)
             if obstacle():
-                move_backward_cm(50)
-                turn_left(90)
+                move_backward_cm(50,True, "F")
+                turn_left(90, True, )
             else:
                 while not saw_red():
                     move_forward(250)
