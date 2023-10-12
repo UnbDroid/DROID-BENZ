@@ -838,11 +838,12 @@ def museum():
         else:
             turn_left(90)
             stop()
-            move_forward_cm(85, True, "F") #depois arruma
+            move_forward_cm(74, True, "F") #depois arruma
             if obstacle():
+                move_backward_cm(4)
                 turn_right(90, True)
                 stop()
-                move_forward_cm(35, True, "F")
+                move_forward_cm(30, True, "F")
                 turn_left(90, True, "L")
             else:
                 while not saw_red():
@@ -885,12 +886,12 @@ def drugstore():
                 move_forward_cm(70)
                 turn_right(90)
                 move_forward_cm(130)
-                turn_right(90, True, "L")
+                turn_right(90, True)
                 move_forward_cm(35, True, "F")
-                turn_right(90, True, "L")
+                turn_right(90, True)
             else:
                 move_forward_cm(65)
-                turn_left(90,True, "L")
+                turn_left(90,True)
                 move_forward_cm(30, True)
                 turn_left(90, True, "L")
         else:
@@ -1041,9 +1042,9 @@ def park():
             reposition()
             move_backward_cm(11)
             if obstacle("lado"):
-                turn_right(90)
-                move_forward_cm(40)
-                turn_left(90)
+                turn_right(90, True, "R")
+                move_forward_cm(40, True, "F")
+                turn_left(90, True, "R")
             else:
                 turn_left(90, True)
                 while not saw_red():
@@ -1060,23 +1061,33 @@ def park():
         if obstacle():
             move_backward_cm(10)
             turn_left(90)
-            move_forward_cm(70)
-            turn_right(90)
-            while not saw_black():
-                move_forward(400)
-            reposition()
-            move_backward_cm(10)
-            if obstacle("lado"):
+            if obstacle():
+                move_backward_cm(75)
+                turn_left(90)
+                move_forward_cm(70)
                 turn_right(90)
-                move_forward_cm(40)
-                turn_left(90)
+                move_forward_cm(130)
+                turn_right(90, True, "L")
+                move_forward_cm(35, True, "F")
+                turn_left(90, True, "L")
             else:
-                turn_left(90)
-                while not saw_red():
-                    move_forward(350)
+                move_forward_cm(70)
+                turn_right(90)
+                while not saw_black():
+                    move_forward(400)
                 reposition()
                 move_backward_cm(10)
-                turn_right(90)
+                if obstacle("lado"):
+                    turn_right(90, True, "L")
+                    move_forward_cm(40, True , "F")
+                    turn_left(90, True, "L")
+                else:
+                    turn_left(90)
+                    while not saw_red():
+                        move_forward(350)
+                    reposition()
+                    move_backward_cm(10)
+                    turn_right(90)
         else:
             while not saw_black():
                 move_forward(400)
